@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Controle de Manutenção - Oficina</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input,
+        textarea,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #004085;
+        }
+
+        .busca-secao {
+            margin-top: 30px;
+            border-top: 2px solid #ccc;
+            padding-top: 20px;
+        }
+
+        .resultado {
+            background: #e9ecef;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Nova Ordem de Manutenção</h2>
+        <form id="formManutencao">
+            <input type="text" id="nome" placeholder="Nome completo" required>
+            <input type="text" id="placa" placeholder="Placa do Veículo (ex: ABC1D23)" required>
+            <input type="text" id="modelo" placeholder="Modelo / Veículo" required>
+            <textarea id="servico" placeholder="Descrição do Serviço Realizado e Peças Trocadas" rows="4"
+                required></textarea>
+            <button type="submit">Salvar no Histórico</button>
+        </form>
+
+        <div class="busca-secao">
+            <h2>Consultar Histórico</h2>
+            <input type="text" id="buscaPlaca" placeholder="Digite a placa para buscar...">
+            <button onclick="buscarVeiculo()">Buscar</button>
+            <div id="resultadoBusca"></div>
+        </div>
+    </div>
+
+    <script>
+        // Função para salvar os dados
+        document.getElementById('formManutencao').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const cliente = document.getElementById('nome').value;
+            const placa = document.getElementById('placa').value.toUpperCase().trim();
+            const modelo = document.getElementById('modelo').value;
+            const servico = document.getElementById('servico').value;
+            const dataAtual = new Date().toLocaleDateString('pt-BR');
+
+            const registro = { cliente, modelo, servico, data: dataAtual };
+
+            // Pega o que já tem no sistema ou cria um banco vazio
+            let historico = JSON.parse(localStorage.getItem('oficina_dados')) || {};
+
+            // Se a placa não existir no histórico, cria uma lista para ela
+            if (!historico[placa]) {
+                historico[placa] = [];
+            }
+
+            // Adiciona o novo serviço ao histórico daquela placa
+            historico[placa].push(registro);
+
+            // Salva de volta no navegador
+            localStorage.setItem('oficina_dados', JSON.stringify(historico));
+
+            alert('Manutenção salva com sucesso!');
+            document.getElementById('formManutencao').reset();
+        });
+
+        // Função para consultar os dados dps
+        function buscarVeiculo() {
+            const placaBusca = document.getElementById('buscaPlaca').value.toUpperCase().trim();
+            const historico = JSON.parse(localStorage.getItem('oficina_dados')) || {};
+            const painelResultado = document.getElementById('resultadoBusca');
+
+            painelResultado.innerHTML = ""; // Limpa a busca anterior
+
+            if (historico[placaBusca]) {
+                let htmlConteudo = `<h3>Histórico do Veículo (${placaBusca}):</h3>`;
+
+                // Lista todas as manutenções daquela placa da mais nova para a mais antiga
+                historico[placaBusca].reverse().forEach(info => {
+                    htmlConteudo += `
+                    <div class="resultado">
+                        <p><strong>Cliente:</strong> ${info.cliente}</p>
+                        <p><strong>Data:</strong> ${info.data}</p>
+                        <p><strong>Modelo:</strong> ${info.modelo}</p>
+                        <p><strong>Serviço:</strong> ${info.servico}</p>
+                    </div>
+                `;
+                });
+                painelResultado.innerHTML = htmlConteudo;
+            } else {
+                painelResultado.innerHTML = "<p style='color:red;'>Nenhum histórico encontrado para esta placa.</p>";
+            }
+        }
+    </script>
+
+</body>
+
+</html>

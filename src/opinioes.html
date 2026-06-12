@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seção de Opiniões</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .contador {
+            text-align: right;
+            font-size: 14px;
+            color: #777;
+            margin-top: 5px;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid #eee;
+            margin: 25px 0;
+        }
+
+        .opiniao-item {
+            background: #f9f9f9;
+            padding: 15px;
+            border-left: 4px solid #007bff;
+            margin-bottom: 15px;
+            border-radius: 0 4px 4px 0;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .opiniao-nome {
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 5px;
+        }
+
+        .opiniao-texto {
+            color: #444;
+            margin: 0;
+            word-wrap: break-word;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+    
+</head>
+<body>
+
+<div class="container">
+    <h2>Deixe sua Opinião</h2>
+    
+    <!-- Formulário de Envio -->
+    <form id="formOpiniao">
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" required placeholder="Seu nome">
+        </div>
+        <div class="form-group">
+            <label for="texto">Opinião:</label>
+            <textarea id="texto" required placeholder="Escreva o que você achou..."></textarea>
+        </div>
+        <button type="submit">Enviar Opinião</button>
+    </form>
+
+    <hr>
+
+    <!-- Lista de Opiniões -->
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3>Opiniões dos Clientes</h3>
+        <div class="contador" id="contador">Opiniões: 0/10</div>
+    </div>
+    
+    <div id="listaOpinioes">
+        <!-- As opiniões aparecerão aqui -->
+    </div>
+</div>
+
+<script>
+    // Array para armazenar as opiniões (máximo 10)
+    let opinioes = [];
+
+    const form = document.getElementById('formOpiniao');
+    const listaHtml = document.getElementById('listaOpinioes');
+    const contadorHtml = document.getElementById('contador');
+
+    // Função para renderizar as opiniões na tela
+    function atualizarLista() {
+        listaHtml.innerHTML = ''; // Limpa a lista atual
+        
+        // Se não houver opiniões
+        if (opinioes.length === 0) {
+            listaHtml.innerHTML = '<p style="color: #999; text-align: center;">Nenhuma opinião ainda. Seja o primeiro!</p>';
+            contadorHtml.textContent = "Opiniões: 0/10";
+            return;
+        }
+
+        // Renderiza cada opinião (as mais recentes primeiro)
+        opinioes.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'opiniao-item';
+            div.innerHTML = `
+                <div class="opiniao-nome">${item.nome}</div>
+                <p class="opiniao-texto">${item.texto}</p>
+            `;
+            listaHtml.appendChild(div);
+        });
+
+        // Atualiza o contador do limite
+        contadorHtml.textContent = `Opiniões: ${opinioes.length}/10`;
+    }
+
+    // Evento de envio do formulário
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Impede a página de recarregar
+
+        const nomeInput = document.getElementById('nome');
+        const textoInput = document.getElementById('texto');
+
+        // Cria o novo objeto de opinião
+        const novaOpiniao = {
+            nome: nomeInput.value,
+            texto: textoInput.value
+        };
+
+        // Adiciona a nova opinião no INÍCIO do array (para aparecer no topo)
+        opinioes.unshift(novaOpiniao);
+
+        // Se passar de 10, remove a última (a mais antiga)
+        if (opinioes.length > 10) {
+            opinioes.pop();
+        }
+
+        // Atualiza a interface
+        atualizarLista();
+
+        // Limpa o formulário
+        form.reset();
+    });
+
+    // Inicializa a lista vazia
+    atualizarLista();
+</script>
+
+</body>
+</html>

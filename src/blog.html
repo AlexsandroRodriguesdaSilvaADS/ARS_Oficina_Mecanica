@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ARS | Meu Blog</title>
+
+    <!--<link rel="shortcut icon" href="./src/imagens/logo-p.png" type="image/x-icon">-->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.14.0/devicon.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/estilos.css" />
+    <link rel="stylesheet" href="./css/responsivo.css" />
+    <link rel="stylesheet" href="./css/blog.css" />
+</head>
+
+<body cz-shortcut-listen="true">
+    <section class="background">
+
+        <!-- CABEÇALHO -->
+        <header>
+            <div class="header-container">
+                <div class="logo"><img src="./imagens/logo-p.png" alt="Logomarca"></div>
+                <nav>
+                    <a href="../index.html">Home</a>
+                    <a href="#">Início</a>
+                    <a href="#">Artigos</a>
+                    <a href="#sobre_mim">Sobre</a>
+                    <a href="#noticias">Notícias</a>
+                    <a href="https://api.whatsapp.com/send?phone=5581998090037&text=Olá! Gostaria de mais informações."
+                        target="_blank" rel="noopener noreferrer" title="Fale conosco pelo WhatsApp">Contato</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main-container">
+
+            <!-- SEÇÃO DE POSTS -->
+            <section class="posts-section">
+
+                <!-- POST 1 -->
+                <article class="post-card">
+                    <!-- Substitua a URL abaixo pela imagem do seu post -->
+
+                    <!--<div class="container-foto-principal">
+                        <div class="foto-video">
+                            <video src="./video/skyline-gtr-r34.mp4" autoplay muted loop
+                                alt="@ric_lambo (https://www.youtube.com/shorts/krrsP_xThbQ)">
+                            </video>
+                            <img src="./imagens/foto-perfil-alfa.png" alt="Foto do portifólio de Alexsandro" />
+                        </div>
+                    </div>-->
+
+                    <img src="./imagens/supra.jpg" alt="Programação" class="post-img">
+                    <div class="post-content">
+                        <div class="post-meta">Por Alexsandro R da Silva <time datetime="" id="current-time"></time>
+                        </div>
+                        <h2 class="post-title">Manutenção preventiva, você deve fazer</h2>
+                        <p class="post-excerpt">Possuir um veículo significa que você tem grande responsabilidade. Não é
+                            só abastecer e calibrar os pneus, é necessário mais conhecimento para não ter maiores
+                            prejuízos...</p>
+                        <a href="https://youtu.be/wFjEoT-QZXw?si=QX8VsDQlSq54Zg7e" target="_blank"
+                            class="read-more-btn">Ler mais</a>
+                    </div>
+                </article>
+
+                <!-- POST 2 -->
+                <article class="post-card">
+                    <!-- Substitua a URL abaixo pela imagem do seu post -->
+                    <img src="./imagens/orçamento.png" alt="Espaço de trabalho" class="post-img">
+                    <div class="post-content">
+                        <div class="post-meta">Por Alexsandro R da Silva <time datetime="" id="current-time"></time>
+                        </div>
+                        <h2 class="post-title">Orçamento correto para o seu veículo</h2>
+                        <p class="post-excerpt">Infelizmente muitas oficinas possuem profissionais que deixa muito a
+                            desejar. A má impressão dos proprietátios de veículos é a de que em algum momento serão
+                            enganados...</p>
+                        <a href="https://quatrorodas.abril.com.br/auto-servico/orcamento-na-medida-certa/"
+                            target="_blank" class="read-more-btn">Ler mais</a>
+                    </div>
+                </article>
+
+            </section>
+
+            <!-- BARRA LATERAL -->
+            <aside>
+
+                <!-- WIDGET QUEM SOU EU -->
+                <div>
+                    <div id="sobre_mim" class="sidebar-widget about-me">
+                        <h3 class="widget-title">Sobre Mim</h3>
+                        <!-- Imagem de perfil de exemplo -->
+                        <img src="./imagens/foto-perfil.png" alt="Minha foto">
+                        <p>Olá! Sou o Alexsandro, mecãnico automotivo em formação técnica apaixonado por carros.</p>
+                    </div>
+                </div>
+
+                <!-- WIDGET CATEGORIAS -->
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">Categorias</h3>
+                    <ul class="categories-list">
+                        <li><a href="#">Tecnologia (0)</a></li>
+                        <li><a href="#">Produtividade (0)</a></li>
+                        <li><a href="#">Design (0)</a></li>
+                        <li><a href="#">Carreira (0)</a></li>
+                    </ul>
+                </div>
+
+            </aside>
+
+            <section id="noticias" class="noticias">
+
+                <!--<div class="container-foto">
+                    <div class="foto-video">
+                        <video src="./src/video/skyline-gtr-r34.mp4" autoplay muted loop
+                            alt="@ric_lambo (https://www.youtube.com/shorts/krrsP_xThbQ)">
+                        </video>
+                        <img src="./src/imagens/foto-perfil-alfa.png" alt="Foto do portifólio de Alexsandro" />
+                    </div>
+                </div>-->
+
+                <h2 class="titulo">Notícias</h2>
+                <div class="media">
+                    <div>
+                        <h1 class="title" style="background-color: #FF1100; color: #fff;"><a
+                                href="https://www.lojadomecanico.com.br/blog/dicas/mecanica/" target="_blank"
+                                title="Ir para Loja do Mecânico">Loja do Mecânico</a></h1>
+                        <iframe src="https://www.lojadomecanico.com.br/blog/dicas/mecanica/" frameborder="0"
+                            scrolling="yes" sandbox="allow-scripts allow-popups allow-forms"></iframe>
+                    </div>
+                    <div>
+                        <h1 class="title" style="background-color: red; color: #fff;"><a
+                                href="https://www.youtube.com/watch?v=7UvXYsvLDqo" target="_blank"
+                                title="Ir para Auto Papo">Auto
+                                Papo</a></h1>
+                        <iframe width="560" height="315"
+                            src="https://www.youtube.com/embed/7UvXYsvLDqo?si=LnPBSAypErUhb5iQ"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="frame-noticias">
+                        <h1 class="title" style="background-color: #BBEE1F; color: rgb(21, 60, 93);"><a
+                                href="https://aryqueirozjr.com.br/" target="_blank"
+                                title="Ir para blog aryqueirozjr">Teologia
+                                Reformada
+                                - AQVJ</a></h1>
+                        <iframe src="https://aryqueirozjr.com.br/" frameborder="0" scrolling="yes"
+                            sandbox="allow-scripts allow-popups allow-forms"></iframe>
+                    </div>
+                    <div class="frame-noticias">
+                        <h1 class="title" style="background-color: #BBEE1F; color: rgb(21, 60, 93);"><a
+                                href="https://www.youtube.com/augustusnicodemus" target="_blank"
+                                title="Ir para blog augustusnicodemus">Augustus Nicodemus</a></h1>
+                        <iframe width="560" height="315"
+                            src="https://www.youtube.com/embed/yV-1qzzWfm4?si=WXv-BAOdO_SYQwSM"
+                            title="YouTube video player" frameborder="0">
+                        </iframe>
+
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <script src="./src/js/data.js"></script>
+
+        <!-- RODAPÉ -->
+        <footer class="footer">
+            <img class="logo" src="./imagens/logo-p.png" alt="Logotipo ARS">
+            <h2 id="footer">Alexsandro Rodrigues da Silva | Mecânico Automotivo</h2>
+            <h1>© Copyright 2026. Made by <a href="https://alexsandrorodriguesdasilvaads.github.io/portifolio/"
+                    target="_blank">Alexsandro R da Silva</a></h1>
+        </footer>
+
+        <a href="../index.html" target="_self" class="blog-flutuante"
+            title="Ir para o Blog">Home<!--<i class="fa-brands fa-blogger"></i>--></a>
+
+        <a href="https://api.whatsapp.com/send?phone=5581998090037&text=Olá! Gostaria de mais informações."
+            class="whatsapp-flutuante" target="_blank" rel="noopener noreferrer" title="Fale conosco pelo WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+
+    </section>
+
+</body>
+
+</html>

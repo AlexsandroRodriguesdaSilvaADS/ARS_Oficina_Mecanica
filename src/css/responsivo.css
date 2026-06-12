@@ -1,0 +1,449 @@
+@media (max-width: 1280px) {
+    .main {
+        padding: 0;
+    }
+
+    .home {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .home .informacoes {
+        max-width: 100%;
+        text-align: center;
+        align-items: center;
+    }
+
+    .home .agendamento-ul {
+        justify-content: space-around;
+        gap: 10px;
+    }
+
+    .home .container-foto-principal {
+        top: 0;
+    }
+
+    .servicos .container-foto .foto-video,
+    .dicas .container-foto .foto-video,
+    .noticias .container-foto .foto-video {
+        right: 10px;
+    }
+
+    .servicos {
+        margin: 0;
+    }
+
+    .dicas .container-servicos .servico.ativo {
+        width: 90%;
+    }
+
+    .noticias {
+        height: 100%;
+    }
+
+    .noticias .media {
+        padding: 10px 0;
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .noticias .media iframe {
+        width: 400px;
+        height: 400px;
+    }
+
+    .media iframe {
+        height: 50vh;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .cabecalho .menu li a.botao,
+    .cabecalho .menu li a.blog {
+        font-size: 14px;
+        color: #fff;
+        padding: 10px;
+    }
+
+    .carousel-thumbnails-left {
+        left: 0;
+    }
+
+    .carousel-thumbnails-right {
+        right: 0;
+    }
+
+    .thumb {
+	width: 50px;
+	height: 50px;
+}
+
+    .dicas .link-dicas {
+        display: flex;
+        gap: 10px;
+        padding-bottom: 15px;
+    }
+
+    .dicas .container-servicos .servico.ativo {
+        width: 95vw;
+        margin-top: 10px;
+    }
+
+    .dicas .container-servicos .informacoes-servico {
+        padding: 10px;
+        height: 220px;
+    }
+
+    .dicas .container-servicos .servico img {
+        min-width: 200px;
+        max-height: 220px;
+    }
+
+    .dicas .container-servicos .servico h3 {
+        min-width: 200px;
+    }
+}
+
+@media (max-width: 426px) {
+    .main .logo {
+        display: flex;
+        margin: 10px auto;
+        position: relative;
+        padding: 2px;
+        width: 130px;
+        box-shadow: 0 0 10px #fff;
+        z-index: 3;
+    }
+
+    .cabecalho nav.menu {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 25px;
+    }
+
+    .cabecalho .logo {
+        display: none;
+    }
+
+    .container-foto .foto-video {
+        display: none;
+    }
+
+    .cabecalho .menu a.botao {
+        font-size: 14px;
+        color: #fff;
+        padding: 10px;
+    }
+
+    .home {
+        padding: 30px 0;
+    }
+
+    .home .informacoes h1 {
+        font-size: 30px;
+    }
+
+    .home .informacoes p {
+        font-size: 18px;
+    }
+
+    .home .container-foto-principal .foto-video {
+        max-width: 300px;
+    }
+
+    .home .container-foto-principal .foto-video video {
+        width: 300px;
+    }
+
+    .home .agendamento-ul {
+        position: relative;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .painel-lateral {
+        flex-direction: column;
+        top: -600px;
+        width: 100%;
+        height: 600px;
+    }
+
+    .painel-lateral.ativo {
+        transform: translateY(710px);
+    }
+
+    .player-container li {
+        padding-left: 2px;
+    }
+
+    .player-container li.active {
+        max-width: 100%;
+    }
+
+    .overlay {
+        top: 70px;
+        box-sizing: border-box;
+        margin: 15px 10px 0 10px;
+    }
+
+    .popup form .botoes {
+        gap: 130px;
+    }
+
+    /*.servicos {
+        background: none;
+    }*/
+
+    .carousel-container {
+        width: 95%;
+    }
+
+    .carousel-slide img {
+        height: 50%;
+    }
+
+    .carousel-thumbnails-left,
+    .carousel-thumbnails-right {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        margin: auto;
+        gap: 5px;
+    }
+
+    .thumb {
+        width: 50px;
+        height: 50px;
+    }
+
+    .servicos,
+    .dicas,
+    .noticias {
+        padding: 20px 0 30px 0;
+    }
+
+    .servicos .container-engrenagem {
+        display: none;
+    }
+
+    .dicas-main {
+        background-color: rgba(21, 60, 93, 0.7);
+        display: flex;
+        min-width: 100%;
+    }
+
+    .dicas .link-dicas {
+        display: none;
+    }
+
+    /* FILHO 1 */
+    .dicas .navbar {
+        /*border-right: 2px #ca2a02 solid;*/
+        display: flex;
+        font-size: 14px;
+        width: 30%;
+        height: 540px;
+        /*top: 10px;*/
+        position: relative;
+        margin: auto;
+        justify-content: center;
+    }
+
+    .menu {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Itens Principais do Menu */
+    .menu-item {
+        position: relative;
+        /* Necessário para posicionar a cascata */
+    }
+
+    .menu-item a {
+        color: #ffffff;
+        text-decoration: none;
+        padding: 15px 5px;
+        margin: 5px 0;
+        width: 100%;
+        display: block;
+        transition: background 0.3s ease;
+    }
+
+    .menu-item a:hover {
+        background-color: #fff;
+        color: rgb(21, 60, 93);
+        font-weight: bold;
+        border: 1px #ca2a02 solid;
+    }
+
+    /* Ícone indicador de submenu (opcional, mas ajuda o usuário) */
+    .has-submenu>a::after {
+        content: ' ▼';
+        font-size: 0.8rem;
+        color: #bdc3c7;
+    }
+
+    /* A Cascata (Submenu) - Escondida por padrão */
+    .submenu {
+        border: 1px #ca2a02 solid;
+        list-style: none;
+        position: absolute;
+        top: 5px;
+
+        /* Brota exatamente abaixo do item pai */
+        left: 110%;
+        background-color: #ffffff;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.15);
+        min-width: 200px;
+
+        /* Efeito de transição suave em vez de apenas display:none */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(10px);
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+        border-radius: 0 0 4px 4px;
+        z-index: 10;
+    }
+
+    /* Itens do Submenu */
+    .submenu li a {
+        color: rgb(21, 60, 93);
+        padding: 12px 20px;
+        border-bottom: 1px solid #f1f1f1;
+    }
+
+    .submenu li a:hover {
+        background-color: #f8f9fa;
+        color: rgb(21, 60, 93);
+    }
+
+    /* Remove a borda do último item do submenu */
+    .submenu li:last-child a {
+        border-bottom: none;
+    }
+
+    /* O PULO DO GATO: Quando passar o mouse no item pai, mostra o submenu */
+    .menu-item:hover .submenu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    /* FILHO 2 */
+    .dicas .container-servicos {
+        display: flex;
+        position: relative;
+        margin: auto;
+        width: 65%;
+        height: 500px;
+    }
+
+    .dicas .container-servicos .servico {
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+    }
+
+    .dicas .container-servicos .servico h3 {
+        background-color: rgba(0, 0, 0, 0.01);
+        border: 1px #ca2a02 solid;
+        width: 100%;
+        font-size: 16px;
+        font-weight: normal;
+        top: -30px;
+    }
+
+    .dicas .container-servicos .servico h2 {
+        font-size: 16px;
+        font-weight: normal;
+    }
+
+    .dicas .container-servicos .servico img {
+        min-width: 220px;
+        min-height: 220px;
+        margin: auto;
+        padding-top: 10px;
+    }
+
+    .dicas .container-servicos .informacoes-servico {
+        background-color: rgba(0, 0, 0, 0.01);
+        border: 1px #ca2a02 solid;
+        font-weight: normal;
+        font-size: 15px;
+        padding: 5px;
+        height: 100%;
+    }
+
+    .dicas .container-servicos .informacoes-servico .link-agendamento {
+        position: absolute;
+        bottom: 5px;
+    }
+
+    .footer .logo {
+        width: 70px;
+        height: 50px;
+    }
+
+    .blog-flutuante {
+        left: 10px;
+        bottom: 10px;
+    }
+
+    .whatsapp-flutuante {
+        bottom: 10px;
+    }
+}
+
+@media (max-width: 320px) {
+    .cabecalho .menu ul {
+        gap: 5px;
+    }
+
+    .cabecalho .menu a.botao {
+        font-size: 13px;
+        /*padding: 5px;*/
+    }
+
+    .overlay {
+        margin: 15px 8px 0 8px;
+    }
+
+    .popup form .botoes {
+        gap: 100px;
+    }
+
+    .thumb {
+        width: 45px;
+        height: 45px;
+    }
+
+    .menu-item a {
+        font-size: 11px;
+    }
+
+    .dicas .container-servicos {
+        width: 60%;
+    }
+
+    .dicas .container-servicos .servico h3 {
+        width: 60%;
+    }
+
+    .dicas .container-servicos .servico img {
+        min-width: 180px;
+        min-height: 180px;
+    }
+}
