@@ -61,7 +61,7 @@ nav a:hover {
 }
 
 .post-card {
-    background-color: rgb(21, 60, 93);
+    background-color: rgba(21, 60, 93, 0.8);
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
@@ -120,7 +120,7 @@ nav a:hover {
 
 .post-title {
     font-size: 24px;
-    color: #111;
+    color:#0076df;
     margin-bottom: 15px;
 }
 
@@ -186,7 +186,7 @@ aside {
 
 /* SESSÃO BLOG/NOTICIAS */
 .noticias {
-    background-color: rgb(21, 60, 93);
+    background-color: rgba(21, 60, 93, 0.8);
     border-radius: 10px;
     width: 100%;
     padding: 50px 0;
