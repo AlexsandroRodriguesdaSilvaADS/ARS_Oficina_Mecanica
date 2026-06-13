@@ -125,8 +125,7 @@
     }
 
     .main .logo {
-        display: none;
-        width: 100px;
+        display: flex;
     }
 
     .cabecalho nav.menu {
@@ -185,7 +184,7 @@
     }
 
     .painel-lateral.ativo {
-        transform: translateY(710px);
+        transform: translateY(670px);
     }
 
     .player-container li {
@@ -243,7 +242,7 @@
     .servicos,
     .dicas,
     .noticias {
-        padding: 20px 0 30px 0;
+        padding: 0 0 30px 0;
     }
 
     .servicos .titulo,
