@@ -205,13 +205,13 @@
         gap: 130px;
     }
 
-    /*.servicos {
-        background: none;
-    }*/
-
     .carousel-container {
         width: 95%;
         padding: 0;
+    }
+
+    .carousel-slide h3 {
+        top: 5px;
     }
 
     .carousel-slide img {
