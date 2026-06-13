@@ -76,9 +76,9 @@
     }
 
     .thumb {
-	width: 50px;
-	height: 50px;
-}
+        width: 50px;
+        height: 50px;
+    }
 
     .dicas .link-dicas {
         display: flex;
@@ -104,12 +104,29 @@
     .dicas .container-servicos .servico h3 {
         min-width: 200px;
     }
+
+    .blog-flutuante {
+        left: 10px;
+        bottom: 10px;
+    }
+
+    .whatsapp-flutuante {
+        bottom: 10px;
+    }
 }
 
 @media (max-width: 426px) {
+    header {
+        height: 80px;
+    }
+
+    .cabecalho {
+        padding: 2px 0;
+    }
+
     .main .logo {
         display: flex;
-        margin: 10px auto;
+        margin: 20px auto;
         position: relative;
         padding: 2px;
         width: 130px;
@@ -253,7 +270,7 @@
         display: flex;
         font-size: 14px;
         width: 30%;
-        height: 540px;
+        height: 75vh;
         /*top: 10px;*/
         position: relative;
         margin: auto;
@@ -286,7 +303,6 @@
         background-color: #fff;
         color: rgb(21, 60, 93);
         font-weight: bold;
-        border: 1px #ca2a02 solid;
     }
 
     /* Ícone indicador de submenu (opcional, mas ajuda o usuário) */
@@ -298,7 +314,6 @@
 
     /* A Cascata (Submenu) - Escondida por padrão */
     .submenu {
-        border: 1px #ca2a02 solid;
         list-style: none;
         position: absolute;
         top: 5px;
@@ -348,13 +363,14 @@
         position: relative;
         margin: auto;
         width: 65%;
-        height: 500px;
+        height: 70vh;
     }
 
     .dicas .container-servicos .servico {
         flex-direction: column;
         height: 100%;
         width: 100%;
+        padding-top: 10px;
     }
 
     .dicas .container-servicos .servico h3 {
@@ -369,13 +385,13 @@
     .dicas .container-servicos .servico h2 {
         font-size: 16px;
         font-weight: normal;
+        margin-bottom: 5px;
     }
 
     .dicas .container-servicos .servico img {
         min-width: 220px;
         min-height: 220px;
         margin: auto;
-        padding-top: 10px;
     }
 
     .dicas .container-servicos .informacoes-servico {
@@ -396,15 +412,6 @@
         width: 70px;
         height: 50px;
     }
-
-    .blog-flutuante {
-        left: 10px;
-        bottom: 10px;
-    }
-
-    .whatsapp-flutuante {
-        bottom: 10px;
-    }
 }
 
 @media (max-width: 320px) {
@@ -415,6 +422,11 @@
     .cabecalho .menu a.botao {
         font-size: 13px;
         /*padding: 5px;*/
+    }
+
+    .home .informacoes #endereço {
+        width: 200px;
+        font-size: 22px;
     }
 
     .overlay {
