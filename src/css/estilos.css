@@ -499,7 +499,7 @@ header {
 .dicas .container-foto .foto-video {
 	position: fixed;
 	width: 108px;
-	right: 22%;
+	right: 21%;
 	top: 5px;
 	z-index: 10;
 }
