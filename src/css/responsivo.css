@@ -164,6 +164,7 @@
 
     .home .container-foto-principal .foto-video {
         max-width: 300px;
+        top: 0;
     }
 
     .home .container-foto-principal .foto-video video {
@@ -179,8 +180,17 @@
     .painel-lateral {
         flex-direction: column;
         top: -600px;
-        width: 100%;
         height: 600px;
+        width: 100vw;
+    }
+
+    .painel-lateral .player-container,
+    .painel-lateral .text-container {
+        width: 100%;
+    }
+
+    .painel-lateral .player-container .poster {
+        width: 95%;
     }
 
     .painel-lateral.ativo {
