@@ -443,6 +443,7 @@ header {
 }
 
 .painel-lateral .player-container .poster {
+	opacity: 0.5;
 	position: absolute;
 	width: 280px;
 	height: 260px;
