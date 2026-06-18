@@ -52,7 +52,8 @@
 
       <div class="video-bg-container">
         <video class="video-bg" autoplay muted loop playsinline>
-          <source src="./src/video/subaro-branco-1.webm" type="video/webm" title="Proprietário https://www.youtube.com/@ThePulseMusic">
+          <source src="./src/video/subaro-branco-1.webm" type="video/webm"
+            title="Proprietário https://www.youtube.com/@ThePulseMusic">
           Seu navegador não suporta vídeos em HTML5.
         </video>
         <div class="conteudo">
@@ -175,6 +176,8 @@
 
       <div class="painel-lateral" id="meuPainel">
         <div class="player-container">
+          <img class="poster" id="albumPoster" src="" alt="Capa do Álbum">
+
           <audio id="audioPlayer" autoplay controls>
             <source src="" type="audio/mpeg">
             Seu navegador não suporta áudio HTML5.
@@ -185,24 +188,28 @@
             <!--<li data-src="./src/audio/Bullet-The-Blue-Sky.mp3">Bullet The Blue Sky</li>-->
             <!--<li data-src="./src/audio/De-Joelhos.mp3">De Joelhos</li>-->
             <!--<li data-src="./src/audio/Angel-Of-Light.mp3">Angel Of Light</li>-->
-            <li data-src="./src/audio/City-Of-Blinding-Lights.mp3">City Of Blinding Lights</li>
-            <li data-src="./src/audio/Depois-Da-Guerra.mp3">Depois Da Guerra</li>
+            <li data-src="./src/audio/City-Of-Blinding-Lights.mp3"
+              data-poster="./src/audio/city-of-blinding-lights.jpeg">City Of Blinding Lights</li>
+            <li data-src="./src/audio/Depois-Da-Guerra.mp3" data-poster="./src/audio/DDG.jpeg">
+              Depois Da Guerra</li>
             <!--<li data-src="./src/audio/Back-To-The-Rock.mp3">Back To the Rock</li>-->
-            <li data-src="./src/audio/Elevation.mp3">Elevation</li>
-            <li data-src="./src/audio/Meus-Passos.mp3">Meus Passos</li>
+            <li data-src="./src/audio/Elevation.mp3" data-poster="capa1.jpg">Elevation</li>
+            <li data-src="./src/audio/Meus-Passos.mp3" data-poster="./src/audio/neus-passos.jpeg">Meus Passos</li>
             <!--<li data-src="./src/audio/Bema-Seat.mp3">Bema Seat</li>-->
-            <li data-src="./src/audio/Every-Breaking-Wave.mp3">Every Breaking Wave</li>
-            <li data-src="./src/audio/Meus-Próprios-Meios.mp3">Meus Próprios Meios</li>
+            <li data-src="./src/audio/Every-Breaking-Wave.mp3" data-poster="capa1.jpg">Every Breaking Wave</li>
+            <li data-src="./src/audio/Meus-Próprios-Meios.mp3" data-poster="capa1.jpg">Meus Próprios Meios</li>
             <!--<li data-src="./src/audio/Clean.mp3">Clean</li>-->
-            <li data-src="./src/audio/Invisible.mp3">Invisible</li>
-            <li data-src="./src/audio/Muros.mp3">Muros</li>
+            <li data-src="./src/audio/Invisible.mp3" data-poster="capa1.jpg">Invisible</li>
+            <li data-src="./src/audio/Muros.mp3" data-poster="capa1.jpg">Muros</li>
             <!--<li data-src="./src/audio/Grave-Robber.mp3">Grave Robber</li>-->
-            <li data-src="./src/audio/I-Still-Haven't-Found-What-I'm-Looking-For.mp3">I Still Haven't Found What I'm
-              Looking For</li>
-            <li data-src="./src/audio/Obediência.mp3">Obediência</li>
-            <li data-src="./src/audio/Pride.mp3">Pride</li>
-            <li data-src="./src/audio/Until-The-End-Of-The-World.mp3">Until The End Of The World</li>
-            <li data-src="./src/audio/Vertigo.mp3">Vertigo</li>
+            <li data-src="./src/audio/I-Still-Haven't-Found-What-I'm-Looking-For.mp3" data-poster="capa1.jpg">
+              I Still Haven't Found What I'm Looking For</li>
+            <li data-src="./src/audio/Obediência.mp3" data-poster="capa1.jpg">Obediência</li>
+            <li data-src="./src/audio/Pride.mp3" data-poster="capa1.jpg">Pride</li>
+            <li data-src="./src/audio/Until-The-End-Of-The-World.mp3" data-poster="capa1.jpg">
+              Until The End Of The World
+            </li>
+            <li data-src="./src/audio/Vertigo.mp3" data-poster="capa1.jpg">Vertigo</li>
           </ul>
         </div>
 
@@ -324,7 +331,6 @@
                     rolamento</a></li>
               </ul>
             </nav>
-
             <!--- Scream min-width 425px  -->
             <ul class="link-dicas">
               <li><a href="#" class="meu-link" data-alvo="embreagem">Embreagem</a></li>

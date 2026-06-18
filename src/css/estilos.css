@@ -12,6 +12,7 @@ body {
 
 .background {
 	background-color: rgba(0, 0, 0, 0.5);
+	min-height: 100vh;
 }
 
 header {
@@ -106,6 +107,7 @@ header {
 	background-color: #FE9E00;
 	color: #ca2a02;
 	font-weight: bolder;
+	transform: scale(1.3);
 }
 
 .main {
@@ -338,7 +340,7 @@ header {
 	position: fixed;
 	width: 95%;
 	max-width: 500px;
-	top: 150px;
+	top: 125px;
 	z-index: 3;
 }
 
@@ -437,6 +439,16 @@ header {
 	border-radius: 10px;
 	width: 300px;
 	height: 280px;
+	z-index: -1;
+}
+
+.painel-lateral .player-container .poster {
+	position: absolute;
+	width: 280px;
+	height: 260px;
+	border-radius: 5px;
+	object-fit: cover;
+	z-index: -1;
 }
 
 .painel-lateral .player-container audio {
@@ -524,7 +536,7 @@ header {
 
 /* SESSÃO SERVIÇOS */
 .servicos {
-	padding: 0 0 60px;
+	padding: 30px 0;
 }
 
 /*.servicos .container-engrenagem {
@@ -554,6 +566,7 @@ header {
 }*/
 
 .servicos .titulo {
+	display: none;
 	position: relative;
 	text-align: center;
 	padding: 50px;
@@ -648,7 +661,7 @@ header {
 
 /* SESSÃO DICAS */
 .dicas {
-	padding: 0 0 60px;
+	padding:30px 0 60px;
 }
 
 .dicas .navbar {
@@ -656,6 +669,7 @@ header {
 }
 
 .dicas .titulo {
+	display: none;
 	position: relative;
 	padding: 50px;
 	text-align: center;
