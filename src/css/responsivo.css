@@ -20,7 +20,7 @@
         gap: 10px;
     }
 
-    .home .container-foto-principal {
+    .home .container-foto-principal .foto-video {
         top: 0;
     }
 
@@ -128,7 +128,6 @@
     .cabecalho nav.menu {
         height: 80px;
         justify-content: end;
-        padding-right: 10px;
     }
 
     .cabecalho {
@@ -424,7 +423,7 @@
 
 @media (max-width: 320px) {
 
-   header,
+    header,
     .cabecalho nav.menu {
         padding-right: 2px;
     }

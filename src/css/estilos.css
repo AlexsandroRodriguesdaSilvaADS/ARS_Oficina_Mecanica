@@ -25,12 +25,13 @@ header {
 }
 
 .cabecalho {
+	background-color: #128c7e;
 	max-width: 1100px;
 	margin: auto;
 }
 
 .cabecalho .logo {
-	position: fixed;
+	position: absolute;
 	margin: 5px;
 	width: 130px;
 	box-shadow: 0 0 10px #fff;
