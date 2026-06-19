@@ -115,28 +115,25 @@
 }
 
 @media (max-width: 426px) {
-    header {
-        height: 80px;
-    }
 
     .cabecalho {
         padding: 2px 0;
     }
 
     .main .logo {
-        display: flex;
+        display: none;
     }
 
     .cabecalho nav.menu {
         width: 100%;
         display: flex;
         flex-direction: row;
-        justify-content: center;
-        gap: 25px;
+        justify-content: end;
     }
 
     .cabecalho .logo {
-        display: none;
+        display: flex;
+        width: 90px;
     }
 
     .container-foto .foto-video {
@@ -249,15 +246,14 @@
     }
 
     .servicos,
-    .dicas,
-    .noticias {
+    .dicas {
         padding: 0 0 30px 0;
     }
 
-    .servicos .titulo,
+    /*.servicos .titulo,
     .dicas .titulo {
-        display: none;
-    }
+        display: flex;
+    }*/
 
     .servicos .container-engrenagem {
         display: none;
