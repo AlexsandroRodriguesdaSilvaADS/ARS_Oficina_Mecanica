@@ -115,9 +115,20 @@
     }
 }
 
+@media (max-width: 376px) {
+
+    .cabecalho nav.menu {
+        gap: 5px;
+    }
+}
+
 @media (max-width: 426px) {
-    header {
+
+    header,
+    .cabecalho nav.menu {
         height: 80px;
+        justify-content: end;
+        padding-right: 10px;
     }
 
     .cabecalho {
@@ -125,19 +136,12 @@
     }
 
     .main .logo {
-        display: flex;
-    }
-
-    .cabecalho nav.menu {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        gap: 25px;
+        display: none;
     }
 
     .cabecalho .logo {
-        display: none;
+        display: flex;
+        width: 80px;
     }
 
     .container-foto .foto-video {
@@ -247,12 +251,6 @@
     .thumb {
         width: 50px;
         height: 50px;
-    }
-
-    .servicos,
-    .dicas,
-    .noticias {
-        padding: 0 0 30px 0;
     }
 
     .servicos .titulo,
@@ -425,13 +423,18 @@
 }
 
 @media (max-width: 320px) {
+
+   header,
+    .cabecalho nav.menu {
+        padding-right: 2px;
+    }
+
     .cabecalho .menu ul {
         gap: 5px;
     }
 
     .cabecalho .menu a.botao {
-        font-size: 13px;
-        /*padding: 5px;*/
+        font-size: 11px;
     }
 
     .home .informacoes #endereço {
