@@ -20,7 +20,7 @@
         gap: 10px;
     }
 
-    .home .container-foto-principal {
+    .home .container-foto-principal .foto-video {
         top: 0;
     }
 
@@ -120,19 +120,11 @@
         padding: 2px 0;
     }
 
-    .main .logo {
-        display: none;
-    }
-
-    .cabecalho nav.menu {
-        width: 100%;
-        display: flex;
+    .cabecalho .menu {
         flex-direction: row;
-        justify-content: end;
     }
 
     .cabecalho .logo {
-        display: flex;
         width: 90px;
     }
 

@@ -26,28 +26,30 @@ header {
 .cabecalho {
 	max-width: 1100px;
 	margin: 0 auto;
-	padding: 25px 0;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
 .cabecalho .logo {
-	position: absolute;
+	position: relative;
 	left: 5px;
 	width: 135px;
 	box-shadow: 0 0 10px #fff;
 	padding: 2px;
+	margin: 5px;
 }
 
-.cabecalho nav.menu {
-	width: 100%;
+.cabecalho .menu {
+	width: 100vw;
 	display: flex;
+	margin: auto;
 	align-items: center;
-	justify-content: center;
+	justify-content: end;
 	gap: 20px;
-	padding: 10px 0;
+	padding: 5px 0;
 }
+
 
 /*.cabecalho .container-foto .foto-video {
 	margin-top: 5px;
@@ -80,6 +82,12 @@ header {
 	text-transform: capitalize;
 	padding: 5px 20px;
 	transition: 0.3s;
+}
+
+.cabecalho .menu a.botao:hover{
+	color: rgb(21, 60, 93);
+	background-color: #fff;
+	font-weight: bold;
 }
 
 .cabecalho .menu a.botao.selecionado {
@@ -133,16 +141,6 @@ header {
 	width: 100%;
 	min-height: 100%;
 	object-fit: cover;
-}
-
-.main .logo {
-	display: none;
-	position: relative;
-	margin: 15px auto;
-	padding: 2px;
-	max-width: 130px;
-	box-shadow: 0 0 10px #fff;
-	z-index: 3;
 }
 
 /* MUDANÇA DAS SESSÕES*/
