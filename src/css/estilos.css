@@ -1,5 +1,5 @@
 html {
-	color: #fff;
+	color: #F8F9FA;
 	scroll-behavior: smooth;
 }
 
@@ -11,12 +11,12 @@ body {
 }
 
 .background {
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: rgba(0, 0, 0, 0.25);
 	min-height: 100vh;
 }
 
 header {
-	background-color: rgba(0, 0, 0, 0.8);
+	background-color: #212529;
 	border-bottom: 1px black solid;
 	margin: auto;
 	position: sticky;
@@ -41,23 +41,6 @@ header {
 	margin: 5px;
 }
 
-.cabecalho .seta-1 {
-	display: none;
-	margin: 8px 8px 0;
-	width: 35px;
-	height: 35px;
-	padding: 5px;
-	border: 1px #fff solid;
-	border-radius: 50%;
-	transform: rotate(-90deg);
-	transition: transform 0.5s ease;
-}
-
-.cabecalho .seta-1.girar {
-	transform: rotate(90deg);
-	transition: transform 0.5s ease;
-}
-
 .cabecalho .menu-section {
 	width: 100vw;
 }
@@ -75,33 +58,10 @@ header {
 	padding: 5px 0;
 }
 
-
-/*.cabecalho .container-foto .foto-video {
-	margin-top: 5px;
-	position: relative;
-	width: 110px;
-}
-
-.cabecalho .container-foto .foto-video video {
-	box-shadow: 0 0 10px 1px #fff;
-	padding: 2px;
-	width: 100%;
-	border-radius: 50%;
-	position: relative;
-}
-
-.cabecalho .container-foto .foto-video img {
-	width: 100%;
-	border-radius: 50%;
-	position: absolute;
-	top: 0;
-	left: 0;
-}*/
-
 .cabecalho .menu a.botao {
 	font-family: "Raleway", sans-serif;
 	font-size: 18px;
-	color: #fff;
+	color: #F8F9FA;
 	border: 1px solid #fff;
 	border-radius: 15px;
 	text-transform: capitalize;
@@ -111,7 +71,7 @@ header {
 
 .cabecalho .menu a.botao:hover {
 	color: rgb(21, 60, 93);
-	background-color: #fff;
+	background-color: #ffffff;
 	font-weight: bold;
 }
 
@@ -126,7 +86,7 @@ header {
 	width: 35px;
 	height: 35px;
 	padding: 5px;
-	border: 1px #fff solid;
+	border: 1px #ffffff solid;
 	border-radius: 50%;
 	transform: rotate(-90deg);
 	transition: transform 0.5s ease;
@@ -156,7 +116,7 @@ header {
 	overflow: hidden;
 	justify-content: center;
 	align-items: center;
-	color: #fff;
+	color: #F8F9FA;
 	z-index: -1;
 }
 
@@ -190,6 +150,7 @@ header {
 
 .home .informacoes {
 	font-family: "Raleway", sans-serif;
+	color: #F8F9FA;
 	display: flex;
 	flex-direction: column;
 	gap: 15px;
@@ -220,20 +181,53 @@ header {
 	font-weight: bolder;
 }
 
-.home .informacoes #endereço {
+.home .informacoes .endereço {
+	background-color: #128c7e;
 	max-width: 320px;
-	border: 1px solid #fff;
+/*	border: 1px solid #fff;*/
 	border-radius: 15px;
 	padding: 10px 15px;
 	font-size: 24px;
 	transition: 0.3s;
 	box-shadow: 0 0 10px #fff;
+	transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.home .informacoes #endereço:hover {
+.home .informacoes .endereço:hover {
 	background-color: #df8b04;
 	color: #ca2a02;
 	font-weight: bolder;
+	transform: scale(1.1);
+}
+
+.home .informacoes .endereço::after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	border-radius: 50px;
+	top: 0;
+	left: 0;
+	box-shadow: 0 0 0 0 rgba(21, 60, 93, 0.7);
+	animation: pulso-endereço 2s infinite;
+	z-index: -1;
+}
+
+@keyframes pulso-endereço {
+	0% {
+		transform: scale(0.9);
+		box-shadow: 0 0 0 0 rgba(224, 224, 224, 0.7);
+	}
+
+	70% {
+		transform: scale(1);
+		box-shadow: 0 0 0 15px rgba(224, 224, 224, 0);
+	}
+
+	100% {
+		transform: scale(0.9);
+		box-shadow: 0 0 0 0 rgba(224, 224, 224, 0);
+	}
 }
 
 .home .redes-sociais {
@@ -423,7 +417,7 @@ header {
 }
 
 .painel-lateral .player-container {
-	background-color: rgb(21, 60, 93);
+	background-color: #2C6693;
 	/*border: 1px black solid;*/
 	margin: 5px;
 	padding: 10px;
@@ -477,12 +471,12 @@ header {
 .painel-lateral .player-container li.active {
 	color: rgb(21, 60, 93);
 	font-weight: bold;
-	background-color: rgba(255, 255, 255, 0.7);
+	background-color: rgba(248, 249, 250, 0.7);
 	max-width: 99%;
 }
 
 .painel-lateral .text-container {
-	background-color: rgb(21, 60, 93);
+	background-color: #2C6693;
 	/*border: 1px black solid;*/
 	padding: 2px;
 	margin: 5px;
@@ -503,32 +497,6 @@ header {
 .servicos {
 	padding: 30px 0;
 }
-
-/*.servicos .container-engrenagem {
-	position: absolute;
-	top: 250px;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	margin: auto;
-	width: 1100px;
-	height: 100%;
-}
-
-.servicos .container-engrenagem video {
-	position: fixed;
-	width: 100%;
-	min-height: 100%;
-	object-fit: cover;
-}
-
-.servicos .container-engrenagem .engrenagem {
-	position: relative;
-	display: flex;
-	margin: auto;
-	height: 100%;
-	padding: 5px;
-}*/
 
 .servicos .titulo {
 	/*display: none;*/
@@ -551,7 +519,7 @@ header {
 }
 
 .carousel-slide {
-	/*	background-color: rgba(0, 0, 0, 0.5);*/
+	background-color: rgba(44, 102, 147, 0.5);
 	box-shadow: 0 0 10px #fff;
 	border-radius: 15px;
 	max-width: 450px;
