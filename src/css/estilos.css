@@ -4,7 +4,7 @@ html {
 }
 
 body {
-	background: url("../imagens/bmw-m3-gtr.webp") center / cover no-repeat fixed;
+	background: url("../imagens/supra.jpg") center / cover no-repeat fixed;
 	height: 100%;
 	font-family: "Poppins", sans-serif;
 	margin: 0 auto;
@@ -70,8 +70,8 @@ header {
 }
 
 .cabecalho .menu a.botao:hover {
-	color: rgb(21, 60, 93);
-	background-color: #ffffff;
+	color: #F8F9FA;
+	background-color: #2C6693;
 	font-weight: bold;
 }
 
@@ -116,7 +116,6 @@ header {
 	overflow: hidden;
 	justify-content: center;
 	align-items: center;
-	color: #F8F9FA;
 	z-index: -1;
 }
 
@@ -182,7 +181,7 @@ header {
 }
 
 .home .informacoes .endereço {
-	background-color: #128c7e;
+	background-color: rgba(44, 102, 147, 0.5);
 	max-width: 320px;
 /*	border: 1px solid #fff;*/
 	border-radius: 15px;
@@ -190,44 +189,12 @@ header {
 	font-size: 24px;
 	transition: 0.3s;
 	box-shadow: 0 0 10px #fff;
-	transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
 .home .informacoes .endereço:hover {
 	background-color: #df8b04;
 	color: #ca2a02;
 	font-weight: bolder;
-	transform: scale(1.1);
-}
-
-.home .informacoes .endereço::after {
-	content: '';
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	border-radius: 50px;
-	top: 0;
-	left: 0;
-	box-shadow: 0 0 0 0 rgba(21, 60, 93, 0.7);
-	animation: pulso-endereço 2s infinite;
-	z-index: -1;
-}
-
-@keyframes pulso-endereço {
-	0% {
-		transform: scale(0.9);
-		box-shadow: 0 0 0 0 rgba(224, 224, 224, 0.7);
-	}
-
-	70% {
-		transform: scale(1);
-		box-shadow: 0 0 0 15px rgba(224, 224, 224, 0);
-	}
-
-	100% {
-		transform: scale(0.9);
-		box-shadow: 0 0 0 0 rgba(224, 224, 224, 0);
-	}
 }
 
 .home .redes-sociais {
@@ -334,7 +301,7 @@ header {
 }
 
 .popup {
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: rgba(44, 102, 147, 0.5);
 	border: 1px black solid;
 	padding: 20px;
 	text-align: center;
@@ -491,7 +458,6 @@ header {
 	height: 35vh;
 	pointer-events: none;
 }
-
 
 /* SESSÃO SERVIÇOS */
 .servicos {
@@ -661,14 +627,14 @@ header {
 }
 
 .dicas .container-servicos .servico img {
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: rgba(44, 102, 147, 0.5);
 	border: 1px #fff solid;
 	min-width: 260px;
 	max-height: 260px;
 }
 
 .dicas .container-servicos .informacoes-servico {
-	background-color: rgba(0, 0, 0, 0.5);
+	background-color: rgba(44, 102, 147, 0.5);
 	border: 1px #fff solid;
 	width: 100%;
 	height: 260px;
@@ -692,7 +658,6 @@ header {
 	color: #FE9E00;
 	transition: 0.3s;
 }
-
 
 /* RODAPÉ */
 .footer {
