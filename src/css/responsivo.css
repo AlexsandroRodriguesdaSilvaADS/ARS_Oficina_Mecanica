@@ -120,10 +120,6 @@
         display: none;
     }
 
-    /*.cabecalho .menu .seta {
-        display: none;
-    }*/
-
     .cabecalho .menu-toggle {
         display: block;
         width: 40px;
@@ -146,7 +142,7 @@
     }
 
     .cabecalho .menu-section.on {
-        background-color: rgba(0, 0, 0, 0.5);
+        background: url("../imagens/supra.jpg") center / cover no-repeat;
         position: fixed;
         top: 0;
         right: 0;
@@ -158,7 +154,10 @@
     }
 
     .cabecalho .menu-section.on .menu {
-        display: block;
+        /*background-color: rgba(0, 0, 0, 0.5);*/
+        display: flex;
+        flex-wrap: wrap;
+        /*padding: 50px;*/
     }
 
     .cabecalho .menu-section.on .menu-toggle .one {

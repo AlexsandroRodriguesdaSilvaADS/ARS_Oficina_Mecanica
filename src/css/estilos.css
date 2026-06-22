@@ -41,10 +41,6 @@ header {
 	margin: 5px;
 }
 
-.cabecalho .menu-section {
-	width: 100vw;
-}
-
 .cabecalho .menu-toggle {
 	display: none;
 }
@@ -183,7 +179,7 @@ header {
 .home .informacoes .endereço {
 	background-color: rgba(44, 102, 147, 0.5);
 	max-width: 320px;
-/*	border: 1px solid #fff;*/
+	/*	border: 1px solid #fff;*/
 	border-radius: 15px;
 	padding: 10px 15px;
 	font-size: 24px;
@@ -698,7 +694,7 @@ header {
 }
 
 .blog-flutuante {
-	background-color: rgb(21, 60, 93);
+	background-color: #2C6693;
 	color: #fff;
 	position: fixed;
 	width: 60px;
@@ -719,8 +715,8 @@ header {
 }
 
 .blog-flutuante:hover {
-	background-color: #FE9E00;
-	color: #ca2a02;
+	background-color: #153C5D;
+	/*color: #ca2a02;*/
 	font-weight: bold;
 	transform: scale(1.1);
 }
@@ -741,7 +737,7 @@ header {
 @keyframes pulso-blog {
 	0% {
 		transform: scale(0.9);
-		box-shadow: 0 0 0 0 rgba(224, 224, 224, 0.7);
+		box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
 	}
 
 	70% {
