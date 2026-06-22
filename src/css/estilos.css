@@ -16,7 +16,8 @@ body {
 }
 
 header {
-	background-color: rgb(21, 60, 93, 0.9);
+	background-color: rgba(0, 0, 0, 0.8);
+	border-bottom: 1px black solid;
 	margin: auto;
 	position: sticky;
 	top: 0;
@@ -40,8 +41,32 @@ header {
 	margin: 5px;
 }
 
-.cabecalho .menu {
+.cabecalho .seta-1 {
+	display: none;
+	margin: 8px 8px 0;
+	width: 35px;
+	height: 35px;
+	padding: 5px;
+	border: 1px #fff solid;
+	border-radius: 50%;
+	transform: rotate(-90deg);
+	transition: transform 0.5s ease;
+}
+
+.cabecalho .seta-1.girar {
+	transform: rotate(90deg);
+	transition: transform 0.5s ease;
+}
+
+.cabecalho .menu-section {
 	width: 100vw;
+}
+
+.cabecalho .menu-toggle {
+	display: none;
+}
+
+.cabecalho .menu {
 	display: flex;
 	margin: auto;
 	align-items: center;
@@ -84,7 +109,7 @@ header {
 	transition: 0.3s;
 }
 
-.cabecalho .menu a.botao:hover{
+.cabecalho .menu a.botao:hover {
 	color: rgb(21, 60, 93);
 	background-color: #fff;
 	font-weight: bold;
@@ -96,7 +121,7 @@ header {
 	font-weight: bolder;
 }
 
-.cabecalho .menu img.seta {
+.cabecalho .menu .seta {
 	margin: 8px 8px 0;
 	width: 35px;
 	height: 35px;
@@ -107,7 +132,7 @@ header {
 	transition: transform 0.5s ease;
 }
 
-.cabecalho .menu img.seta.girar {
+.cabecalho .menu .seta.girar {
 	transform: rotate(90deg);
 	transition: transform 0.5s ease;
 }
@@ -315,8 +340,8 @@ header {
 }
 
 .popup {
-	background-color: rgba(21, 60, 93, 0.7);
-	border: 1px #fff solid;
+	background-color: rgba(0, 0, 0, 0.5);
+	border: 1px black solid;
 	padding: 20px;
 	text-align: center;
 	box-sizing: border-box;
@@ -399,7 +424,7 @@ header {
 
 .painel-lateral .player-container {
 	background-color: rgb(21, 60, 93);
-	border: 1px #fff solid;
+	/*border: 1px black solid;*/
 	margin: 5px;
 	padding: 10px;
 	border-radius: 10px;
@@ -458,7 +483,7 @@ header {
 
 .painel-lateral .text-container {
 	background-color: rgb(21, 60, 93);
-	border: 1px #fff solid;
+	/*border: 1px black solid;*/
 	padding: 2px;
 	margin: 5px;
 	border-radius: 10px;
@@ -526,7 +551,7 @@ header {
 }
 
 .carousel-slide {
-	background-color: rgba(0, 0, 0, 0.5);
+	/*	background-color: rgba(0, 0, 0, 0.5);*/
 	box-shadow: 0 0 10px #fff;
 	border-radius: 15px;
 	max-width: 450px;
@@ -661,20 +686,22 @@ header {
 }
 
 .dicas .container-servicos .servico h3 {
-	background-color: rgb(21, 60, 93);
+	/*	background-color: rgba(0, 0, 0, 0.5);*/
 	min-width: 260px;
 	padding: 1px 0px 1px 5px;
 	position: absolute;
 }
 
 .dicas .container-servicos .servico img {
-	background-color: #fff;
+	background-color: rgba(0, 0, 0, 0.5);
+	border: 1px #fff solid;
 	min-width: 260px;
 	max-height: 260px;
 }
 
 .dicas .container-servicos .informacoes-servico {
-	background-color: rgba(21, 60, 93, 0.9);
+	background-color: rgba(0, 0, 0, 0.5);
+	border: 1px #fff solid;
 	width: 100%;
 	height: 260px;
 	font-weight: 600;

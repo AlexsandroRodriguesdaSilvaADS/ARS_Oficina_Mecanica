@@ -67,11 +67,11 @@
     }
 
     .carousel-thumbnails-left {
-        left: 0;
+        left: 20px;
     }
 
     .carousel-thumbnails-right {
-        right: 0;
+        right: 20px;
     }
 
     .thumb {
@@ -114,7 +114,78 @@
     }
 }
 
-@media (max-width: 426px) {
+@media (max-width: 570px) {
+
+    .cabecalho .menu {
+        display: none;
+    }
+
+    /*.cabecalho .menu .seta {
+        display: none;
+    }*/
+
+    .cabecalho .menu-toggle {
+        display: block;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        margin-top: 20px;
+        margin-right: 10px;
+        right: 1px;
+        top: 1px;
+    }
+
+    .one,
+    .two,
+    .three {
+        background-color: #ca2a02;
+        height: 5px;
+        width: 100%;
+        margin: 6px auto;
+        transition-duration: 0.3s;
+    }
+
+    .cabecalho .menu-section.on {
+        background-color: rgba(0, 0, 0, 0.5);
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 15%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cabecalho .menu-section.on .menu {
+        display: block;
+    }
+
+    .cabecalho .menu-section.on .menu-toggle .one {
+        transform: rotate(45deg) translate(7px, 7px);
+    }
+
+    .cabecalho .menu-section.on .menu-toggle .two {
+        opacity: 0;
+    }
+
+    .cabecalho .menu-section.on .menu-toggle .three {
+        transform: rotate(-45deg) translate(8px, -9px);
+    }
+
+    .cabecalho .menu-section.on .menu .botao {
+        font-size: 18px;
+        line-height: 10px;
+        display: flex;
+        margin: 5px auto;
+        writing-mode: vertical-lr;
+        /*text-orientation: upright;*/
+        transition-duration: 0.5s;
+    }
+
+}
+
+@media (max-width: 425px) {
 
     .cabecalho {
         padding: 2px 0;
