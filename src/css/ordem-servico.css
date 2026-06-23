@@ -1,10 +1,17 @@
 .container {
     max-width: 1300px;
+    height: 100%;
     margin: 0 auto;
     background: #fff;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    position: relative;
+    display: flex;
+    width: 135px;
+    margin: 20px auto;
 }
 
 h2 {
@@ -92,20 +99,50 @@ textarea {
     background-color: #2c5282;
 }
 
+.btn-clear {
+    background-color: #e2e8f0;
+    color: #4a5568;
+    padding: 12px;
+    border: 1px solid #cbd5e0;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-clear:hover {
+    background-color: #cbd5e0;
+    color: #2d3748;
+}
+
 /* Layout do Espelho de Impressão (Invisível no início) */
 #print-area {
     display: none;
 }
 
+.footer {
+    display: none;
+}
+
 /* Regras de Impressão */
 @media print {
+    @page {
+        size: A4;
+        margin: 10mm;
+    }
+
+    html,
     body {
+        height: 100%;
         background: white;
         padding: 0;
+        margin: 0;
+        font-size: 12px;
     }
 
     #os-form,
-    .btn-submit {
+    .btn-group {
         display: none !important;
     }
 
@@ -119,12 +156,20 @@ textarea {
         max-width: 100%;
     }
 
+    .logo {
+        position: relative;
+        display: flex;
+        width: 135px;
+        margin: 20px auto;
+    }
+
     /* Estilo da folha impressa */
     .print-header {
         display: flex;
         justify-content: space-between;
         border-bottom: 2px solid #333;
         padding-bottom: 15px;
+        margin-top: 20px;
         margin-bottom: 20px;
     }
 
@@ -162,11 +207,11 @@ textarea {
         margin-top: 60px;
     }
 
-    /*.sig-line {
+    .sig-line {
         border-top: 1px solid #999;
         width: 45%;
         text-align: center;
         padding-top: 5px;
         font-size: 12px;
-    }*/
+    }
 }

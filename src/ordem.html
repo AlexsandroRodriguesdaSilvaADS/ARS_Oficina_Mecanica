@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ARS | Auto Mecânico</title>
+
+    <!--<link rel="shortcut icon" href="./src/imagens/logo-p.png" type="image/x-icon">-->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.14.0/devicon.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/estilos.css" />
+    <link rel="stylesheet" href="./css/responsivo.css" />
+    <link rel="stylesheet" href="./css/ordem-servico.css" />
+</head>
+
+<body>
+
+    <div class="container">
+
+        <form id="os-form" onsubmit="gerarOS(event)">
+            <img class="logo" src="./imagens/logo.png" title="Soluções integradas para o seu veículo"
+                alt="Logo de ARS Mecânico Automotivo" />
+            <h2>Ordem de Serviço</h2>
+
+            <div class="form-section" style="background: #e2e8f0; padding: 15px; border-radius: 5px;">
+                <div class="form-grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="form-group">
+                        <label for="f_numero" style="color: #1a365d;">Nº desta Ordem de Serviço (Sequencial)</label>
+                        <input type="number" id="f_numero" required style="font-weight: bold; color: #1a365d;">
+                    </div>
+                    <div class="form-group">
+                        <label for="f_status">Status Inicial</label>
+                        <select id="f_status">
+                            <option value="Em Andamento">Em Andamento</option>
+                            <option value="Aprovado">Aprovado / Finalizado</option>
+                            <option value="Orçamento">Apenas Orçamento</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <label style="font-size: 16px; color: #1a365d; display:block; margin-bottom:10px; margin-top: 15px;">1.
+                    Dados do Cliente</label>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="f_cliente">Nome do Cliente / Razão Social</label>
+                        <input type="text" id="f_cliente" required placeholder="Ex: João da Silva">
+                    </div>
+                    <div class="form-group">
+                        <label for="f_documento">CPF / CNPJ</label>
+                        <input type="text" id="f_documento" placeholder="000.000.000-00">
+                    </div>
+                    <div class="form-group">
+                        <label for="f_telefone">Telefone</label>
+                        <input type="tel" id="f_telefone" required placeholder="(11) 99999-9999">
+                    </div>
+                    <div class="form-group">
+                        <label for="f_email">E-mail</label>
+                        <input type="email" id="f_email" placeholder="cliente@email.com">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <label style="font-size: 16px; color: #1a365d; display:block; margin-bottom:10px;">2. Informações do
+                    Objeto / Veículo</label>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="f_objeto">Equipamento / Carro</label>
+                        <input type="text" id="f_objeto" required placeholder="Ex: Subaru WRX">
+                    </div>
+                    <div class="form-group">
+                        <label for="f_modelo">Marca / Modelo / Cor</label>
+                        <input type="text" id="f_modelo" placeholder="Ex: Subaru - Branco">
+                    </div>
+                    <div class="form-group">
+                        <label for="f_serial">Nº de Série / Placa</label>
+                        <input type="text" id="f_serial" placeholder="Ex: ABC-1234">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <label style="font-size: 16px; color: #1a365d; display:block; margin-bottom:10px;">3. Detalhes Técnico e
+                    Valores</label>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="f_defeito">Defeito Relatado / Solicitação</label>
+                        <textarea id="f_defeito" required
+                            placeholder="Descreva o problema trazido pelo cliente..."></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="f_laudo">Laudo Técnico / Serviços Executados</label>
+                        <textarea id="f_laudo" placeholder="O que foi feito para resolver o problema..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="f_valor">Valor Total do Serviço (R$)</label>
+                        <input type="number" id="f_valor" step="0.01" required placeholder="0,00">
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <button type="submit" class="btn-submit">Gerar OS para Impressão</button>
+                <button type="button" class="btn-clear" onclick="limparFormulario()">Limpar</button>
+            </div>
+            
+        </form>
+
+        <div id="print-area">
+            <img class="logo" src="./imagens/logo.png" title="Soluções integradas para o seu veículo"
+                alt="Logo de ARS Mecânico Automotivo" />
+            <div class="print-header">
+                <div>
+                    <h1 style="margin:0; color:#1a365d; font-size: 26px;">ARS Oficina Mecânica</h1>
+                    <p style="margin:5px 0 0 0; font-size:12px; color:#555;">Contato: autonomosslm@gmail.com
+                        |Tel: (81)99809-0037</p>
+                </div>
+                <div style="text-align: right;">
+                    <div
+                        style="background:#1a365d; color:white; padding: 4px 8px; font-weight:bold; border-radius:4px; font-size: 13px;">
+                        ORDEM DE SERVIÇO Nº <span id="p_numero"></span>
+                    </div>
+                    <p style="margin: 4px 0 0 0; font-size:11px;">Data: <span id="p_data"></span></p>
+                </div>
+            </div>
+
+            <div class="print-section">
+                <h3>Dados do Cliente</h3>
+                <div class="print-grid">
+                    <div><strong>Cliente:</strong> <span id="p_cliente"></span></div>
+                    <div><strong>CPF/CNPJ:</strong> <span id="p_documento"></span></div>
+                    <div><strong>Telefone:</strong> <span id="p_telefone"></span></div>
+                    <div><strong>E-mail:</strong> <span id="p_email"></span></div>
+                </div>
+            </div>
+
+            <div class="print-section">
+                <h3>Identificação do Objeto / Equipamento</h3>
+                <div class="print-grid">
+                    <div><strong>Objeto:</strong> <span id="p_objeto"></span></div>
+                    <div><strong>Marca/Modelo/Cor:</strong> <span id="p_modelo"></span></div>
+                    <div><strong>Nº Série/Placa:</strong> <span id="p_serial"></span></div>
+                    <div><strong>Status:</strong> <span id="p_status" style="font-weight: bold;"></span></div>
+                </div>
+            </div>
+
+            <div class="print-section">
+                <h3>Defeito Relatado</h3>
+                <div class="print-block" id="p_defeito"></div>
+            </div>
+
+            <div class="print-section">
+                <h3>Laudo Técnico / Solução</h3>
+                <div class="print-block" id="p_laudo"></div>
+            </div>
+
+            <div class="print-section" style="text-align: right; margin-top: 15px;">
+                <span
+                    style="font-size: 15px; font-weight: bold; color: #1a365d; border: 1px solid #1a365d; padding: 6px 15px; background: #f0f4f8;">
+                    VALOR TOTAL: R$ <span id="p_valor"></span>
+                </span>
+            </div>
+
+            <div class="signatures">
+                <div class="sig-line">Assinatura do Cliente</div>
+                <div class="sig-line">Responsável Técnico</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Executa assim que a página carrega
+        window.onload = function () {
+            // Tenta buscar o próximo número salvo. Se não existir, começa do 1.
+            let proximoNumero = localStorage.getItem('proxima_os_num');
+            if (!proximoNumero) {
+                proximoNumero = 1;
+            }
+            document.getElementById('f_numero').value = proximoNumero;
+        };
+
+        // Funcção para limpar o form
+        function limparFormulario() {
+            // Guarda o número atual da OS antes de resetar tudo
+            const numeroAtual = document.getElementById('f_numero').value;
+
+            // Reseta o formulário
+            document.getElementById('os-form').reset();
+
+            // Devolve o número correto da OS para o campo
+            document.getElementById('f_numero').value = numeroAtual;
+        }
+
+        function gerarOS(event) {
+            event.preventDefault();
+
+            // Captura o número digitado
+            const numeroOS = document.getElementById('f_numero').value;
+
+            const cliente = document.getElementById('f_cliente').value;
+            const documento = document.getElementById('f_documento').value || 'Não informado';
+            const telefone = document.getElementById('f_telefone').value;
+            const email = document.getElementById('f_email').value || 'Não informado';
+
+            const objeto = document.getElementById('f_objeto').value;
+            const modelo = document.getElementById('f_modelo').value || 'Não informado';
+            const serial = document.getElementById('f_serial').value || 'Não informado';
+
+            const defeito = document.getElementById('f_defeito').value;
+            const laudo = document.getElementById('f_laudo').value || 'Em análise técnica.';
+            const valor = parseFloat(document.getElementById('f_valor').value).toFixed(2);
+            const status = document.getElementById('f_status').value;
+
+            const hoje = new Date();
+            const dataFormatada = hoje.toLocaleDateString('pt-BR') + ' ' + hoje.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+            // Injeta os dados no espelho de impressão
+            document.getElementById('p_numero').innerText = numeroOS;
+            document.getElementById('p_data').innerText = dataFormatada;
+            document.getElementById('p_cliente').innerText = cliente;
+            document.getElementById('p_documento').innerText = documento;
+            document.getElementById('p_telefone').innerText = telefone;
+            document.getElementById('p_email').innerText = email;
+
+            document.getElementById('p_objeto').innerText = objeto;
+            document.getElementById('p_modelo').innerText = modelo;
+            document.getElementById('p_serial').innerText = serial;
+            document.getElementById('p_status').innerText = status;
+
+            document.getElementById('p_defeito').innerText = defeito;
+            document.getElementById('p_laudo').innerText = laudo;
+            document.getElementById('p_valor').innerText = valor;
+
+            // MULTIPLICAÇÃO DA SEQUÊNCIA: Calcula e salva o próximo número (+1)
+            let novoNumero = parseInt(numeroOS) + 1;
+            localStorage.setItem('proxima_os_num', novoNumero);
+
+            // Atualiza o formulário em segundo plano para o próximo número
+            document.getElementById('f_numero').value = novoNumero;
+
+            // Dispara a impressão
+            window.print();
+        }
+    </script>
+
+</body>
+
+</html>
