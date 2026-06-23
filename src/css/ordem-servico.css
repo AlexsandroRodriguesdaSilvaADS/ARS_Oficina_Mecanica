@@ -1,4 +1,4 @@
-.container {
+/*.container {
     max-width: 1300px;
     height: 100%;
     margin: 0 auto;
@@ -21,7 +21,7 @@ h2 {
     margin-top: 0;
 }
 
-/* Estilos do Formulário */
+/* Estilos do Formulário 
 .form-section {
     margin-bottom: 25px;
 }
@@ -41,7 +41,7 @@ h2 {
     grid-column: 1 / -1;
 }
 
-/* LABEL PRINCIPAL */
+/* LABEL PRINCIPAL 
 .dados-principais {
     font-size: 16px;
     color: #1a365d;
@@ -79,7 +79,7 @@ textarea {
     min-height: 80px;
 }
 
-/* Botões */
+/* Botões 
 .btn-submit {
     display: block;
     width: 100%;
@@ -116,7 +116,7 @@ textarea {
     color: #2d3748;
 }
 
-/* Layout do Espelho de Impressão (Invisível no início) */
+/* Layout do Espelho de Impressão (Invisível no início) 
 #print-area {
     display: none;
 }
@@ -125,7 +125,7 @@ textarea {
     display: none;
 }
 
-/* Regras de Impressão */
+/* Regras de Impressão 
 @media print {
     @page {
         size: A4;
@@ -163,7 +163,7 @@ textarea {
         margin: 20px auto;
     }
 
-    /* Estilo da folha impressa */
+    /* Estilo da folha impressa 
     .print-header {
         display: flex;
         justify-content: space-between;
@@ -213,5 +213,316 @@ textarea {
         text-align: center;
         padding-top: 5px;
         font-size: 12px;
+    }
+}*/
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+/* TELA DE LOGIN */
+#login-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #1a365d;
+    z-index: 9999;
+}
+
+.login-box {
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+}
+
+.login-box h3 {
+    margin-top: 0;
+    color: #1a365d;
+    margin-bottom: 20px;
+}
+
+.login-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.login-group label {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #4a5568;
+}
+
+.login-group input {
+    padding: 10px;
+    border: 1px solid #cbd5e0;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.btn-login {
+    width: 100%;
+    background-color: #2b6cb0;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    background-color: #2c5282;
+}
+
+#login-error {
+    color: #e53e3e;
+    font-size: 13px;
+    margin-top: 10px;
+    display: none;
+}
+
+/* CONTEÚDO PRINCIPAL (OCULTO ANTES DO LOGIN) */
+#main-content {
+    display: none;
+}
+
+.container {
+    max-width: 850px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.btn-logout {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: #e53e3e;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.btn-logout:hover {
+    background: #c53030;
+}
+
+h2 {
+    color: #1a365d;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 8px;
+    margin-top: 0;
+    max-width: 80%;
+}
+
+/* Estilos do Formulário */
+.form-section {
+    margin-bottom: 25px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+label {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #4a5568;
+}
+
+input,
+textarea,
+select {
+    padding: 10px;
+    border: 1px solid #cbd5e0;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #fff;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #3182ce;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Área dos Botões */
+.btn-group {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn-submit {
+    background-color: #2b6cb0;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background-color: #2c5282;
+}
+
+.btn-clear {
+    background-color: #e2e8f0;
+    color: #4a5568;
+    padding: 12px;
+    border: 1px solid #cbd5e0;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-clear:hover {
+    background-color: #cbd5e0;
+    color: #2d3748;
+}
+
+/* Layout do Espelho de Impressão */
+#print-area {
+    display: none;
+}
+
+/* REGRAS DE IMPRESSÃO */
+@media print {
+    @page {
+        size: A4;
+        margin: 10mm;
+    }
+
+    html,
+    body {
+        height: 100%;
+        background: white;
+        padding: 0;
+        margin: 0;
+        font-size: 12px;
+    }
+
+    #login-screen,
+    #os-form,
+    .btn-group,
+    .btn-logout {
+        display: none !important;
+    }
+
+    #main-content {
+        display: block !important;
+    }
+
+    #print-area {
+        display: block !important;
+        max-height: 100%;
+        box-sizing: border-box;
+    }
+
+    .container {
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+    }
+
+    .print-header {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 2px solid #333;
+        padding-bottom: 8px;
+        margin-bottom: 12px;
+    }
+
+    .print-section {
+        margin-bottom: 12px;
+    }
+
+    .print-section h3 {
+        background: #f0f4f8;
+        padding: 4px 6px;
+        margin: 0 0 6px 0;
+        font-size: 12px;
+        text-transform: uppercase;
+        border-left: 4px solid #1a365d;
+    }
+
+    .print-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+        font-size: 12px;
+    }
+
+    .print-block {
+        border: 1px solid #ddd;
+        padding: 6px 10px;
+        font-size: 12px;
+        min-height: 40px;
+        background: #fafafa;
+        white-space: pre-wrap;
+    }
+
+    .signatures {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 40px;
+        page-break-inside: avoid;
+    }
+
+    .sig-line {
+        border-top: 1px solid #999;
+        width: 42%;
+        text-align: center;
+        padding-top: 4px;
+        font-size: 11px;
     }
 }
