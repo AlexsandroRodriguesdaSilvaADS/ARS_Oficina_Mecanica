@@ -20,35 +20,34 @@
     <link rel="stylesheet" href="./css/estilos.css" />
     <link rel="stylesheet" href="./css/responsivo.css" />
     <link rel="stylesheet" href="./css/ordem-servico.css" />
+    
     <style>
-        /*  body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 40px auto;
-            max-width: 500px;
-            background-color: #f7f9fc;
-            color: #333;
-        }*/
         .card {
-            background: rgb(250, 5, 5);
-            width: 50vw;
+            background: #ffffff;
             padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
-        h2, h3 {
+
+        h2,
+        h3 {
             margin-top: 0;
             color: #2c3e50;
         }
+
         .form-grupo {
             margin-bottom: 15px;
         }
-        label {
+
+        /*label {
             display: block;
             margin-bottom: 6px;
             font-weight: 600;
             font-size: 14px;
-        }
-        select, input {
+        }*/
+
+        select,
+        input {
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
@@ -56,6 +55,7 @@
             box-sizing: border-box;
             font-size: 15px;
         }
+
         button {
             width: 100%;
             padding: 12px;
@@ -68,19 +68,23 @@
             cursor: pointer;
             transition: background 0.2s;
         }
+
         button:hover {
             background-color: #0056b3;
         }
+
         .lista-container {
             margin-top: 25px;
             border-top: 2px solid #eee;
             padding-top: 20px;
         }
+
         ul {
             list-style: none;
             padding: 0;
             margin: 0;
         }
+
         li {
             display: flex;
             justify-content: space-between;
@@ -88,6 +92,7 @@
             border-bottom: 1px solid #f1f1f1;
             font-size: 15px;
         }
+
         .total-container {
             margin-top: 20px;
             display: flex;
@@ -97,10 +102,12 @@
             padding: 15px;
             border-radius: 6px;
         }
+
         .total-container label {
             margin: 0;
             font-size: 16px;
         }
+
         .total-container input {
             width: 140px;
             background: #fff;
@@ -208,17 +215,27 @@
                     <label style="font-size: 16px; color: #1a365d; display:block; margin-bottom:10px;">
                         3. Detalhes Técnico e Valores</label>
                     <div class="form-grid">
+
                         <div class="form-group full-width">
                             <label for="f_defeito">Defeito Relatado / Solicitação</label>
                             <textarea id="f_defeito" required
                                 placeholder="Descreva o problema trazido pelo cliente..."></textarea>
                         </div>
 
-                        <div class="card">
-                            <h2>Adicionar Serviço</h2>
+                        <div class="form-group full-width">
+                            <label for="f_laudo">Laudo Técnico / Serviços Executados</label>
+                            <textarea id="f_laudo" placeholder="O que foi feito para resolver o problema..."></textarea>
+                        </div>
+
+                        <!--<div class="form-group">
+                            <label for="f_valor">Valor Total do Serviço (R$)</label>
+                            <input type="number" id="f_valor" step="0.01" required placeholder="0,00">
+                        </div>-->
+
+                        <div class="form-group full-width">
 
                             <div class="form-grupo">
-                                <label for="servico">Selecione o Serviço:</label>
+                                <label for="servico">Selecione Serviço:</label>
                                 <select id="servico">
                                     <option value="Troca de amortecedor dianteiro">Troca de amortecedor dianteiro
                                     </option>
@@ -246,18 +263,8 @@
                                     <input type="text" id="totalGeral" readonly value="R$ 0,00">
                                 </div>
                             </div>
+
                         </div>
-
-                        <!--<div class="form-group full-width">
-                            <label for="f_laudo">Laudo Técnico / Serviços Executados</label>
-                            <textarea id="f_laudo" placeholder="O que foi feito para resolver o problema..."></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="f_valor">Valor Total do Serviço (R$)</label>
-                            <input type="number" id="f_valor" step="0.01" required placeholder="0,00">
-                        </div>-->
-
                     </div>
                 </div>
 
@@ -422,55 +429,55 @@
     </script>
 
     <script>
-    // Variável global para armazenar o valor acumulado da soma
-    let somaTotal = 0;
+        // Variável global para armazenar o valor acumulado da soma
+        let somaTotal = 0;
 
-    // Mapeamento dos elementos do HTML
-    const selectServico = document.getElementById('servico');
-    const inputValor = document.getElementById('valor');
-    const listaServicos = document.getElementById('listaServicos');
-    const inputTotalGeral = document.getElementById('totalGeral');
-    const btnAdicionar = document.getElementById('btnAdicionar');
+        // Mapeamento dos elementos do HTML
+        const selectServico = document.getElementById('servico');
+        const inputValor = document.getElementById('valor');
+        const listaServicos = document.getElementById('listaServicos');
+        const inputTotalGeral = document.getElementById('totalGeral');
+        const btnAdicionar = document.getElementById('btnAdicionar');
 
-    // Função para formatar números no padrão de moeda Real (R$)
-    function formatarMoeda(valor) {
-        return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-    }
-
-    // Evento de clique do botão
-    btnAdicionar.addEventListener('click', () => {
-        const nomeServico = selectServico.value;
-        const valorServico = parseFloat(inputValor.value);
-
-        // Validação simples para garantir que o usuário digitou um valor válido
-        if (isNaN(valorServico) || valorServico <= 0) {
-            alert("Por favor, insira um valor válido maior que zero.");
-            return;
+        // Função para formatar números no padrão de moeda Real (R$)
+        function formatarMoeda(valor) {
+            return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         }
 
-        // 1. Cria uma nova linha (li) para a lista
-        const novoItem = document.createElement('li');
-        
-        // 2. Preenche a linha com o nome do serviço e o valor formatado
-        novoItem.innerHTML = `
+        // Evento de clique do botão
+        btnAdicionar.addEventListener('click', () => {
+            const nomeServico = selectServico.value;
+            const valorServico = parseFloat(inputValor.value);
+
+            // Validação simples para garantir que o usuário digitou um valor válido
+            if (isNaN(valorServico) || valorServico <= 0) {
+                alert("Por favor, insira um valor válido maior que zero.");
+                return;
+            }
+
+            // 1. Cria uma nova linha (li) para a lista
+            const novoItem = document.createElement('li');
+
+            // 2. Preenche a linha com o nome do serviço e o valor formatado
+            novoItem.innerHTML = `
             <span>${nomeServico}</span>
             <strong>${formatarMoeda(valorServico)}</strong>
         `;
 
-        // 3. Adiciona a nova linha dentro da nossa lista (ul)
-        listaServicos.appendChild(novoItem);
+            // 3. Adiciona a nova linha dentro da nossa lista (ul)
+            listaServicos.appendChild(novoItem);
 
-        // 4. Atualiza a soma total do sistema
-        somaTotal += valorServico;
+            // 4. Atualiza a soma total do sistema
+            somaTotal += valorServico;
 
-        // 5. Atualiza o campo input do resultado final na tela
-        inputTotalGeral.value = formatarMoeda(somaTotal);
+            // 5. Atualiza o campo input do resultado final na tela
+            inputTotalGeral.value = formatarMoeda(somaTotal);
 
-        // 6. Limpa o campo de valor para a próxima inserção
-        inputValor.value = '';
-        inputValor.focus();
-    });
-</script>
+            // 6. Limpa o campo de valor para a próxima inserção
+            inputValor.value = '';
+            inputValor.focus();
+        });
+    </script>
 
 </body>
 
