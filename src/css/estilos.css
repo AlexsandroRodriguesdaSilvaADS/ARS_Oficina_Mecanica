@@ -54,7 +54,8 @@ header {
 	padding: 5px 0;
 }
 
-.cabecalho .menu a.botao {
+.cabecalho .menu .botao,
+.cabecalho .menu .os {
 	font-family: "Raleway", sans-serif;
 	font-size: 18px;
 	color: #F8F9FA;
@@ -65,13 +66,14 @@ header {
 	transition: 0.3s;
 }
 
-.cabecalho .menu a.botao:hover {
+.cabecalho .menu .botao:hover,
+.cabecalho .menu .os:hover {
 	color: #F8F9FA;
 	background-color: #2C6693;
 	font-weight: bold;
 }
 
-.cabecalho .menu a.botao.selecionado {
+.cabecalho .menu .botao.selecionado {
 	background-color: #FE9E00;
 	color: #ca2a02;
 	font-weight: bolder;

@@ -1,0 +1,172 @@
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: #1a365d;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 8px;
+    margin-top: 0;
+}
+
+/* Estilos do Formulário */
+.form-section {
+    margin-bottom: 25px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+/* LABEL PRINCIPAL */
+.dados-principais {
+    font-size: 16px;
+    color: #1a365d;
+    display: block;
+    margin-bottom: 10px;
+}
+
+label {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #4a5568;
+}
+
+input,
+textarea,
+select {
+    padding: 10px;
+    border: 1px solid #cbd5e0;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #fff;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #3182ce;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Botões */
+.btn-submit {
+    display: block;
+    width: 100%;
+    background-color: #2b6cb0;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 20px;
+}
+
+.btn-submit:hover {
+    background-color: #2c5282;
+}
+
+/* Layout do Espelho de Impressão (Invisível no início) */
+#print-area {
+    display: none;
+}
+
+/* Regras de Impressão */
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+
+    #os-form,
+    .btn-submit {
+        display: none !important;
+    }
+
+    #print-area {
+        display: block !important;
+    }
+
+    .container {
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+    }
+
+    /* Estilo da folha impressa */
+    .print-header {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 2px solid #333;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+    }
+
+    .print-section {
+        margin-bottom: 20px;
+    }
+
+    .print-section h3 {
+        background: #f0f4f8;
+        padding: 6px;
+        margin: 0 0 10px 0;
+        font-size: 14px;
+        text-transform: uppercase;
+        border-left: 4px solid #1a365d;
+    }
+
+    .print-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        font-size: 14px;
+    }
+
+    .print-block {
+        border: 1px solid #ddd;
+        padding: 10px;
+        font-size: 14px;
+        min-height: 60px;
+        background: #fafafa;
+    }
+
+    .signatures {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 60px;
+    }
+
+    /*.sig-line {
+        border-top: 1px solid #999;
+        width: 45%;
+        text-align: center;
+        padding-top: 5px;
+        font-size: 12px;
+    }*/
+}
