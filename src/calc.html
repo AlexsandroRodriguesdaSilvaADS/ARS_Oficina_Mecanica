@@ -1,229 +1,429 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Serviços</title>
+    <title>Gerador de Ordem de Serviço Autenticado</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 40px auto;
-            max-width: 500px;
-            background-color: #f7f9fc;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 20px;
             color: #333;
         }
 
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        h2,
-        h3 {
-            margin-top: 0;
-            color: #2c3e50;
-        }
-
-        .form-grupo {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        select,
-        input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            box-sizing: border-box;
-            font-size: 15px;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        .lista-container {
-            margin-top: 25px;
-            border-top: 2px solid #eee;
-            padding-top: 20px;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        li {
+        /* TELA DE LOGIN */
+        #login-screen {
             display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #f1f1f1;
-            font-size: 15px;
-        }
-
-        .total-container {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            background-color: #e9ecef;
-            padding: 15px;
-            border-radius: 6px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #1a365d;
+            z-index: 9999;
         }
 
-        .total-container label {
-            margin: 0;
-            font-size: 16px;
+        .login-box {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
         }
 
-        .total-container input {
-            width: 140px;
-            background: #fff;
-            text-align: right;
-            font-weight: bold;
-            color: #28a745;
-            font-size: 18px;
-            border: 1px solid #ced4da;
+        .login-box h3 { margin-top: 0; color: #1a365d; margin-bottom: 20px; }
+        .login-group { display: flex; flex-direction: column; text-align: left; margin-bottom: 15px; }
+        .login-group label { font-size: 13px; font-weight: bold; margin-bottom: 5px; color: #4a5568; }
+        .login-group input { padding: 10px; border: 1px solid #cbd5e0; border-radius: 5px; font-size: 14px; }
+        .btn-login { width: 100%; background-color: #2b6cb0; color: white; padding: 12px; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .btn-login:hover { background-color: #2c5282; }
+        #login-error { color: #e53e3e; font-size: 13px; margin-top: 10px; display: none; }
+
+        /* CONTEÚDO PRINCIPAL */
+        #main-content { display: none; }
+        .container { max-width: 850px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: relative; }
+        
+        .btn-logout { position: absolute; top: 30px; right: 30px; background: #e53e3e; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 12px; }
+        .btn-logout:hover { background: #c53030; }
+
+        h2 { color: #1a365d; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-top: 0; max-width: 80%; }
+        .form-section { margin-bottom: 25px; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group.full-width { grid-column: 1 / -1; }
+        label { font-size: 13px; font-weight: 600; margin-bottom: 5px; color: #4a5568; }
+        input, textarea, select { padding: 10px; border: 1px solid #cbd5e0; border-radius: 5px; font-size: 14px; background-color: #fff; }
+        input:focus, textarea:focus, select:focus { border-color: #3182ce; outline: none; box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5); }
+        textarea { resize: vertical; min-height: 60px; }
+
+        /* Estilos da Lista Dinâmica no Formulário */
+        .list-input-group { display: flex; gap: 10px; }
+        .list-input-group input { flex: 1; }
+        .btn-add-item { background: #38a169; color: white; border: none; padding: 0 15px; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 18px; }
+        .btn-add-item:hover { background: #2f855a; }
+        
+        #lista-itens-form { list-style: none; padding: 0; margin: 10px 0 0 0; }
+        #lista-itens-form li { display: flex; justify-content: space-between; align-items: center; background: #f7fafc; padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 5px; margin-bottom: 5px; font-size: 14px; }
+        .btn-remove-item { background: #e53e3e; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 11px; }
+        .btn-remove-item:hover { background: #c53030; }
+
+        /* Área dos Botões de Ação */
+        .btn-group { display: grid; grid-template-columns: 2fr 1fr; gap: 15px; margin-top: 20px; }
+        .btn-submit { background-color: #2b6cb0; color: white; padding: 12px; border: none; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        .btn-submit:hover { background-color: #2c5282; }
+        .btn-clear { background-color: #e2e8f0; color: #4a5568; padding: 12px; border: 1px solid #cbd5e0; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; }
+        .btn-clear:hover { background-color: #cbd5e0; color: #2d3748; }
+
+        /* Layout do Espelho de Impressão */
+        #print-area { display: none; }
+        #p_lista_itens { padding-left: 20px; margin: 5px 0; font-size: 12px; }
+        #p_lista_itens li { margin-bottom: 3px; }
+
+        /* REGRAS ESTRITAS DE IMPRESSÃO */
+        @media print {
+            @page { size: A4; margin: 10mm; }
+            html, body { height: 100%; background: white; padding: 0; margin: 0; font-size: 12px; }
+            #login-screen, #os-form, .btn-group, .btn-logout { display: none !important; }
+            #main-content { display: block !important; }
+            #print-area { display: block !important; max-height: 100%; box-sizing: border-box; }
+            .container { box-shadow: none; padding: 0; max-width: 100%; }
+            .print-header { display: flex; justify-content: space-between; border-bottom: 2px solid #333; padding-bottom: 8px; margin-bottom: 12px; }
+            .print-section { margin-bottom: 10px; }
+            .print-section h3 { background: #f0f4f8; padding: 4px 6px; margin: 0 0 6px 0; font-size: 12px; text-transform: uppercase; border-left: 4px solid #1a365d; }
+            .print-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; font-size: 12px; }
+            .print-block { border: 1px solid #ddd; padding: 6px 10px; font-size: 12px; min-height: 35px; background: #fafafa; white-space: pre-wrap; }
+            .signatures { display: flex; justify-content: space-between; margin-top: 35px; page-break-inside: avoid; }
+            .sig-line { border-top: 1px solid #999; width: 42%; text-align: center; padding-top: 4px; font-size: 11px; }
         }
     </style>
 </head>
-
 <body>
 
-    <div class="card">
-        <h2>Adicionar Serviço</h2>
+<div id="login-screen">
+    <div class="login-box">
+        <h3>Acesso Restrito</h3>
+        <form onsubmit="autenticar(event)">
+            <div class="login-group">
+                <label for="username">Usuário</label>
+                <input type="text" id="username" required placeholder="admin">
+            </div>
+            <div class="login-group">
+                <label for="password">Senha</label>
+                <input type="password" id="password" required placeholder="12345">
+            </div>
+            <button type="submit" class="btn-login">Entrar</button>
+            <div id="login-error">Usuário ou senha incorretos!</div>
+        </form>
+    </div>
+</div>
 
-        <div class="form-grupo">
-            <label for="servico">Selecione o Serviço:</label>
-            <select id="servico">
-                <option value="Troca de amortecedor dianteiro">Troca de amortecedor dianteiro</option>
-                <option value="Troca de amortecedor traseiro">Desenvolvimento Web</option>
-                <option value="Design Gráfico">Design Gráfico</option>
-                <option value="Suporte e Manutenção">Suporte e Manutenção</option>
-                <option value="Hospedagem de Servidor">Hospedagem de Servidor</option>
-            </select>
-        </div>
+<div id="main-content">
+    <div class="container">
+        
+        <button class="btn-logout" onclick="logout()">Sair</button>
 
-        <div class="form-grupo">
-            <label for="valor">Valor do Serviço (R$):</label>
-            <input type="number" id="valor" step="0.01" min="0" placeholder="Ex: 150.50">
-        </div>
+        <form id="os-form" onsubmit="gerarOS(event)">
+            <h2>Criar Nova Ordem de Serviço</h2>
+            
+            <div class="form-section" style="background: #e2e8f0; padding: 15px; border-radius: 5px;">
+                <div class="form-grid" style="grid-template-columns: 1fr 1fr;">
+                    <div class="form-group">
+                        <label for="f_numero" style="color: #1a365d;">Nº desta Ordem de Serviço (Sequencial)</label>
+                        <input type="number" id="f_numero" required style="font-weight: bold; color: #1a365d;">
+                    </div>
+                    <div class="form-group">
+                        <label for="f_status">Status Inicial</label>
+                        <select id="f_status">
+                            <option value="Em Andamento">Em Andamento</option>
+                            <option value="Aprovado">Aprovado / Finalizado</option>
+                            <option value="Orçamento">Apenas Orçamento</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
 
-        <button type="button" id="btnAdicionar">Adicionar à Lista</button>
+            <div class="form-section">
+                <label style="font-size: 16px; color: #1a365d; display:block; margin-bottom:10px; margin-top: 15px;">1. Dados do Cliente</label>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="f_cliente">Nome do Cliente / Razão Social</label>
+                        <input type="text" id="f_cliente" required placeholder="Ex: João da Silva">
+                    </div>
+                    <div class="form-group">
+                        <label for="f_documento">CPF / CNPJ</label>
+                        <input type="text" id="f_documento" placeholder="000.000.000-00">
+                    </div>
+                    <div class="form-group">
+                        <label for="f_telefone">Telefone</label>
+                        <input type="tel" id="f_telefone" required placeholder="(11) 99999-9999">
+                    </div>
+                    <div class="form-group">
+                        <label for="f_email">E-mail</label>
+                        <input type="email" id="f_email" placeholder="cliente@email.com">
+                    </div>
+                </div>
+            </div>
 
-        <div class="lista-container">
-            <h3>Serviços Selecionados</h3>
-            <ul id="listaServicos">
-            </ul>
+            <div class="form-section">
+                <label style="font-size: 16px; color: #1a365d; display:block; margin-bottom:10px;">2. Informações do Objeto / Veículo</label>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="f_objeto">Equipamento / Carro</label>
+                        <input type="text" id="f_objeto" required placeholder="Ex: Subaru WRX">
+                    </div>
+                    <div class="form-group">
+                        <label for="f_modelo">Marca / Modelo / Cor</label>
+                        <input type="text" id="f_modelo" placeholder="Ex: Subaru - Branco">
+                    </div>
+                    <div class="form-group">
+                        <label for="f_serial">Nº de Série / Placa</label>
+                        <input type="text" id="f_serial" placeholder="Ex: ABC-1234">
+                    </div>
+                </div>
+            </div>
 
-            <div class="total-container">
-                <label for="totalGeral">Soma Total:</label>
-                <input type="text" id="totalGeral" readonly value="R$ 0,00">
+            <div class="form-section">
+                <label style="font-size: 16px; color: #1a365d; display:block; margin-bottom:10px;">3. Detalhes Técnico e Valores</label>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="f_defeito">Defeito Relatado / Solicitação</label>
+                        <textarea id="f_defeito" required placeholder="Descreva o problema trazido pelo cliente..."></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="f_laudo">Laudo Técnico / Serviços Executados</label>
+                        <textarea id="f_laudo" placeholder="O que foi feito para resolver o problema..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="f_valor">Valor Total do Serviço (R$)</label>
+                        <input type="number" id="f_valor" step="0.01" required placeholder="0,00">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <label style="font-size: 16px; color: #1a365d; display:block; margin-bottom:10px;">4. Itens / Peças Adicionais</label>
+                <div class="list-input-group">
+                    <input type="text" id="item-input" placeholder="Ex: Troca de pastilha de freio Bosch">
+                    <button type="button" class="btn-add-item" onclick="adicionarItemLista()">+</button>
+                </div>
+                <ul id="lista-itens-form"></ul>
+            </div>
+
+            <div class="btn-group">
+                <button type="submit" class="btn-submit">Gerar OS para Impressão</button>
+                <button type="button" class="btn-clear" onclick="limparFormulario()">Limpar</button>
+            </div>
+        </form>
+
+        <div id="print-area">
+            <div class="print-header">
+                <div>
+                    <h1 style="margin:0; color:#1a365d; font-size: 22px;">ARS Assistência Técnica</h1>
+                    <p style="margin:3px 0 0 0; font-size:11px; color:#555;">Contato: contato@ars.com | Tel: (11) 99999-9999</p>
+                </div>
+                <div style="text-align: right;">
+                    <div style="background:#1a365d; color:white; padding: 4px 8px; font-weight:bold; border-radius:4px; font-size: 13px;">
+                        ORDEM DE SERVIÇO Nº <span id="p_numero"></span>
+                    </div>
+                    <p style="margin: 4px 0 0 0; font-size:11px;">Data: <span id="p_data"></span></p>
+                </div>
+            </div>
+
+            <div class="print-section">
+                <h3>Dados do Cliente</h3>
+                <div class="print-grid">
+                    <div><strong>Cliente:</strong> <span id="p_cliente"></span></div>
+                    <div><strong>CPF/CNPJ:</strong> <span id="p_documento"></span></div>
+                    <div><strong>Telefone:</strong> <span id="p_telefone"></span></div>
+                    <div><strong>E-mail:</strong> <span id="p_email"></span></div>
+                </div>
+            </div>
+
+            <div class="print-section">
+                <h3>Identificação do Objeto / Equipamento</h3>
+                <div class="print-grid">
+                    <div><strong>Objeto:</strong> <span id="p_objeto"></span></div>
+                    <div><strong>Marca/Modelo/Cor:</strong> <span id="p_modelo"></span></div>
+                    <div><strong>Nº Série/Placa:</strong> <span id="p_serial"></span></div>
+                    <div><strong>Status:</strong> <span id="p_status" style="font-weight: bold;"></span></div>
+                </div>
+            </div>
+
+            <div class="print-section">
+                <h3>Defeito Relatado</h3>
+                <div class="print-block" id="p_defeito"></div>
+            </div>
+
+            <div class="print-section">
+                <h3>Laudo Técnico / Solução</h3>
+                <div class="print-block" id="p_laudo"></div>
+            </div>
+
+            <div class="print-section" id="print-section-itens">
+                <h3>Peças Utilizadas / Serviços Inclusos</h3>
+                <div class="print-block" style="min-height: auto;">
+                    <ol id="p_lista_itens"></ol>
+                </div>
+            </div>
+
+            <div class="print-section" style="text-align: right; margin-top: 15px;">
+                <span style="font-size: 15px; font-weight: bold; color: #1a365d; border: 1px solid #1a365d; padding: 6px 15px; background: #f0f4f8;">
+                    VALOR TOTAL: R$ <span id="p_valor"></span>
+                </span>
+            </div>
+
+            <div class="signatures">
+                <div class="sig-line">Assinatura do Cliente</div>
+                <div class="sig-line">Responsável Técnico</div>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        // Variável global para armazenar o valor acumulado da soma
-        let somaTotal = 0;
-
-        // Mapeamento dos elementos do HTML
-        const selectServico = document.getElementById('servico');
-        const inputValor = document.getElementById('valor');
-        const listaServicos = document.getElementById('listaServicos');
-        const inputTotalGeral = document.getElementById('totalGeral');
-        const btnAdicionar = document.getElementById('btnAdicionar');
-
-        // Função para formatar números no padrão de moeda Real (R$)
-        function formatarMoeda(valor) {
-            return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+<script>
+    window.onload = function() {
+        if (sessionStorage.getItem('usuario_autenticado') === 'true') {
+            exibirPainel();
         }
+        carregarNumeroOS();
+    };
 
-        // Evento de clique do botão
-        btnAdicionar.addEventListener('click', () => {
-            const nomeServico = selectServico.value;
-            const valorServico = parseFloat(inputValor.value);
+    // Função para adiconar itens à lista visual do formulário
+    function adicionarItemLista() {
+        const inputItem = document.getElementById('item-input');
+        const textoItem = inputItem.value.trim();
+        
+        if (textoItem === '') return;
 
-            // Validação simples para garantir que o usuário digitou um valor válido
-            if (isNaN(valorServico) || valorServico <= 0) {
-                alert("Por favor, insira um valor válido maior que zero.");
-                return;
-            }
+        const listaForm = document.getElementById('lista-itens-form');
+        
+        // Criando o elemento da lista dinamicamente
+        const novoItem = document.createElement('li');
+        novoItem.innerHTML = `<span>${textoItem}</span>`;
+        
+        // Criando botão de remover (utilizando a lógica .remove())
+        const btnRemover = document.createElement('button');
+        btnRemover.type = "button";
+        btnRemover.className = "btn-remove-item";
+        btnRemover.textContent = "Remover";
+        btnRemover.onclick = function() {
+            novoItem.remove();
+        };
 
-            // 1. Cria uma nova linha (li) para a lista
-            const novoItem = document.createElement('li');
+        novoItem.appendChild(btnRemover);
+        listaForm.appendChild(novoItem);
+        
+        inputItem.value = ''; // limpa o input
+        inputItem.focus();
+    }
 
-            // 2. Preenche a linha com o nome do serviço e o valor formatado
-            novoItem.innerHTML = `
-            <span>${nomeServico}</span>
-            <strong>${formatarMoeda(valorServico)}</strong>
-        `;
+    function autenticar(event) {
+        event.preventDefault();
+        const usuarioCorreto = "admin", senhaCorreta = "12345";
+        const usuarioDigitado = document.getElementById('username').value;
+        const senhaDigitada = document.getElementById('password').value;
+        const erroMensagem = document.getElementById('login-error');
 
-            // 3. Adiciona a nova linha dentro da nossa lista (ul)
-            listaServicos.appendChild(novoItem);
+        if (usuarioDigitado === usuarioCorreto && senhaDigitada === senhaCorreta) {
+            sessionStorage.setItem('usuario_autenticado', 'true');
+            exibirPainel();
+            erroMensagem.style.display = 'none';
+        } else {
+            erroMensagem.style.display = 'block';
+            document.getElementById('password').value = '';
+        }
+    }
 
-            // 4. Atualiza a soma total do sistema
-            somaTotal += valorServico;
+    function exibirPainel() {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+    }
 
-            // 5. Atualiza o campo input do resultado final na tela
-            inputTotalGeral.value = formatarMoeda(somaTotal);
+    function logout() {
+        sessionStorage.removeItem('usuario_autenticado');
+        window.location.reload();
+    }
 
-            // 6. Limpa o campo de valor para a próxima inserção
-            inputValor.value = '';
-            inputValor.focus();
-        });
+    function carregarNumeroOS() {
+        let proximoNumero = localStorage.getItem('proxima_os_num');
+        if (!proximoNumero) proximoNumero = 1; 
+        document.getElementById('f_numero').value = proximoNumero;
+    }
 
+    function limparFormulario() {
+        const numeroAtual = document.getElementById('f_numero').value;
+        document.getElementById('os-form').reset();
+        document.getElementById('lista-itens-form').innerHTML = ''; // Limpa a lista do formulário
+        document.getElementById('f_numero').value = numeroAtual;
+    }
 
-        //Selecionando os elementos
-        const novaListaElemento = document.getElementById('id-da-sua-nova-lista');
-        const botaoLimpar = document.getElementById('id-do-botao-limpar');
+    function gerarOS(event) {
+        event.preventDefault();
 
-        // Supondo que você use um array para controlar os itens na memória
-        let itensNovaLista = [];
+        const numeroOS = document.getElementById('f_numero').value;
+        const cliente = document.getElementById('f_cliente').value;
+        const documento = document.getElementById('f_documento').value || 'Não informado';
+        const telefone = document.getElementById('f_telefone').value;
+        const email = document.getElementById('f_email').value || 'Não informado';
+        const objeto = document.getElementById('f_objeto').value;
+        const modelo = document.getElementById('f_modelo').value || 'Não informado';
+        const serial = document.getElementById('f_serial').value || 'Não informado';
+        const defeito = document.getElementById('f_defeito').value;
+        const laudo = document.getElementById('f_laudo').value || 'Em análise técnica.';
+        const valor = parseFloat(document.getElementById('f_valor').value).toFixed(2);
+        const status = document.getElementById('f_status').value;
+        
+        const hoje = new Date();
+        const dataFormatada = hoje.toLocaleDateString('pt-BR') + ' ' + hoje.toLocaleTimeString('pt-BR', {hour: '2-digit', minute:'2-digit'});
 
-        // Função que o botão Limpar vai executar
-        botaoLimpar.addEventListener('click', () => {
-            // 1. Limpa o HTML da nova lista (remove o que está na tela)
-            if (novaListaElemento) {
-                novaListaElemento.innerHTML = '';
-            }
+        // Injeta textos na impressão
+        document.getElementById('p_numero').innerText = numeroOS;
+        document.getElementById('p_data').innerText = dataFormatada;
+        document.getElementById('p_cliente').innerText = cliente;
+        document.getElementById('p_documento').innerText = documento;
+        document.getElementById('p_telefone').innerText = telefone;
+        document.getElementById('p_email').innerText = email;
+        document.getElementById('p_objeto').innerText = objeto;
+        document.getElementById('p_modelo').innerText = modelo;
+        document.getElementById('p_serial').innerText = serial;
+        document.getElementById('p_status').innerText = status;
+        document.getElementById('p_defeito').innerText = defeito;
+        document.getElementById('p_laudo').innerText = laudo;
+        document.getElementById('p_valor').innerText = valor;
 
-            // 2. Limpa o array na memória (se houver)
-            itensNovaLista = [];
+        // --- CLONAGEM E INJEÇÃO DA LISTA PARA A IMPRESSÃO ---
+        const itensForm = document.querySelectorAll('#lista-itens-form li span');
+        const listaImpressao = document.getElementById('p_lista_itens');
+        const secaoItensImpressao = document.getElementById('print-section-itens');
+        
+        listaImpressao.innerHTML = ''; // Limpa impressão anterior
 
-            // 3. Limpa o localStorage (caso você esteja usando para persistir os dados)
-            localStorage.removeItem('nome-da-sua-chave-da-nova-lista');
+        if (itensForm.length === 0) {
+            // Se não houver itens cadastrados na lista, esconde o bloco na impressão para poupar espaço
+            secaoItensImpressao.style.display = 'none';
+        } else {
+            secaoItensImpressao.style.display = 'block';
+            itensForm.forEach(function(item) {
+                const liImpressao = document.createElement('li');
+                liImpressao.textContent = item.textContent;
+                listaImpressao.appendChild(liImpressao);
+            });
+        }
+        // ----------------------------------------------------
 
-            // Opcional: Se quiser limpar tudo do localStorage de uma vez:
-            // localStorage.clear(); 
-        });
+        let novoNumero = parseInt(numeroOS) + 1;
+        localStorage.setItem('proxima_os_num', novoNumero);
+        document.getElementById('f_numero').value = novoNumero;
 
-    </script>
+        window.print();
+    }
+</script>
 
 </body>
-
 </html>
