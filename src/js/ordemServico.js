@@ -15,6 +15,8 @@ window.onload = function () {
     carregarNumeroOS();
 };
 
+
+// AUTENTICAÇÃO
 function autenticar(event) {
     event.preventDefault();
     const usuarioCorreto = "admin";
@@ -54,6 +56,7 @@ function formatarMoeda(valor) {
     return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
+
 // ADICIONANDO SERVIÇOS E VALORES DINAMICAMENTE
 btnAdicionar.addEventListener('click', () => {
     const nomeServico = selectServico.value;
@@ -86,6 +89,8 @@ function limparFormulario() {
     somaTotal = 0;
 }
 
+
+// GERAR A ORDEM DE SERVIÇO
 function gerarOS(event) {
     event.preventDefault();
 
@@ -134,22 +139,7 @@ function gerarOS(event) {
         printLista.appendChild(liClonada);
     });
 
-    // CHAMADA DA FUNÇÃO DO PDF: Gera o PDF automaticamente junto com a impressão
-    /*salvarPDF(numeroOS, cliente);*/
-
-    // Atualizando o localStorage para a próxima OS
-    let novoNumero = parseInt(numeroOS) + 1;
-    localStorage.setItem('proxima_os_num', novoNumero);
-
-    // Disparar a impressão nativa
-    window.print();
-
-    // Atualiza o número no formulário e limpa a tela para a próxima entrada
-    document.getElementById('f_numero').value = novoNumero;
-    limparFormulario();
-}
-
-/*// NOVA FUNÇÃO: Gera e faz o download automático do PDF
+    // NOVA FUNÇÃO: Gera e faz o download automático do PDF
     function salvarPDF(numeroOS, cliente) {
         // Seleciona o elemento que contém a área de impressão/preview da sua OS
         // Nota: Altere 'area-impressao' para o ID real da sua div de visualização/impressão (onde ficam os p_numero, p_cliente, etc)
@@ -166,8 +156,22 @@ function gerarOS(event) {
 
         // Executa a biblioteca e baixa o arquivo
         html2pdf().set(opcoes).from(elementoOS).save();
-    }*/
+    }
 
+    // CHAMADA DA FUNÇÃO DO PDF: Gera o PDF automaticamente junto com a impressão
+    /*salvarPDF(numeroOS, cliente);*/
+
+    // Atualizando o localStorage para a próxima OS
+    let novoNumero = parseInt(numeroOS) + 1;
+    localStorage.setItem('proxima_os_num', novoNumero);
+
+    // Disparar a impressão nativa
+    window.print();
+
+    // Atualiza o número no formulário e limpa a tela para a próxima entrada
+    document.getElementById('f_numero').value = novoNumero;
+    limparFormulario();
+}
 
 /*    let somaTotal = 0;
 

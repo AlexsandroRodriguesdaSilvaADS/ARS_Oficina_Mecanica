@@ -421,19 +421,19 @@ li {
         /* Evita que uma seção quebre no meio entre duas páginas */
     }
 
-    /*.print-section-vTotal {
+    .print-section.v-total {
         text-align: right;
         margin-top: 15px;
     }
 
-    .print-section-vTotal span {
+    .print-section.v-total span#v-total {
         font-size: 15px;
         font-weight: bold;
         color: #1a365d;
         border: 1px solid #1a365d;
         padding: 6px 15px;
-        background: #f40509;
-    }*/
+        background: #f0f4f8;
+    }
 
     .print-section h3 {
         background: #f0f4f8 !important;
