@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ARS | Auto Mecânico</title>
+    <title>ARS | Oficina Mecânica</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -45,18 +45,20 @@
             <img class="logo" src="./imagens/logo.png" title="Soluções integradas para o seu veículo"
                 alt="Logo de ARS Mecânico Automotivo" />
 
+            <h2 id="main-title">Ordem de Serviço</h2>
+
             <button class="btn-logout" onclick="logout()">Sair</button>
 
             <form id="os-form" onsubmit="gerarOS(event)">
-                <h2>Ordem de Serviço</h2>
+
                 <div class="form-section cabec">
                     <div class="form-grid-1">
                         <div class="form-group-1">
-                            <label for="f_numero">Nº desta Ordem de Serviço (Sequencial)</label>
-                            <input type="number" id="f_numero" required>
+                            <label for="f_numero">Nº Ordem de Serviço</label>
+                            <input type="number" id="f_numero" min="1" required>
                         </div>
                         <div class="form-group">
-                            <label for="f_status">Status Inicial</label>
+                            <label for="f_status">Status</label>
                             <select id="f_status">
                                 <option value="Em Andamento">Em Andamento</option>
                                 <option value="Aprovado">Aprovado / Finalizado</option>
@@ -70,7 +72,7 @@
                     <label class="form-title">1. Dados do Cliente</label>
                     <div class="form-grid">
                         <div class="form-group">
-                            <label for="f_cliente">Nome do Cliente / Razão Social</label>
+                            <label for="f_cliente">Nome do Cliente / Razão Social*</label>
                             <input type="text" id="f_cliente" required placeholder="Ex: João da Silva">
                         </div>
                         <div class="form-group">
@@ -78,7 +80,7 @@
                             <input type="text" id="f_documento" placeholder="000.000.000-00">
                         </div>
                         <div class="form-group">
-                            <label for="f_telefone">Telefone</label>
+                            <label for="f_telefone">Telefone*</label>
                             <input type="tel" id="f_telefone" required placeholder="(11) 99999-9999">
                         </div>
                         <div class="form-group">
@@ -92,26 +94,26 @@
                     <label class="form-title">2. Informações do Veículo</label>
                     <div class="form-grid">
                         <div class="form-group">
-                            <label for="f_objeto">Veículo</label>
+                            <label for="f_objeto">Veículo*</label>
                             <input type="text" id="f_objeto" required placeholder="Ex: Subaru WRX">
                         </div>
                         <div class="form-group">
-                            <label for="f_modelo">Modelo / Cor / Ano</label>
-                            <input type="text" id="f_modelo" placeholder="Ex: WRX 2.5 - Branco - 2015">
+                            <label for="f_modelo">Modelo / Cor / Ano*</label>
+                            <input type="text" id="f_modelo" required placeholder="Ex: WRX 2.5 - Branco - 2015">
                         </div>
                         <div class="form-group">
-                            <label for="f_serial">Placa</label>
-                            <input type="text" id="f_serial" placeholder="Ex: ABC-1234">
+                            <label for="f_serial">Placa*</label>
+                            <input type="text" id="f_serial" required placeholder="Ex: ABC-1234">
                         </div>
                     </div>
                 </div>
 
                 <div class="form-section">
-                    <label class="form-title">3. Detalhes Técnico e Valores</label>
+                    <label class="form-title">3. Detalhes Técnicos e Valores</label>
                     <div class="form-grid">
 
                         <div class="form-group full-width">
-                            <label for="f_defeito">Defeito Relatado / Solicitação</label>
+                            <label for="f_defeito">Defeito Relatado / Solicitação*</label>
                             <textarea id="f_defeito" required
                                 placeholder="Descreva o problema trazido pelo cliente..."></textarea>
                         </div>
@@ -181,7 +183,9 @@
                         <div class="form-group full-width">
                             <div class="lista-container">
                                 <h3>Serviços Realizados</h3>
-                                <ul id="listaServicos"></ul>
+                                <ul id="listaServicos">
+                                    <!--LI criadas aparecem aqui-->
+                                </ul>
                                 <div class="total-container">
                                     <label for="totalGeral">Soma Total:</label>
                                     <input type="text" id="totalGeral" readonly value="R$ 0,00">
@@ -198,6 +202,8 @@
                 </div>
             </form>
 
+
+            <!-- ÁREA PARA IMPRESSÃO -->
             <div id="print-area">
                 <div class="print-header">
                     <div>

@@ -96,12 +96,30 @@ body {
     position: relative;
 }
 
+/*nav {
+    display: flex;
+    margin: 25px auto;
+    text-transform: uppercase;
+}*/
+
 .logo {
     position: relative;
     width: 135px;
     box-shadow: 0 0 10px #fff;
     padding: 2px;
-    margin: 10px auto;
+    /*margin: 10px auto;*/
+}
+
+.container #main-title {
+    position: absolute;
+    top: 60px;
+    left: 30%;
+    right: 30%;
+    font-size: 26px;
+    color: #1a365d;
+    padding-bottom: 8px;
+    text-align: center;
+    text-transform: uppercase;
 }
 
 .btn-logout {
@@ -121,14 +139,6 @@ body {
 
 .btn-logout:hover {
     background: #c53030;
-}
-
-h2 {
-    color: #1a365d;
-    border-bottom: 2px solid #e2e8f0;
-    padding-bottom: 8px;
-    margin-top: 0;
-    max-width: 80%;
 }
 
 h3 {
@@ -190,16 +200,21 @@ h3 {
 
 .form-group.flex-wrap {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
-    gap: 85px;
+    gap: 30px;
     margin: auto;
     padding: 5px;
 }
 
-.form-group.flex-wrap input,
-.form-group.flex-wrap select {
-    width: 300px;
+.form-group.flex-wrap input {
+    width: 180px;
+    margin-top: 5px;
+}
+
+.form-group.flex-wrap select#servico {
+    width: 400px;
+    margin-top: 5px;
 }
 
 label {
@@ -207,6 +222,10 @@ label {
     font-weight: 600;
     margin-bottom: 5px;
     color: #1a365d;
+}
+
+input[type="number"] {
+    text-align: right;
 }
 
 input,
@@ -217,6 +236,7 @@ select {
     border: 1px solid #1a365d;
     border-radius: 5px;
     font-size: 14px;
+    text-transform: uppercase;
     background-color: #fff;
 }
 
@@ -232,7 +252,6 @@ textarea {
     resize: vertical;
     min-height: 80px;
 }
-
 
 .lista-container {
     margin-top: 25px;
@@ -280,6 +299,8 @@ li {
 }
 
 .btn-adicionar {
+    position: absolute;
+    right: 30px;
     background-color: #2b6cb0;
     width: 300px;
     color: white;
@@ -348,7 +369,7 @@ li {
 @media print {
     @page {
         size: A4;
-        margin: 15mm 10mm 15mm 10mm;
+        margin: 10mm;
         /* Margens ligeiramente maiores para evitar cortes */
     }
 
@@ -413,6 +434,18 @@ li {
         border-bottom: 2px solid #000;
         padding-bottom: 8px;
         margin-bottom: 12px;
+    }
+
+    .container #main-title {
+        position: absolute;
+        top: 30px;
+        left: 30%;
+        right: 30%;
+        font-size: 26px;
+        color: #1a365d;
+        padding-bottom: 8px;
+        text-align: center;
+        text-transform: uppercase;
     }
 
     .print-section {
