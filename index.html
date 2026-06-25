@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="./src/css/reset.css" />
   <link rel="stylesheet" href="./src/css/estilos.css" />
   <link rel="stylesheet" href="./src/css/responsivo.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 
 <body cz-shortcut-listen="true">
@@ -37,13 +38,13 @@
             <div class="three"></div>
           </div>
           <nav class="menu">
-            <a onclick="toggleMenu1()">
-              <img id="seta" class="seta" src="./src/imagens/seta.png" alt="Botão da barra superior" />
-            </a>
             <a class="botao selecionado">Home</a>
             <a class="botao">Serviços</a>
             <a class="botao">Dicas</a>
-            <a href="./src/ordem.html" target="_blank" class="os">OS</a>
+            <a class="os" href="./src/ordem.html" target="_blank">OS</a>
+            <a onclick="toggleMenu1()">
+              <img id="seta" class="seta" src="./src/imagens/seta.png" alt="Botão da barra superior" />
+            </a>
           </nav>
         </div>
       </div>

@@ -182,6 +182,10 @@
         /*text-orientation: upright;*/
         transition-duration: 0.5s;
     }
+
+     .cabecalho .menu-section.on .menu .os {
+        display: none;
+    }
 }
 
 @media (max-width: 425px) {

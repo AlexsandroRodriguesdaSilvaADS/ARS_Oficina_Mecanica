@@ -334,7 +334,6 @@ li {
     color: #2d3748;
 }
 
-
 /* Layout do Espelho de Impressão */
 #print-area {
     display: none;
@@ -344,11 +343,13 @@ li {
 @media print {
     @page {
         size: A4;
-        margin: 15mm 10mm 15mm 10mm; /* Margens ligeiramente maiores para evitar cortes */
+        margin: 15mm 10mm 15mm 10mm;
+        /* Margens ligeiramente maiores para evitar cortes */
     }
 
     /* Reseta o fundo e esconde as barras de rolagem do navegador */
-    html, body {
+    html,
+    body {
         background: #ffffff !important;
         color: #000000 !important;
         padding: 0 !important;
@@ -359,19 +360,20 @@ li {
     }
 
     /* ESCONDE TUDO DO SISTEMA E DA TELA DE LOGIN COMPLETAMENTE */
-    #login-screen, 
-    #os-form, 
-    .btn-group, 
+    #login-screen,
+    #os-form,
+    .btn-group,
     .btn-logout,
-    header, 
-    footer, 
+    header,
+    footer,
     button {
         display: none !important;
         visibility: hidden !important;
         opacity: 0 !important;
         height: 0 !important;
         width: 0 !important;
-        position: absolute !important; /* Remove do fluxo de renderização */
+        position: absolute !important;
+        /* Remove do fluxo de renderização */
     }
 
     /* PREPARA O CONTAINER PAI */
@@ -410,12 +412,15 @@ li {
 
     .print-section {
         margin-bottom: 12px;
-        page-break-inside: avoid; /* Evita que uma seção quebre no meio entre duas páginas */
+        page-break-inside: avoid;
+        /* Evita que uma seção quebre no meio entre duas páginas */
     }
 
     .print-section h3 {
-        background: #f0f4f8 !important; /* Força o fundo cinza claro */
-        -webkit-print-color-adjust: exact; /* Força navegadores baseados em Chrome a exibir o fundo */
+        background: #f0f4f8 !important;
+        /* Força o fundo cinza claro */
+        -webkit-print-color-adjust: exact;
+        /* Força navegadores baseados em Chrome a exibir o fundo */
         print-color-adjust: exact;
         padding: 4px 6px;
         margin: 0 0 6px 0;
@@ -455,5 +460,29 @@ li {
         text-align: center;
         padding-top: 4px;
         font-size: 11px;
+    }
+
+    .lista-container,
+    .lista-container * {
+        display: block !important;
+    }
+
+    /* Ajuste específico para as LIs não perderem a formatação de lista */
+    #listaServicos li {
+        display: list-item !important;
+        /* Mantém a bolinha/marcador da lista se quiser */
+        margin-bottom: 8px;
+        font-size: 14px;
+        border-bottom: 1px dashed #ccc;
+        /* Linha pontilhada estilosa para a impressão */
+        padding-bottom: 4px;
+    }
+
+    /* Se o input do Total sumir ou ficar cinza, isso força ele a aparecer negrito */
+    #TotalGeral {
+        border: none !important;
+        /*font-weight: bold;*/
+        font-size: 16px;
+        background: transparent !important;
     }
 }
