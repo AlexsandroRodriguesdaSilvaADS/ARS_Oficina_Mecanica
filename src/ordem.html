@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="./css/estilos.css" />
     <link rel="stylesheet" href="./css/responsivo.css" />
     <link rel="stylesheet" href="./css/ordem-servico.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 
 <body cz-shortcut-listen="true">
@@ -39,7 +40,7 @@
         </div>
     </div>
 
-    <div id="main-content" style="display: none;">
+    <div id="main-content">
         <div class="container">
 
             <img class="logo" src="./imagens/logo.png" title="Soluções integradas para o seu veículo"
@@ -198,6 +199,7 @@
 
                 <div class="btn-group">
                     <button type="submit" class="btn-submit">Gerar OS para Impressão</button>
+                    <!--<button id="btn-salvar" class="btn-submit">Salvar</button>-->
                     <button type="button" class="btn-clear" id="btn-limpar" onclick="limparFormulario()">Limpar</button>
                 </div>
             </form>
