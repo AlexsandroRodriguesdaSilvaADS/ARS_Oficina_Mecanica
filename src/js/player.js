@@ -1,7 +1,6 @@
 
 //CONTROLE DAS MÚSICAS
-/*
-const audioPlayer = document.getElementById('audioPlayer');
+/*const audioPlayer = document.getElementById('audioPlayer');
 const playlist = document.getElementById('playlist');
 const tracks = playlist.getElementsByTagName('li');
 let currentTrack = 0;

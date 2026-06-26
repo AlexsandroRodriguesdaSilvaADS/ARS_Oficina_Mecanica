@@ -206,7 +206,7 @@
 
 
             <!-- ÁREA PARA IMPRESSÃO -->
-            <div id="print-area">
+            <div id="print-area" style="display: none;">
                 <div class="print-header">
                     <div>
                         <h1 style="margin:0; color:#1a365d; font-size: 22px;">ARS Oficina Mecânica</h1>
@@ -266,6 +266,53 @@
                 <div class="signatures">
                     <div class="sig-line">Assinatura do Cliente</div>
                     <div class="sig-line">Responsável Técnico</div>
+                </div>
+
+
+                <!-- PÁGINA DE TERMO DE GARANTIA -->
+                <div class="quebrar-pagina">
+
+                    <img class="logo" src="./imagens/logo.png" title="Soluções integradas para o seu veículo"
+                        alt="Logo de ARS Mecânico Automotivo" />
+
+                    <h2 id="main-title-2">Termo de Garantia</h2>
+
+                    <div class="print-header">
+                        <div>
+                            <h1 style="margin:0; color:#1a365d; font-size: 22px;">ARS Oficina Mecânica</h1>
+                            <p style="margin:3px 0 0 0; font-size:11px; color:#555;">Contato: autonomosslm@gmail.com |
+                                Tel: (81) 99809-0037</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <div
+                                style="background:#1a365d; color:white; padding: 4px 8px; font-weight:bold; border-radius:4px; font-size: 13px;">
+                                ORDEM DE SERVIÇO Nº <span id="p_numero"></span>
+                            </div>
+                            <p style="margin: 4px 0 0 0; font-size:11px;">Data: <span id="p_data"></span></p>
+                        </div>
+
+                        <div class="print-section">
+                            <h3>Dados do Cliente</h3>
+                            <div class="print-grid">
+                                <div><strong>Cliente:</strong> <span id="p_cliente"></span></div>
+                                <div><strong>CPF/CNPJ:</strong> <span id="p_documento"></span></div>
+                                <div><strong>Telefone:</strong> <span id="p_telefone"></span></div>
+                                <div><strong>E-mail:</strong> <span id="p_email"></span></div>
+                            </div>
+                        </div>
+
+                        <div class="print-section">
+                            <h3>Identificação do Veículo</h3>
+                            <div class="print-grid">
+                                <div><strong>Veículo:</strong> <span id="p_objeto"></span></div>
+                                <div><strong>Marca/Modelo/Cor:</strong> <span id="p_modelo"></span></div>
+                                <div><strong>Nº Série/Placa:</strong> <span id="p_serial"></span></div>
+                                <div><strong>Status:</strong> <span id="p_status" style="font-weight: bold;"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
