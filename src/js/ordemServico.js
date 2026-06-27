@@ -1,449 +1,466 @@
+// ==========================================
+// 1. CONTROLADOR DO NÚMERO SEQUENCIAL (OS)
+// ==========================================
+function inicializarNumeroOS() {
+    const fNumero = document.getElementById('f_numero');
+    if (!fNumero) return;
 
-// CÓDIGO OTIMIZADO
-let somaTotal = 0;
-
-// Centralização das referências do DOM para evitar buscas repetidas
-const El = {
-    selectServico: document.getElementById('servico'),
-    inputValor: document.getElementById('valor'),
-    listaServicos: document.getElementById('listaServicos'),
-    inputTotalGeral: document.getElementById('totalGeral'),
-    btnAdicionar: document.getElementById('btnAdicionar'),
-    loginScreen: document.getElementById('login-screen'),
-    mainContent: document.getElementById('main-content'),
-    loginError: document.getElementById('login-error'),
-    password: document.getElementById('password'),
-    username: document.getElementById('username'),
-    fNumero: document.getElementById('f_numero'),
-    osForm: document.getElementById('os-form'),
-    printLista: document.getElementById('p_lista'),
-    printValor: document.getElementById('p_valor')
-};
-
-// INICIALIZAÇÃO
-window.addEventListener('DOMContentLoaded', () => {
-    if (sessionStorage.getItem('usuario_autenticado') === 'true') {
-        exibirPainel();
+    if (!localStorage.getItem('proximo_numero_os')) {
+        localStorage.setItem('proximo_numero_os', '2601');
     }
-    carregarNumeroOS();
-    configurarEventos();
-});
 
-// EVENTOS
-function configurarEventos() {
-    if (El.btnAdicionar) {
-        El.btnAdicionar.addEventListener('click', adicionarServico);
-    }
+    fNumero.value = localStorage.getItem('proximo_numero_os');
+    fNumero.readOnly = true;
 }
 
-// AUTENTICAÇÃO
+function incrementarNumeroOS() {
+    let atual = parseInt(localStorage.getItem('proximo_numero_os'), 10) || 1001;
+    let proximo = atual + 1;
+    localStorage.setItem('proximo_numero_os', proximo.toString());
+    document.getElementById('f_numero').value = proximo;
+}
+
+// ==========================================
+// 2. CONTROLE DE ACESSO (LOGIN / LOGOUT)
+// ==========================================
 function autenticar(event) {
     event.preventDefault();
-    const USUARIO_CORRETO = "admin";
-    const SENHA_CORRETA = "047874";
+    const user = document.getElementById('username').value.trim();
+    const pass = document.getElementById('password').value.trim();
+    const errorMsg = document.getElementById('login-error');
 
-    if (El.username.value === USUARIO_CORRETO && El.password.value === SENHA_CORRETA) {
-        sessionStorage.setItem('usuario_autenticado', 'true');
-        exibirPainel();
-        if (El.loginError) El.loginError.style.display = 'none';
+    if (user === "admin" && pass === "12345") {
+        errorMsg.style.display = 'none';
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+
+        inicializarNumeroOS();
+        event.target.reset();
     } else {
-        if (El.loginError) El.loginError.style.display = 'block';
-        El.password.value = '';
+        errorMsg.style.display = 'block';
     }
-}
-
-function exibirPainel() {
-    if (El.loginScreen) El.loginScreen.style.display = 'none';
-    if (El.mainContent) El.mainContent.style.display = 'block';
 }
 
 function logout() {
-    sessionStorage.removeItem('usuario_autenticado');
-    window.location.reload();
+    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
 }
 
-function carregarNumeroOS() {
-    const proximoNumero = localStorage.getItem('proxima_os_num') || 1;
-    if (El.fNumero) El.fNumero.value = proximoNumero;
+// ==========================================
+// 3. GERENCIAMENTO DA LISTA DE SERVIÇOS
+// ==========================================
+const btnAdicionar = document.getElementById('btnAdicionar');
+const selectServico = document.getElementById('servico');
+const listaServicos = document.getElementById('listaServicos');
+
+if (btnAdicionar) {
+    btnAdicionar.addEventListener('click', () => {
+        const servicoSelecionado = selectServico.value;
+
+        if (!servicoSelecionado) {
+            alert('Por favor, selecione um serviço válido.');
+            return;
+        }
+
+        const itensAtuais = Array.from(listaServicos.querySelectorAll('li')).map(li => li.dataset.value);
+        if (itensAtuais.includes(servicoSelecionado)) {
+            alert('Este serviço já foi adicionado.');
+            return;
+        }
+
+        const li = document.createElement('li');
+        li.dataset.value = servicoSelecionado;
+        li.innerHTML = `
+            <span><i class="fas fa-wrench" style="margin-right: 8px; color: #1a365d;"></i>
+            ${servicoSelecionado}
+            </span>
+
+            <button type="button" class="btn-remove-item" style="background:none; border:none; color:#e53e3e; cursor:pointer;" title="Remover">
+            <i class="fas fa-trash-alt"></i>
+            </button>
+        `;
+
+        li.querySelector('.btn-remove-item').addEventListener('click', () => li.remove());
+        listaServicos.appendChild(li);
+        selectServico.value = "";
+    });
 }
 
-function formatarMoeda(valor) {
-    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-}
-
-// ADICIONANDO SERVIÇOS E VALORES
-function adicionarServico() {
-    const nomeServico = El.selectServico.value;
-    const valorServico = parseFloat(El.inputValor.value);
-
-    if (isNaN(valorServico) || valorServico <= 0) {
-        alert("Por favor, insira um valor válido para o serviço.");
-        return;
-    }
-
-    const novoItem = document.createElement('li');
-    novoItem.innerHTML = `<span>${nomeServico}</span> <strong>${formatarMoeda(valorServico)}</strong>`;
-    El.listaServicos.appendChild(novoItem);
-
-    somaTotal += valorServico;
-    El.inputTotalGeral.value = formatarMoeda(somaTotal);
-
-    El.inputValor.value = '';
-    El.inputValor.focus();
-}
-
-function limparFormulario() {
-    const numeroAtual = El.fNumero ? El.fNumero.value : 1;
-    if (El.osForm) El.osForm.reset();
-
-    if (El.fNumero) El.fNumero.value = numeroAtual;
-    El.listaServicos.innerHTML = '';
-    El.inputTotalGeral.value = 'R$ 0,00';
-    somaTotal = 0;
-}
-
+// ==========================================
+// 4. PROCESSAR DADOS E ABRIR IMPRESSÃO NATIVA (OS + TERMO)
+// ==========================================
 function gerarOS(event) {
     event.preventDefault();
 
-    const numeroOS = El.fNumero.value;
-    const cliente = document.getElementById('f_cliente').value;
+    const itensServico = listaServicos.querySelectorAll('li');
+    if (itensServico.length === 0) {
+        alert('Adicione pelo menos um serviço antes de gerar a Ordem de Serviço.');
+        return;
+    }
 
-    const hoje = new Date();
-    const dataFormatada = `${hoje.toLocaleDateString('pt-BR')} ${hoje.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`;
-
-    // Objeto centralizado com os dados para reutilização em ambos os documentos
+    // 1. Coleta e mapeamento de variáveis do formulário
     const dadosOS = {
-        numero: numeroOS,
-        data: dataFormatada,
-        cliente: cliente,
+        numero: document.getElementById('f_numero').value,
+        status: document.getElementById('f_status').value,
+        cliente: document.getElementById('f_cliente').value || 'Não informado',
         documento: document.getElementById('f_documento').value || 'Não informado',
         telefone: document.getElementById('f_telefone').value || 'Não informado',
         email: document.getElementById('f_email').value || 'Não informado',
         objeto: document.getElementById('f_objeto').value || 'Não informado',
         modelo: document.getElementById('f_modelo').value || 'Não informado',
         serial: document.getElementById('f_serial').value || 'Não informado',
-        status: document.getElementById('f_status').value || 'Não informado',
         defeito: document.getElementById('f_defeito').value || 'Não informado',
-        laudo: document.getElementById('f_laudo').value || 'Em análise técnica.',
-        total: El.inputTotalGeral ? El.inputTotalGeral.value : 'R$ 0,00'
+        laudo: document.getElementById('f_laudo').value || 'Não informado',
+        data: new Date().toLocaleDateString('pt-BR'),
+        //total: 'Sob Consulta' // Como o form original está com o campo de valores comentado, deixamos um fallback elegante
     };
 
-    // Mapeamento dinâmico para a Área de Impressão da OS na Tela
-    const mapeamentoCampos = [
-        ['p_numero', dadosOS.numero],
-        ['p_data', dadosOS.data],
-        ['p_cliente', dadosOS.cliente],
-        ['p_documento', dadosOS.documento],
-        ['p_telefone', dadosOS.telefone],
-        ['p_email', dadosOS.email],
-        ['p_objeto', dadosOS.objeto],
-        ['p_modelo', dadosOS.modelo],
-        ['p_serial', dadosOS.serial],
-        ['p_status', dadosOS.status],
-        ['p_defeito', dadosOS.defeito],
-        ['p_laudo', dadosOS.laudo]
-    ];
+    // 2. Preenche a página 1 (Ordem de Serviço Clássica)
+    document.getElementById('p_numero').textContent = dadosOS.numero;
+    document.getElementById('p_status').textContent = dadosOS.status;
+    document.getElementById('p_cliente').textContent = dadosOS.cliente;
+    document.getElementById('p_documento').textContent = dadosOS.documento;
+    document.getElementById('p_telefone').textContent = dadosOS.telefone;
+    document.getElementById('p_email').textContent = dadosOS.email;
+    document.getElementById('p_objeto').textContent = dadosOS.objeto;
+    document.getElementById('p_modelo').textContent = dadosOS.modelo;
+    document.getElementById('p_serial').textContent = dadosOS.serial;
+    document.getElementById('p_defeito').textContent = dadosOS.defeito;
+    document.getElementById('p_laudo').textContent = dadosOS.laudo;
+    document.getElementById('p_data').textContent = dadosOS.data;
 
-    // Loop que preenche a div de impressão da OS
-    mapeamentoCampos.forEach(([idPrint, valor]) => {
-        const elemento = document.getElementById(idPrint);
-        if (elemento) elemento.innerText = valor;
+    // Popula a lista simples na OS
+    const pLista = document.getElementById('p_lista');
+    pLista.innerHTML = '';
+
+    // String acumuladora para a tabela estruturada do Termo de Garantia
+    let itensHTMLParaTermo = '';
+
+    itensServico.forEach(li => {
+        const txtServico = li.innerText.trim();
+
+        // Elemento da pág 1
+        const novoLi = document.createElement('li');
+        novoLi.textContent = txtServico;
+        pLista.appendChild(novoLi);
+
+        /*// Elemento da pág 2 (Termo)
+        itensHTMLParaTermo += `
+            <tr>
+                <td style="border: 1px solid #e2e8f0; padding: 6px 10px; font-size: 10pt;">
+                ${txtServico}
+                </td>
+            </tr>
+        `;*/
     });
 
-    if (El.printValor) {
-        El.printValor.innerText = dadosOS.total;
-    }
+    
+    
+/*    // 3. Remove qualquer Termo gerado anteriormente para não duplicar no HTML
+    const termoAntigo = document.getElementById('print-termo-garantia');
+    if (termoAntigo) termoAntigo.remove();
 
-    // COPIA AS LIs DA TELA PARA A ÁREA DE IMPREESSÃO DA OS E FORMATA PARA O TERMO
-    let itensHTMLParaTermo = '';
-    if (El.printLista && El.listaServicos) {
-        El.printLista.innerHTML = '';
-        El.listaServicos.querySelectorAll('li').forEach(item => {
-            const liClonada = document.createElement('li');
-            Object.assign(liClonada.style, {
-                display: "flex",
-                justifyContent: "space-between",
-                borderBottom: "1px dashed #ccc",
-                padding: "4px 0"
-            });
-            liClonada.innerHTML = item.innerHTML;
-            El.printLista.appendChild(liClonada);
+    // 4. Constrói a estrutura da Página 2 injetando o template fornecido
+    const containerTermo = document.createElement('div');
+    containerTermo.id = 'print-termo-garantia';
 
-            // Constrói as linhas textuais dos serviços que irão para o PDF do Termo
-            itensHTMLParaTermo += `
-                <tr>
-                    <td style="padding: 7px 10px; border-bottom: 1px dashed #cbd5e0; font-size: 10pt;">${item.innerText || item.textContent}</td>
-                </tr>`;
-        });
-    }
+    // Estilização inline focada na quebra de folha para impressão
+    containerTermo.style.cssText = 'page-break-before: always; margin-top: 30px; font-family: Arial, sans-serif;';
 
-    if (!itensHTMLParaTermo) {
-        itensHTMLParaTermo = `<tr><td style="padding: 7px 10px; border-bottom: 1px dashed #cbd5e0; color: #777; font-size: 10pt;">Nenhum serviço ou peça listada.</td></tr>`;
-    }
+    containerTermo.innerHTML = `
+        <div class="header" style="border-bottom: 3px solid #2b6cb0; padding-bottom: 8px; margin-bottom: 18px; text-align: center;">
+            <h1 style="font-size: 22pt; margin: 0; color: #2b6cb0; text-transform: uppercase; font-weight: bold;">
+            Termo de Garantia</h1>
 
-    // =========================================================================
-    // 1º PASSO: DISPARAR IMPRESSÃO DA ORDEM DE SERVIÇO ORIGINAL
-    // =========================================================================
-    const tituloOriginal = document.title;
-    const clienteLimpo = dadosOS.cliente.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]/g, "_");
-
-    document.title = `OS_${dadosOS.numero}_${clienteLimpo}`;
-    window.print(); // Executa a impressão da OS configurada na página
-    document.title = tituloOriginal;
-
-    // =========================================================================
-    // 2º PASSO: GERAR E DISPARAR O PDF DO TERMO DE GARANTIA
-    // =========================================================================
-    const nomeArquivoTermo = `Termo_de_Garantia_OS_${dadosOS.numero}_${clienteLimpo}`;
-    /*const janelaTermo = window.open('', '_blank');*/
-
-
-    // 1. Abre a nova janela em branco
-    const janelaTermo = window.open("", "_blank");
-
-    if (janelaTermo) {
-        // 2. Define o título da página
-        janelaTermo.document.title = nomeArquivoTermo;
-
-        // 3. Insere a estrutura base com os estilos
-        janelaTermo.document.documentElement.innerHTML = `
-        <!DOCTYPE html>
-        <html lang="pt-BR">
-        <head>
-            <meta charset="UTF-8">
-            <style>
-                @page { size: A4; margin: 18mm 15mm; }
-                *, *::before, *::after { box-sizing: border-box; }
-                body { font-family: Arial, sans-serif; margin: 0; padding: 0; color: #2d3748; line-height: 1.4; }
-                .header { border-bottom: 3px solid #2b6cb0; padding-bottom: 8px; margin-bottom: 18px; text-align: center; }
-                .header h1 { font-size: 22pt; margin: 0; color: #2b6cb0; text-transform: uppercase; font-weight: bold; }
-                .header p { font-size: 11pt; color: #4a5568; margin: 4px 0 0 0; font-weight: bold; }
-                .grid { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
-                .grid td { border: 1px solid #e2e8f0; padding: 6px 10px; vertical-align: top; }
-                .bg-gray { background-color: #f7fafc; }
-                .label { font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px; }
-                .value { font-size: 10.5pt; color: #1a202c; font-weight: 500; }
-                .section-title { font-size: 11pt; font-weight: bold; color: #2b6cb0; background-color: #ebf8ff; padding: 5px 10px; margin: 15px 0 8px 0; border-left: 4px solid #3182ce; text-transform: uppercase; }
-                .table-itens { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
-                .table-itens th { background-color: #4a5568; color: #fff; padding: 6px 10px; font-size: 9pt; text-align: left; text-transform: uppercase; }
-                .total-box { text-align: right; font-size: 11.5pt; font-weight: bold; color: #2b6cb0; margin: 10px 0; }
-                .text-condicoes { font-size: 9pt; color: #4a5568; text-align: justify; margin: 0 0 6px 0; }
-                .signatures { width: 100%; margin-top: 40px; border-collapse: collapse; }
-                .signatures td { border: none; text-align: center; width: 50%; padding: 10px; }
-                .line { border-top: 1px solid #a0aec0; width: 80%; margin: 0 auto 4px auto; }
-                .line-lbl { font-size: 8.5pt; color: #4a5568; }
-            </style>
-        </head>
-        <body></body>
-        </html>
-    `;
-
-        // 4. Insere o conteúdo dinâmico dentro do Body
-        janelaTermo.document.body.innerHTML = `
-        <div class="header">
-            <h1>Termo de Garantia</h1>
-            <p>Referente à Ordem de Serviço Nº ${dadosOS.numero}</p>
+            <p style="font-size: 11pt; color: #4a5568; margin: 4px 0 0 0; font-weight: bold;">
+            Referente à Ordem de Serviço Nº ${dadosOS.numero}</p>
         </div>
 
-        <table class="grid">
+        <table class="grid" style="width: 100%; border-collapse: collapse; margin-bottom: 12px;">
             <tr>
-                <td class="bg-gray" style="width: 35%;"><span class="label">OS Documento</span><span class="value">#${dadosOS.numero}</span></td>
-                <td class="bg-gray" style="width: 65%;"><span class="label">Data de Emissão</span><span class="value">${dadosOS.data}</span></td>
+                <td class="bg-gray" style="width: 35%; border: 1px solid #e2e8f0; padding: 6px 10px; background-color: #f7fafc;"><span class="label" style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">OS Documento</span><span class="value" style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">#${dadosOS.numero}</span></td>
+                <td class="bg-gray" style="width: 65%; border: 1px solid #e2e8f0; padding: 6px 10px; background-color: #f7fafc;"><span class="label" style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">Data de Emissão</span><span class="value" style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">${dadosOS.data}</span></td>
             </tr>
         </table>
 
-        <div class="section-title">Dados do Cliente</div>
-        <table class="grid">
+        <div class="section-title" style="font-size: 11pt; font-weight: bold; color: #2b6cb0; background-color: #ebf8ff; padding: 5px 10px; margin: 15px 0 8px 0; border-left: 4px solid #3182ce; text-transform: uppercase;">
+        Dados do Cliente</div>
+        <table class="grid" style="width: 100%; border-collapse: collapse; margin-bottom: 12px;">
             <tr>
-                <td style="width: 60%;"><span class="label">Nome / Razão Social</span><span class="value">${dadosOS.cliente}</span></td>
-                <td style="width: 40%;"><span class="label">CPF / CNPJ</span><span class="value">${dadosOS.documento}</span></td>
+                <td style="border: 1px solid #e2e8f0; padding: 6px 10px; width: 60%;">
+                <span class="label" style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">
+                Nome / Razão Social</span><span class="value" style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">${dadosOS.cliente}</span></td>
+                <td style="border: 1px solid #e2e8f0; padding: 6px 10px; width: 40%;"><span class="label" style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">CPF / CNPJ</span><span class="value" style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">${dadosOS.documento}</span></td>
             </tr>
             <tr>
-                <td><span class="label">Telefone de Contato</span><span class="value">${dadosOS.telefone}</span></td>
-                <td><span class="label">E-mail</span><span class="value">${dadosOS.email}</span></td>
-            </tr>
-        </table>
-
-        <div class="section-title">Dados do Veículo</div>
-        <table class="grid">
-            <tr>
-                <td style="width: 40%;"><span class="label">Veículo</span><span class="value">${dadosOS.objeto}</span></td>
-                <td style="width: 30%;"><span class="label">Modelo</span><span class="value">${dadosOS.modelo}</span></td>
-                <td style="width: 30%;"><span class="label">Placa</span><span class="value">${dadosOS.serial}</span></td>
+                <td style="border: 1px solid #e2e8f0; padding: 6px 10px;"><span class="label" style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">Telefone de Contato</span><span class="value" style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">${dadosOS.telefone}</span></td>
+                <td style="border: 1px solid #e2e8f0; padding: 6px 10px;"><span class="label" style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">E-mail</span><span class="value" style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">${dadosOS.email}</span></td>
             </tr>
         </table>
 
-        <div class="section-title">Laudo Técnico & Diagnóstico</div>
-        <table class="grid">
+        <div class="section-title" style="font-size: 11pt; font-weight: bold; color: #2b6cb0; background-color: #ebf8ff; padding: 5px 10px; margin: 15px 0 8px 0; border-left: 4px solid #3182ce; text-transform: uppercase;">Dados do Veículo</div>
+        <table class="grid" style="width: 100%; border-collapse: collapse; margin-bottom: 12px;">
             <tr>
-                <td><span class="label">Parecer Técnico / Solução Aplicada</span><span class="value">${dadosOS.laudo}</span></td>
+                <td style="border: 1px solid #e2e8f0; padding: 6px 10px; width: 40%;"><span class="label" style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">Veículo</span><span class="value" style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">${dadosOS.objeto}</span></td>
+                <td style="border: 1px solid #e2e8f0; padding: 6px 10px; width: 30%;"><span class="label" style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">Modelo</span><span class="value" style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">${dadosOS.modelo}</span></td>
+                <td style="border: 1px solid #e2e8f0; padding: 6px 10px; width: 30%;"><span class="label" style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">Placa</span><span class="value" style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">${dadosOS.serial}</span></td>
             </tr>
         </table>
 
-        <div class="section-title">Serviços Prestados na Garantia - Mão de Obra</div>
-        <table class="table-itens">
+        <div class="section-title" style="font-size: 11pt; font-weight: bold; color: #2b6cb0; background-color: #ebf8ff; padding: 5px 10px; margin: 15px 0 8px 0; border-left: 4px solid #3182ce; text-transform: uppercase;">Laudo Técnico & Diagnóstico</div>
+        <table class="grid" style="width: 100%; border-collapse: collapse; margin-bottom: 12px;">
+            <tr>
+                <td style="border: 1px solid #e2e8f0; padding: 6px 10px;"><span class="label" style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">Parecer Técnico / Solução Aplicada</span><span class="value" style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">${dadosOS.laudo}</span></td>
+            </tr>
+        </table>
+
+        <div class="section-title" style="font-size: 11pt; font-weight: bold; color: #2b6cb0; background-color: #ebf8ff; padding: 5px 10px; margin: 15px 0 8px 0; border-left: 4px solid #3182ce; text-transform: uppercase;">Serviços Prestados na Garantia - Mão de Obra</div>
+        <table class="table-itens" style="width: 100%; border-collapse: collapse; margin-bottom: 8px;">
             <thead>
-                <tr><th>Descrição da Atividade / Item</th></tr>
+                <tr>
+                    <th style="background-color: #4a5568; color: #fff; padding: 6px 10px; font-size: 9pt; text-align: left; text-transform: uppercase;">Descrição da Atividade / Item</th>
+                </tr>
             </thead>
             <tbody>
                 ${itensHTMLParaTermo}
             </tbody>
         </table>
 
-        <div class="total-box">
+        <div class="total-box" style="text-align: right; font-size: 11.5pt; font-weight: bold; color: #2b6cb0; margin: 10px 0;">
             Valor Total Coberto: ${dadosOS.total}
         </div>
 
-        <div class="section-title">Condições Gerais de Garantia</div>
-        <p class="text-condicoes">1. A garantia cobre estritamente a mão de obra descritas no Parecer Técnico deste documento, válidas pelo prazo legal estabelecido (TRÊS MESES) a partir da data de retirada.</p>
-        <p class="text-condicoes">2. Este termo perderá totalmente o efeito caso o objeto apresente avarias decorrentes de flutuações elétricas, entrada de líquidos, lacres rompidos ou modificações por pessoal não autorizado.</p>
+        <div class="section-title" style="font-size: 11pt; font-weight: bold; color: #2b6cb0; background-color: #ebf8ff; padding: 5px 10px; margin: 15px 0 8px 0; border-left: 4px solid #3182ce; text-transform: uppercase;">Condições Gerais de Garantia</div>
+        <p class="text-condicoes" style="font-size: 9pt; color: #4a5568; text-align: justify; margin: 0 0 6px 0;">1. A garantia cobre estritamente a mão de obra descritas no Parecer Técnico deste documento, válidas pelo prazo legal estabelecido (TRÊS MESES) a partir da data de retirada.</p>
+        <p class="text-condicoes" style="font-size: 9pt; color: #4a5568; text-align: justify; margin: 0 0 6px 0;">2. Este termo perderá totalmente o efeito caso o objeto apresente avarias decorrentes de flutuações elétricas, entrada de líquidos, lacres rompidos ou modificações por pessoal não autorizado.</p>
 
-        <table class="signatures">
+        <table class="signatures" style="width: 100%; margin-top: 40px; border-collapse: collapse;">
             <tr>
-                <td>
-                    <div class="line"></div>
-                    <span class="line-lbl">Responsável Técnico / Empresa</span>
+                <td style="border: none; text-align: center; width: 50%; padding: 10px;">
+                    <div class="line" style="border-top: 1px solid #a0aec0; width: 80%; margin: 0 auto 4px auto;"></div>
+                    <span class="line-lbl" style="font-size: 8.5pt; color: #4a5568;">Responsável Técnico / Empresa</span>
                 </td>
-                <td>
-                    <div class="line"></div>
-                    <span class="line-lbl">Assinatura do Cliente</span>
+                <td style="border: none; text-align: center; width: 50%; padding: 10px;">
+                    <div class="line" style="border-top: 1px solid #a0aec0; width: 80%; margin: 0 auto 4px auto;"></div>
+                    <span class="line-lbl" style="font-size: 8.5pt; color: #4a5568;">Assinatura do Cliente</span>
                 </td>
             </tr>
         </table>
     `;
 
-        // 5. Executa a impressão de forma segura após o carregamento completo
-        janelaTermo.focus();
-        janelaTermo.print();
-        setTimeout(() => { janelaTermo.close(); }, 100);
+    // 5. Injeta a estrutura montada no fim da `#print-area` do arquivo original
+    document.getElementById('print-area').appendChild(containerTermo);
+    */
+
+    // 6. Executa a impressão nativa do sistema (Já englobando a OS e o Termo em folhas separadas)
+    window.print();
+
+    // 7. Incrementos pós-impressão
+    incrementarNumeroOS();
+    limparCamposFormulario();
+}
+
+// ==========================================
+// 5. LIMPAR FORMULÁRIO
+// ==========================================
+function limparFormulario() {
+    if (confirm('Tem certeza que deseja limpar todo o formulário?')) {
+        limparCamposFormulario();
+    }
+}
+
+function limparCamposFormulario() {
+    const numeroAtual = localStorage.getItem('proximo_numero_os');
+    document.getElementById('os-form').reset();
+    listaServicos.innerHTML = '';
+    document.getElementById('f_numero').value = numeroAtual;
+
+    // Remove o termo gerado dinamicamente para restaurar o estado limpo
+    const termoAntigo = document.getElementById('print-termo-garantia');
+    if (termoAntigo) termoAntigo.remove();
+}
+
+// ==========================================
+// 6. CONFIGURAÇÃO INICIAL
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('main-content').style.display = 'none';
+    inicializarNumeroOS();
+});
+
+
+
+/*// ==========================================
+// 1. CONTROLADOR DO NÚMERO SEQUENCIAL (OS)
+// ==========================================
+function inicializarNumeroOS() {
+    const fNumero = document.getElementById('f_numero');
+    if (!fNumero) return; // Proteção caso o elemento sumisse
+
+    // Se não existir nenhuma OS guardada, começa no número 2601
+    if (!localStorage.getItem('proximo_numero_os')) {
+        localStorage.setItem('proximo_numero_os', '2601');
+    }
+    
+    // Recupera o número e define o input como readOnly para ninguém alterar manualmente
+    fNumero.value = localStorage.getItem('proximo_numero_os');
+    fNumero.readOnly = true;
+}
+
+function incrementarNumeroOS() {
+    let atual = parseInt(localStorage.getItem('proximo_numero_os'), 10) || 1001;
+    let proximo = atual + 1;
+    localStorage.setItem('proximo_numero_os', proximo.toString());
+    
+    // Atualiza o campo do formulário com o novo número
+    document.getElementById('f_numero').value = proximo;
+}
+
+// ==========================================
+// 2. CONTROLE DE ACESSO (LOGIN / LOGOUT)
+// ==========================================
+function autenticar(event) {
+    event.preventDefault();
+    const user = document.getElementById('username').value.trim();
+    const pass = document.getElementById('password').value.trim();
+    const errorMsg = document.getElementById('login-error');
+
+    if (user === "admin" && pass === "12345") {
+        errorMsg.style.display = 'none';
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+        
+        // Garante que o número está lá ao logar
+        inicializarNumeroOS();
+        
+        event.target.reset(); 
+    } else {
+        errorMsg.style.display = 'block';
+    }
+}
+
+function logout() {
+    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
+}
+
+// ==========================================
+// 3. GERENCIAMENTO DA LISTA DE SERVIÇOS
+// ==========================================
+const btnAdicionar = document.getElementById('btnAdicionar');
+const selectServico = document.getElementById('servico');
+const listaServicos = document.getElementById('listaServicos');
+
+if (btnAdicionar) {
+    btnAdicionar.addEventListener('click', () => {
+        const servicoSelecionado = selectServico.value;
+
+        if (!servicoSelecionado) {
+            alert('Por favor, selecione um serviço válido.');
+            return;
+        }
+
+        const itensAtuais = Array.from(listaServicos.querySelectorAll('li')).map(li => li.dataset.value);
+        if (itensAtuais.includes(servicoSelecionado)) {
+            alert('Este serviço já foi adicionado.');
+            return;
+        }
+
+        const li = document.createElement('li');
+        li.dataset.value = servicoSelecionado;
+        li.innerHTML = `
+            <span><i class="fas fa-wrench" style="margin-right: 8px; color: #1a365d;"></i>${servicoSelecionado}</span>
+            <button type="button" class="btn-remove-item" style="background:none; border:none; color:#e53e3e; cursor:pointer;" title="Remover">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        `;
+
+        li.querySelector('.btn-remove-item').addEventListener('click', () => li.remove());
+        listaServicos.appendChild(li);
+        selectServico.value = "";
+    });
+}
+
+// ==========================================
+// 4. PROCESSAR DADOS E ABRIR IMPRESSÃO NATIVA
+// ==========================================
+function gerarOS(event) {
+    event.preventDefault();
+
+    const itensServico = listaServicos.querySelectorAll('li');
+    if (itensServico.length === 0) {
+        alert('Adicione pelo menos um serviço antes de gerar a Ordem de Serviço.');
+        return;
     }
 
+    const campos = [
+        ['f_numero', 'p_numero'],
+        ['f_status', 'p_status'],
+        ['f_cliente', 'p_cliente'],
+        ['f_documento', 'p_documento'],
+        ['f_telefone', 'p_telefone'],
+        ['f_email', 'p_email'],
+        ['f_objeto', 'p_objeto'],
+        ['f_modelo', 'p_modelo'],
+        ['f_serial', 'p_serial'],
+        ['f_defeito', 'p_defeito'],
+        ['f_laudo', 'p_laudo']
+    ];
 
-    /*janelaTermo.document.write(`
-        <!DOCTYPE html>
-        <html lang="pt-BR">
-        <head>
-            <meta charset="UTF-8">
-            <title>${nomeArquivoTermo}</title>
-            <style>
-                @page { size: A4; margin: 18mm 15mm; }
-                *, *::before, *::after { box-sizing: border-box; }
-                body { font-family: Arial, sans-serif; margin: 0; padding: 0; color: #2d3748; line-height: 1.4; }
-                .header { border-bottom: 3px solid #2b6cb0; padding-bottom: 8px; margin-bottom: 18px; text-align: center; }
-                .header h1 { font-size: 22pt; margin: 0; color: #2b6cb0; text-transform: uppercase; font-weight: bold; }
-                .header p { font-size: 11pt; color: #4a5568; margin: 4px 0 0 0; font-weight: bold; }
-                .grid { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
-                .grid td { border: 1px solid #e2e8f0; padding: 6px 10px; vertical-align: top; }
-                .bg-gray { background-color: #f7fafc; }
-                .label { font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px; }
-                .value { font-size: 10.5pt; color: #1a202c; font-weight: 500; }
-                .section-title { font-size: 11pt; font-weight: bold; color: #2b6cb0; background-color: #ebf8ff; padding: 5px 10px; margin: 15px 0 8px 0; border-left: 4px solid #3182ce; text-transform: uppercase; }
-                .table-itens { width: 100%; border-collapse: collapse; margin-bottom: 8px; }
-                .table-itens th { background-color: #4a5568; color: #fff; padding: 6px 10px; font-size: 9pt; text-align: left; text-transform: uppercase; }
-                .total-box { text-align: right; font-size: 11.5pt; font-weight: bold; color: #2b6cb0; margin: 10px 0; }
-                .text-condicoes { font-size: 9pt; color: #4a5568; text-align: justify; margin: 0 0 6px 0; }
-                .signatures { width: 100%; margin-top: 40px; border-collapse: collapse; }
-                .signatures td { border: none; text-align: center; width: 50%; padding: 10px; }
-                .line { border-top: 1px solid #a0aec0; width: 80%; margin: 0 auto 4px auto; }
-                .line-lbl { font-size: 8.5pt; color: #4a5568; }
-            </style>
-        </head>
-        <body>
-            <div class="header">
-                <h1>Termo de Garantia</h1>
-                <p>Referente à Ordem de Serviço Nº ${dadosOS.numero}</p>
-            </div>
+    campos.forEach(([idForm, idPrint]) => {
+        const input = document.getElementById(idForm);
+        const printElem = document.getElementById(idPrint);
+        if (input && printElem) {
+            printElem.textContent = input.value || 'Não informado';
+        }
+    });
 
-            <table class="grid">
-                <tr>
-                    <td class="bg-gray" style="width: 35%;"><span class="label">OS Documento</span><span class="value">#${dadosOS.numero}</span></td>
-                    <td class="bg-gray" style="width: 65%;"><span class="label">Data de Emissão</span><span class="value">${dadosOS.data}</span></td>
-                </tr>
-            </table>
+    const dataAtual = new Date().toLocaleDateString('pt-BR');
+    document.getElementById('p_data').textContent = dataAtual;
 
-            <div class="section-title">Dados do Cliente</div>
-            <table class="grid">
-                <tr>
-                    <td style="width: 60%;"><span class="label">Nome / Razão Social</span><span class="value">${dadosOS.cliente}</span></td>
-                    <td style="width: 40%;"><span class="label">CPF / CNPJ</span><span class="value">${dadosOS.documento}</span></td>
-                </tr>
-                <tr>
-                    <td><span class="label">Telefone de Contato</span><span class="value">${dadosOS.telefone}</span></td>
-                    <td><span class="label">E-mail</span><span class="value">${dadosOS.email}</span></td>
-                </tr>
-            </table>
+    const pLista = document.getElementById('p_lista');
+    pLista.innerHTML = '';
+    itensServico.forEach(li => {
+        const novoLi = document.createElement('li');
+        novoLi.textContent = li.innerText.trim();
+        pLista.appendChild(novoLi);
+    });
 
-            <div class="section-title">Dados do Equipamento / Objeto</div>
-            <table class="grid">
-                <tr>
-                    <td style="width: 40%;"><span class="label">Equipamento</span><span class="value">${dadosOS.objeto}</span></td>
-                    <td style="width: 30%;"><span class="label">Modelo</span><span class="value">${dadosOS.modelo}</span></td>
-                    <td style="width: 30%;"><span class="label">Nº de Série / Serial</span><span class="value">${dadosOS.serial}</span></td>
-                </tr>
-            </table>
+    // Abre a janela de impressão
+    window.print();
 
-            <div class="section-title">Laudo Técnico & Diagnóstico</div>
-            <table class="grid">
-                <tr>
-                    <td class="bg-gray"><span class="label">Situação Final</span><span class="value">${dadosOS.status}</span></td>
-                </tr>
-                <tr>
-                    <td><span class="label">Defeito Relatado</span><span class="value">${dadosOS.defeito}</span></td>
-                </tr>
-                <tr>
-                    <td><span class="label">Parecer Técnico / Solução Aplicada</span><span class="value">${dadosOS.laudo}</span></td>
-                </tr>
-            </table>
-
-            <div class="section-title">Serviços Prestados & Peças Inclusas na Garantia</div>
-            <table class="table-itens">
-                <thead>
-                    <tr>
-                        <th>Descrição da Atividade / Item</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    ${itensHTMLParaTermo}
-                </tbody>
-            </table>
-
-            <div class="total-box">
-                Valor Total Coberto: ${dadosOS.total}
-            </div>
-
-            <div class="section-title">Condições Gerais de Garantia</div>
-            <p class="text-condicoes">1. A garantia cobre estritamente as peças substituídas e a mão de obra descritas no Parecer Técnico deste documento, válidas pelo prazo legal estabelecido a partir da data de retirada.</p>
-            <p class="text-condicoes">2. Este termo perderá totalmente o efeito caso o objeto apresente avarias decorrentes de quedas, flutuações elétricas, entrada de líquidos, lacres rompidos ou modificações por pessoal não autorizado.</p>
-
-            <table class="signatures">
-                <tr>
-                    <td>
-                        <div class="line"></div>
-                        <span class="line-lbl">Responsável Técnico / Empresa</span>
-                    </td>
-                    <td>
-                        <div class="line"></div>
-                        <span class="line-lbl">Assinatura do Cliente</span>
-                    </td>
-                </tr>
-            </table>
-            
-            <script>
-                window.onload = function() {
-                    window.print();
-                    setTimeout(function() { window.close(); }, 300);
-                };
-            </script>
-        </body>
-        </html>
-    `);
-    janelaTermo.document.close();*/
-
-
-    // =========================================================================
-    // 3º PASSO: ATUALIZAÇÃO DOS DADOS LOCAIS E LIMPEZA (SÓ NO FINAL)
-    // =========================================================================
-    localStorage.setItem('proxima_os_num', parseInt(numeroOS) + 1);
-    limparFormulario();
-    carregarNumeroOS();
+    // Incrementa após mandar imprimir
+    incrementarNumeroOS();
+    limparCamposFormulario();
 }
+
+// ==========================================
+// 5. LIMPAR FORMULÁRIO
+// ==========================================
+function limparFormulario() {
+    if (confirm('Tem certeza que deseja limpar todo o formulário?')) {
+        limparCamposFormulario();
+    }
+}
+
+function limparCamposFormulario() {
+    const numeroAtual = localStorage.getItem('proximo_numero_os');
+    document.getElementById('os-form').reset();
+    listaServicos.innerHTML = '';
+    
+    // Devolve o número atual correto para o campo
+    document.getElementById('f_numero').value = numeroAtual;
+}
+
+// ==========================================
+// 6. CONFIGURAÇÃO INICIAL (AO CARREGAR A PÁGINA)
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    // Esconde o conteúdo principal e mostra o login
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('main-content').style.display = 'none';
+    
+    // Força a inicialização do número logo de cara na memória
+    inicializarNumeroOS();
+});*/

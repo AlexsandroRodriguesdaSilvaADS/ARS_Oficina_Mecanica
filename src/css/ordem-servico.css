@@ -194,7 +194,7 @@ h3 {
 
 .form-group.flex-wrap {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     align-items: center;
     gap: 30px;
     margin: auto;
@@ -209,6 +209,15 @@ h3 {
 .form-group.flex-wrap select#servico {
     width: 400px;
     margin-top: 5px;
+}
+
+.form-group.flex-wrap select#formaPagamento {
+    width: 200px;
+    margin-top: 5px;
+}
+
+.form-group.flex-wrap input#desconto {
+    width: 100px;
 }
 
 label {
@@ -293,13 +302,13 @@ li {
 }
 
 .btn-adicionar {
-    position: absolute;
-    right: 30px;
+    position: relative;
     background-color: #2b6cb0;
     width: 300px;
     color: white;
     padding: 12px;
     margin-top: 20px;
+    margin-left: 100px;
     border: none;
     border-radius: 5px;
     font-size: 16px;
