@@ -11,6 +11,7 @@ const DOM = {
     fClienteNome: document.getElementById('f_cliente_nome'),
     fClienteDoc: document.getElementById('f_cliente_doc'),
     fClienteTel: document.getElementById('f_cliente_tel'),
+    fClienteId: document.getElementById('f_cliente_id'),
     fVeiculoMod: document.getElementById('f_veiculo_mod'),
     fVeiculoAno: document.getElementById('f_veiculo_ano'),
     fVeiculoPlaca: document.getElementById('f_veiculo_placa'),
@@ -36,7 +37,8 @@ const DOM = {
     valorInput: document.getElementById('valor'),
     btnAdicionar: document.getElementById('btnAdicionar'),
     listaServicosUl: document.getElementById('listaServicos'),
-    printTermoGarantia: document.getElementById('print-termo-garantia')
+    printTermoGarantia: document.getElementById('print-termo-garantia'),
+    btnLimpar: document.getElementById('btnLimpar') 
 };
 
 let listaDeServicosAdicionados = [];
@@ -147,7 +149,6 @@ if (DOM.formaPagamento) {
 }
 
 DOM.descontoInput?.addEventListener('input', calcularTotais);
-DOM.descontoValor?.addEventListener('input', calcularTotais);
 
 DOM.btnAdicionar?.addEventListener('click', () => {
     const nome = DOM.srvSelect.value;
@@ -194,6 +195,43 @@ window.removerServico = function (id) {
     listaDeServicosAdicionados = listaDeServicosAdicionados.filter(s => s.id !== id);
     renderizarLista();
 };
+
+// [ADICIONADO] FUNÇÃO PARA LIMPAR FORMULÁRIO COMPLETAMENTE
+function limparFormulario() {
+    if (!confirm('Tem certeza que deseja limpar todo o formulário?')) return;
+
+    // 1. Limpa campos de texto/data/select principais
+    const camposParaLimpar = [
+        'fNotaData', 'fClienteNome', 'fClienteDoc', 'fClienteTel', 'fClienteId',
+        'fVeiculoMod', 'fVeiculoAno', 'fVeiculoPlaca', 'fNotaLaudo',
+        'descontoValor', 'descontoInput', 'formaPagamento', 'srvSelect', 'valorInput'
+    ];
+    
+    camposParaLimpar.forEach(campo => {
+        if (DOM[campo]) DOM[campo].value = '';
+    });
+
+    // Reset padrão do input de quantidade interna
+    if (DOM.qtdInput) DOM.qtdInput.value = '1';
+
+    // 2. Limpa os inputs das linhas da tabela estática (caso existam)
+    document.querySelectorAll('.item-row').forEach(row => {
+        row.querySelectorAll('input').forEach(input => {
+            if (input.classList.contains('item-qtd') || input.classList.contains('item-uni')) {
+                input.value = '0';
+            } else if (!input.classList.contains('item-tipo')) {
+                input.value = '';
+            }
+        });
+    });
+
+    // 3. Reseta o array de serviços dinâmicos e atualiza a tela
+    listaDeServicosAdicionados = [];
+    renderizarLista(); // Já chama o calcularTotais() internamente
+
+    // 4. Garante que o número da OS não seja perdido/apagado
+    inicializarNumeroOS();
+}
 
 // ==========================================
 // 5. PROCESSAR E DISPARAR IMPRESSÃO DUPLA
@@ -253,62 +291,147 @@ function dispararImpressaoDupla() {
 function gerartemplateTermo(dadosOS, itensHTML) {
     return `
         <div class="header" style="border-bottom: 3px solid #2b6cb0; padding-bottom: 8px; margin-bottom: 18px; text-align: center;">
-            <h1 style="font-size: 22pt; margin: 0; color: #2b6cb0; text-transform: uppercase; font-weight: bold;">Termo de Garantia</h1>
-            <p style="font-size: 11pt; color: #4a5568; margin: 4px 0 0 0; font-weight: bold;">Referente à Ordem de Serviço Nº ${dadosOS.numero}</p>
+            <h1 style="font-size: 22pt; margin: 0; color: #2b6cb0; text-transform: uppercase; font-weight: bold;">
+            Termo de Garantia</h1>
+
+            <p style="font-size: 11pt; color: #4a5568; margin: 4px 0 0 0; font-weight: bold;">
+            Referente à Ordem de Serviço Nº ${dadosOS.numero}</p>
         </div>
+
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 12px;">
             <tr>
-                <td style="width: 35%; border: 1px solid #e2e8f0; padding: 6px 10px; background-color: #f7fafc;"><span style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">OS Documento</span><span style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">${dadosOS.numero}</span></td>
-                <td style="width: 65%; border: 1px solid #e2e8f0; padding: 6px 10px; background-color: #f7fafc;"><span style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">Data de Emissão</span><span style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">${dadosOS.data}</span></td>
+                <td style="width: 35%; border: 1px solid #e2e8f0; padding: 6px 10px; background-color: #f7fafc;">
+                    <span style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">
+                    OS Documento</span>
+
+                    <span style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">${dadosOS.numero}</span>
+                </td>
+
+                <td style="width: 65%; border: 1px solid #e2e8f0; padding: 6px 10px; background-color: #f7fafc;">
+                    <span style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">
+                    Data de Emissão</span>
+
+                    <span style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">${dadosOS.data}</span>
+                </td>
             </tr>
         </table>
-        <div style="font-size: 11pt; font-weight: bold; color: #2b6cb0; background-color: #ebf8ff; padding: 5px 10px; margin: 15px 0 8px 0; border-left: 4px solid #3182ce; text-transform: uppercase;">Dados do Cliente</div>
+
+        <div style="font-size: 11pt; font-weight: bold; color: #2b6cb0; background-color: #ebf8ff; padding: 5px 10px; margin: 15px 0 8px 0; border-left: 4px solid #3182ce; text-transform: uppercase;">
+        Dados do Cliente</div>
+
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 12px;">
             <tr>
-                <td style="border: 1px solid #e2e8f0; padding: 6px 10px; width: 60%;"><span style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">Nome / Razão Social</span><span style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">${dadosOS.cliente}</span></td>
-                <td style="border: 1px solid #e2e8f0; padding: 6px 10px; width: 40%;"><span style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">CPF / CNPJ</span><span style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">${dadosOS.documento}</span></td>
+                <td style="border: 1px solid #e2e8f0; padding: 6px 10px; width: 60%;">
+                    <span style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">
+                    Nome / Razão Social</span>
+                
+                    <span style="font-size: 10.5pt; color: #1a202c; font-weight: 500; text-transform: uppercase;">${dadosOS.cliente}</span>
+                </td>
+
+                <td style="border: 1px solid #e2e8f0; padding: 6px 10px; width: 40%;">
+                    <span style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">
+                    CPF / CNPJ</span>
+                    
+                    <span style="font-size: 10.5pt; color: #1a202c; font-weight: 500; text-transform: uppercase;">${dadosOS.documento}</span>
+                </td>
             </tr>
+
             <tr>
-                <td style="border: 1px solid #e2e8f0; padding: 6px 10px;"><span style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">Telefone de Contato</span><span style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">${dadosOS.telefone}</span></td>
-                <td style="border: 1px solid #e2e8f0; padding: 6px 10px;"><span style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">E-mail</span><span style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">${dadosOS.email}</span></td>
+                <td style="border: 1px solid #e2e8f0; padding: 6px 10px;">
+                    <span style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">
+                    Telefone de Contato</span>
+
+                    <span style="font-size: 10.5pt; color: #1a202c; font-weight: 500;" text-transform: uppercase;>${dadosOS.telefone}</span>
+                </td>
+
+                <td style="border: 1px solid #e2e8f0; padding: 6px 10px;">
+                    <span style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">
+                    E-mail</span>
+
+                    <span style="font-size: 10.5pt; color: #1a202c; font-weight: 500; text-transform: uppercase;">${dadosOS.email}</span>
+                </td>
             </tr>
         </table>
-        <div style="font-size: 11pt; font-weight: bold; color: #2b6cb0; background-color: #ebf8ff; padding: 5px 10px; margin: 15px 0 8px 0; border-left: 4px solid #3182ce; text-transform: uppercase;">Dados do Veículo</div>
+
+        <div style="font-size: 11pt; font-weight: bold; color: #2b6cb0; background-color: #ebf8ff; padding: 5px 10px; margin: 15px 0 8px 0; border-left: 4px solid #3182ce; text-transform: uppercase;">
+        Dados do Veículo</div>
+
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 12px;">
             <tr>
-                <td style="border: 1px solid #e2e8f0; padding: 6px 10px; width: 40%;"><span style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">Veículo</span><span style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">${dadosOS.objeto}</span></td>
-                <td style="border: 1px solid #e2e8f0; padding: 6px 10px; width: 30%;"><span style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">Modelo</span><span style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">${dadosOS.modelo}</span></td>
-                <td style="border: 1px solid #e2e8f0; padding: 6px 10px; width: 30%;"><span style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">Placa</span><span style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">${dadosOS.serial}</span></td>
+                <td style="border: 1px solid #e2e8f0; padding: 6px 10px; width: 40%;">
+                    <span style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">
+                    Veículo</span>
+                    
+                    <span style="font-size: 10.5pt; color: #1a202c; font-weight: 500; text-transform: uppercase;">${dadosOS.objeto}</span>
+                </td>
+
+                <td style="border: 1px solid #e2e8f0; padding: 6px 10px; width: 30%;">
+                    <span style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">
+                    Modelo</span>
+                    
+                    <span style="font-size: 10.5pt; color: #1a202c; font-weight: 500; text-transform: uppercase;">${dadosOS.modelo}</span>
+                </td>
+
+                <td style="border: 1px solid #e2e8f0; padding: 6px 10px; width: 30%;">
+                    <span style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">
+                    Placa</span>
+                    
+                    <span style="font-size: 10.5pt; color: #1a202c; font-weight: 500; text-transform: uppercase;">${dadosOS.serial}</span>
+                </td>
             </tr>
         </table>
-        <div style="font-size: 11pt; font-weight: bold; color: #2b6cb0; background-color: #ebf8ff; padding: 5px 10px; margin: 15px 0 8px 0; border-left: 4px solid #3182ce; text-transform: uppercase;">Laudo Técnico & Diagnóstico</div>
+
+        <div style="font-size: 11pt; font-weight: bold; color: #2b6cb0; background-color: #ebf8ff; padding: 5px 10px; margin: 15px 0 8px 0; border-left: 4px solid #3182ce; text-transform: uppercase;">
+        Laudo Técnico & Diagnóstico</div>
+
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 12px;">
             <tr>
-                <td style="border: 1px solid #e2e8f0; padding: 6px 10px;"><span style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">Parecer Técnico / Solução Aplicada</span><span style="font-size: 10.5pt; color: #1a202c; font-weight: 500;">${dadosOS.laudo}</span></td>
+                <td style="border: 1px solid #e2e8f0; padding: 6px 10px;">
+                    <span style="font-size: 8pt; text-transform: uppercase; color: #718096; font-weight: bold; display: block; margin-bottom: 2px;">
+                    Parecer Técnico / Solução Aplicada</span>
+                    
+                    <span style="font-size: 10.5pt; color: #1a202c; font-weight: 500; text-transform: uppercase;">${dadosOS.laudo}</span>
+                </td>
             </tr>
         </table>
-        <div style="font-size: 11pt; font-weight: bold; color: #2b6cb0; background-color: #ebf8ff; padding: 5px 10px; margin: 15px 0 8px 0; border-left: 4px solid #3182ce; text-transform: uppercase;">Serviços Prestados na Garantia - Mão de Obra</div>
+
+        <div style="font-size: 11pt; font-weight: bold; color: #2b6cb0; background-color: #ebf8ff; padding: 5px 10px; margin: 15px 0 8px 0; border-left: 4px solid #3182ce; text-transform: uppercase;">
+        Serviços Prestados na Garantia - Mão de Obra</div>
+
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 8px;">
             <thead>
-                <tr><th style="background-color: #4a5568; color: #fff; padding: 6px 10px; font-size: 9pt; text-align: left; text-transform: uppercase;">Descrição da Atividade / Item</th></tr>
+                <tr>
+                    <th style="background-color: #4a5568; color: #fff; padding: 6px 10px; font-size: 9pt; text-align: left; text-transform: uppercase;">
+                    Descrição da Atividade / Item</th>
+                </tr>
             </thead>
-            <tbody>${itensHTML}</tbody>
+
+            <tbody style="text-transform: uppercase;">${itensHTML}</tbody>
         </table>
+
         <div style="text-align: right; font-size: 11.5pt; font-weight: bold; color: #2b6cb0; margin: 10px 0;">
-            Valor Total Coberto: ${dadosOS.total}
-        </div>
-        <div style="font-size: 11pt; font-weight: bold; color: #2b6cb0; background-color: #ebf8ff; padding: 5px 10px; margin: 15px 0 8px 0; border-left: 4px solid #3182ce; text-transform: uppercase;">Condições Gerais de Garantia</div>
-        <p style="font-size: 9pt; color: #4a5568; text-align: justify; margin: 0 0 6px 0;">1. A garantia cobre estritamente a mão de obra descritas no Parecer Técnico deste documento, válidas pelo prazo legal estabelecido (TRÊS MESES) a partir da data de retirada.</p>
-        <p style="font-size: 9pt; color: #4a5568; text-align: justify; margin: 0 0 6px 0;">2. Este termo perderá totalmente o efeito caso o objeto apresente avarias decorrentes de flutuações elétricas, entrada de líquidos, lacres rompidos ou modificações por pessoal não autorizado.</p>
+        Valor Total Coberto: ${dadosOS.total}</div>
+
+        <div style="font-size: 11pt; font-weight: bold; color: #2b6cb0; background-color: #ebf8ff; padding: 5px 10px; margin: 15px 0 8px 0; border-left: 4px solid #3182ce; text-transform: uppercase;">
+        Condições Gerais de Garantia</div>
+
+        <p style="font-size: 9pt; color: #4a5568; text-align: justify; margin: 0 0 6px 0;">
+        1. A garantia cobre estritamente a mão de obra descritas no Parecer Técnico deste documento, válidas pelo prazo legal estabelecido (TRÊS MESES) a partir da data de retirada.</p>
+
+        <p style="font-size: 9pt; color: #4a5568; text-align: justify; margin: 0 0 6px 0;">
+        2. Este termo perderá totalmente o efeito caso o objeto apresente avarias decorrentes de flutuações elétricas, entrada de líquidos, lacres rompidos ou modificações por pessoal não autorizado.</p>
+
         <table style="width: 100%; margin-top: 40px; border-collapse: collapse;">
             <tr>
                 <td style="text-align: center; width: 50%; padding: 10px;">
                     <div style="border-top: 1px solid #a0aec0; width: 80%; margin: 0 auto 4px auto;"></div>
-                    <span style="font-size: 8.5pt; color: #4a5568;">Responsável Técnico / Empresa</span>
+                    <span style="font-size: 8.5pt; color: #4a5568;">
+                    Responsável Técnico / Empresa</span>
                 </td>
                 <td style="text-align: center; width: 50%; padding: 10px;">
                     <div style="border-top: 1px solid #a0aec0; width: 80%; margin: 0 auto 4px auto;"></div>
-                    <span style="font-size: 8.5pt; color: #4a5568;">Assinatura do Cliente</span>
+                    <span style="font-size: 8.5pt; color: #4a5568;">
+                    Assinatura do Cliente</span>
                 </td>
             </tr>
         </table>`;
@@ -321,8 +444,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (DOM.mainContent && DOM.mainContent.style.display === 'block') {
         inicializarNumeroOS();
     }
-});
 
+    // [ADICIONADO] Escuta o clique do botão de limpar
+    DOM.btnLimpar?.addEventListener('click', limparFormulario);
+});
 
 
 

@@ -83,7 +83,7 @@ html {
 }
 
 .container {
-    max-width: 850px;
+    max-width: 80%;
     margin: 0 auto;
     background: #fff;
     padding: 30px;
@@ -142,6 +142,7 @@ textarea:focus {
 .flex-wrap {
     flex-wrap: wrap;
     align-items: flex-end;
+    gap: 50px;
 }
 
 .form-grupo {
@@ -389,11 +390,13 @@ li {
     transition: background 0.2s;
 }
 
-.btn-print {
+.btn-print,
+.btn-clear {
     background-color: var(--primary-color);
 }
 
-.btn-print:hover {
+.btn-print:hover,
+.btn-clear:hover {
     background-color: #1a252f;
 }
 
@@ -411,9 +414,14 @@ li {
 
     .container {
         border: none;
+        border-radius: none;
         box-shadow: none;
         padding: 0;
         max-width: 100%;
+    }
+
+    .flex-wrap {
+        display: none;
     }
 
     .no-print-zone {

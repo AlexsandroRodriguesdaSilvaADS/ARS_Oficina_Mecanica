@@ -79,6 +79,10 @@
                             <label>Telefone*</label>
                             <input type="text" id="f_cliente_tel" placeholder="(11) 99999-9999" required>
                         </div>
+                        <div class="form-group">
+                            <label>CPF / CNPJ</label>
+                            <input type="number" id="f_cliente_id">
+                        </div>
                     </div>
 
                     <div class="box">
@@ -229,7 +233,8 @@
             </form>
 
             <div class="no-print-zone">
-                <button class="btn btn-print" onclick="dispararImpressaoDupla()">🖨️ Imprimir / Salvar PDF</button>
+                <button class="btn btn-print" onclick="dispararImpressaoDupla()">Imprimir / Salvar PDF</button>
+                <button class="btn btn-clear" id="btnLimpar">Limpar Formulário</button>
             </div>
 
         </div>
