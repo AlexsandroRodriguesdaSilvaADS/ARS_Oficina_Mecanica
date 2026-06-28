@@ -199,6 +199,13 @@ window.removerServico = function (id) {
 // 5. PROCESSAR E DISPARAR IMPRESSÃO DUPLA
 // ==========================================
 function dispararImpressaoDupla() {
+    // 1. Validação de Campos Obrigatórios do Formulário
+    if (!DOM.fNotaData?.value) { alert('Por favor, preencha a Data da Nota.'); DOM.fNotaData?.focus(); return; }
+    if (!DOM.fClienteNome?.value?.trim()) { alert('Por favor, informe o Nome do Cliente.'); DOM.fClienteNome?.focus(); return; }
+    if (!DOM.fClienteTel?.value?.trim()) { alert('Por favor, informe o Telefone do Cliente.'); DOM.fClienteTel?.focus(); return; }
+    if (!DOM.fVeiculoMod?.value?.trim()) { alert('Por favor, informe o Modelo do Veículo.'); DOM.fVeiculoMod?.focus(); return; }
+    if (!DOM.fVeiculoPlaca?.value?.trim()) { alert('Por favor, informe a Placa do Veículo.'); DOM.fVeiculoPlaca?.focus(); return; }
+
     calcularTotais();
 
     const dataOriginal = DOM.fNotaData?.value;

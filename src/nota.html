@@ -15,113 +15,7 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="./css/nota-servico.css">
-    <!--<link rel="stylesheet" href="./css/estilos.css" />
-    <link rel="stylesheet" href="./css/responsivo.css" />
-    <link rel="stylesheet" href="./css/ordem-servico.css" />-->
-    <style>
-        /*body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            padding: 20px;
-        }*/
-
-        .form-group {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .flex-wrap {
-            flex-wrap: wrap;
-            align-items: flex-end;
-        }
-
-        .form-grupo {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .services {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        input,
-        select {
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-
-        input:disabled {
-            background-color: #e9e9e9;
-            cursor: not-allowed;
-        }
-
-        .btn-adicionar {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: bold;
-            height: 38px;
-        }
-
-        .btn-adicionar:hover {
-            background-color: #218838;
-        }
-
-        .lista-container {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-        }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        li {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .btn-remover {
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            padding: 3px 8px;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-        .total-container {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        #totalGeral {
-            font-size: 18px;
-            font-weight: bold;
-            color: #28a745;
-            border: none;
-            background: transparent;
-            width: 150px;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/reset.css" />
 </head>
 
 <body cz-shortcut-listen="true">
@@ -147,10 +41,12 @@
     <div id="main-content">
         <div class="container">
 
-            <form class="container" onsubmit="event.preventDefault();">
+            <form onsubmit="event.preventDefault();">
                 <header class="header">
                     <div class="logo-area">
-                        <h1>ARS</h1>
+                        <img class="logo" src="./imagens/logo.png" title="Soluções integradas para o seu veículo"
+                            alt="Logo de ARS Mecânico Automotivo" />
+                        
                         <p>Oficina Mecânica Automotiva</p>
                         <p>Rua Exemplo, 171 - São João da Escócia | Tel: (81) 99809-0037</p>
                         <p>CNPJ: 00.000.000/0001-00</p>
@@ -176,28 +72,28 @@
                     <div class="box">
                         <h3>Dados do Cliente</h3>
                         <div class="form-group">
-                            <label>Nome Completo</label>
-                            <input type="text" id="f_cliente_nome" placeholder="Nome do cliente">
+                            <label>Nome Completo*</label>
+                            <input type="text" id="f_cliente_nome" placeholder="Nome do cliente" required>
                         </div>
                         <div class="form-group">
-                            <label>Telefone</label>
-                            <input type="text" id="f_cliente_tel" placeholder="(11) 99999-9999">
+                            <label>Telefone*</label>
+                            <input type="text" id="f_cliente_tel" placeholder="(11) 99999-9999" required>
                         </div>
                     </div>
 
                     <div class="box">
                         <h3>Dados do Veículo</h3>
                         <div class="form-group">
-                            <label>Marca / Modelo / Ano</label>
-                            <input type="text" id="f_veiculo_mod" placeholder="Ex: Subaru Impreza / WRX 2.5 / 2015">
+                            <label>Marca / Modelo / Ano*</label>
+                            <input type="text" id="f_veiculo_mod" placeholder="Ex: Subaru / WRX 2.5 / 2015" required>
                         </div>
                         <div class="form-group">
-                            <label>Placa</label>
-                            <input type="text" id="f_veiculo_placa">
+                            <label>Placa*</label>
+                            <input type="text" id="f_veiculo_placa" required>
                         </div>
                         <div class="form-group">
-                            <label>Quilometragem atual (KM)</label>
-                            <input type="number">
+                            <label>Quilometragem atual (KM)*</label>
+                            <input type="number" required>
                         </div>
                     </div>
                 </div>
@@ -254,12 +150,12 @@
 
                     <div class="form-grupo">
                         <label class="services" for="quantidade">Qtd</label>
-                        <input type="number" id="quantidade" min="1" value="1" style="width: 60px;">
+                        <input type="number" id="quantidade" min="1" value="1" style="width: 60px;" required>
                     </div>
 
                     <div class="form-grupo">
                         <label class="services" for="valor">Valor Unitário (R$)</label>
-                        <input type="number" id="valor" step="0.01" min="0" placeholder="Ex: 150.00">
+                        <input type="number" id="valor" step="0.10" min="10.00" placeholder="Ex: 150.00" required>
                     </div>
 
                     <div class="form-grupo">
@@ -273,7 +169,7 @@
 
                     <div class="form-grupo">
                         <label class="services" for="desconto">Desconto (%)</label>
-                        <input type="number" id="desconto" min="5" max="10" placeholder="Ex: 5" disabled />
+                        <input type="number" id="desconto" min="5" max="10" disabled />
                     </div>
 
                     <button type="button" class="btn-adicionar" id="btnAdicionar">Adicionar Serviço</button>
