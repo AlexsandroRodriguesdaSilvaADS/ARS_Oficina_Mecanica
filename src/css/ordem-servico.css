@@ -262,6 +262,10 @@ textarea {
     padding-top: 20px;
 }
 
+.lista-container span {
+    text-transform: uppercase;
+}
+
 ul {
     list-style: none;
     padding: 0;

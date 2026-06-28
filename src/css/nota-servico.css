@@ -1,0 +1,383 @@
+html {
+    color: #F8F9FA;
+    scroll-behavior: smooth;
+}
+
+#login-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #1a365d;
+    z-index: 9999;
+}
+
+.login-box {
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 360px;
+    text-align: center;
+}
+
+.login-box h3 {
+    margin-top: 0;
+    color: #1a365d;
+    margin-bottom: 20px;
+}
+
+.login-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.login-group label {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #4a5568;
+}
+
+.login-group input {
+    padding: 10px;
+    border: 1px solid #cbd5e0;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.btn-login {
+    width: 100%;
+    background-color: #2b6cb0;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    background-color: #2c5282;
+}
+
+#login-error {
+    display: none;
+    color: #e53e3e;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+/* CONTEÚDO PRINCIPAL (OCULTO ANTES DO LOGIN) */
+#main-content {
+    display: none;
+}
+
+.container {
+    max-width: 850px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #7f8c8d;
+    --light-bg: #f8f9fa;
+    --border-color: #bdc3c7;
+    --focus-color: #3498db;
+}
+
+body {
+    background: url("../imagens/bmw-m3-gtr.webp") center / cover no-repeat fixed;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+    background-color: #f1f2f6;
+}
+
+/* Inputs Gerais */
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 6px 10px;
+    border: 1px solid var(--primary-color);
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 13px;
+    transition: border-color 0.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--focus-color);
+    background-color: #fff;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: bold;
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    margin-bottom: 3px;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.logo-area h1 {
+    margin: 0;
+    font-size: 28px;
+    color: var(--primary-color);
+    letter-spacing: 1px;
+}
+
+.logo-area p {
+    margin: 3px 0;
+    font-size: 12px;
+    color: var(--secondary-color);
+}
+
+.invoice-info {
+    width: 250px;
+}
+
+.invoice-info h2 {
+    margin: 0 0 10px 0;
+    color: var(--primary-color);
+    font-size: 20px;
+    text-align: right;
+}
+
+/* Seções de Dados (Cliente e Veículo) */
+.details-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.box {
+    background-color: var(--light-bg);
+    border: 1px solid var(--border-color);
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.box h3 {
+    margin: 0 0 15px 0;
+    font-size: 14px;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 5px;
+}
+
+/* Tabela de Itens 
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: left;
+    padding: 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+td {
+    padding: 8px 5px;
+    border-bottom: 1px solid var(--border-color);
+}*/
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Totais e Pagamento */
+.footer-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.payment-info {
+    width: 45%;
+}
+
+.totals {
+    width: 45%;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    font-size: 14px;
+}
+
+.total-row input {
+    width: 120px;
+    text-align: right;
+    font-weight: bold;
+}
+
+.total-row.final {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--primary-color);
+    border-top: 2px solid var(--primary-color);
+    margin-top: 5px;
+    padding-top: 10px;
+}
+
+.total-row.final input {
+    font-size: 18px;
+    color: var(--primary-color);
+    border: none;
+    background: transparent;
+}
+
+/* Zona de Ações (Botões) */
+.no-print-zone {
+    text-align: center;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn {
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+.btn-print {
+    background-color: var(--primary-color);
+}
+
+.btn-print:hover {
+    background-color: #1a252f;
+}
+
+.btn-calc {
+    background-color: #27ae60;
+}
+
+.btn-calc:hover {
+    background-color: #219a52;
+}
+
+/* Esqueleto Oculto do Termo de Garantia na Tela Comercial */
+#print-termo-garantia {
+    display: none;
+}
+
+/* ESTILOS EXCLUSIVOS DE IMPRESSÃO NATIVA */
+@media print {
+    body {
+        padding: 0;
+        background-color: #fff;
+    }
+
+    .container {
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        max-width: 100%;
+    }
+
+    .no-print-zone {
+        display: none;
+    }
+
+    input,
+    select,
+    textarea {
+        border: none;
+        background: transparent;
+        padding: 2px 0;
+        appearance: none;
+    }
+
+    .box {
+        border: 1px solid #ddd;
+        background-color: #fff !important;
+    }
+
+    th {
+        background-color: #2c3e50 !important;
+        color: #fff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Força a renderização correta do Termo e quebra para a Página 2 */
+    #print-termo-garantia {
+        display: block !important;
+        page-break-before: always;
+        margin-top: 40px;
+        font-family: Arial, sans-serif;
+        color: #2d3748;
+    }
+
+    #print-termo-garantia table {
+        display: table !important;
+        width: 100% !important;
+        border-collapse: collapse !important;
+    }
+
+    #print-termo-garantia tr {
+        display: table-row !important;
+    }
+
+    #print-termo-garantia td,
+    #print-termo-garantia th {
+        display: table-cell !important;
+    }
+}

@@ -102,15 +102,15 @@ function gerarOS(event) {
     const dadosOS = {
         numero: document.getElementById('f_numero').value,
         status: document.getElementById('f_status').value,
-        cliente: document.getElementById('f_cliente').value || 'Não informado',
-        documento: document.getElementById('f_documento').value || 'Não informado',
-        telefone: document.getElementById('f_telefone').value || 'Não informado',
-        email: document.getElementById('f_email').value || 'Não informado',
-        objeto: document.getElementById('f_objeto').value || 'Não informado',
-        modelo: document.getElementById('f_modelo').value || 'Não informado',
-        serial: document.getElementById('f_serial').value || 'Não informado',
-        defeito: document.getElementById('f_defeito').value || 'Não informado',
-        laudo: document.getElementById('f_laudo').value || 'Não informado',
+        cliente: document.getElementById('f_cliente').value,
+        documento: document.getElementById('f_documento').value || 'NÃO INFORMADO',
+        telefone: document.getElementById('f_telefone').value,
+        email: document.getElementById('f_email').value || 'NÃO INFORMADO',
+        objeto: document.getElementById('f_objeto').value,
+        modelo: document.getElementById('f_modelo').value,
+        serial: document.getElementById('f_serial').value,
+        defeito: document.getElementById('f_defeito').value,
+        laudo: document.getElementById('f_laudo').value || 'EM ANÁLISE, INCONCLUSIVO',
         data: new Date().toLocaleDateString('pt-BR'),
         //total: 'Sob Consulta' // Como o form original está com o campo de valores comentado, deixamos um fallback elegante
     };
@@ -152,10 +152,9 @@ function gerarOS(event) {
                 </td>
             </tr>
         `;*/
-    });
-
+    });  
     
-    
+    // TERMO DE GARANTIA
 /*    // 3. Remove qualquer Termo gerado anteriormente para não duplicar no HTML
     const termoAntigo = document.getElementById('print-termo-garantia');
     if (termoAntigo) termoAntigo.remove();
@@ -276,8 +275,8 @@ function limparCamposFormulario() {
     document.getElementById('f_numero').value = numeroAtual;
 
     // Remove o termo gerado dinamicamente para restaurar o estado limpo
-    const termoAntigo = document.getElementById('print-termo-garantia');
-    if (termoAntigo) termoAntigo.remove();
+    /*const termoAntigo = document.getElementById('print-termo-garantia');
+    if (termoAntigo) termoAntigo.remove();*/
 }
 
 // ==========================================
