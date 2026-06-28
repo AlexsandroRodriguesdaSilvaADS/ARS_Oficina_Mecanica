@@ -453,6 +453,7 @@ li {
 
     /* Força a renderização correta do Termo e quebra para a Página 2 */
     #print-termo-garantia {
+        height: 100vh !important;
         display: block !important;
         page-break-before: always;
         margin-top: 40px;

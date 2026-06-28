@@ -461,6 +461,10 @@ li {
         /* Evita que uma seção quebre no meio entre duas páginas */
     }
 
+    li {
+    font-size: 12px;
+}
+
     .print-section.v-total {
         text-align: right;
         margin-top: 15px;
@@ -504,6 +508,7 @@ li {
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
         white-space: pre-wrap;
+        text-transform: uppercase;
     }
 
     .signatures {

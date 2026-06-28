@@ -202,7 +202,7 @@ function limparFormulario() {
 
     // 1. Limpa campos de texto/data/select principais
     const camposParaLimpar = [
-        'fNotaData', 'fClienteNome', 'fClienteDoc', 'fClienteTel', 'fClienteId',
+        'fClienteNome', 'fClienteDoc', 'fClienteTel', 'fClienteId',
         'fVeiculoMod', 'fVeiculoAno', 'fVeiculoPlaca', 'fNotaLaudo',
         'descontoValor', 'descontoInput', 'formaPagamento', 'srvSelect', 'valorInput'
     ];
