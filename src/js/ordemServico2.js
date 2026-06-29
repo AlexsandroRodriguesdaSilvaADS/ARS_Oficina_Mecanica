@@ -180,14 +180,8 @@ function gerarOS(event) {
 // 5. SUBMISSÃO DO ARQUIVO BINÁRIO AO GOOGLE DRIVE
 // ==========================================
 function enviarParaGoogleDrive(blob, nomeArquivo) {
-    // IMPORTANTE: Insira aqui a URL gerada na implantação do seu Google Apps Script (Web App)
-    // Ela deve terminar com "/exec" e NÃO com "/edit..."
-    const urlScript = 'https://script.google.com/macros/s/AKfycbzxRLQyam8P2dyfQzhHZwDwVhUH0PwCb6f-5gfKScA-P_w7UToU3RCMJq_SjWFazkRl/exec';
-
-    if (urlScript === 'https://script.google.com/macros/s/AKfycbzxRLQyam8P2dyfQzhHZwDwVhUH0PwCb6f-5gfKScA-P_w7UToU3RCMJq_SjWFazkRl/exec' || urlScript.includes('docs.google.com/spreadsheets')) {
-        console.warn("Atenção: Configure a URL CORRETA do Apps Script (Web App) para que o salvamento automático funcione.");
-        return;
-    }
+    // Sua URL do Google Apps Script (Web App)
+    const urlScript = 'https://script.google.com/macros/s/AKfycbyocGP5FboSM7waZ-P5VIdndGyOIHDaZXLwzeE_p9shCxDRmWB5XT-ABVuMedWqVqDy/exec';
 
     const reader = new FileReader();
     reader.readAsDataURL(blob); 
@@ -202,7 +196,7 @@ function enviarParaGoogleDrive(blob, nomeArquivo) {
             mimeType: 'application/pdf'
         };
 
-        // Faz o envio usando POST e JSON estruturado (mais limpo para arquivos grandes)
+        // Faz o envio usando POST e JSON estruturado
         fetch(urlScript, {
             method: 'POST',
             mode: 'cors',
