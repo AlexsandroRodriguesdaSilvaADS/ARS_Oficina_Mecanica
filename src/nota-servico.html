@@ -22,6 +22,7 @@
 
     <div id="login-screen">
         <div class="login-box">
+            <h3>Emissão de Notas</h3>
             <h3>Acesso Restrito</h3>
             <form onsubmit="autenticar(event)">
                 <div class="login-group">
@@ -46,7 +47,7 @@
                     <div class="logo-area">
                         <img class="logo" src="./imagens/logo.png" title="Soluções integradas para o seu veículo"
                             alt="Logo de ARS Mecânico Automotivo" />
-                        
+
                         <p>Oficina Mecânica Automotiva</p>
                         <p>Rua Exemplo, 171 - São João da Escócia | Tel: (81) 99809-0037</p>
                         <p>CNPJ: 00.000.000/0001-00</p>
@@ -97,7 +98,7 @@
                         </div>
                         <div class="form-group">
                             <label>Quilometragem atual (KM)*</label>
-                            <input type="number" required>
+                            <input type="number" id="f_kilometragem" required>
                         </div>
                     </div>
                 </div>
