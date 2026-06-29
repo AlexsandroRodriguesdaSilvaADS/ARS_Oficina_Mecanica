@@ -196,6 +196,7 @@ window.removerServico = function (id) {
     renderizarLista();
 };
 
+
 // [ADICIONADO] FUNÇÃO PARA LIMPAR FORMULÁRIO COMPLETAMENTE
 function limparFormulario() {
     if (!confirm('Tem certeza que deseja limpar todo o formulário?')) return;
@@ -232,6 +233,7 @@ function limparFormulario() {
     // 4. Garante que o número da OS não seja perdido/apagado
     inicializarNumeroOS();
 }
+
 
 // ==========================================
 // 5. PROCESSAR E DISPARAR IMPRESSÃO DUPLA
