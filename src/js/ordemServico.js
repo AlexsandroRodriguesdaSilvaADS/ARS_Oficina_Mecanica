@@ -29,7 +29,7 @@ function autenticar(event) {
     const pass = document.getElementById('password').value.trim();
     const errorMsg = document.getElementById('login-error');
 
-    if (user === "admin" && pass === "12345") {
+    if (user === "admin" && pass === "1234") {
         errorMsg.style.display = 'none';
         document.getElementById('login-screen').style.display = 'none';
         document.getElementById('main-content').style.display = 'block';

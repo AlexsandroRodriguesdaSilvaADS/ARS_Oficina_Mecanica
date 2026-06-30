@@ -92,6 +92,25 @@ html {
     position: relative;
 }
 
+.btn-logout {
+    position: absolute;
+    width: 50px;
+    top: 30px;
+    right: 30px;
+    background: #e53e3e;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.btn-logout:hover {
+    background: #c53030;
+}
+
 :root {
     --primary-color: #2c3e50;
     --secondary-color: #7f8c8d;
@@ -267,6 +286,10 @@ li {
     /*margin: 10px auto;*/
 }
 
+.logo-area {
+    margin-top: 40px;
+}
+
 .logo-area h1 {
     margin: 0;
     font-size: 28px;
@@ -281,6 +304,7 @@ li {
 }
 
 .invoice-info {
+    margin-top: 40px;
     width: 300px;
 }
 
@@ -447,7 +471,8 @@ li {
     select,
     textarea,
     .btn-adicionar,
-    .btn-remover {
+    .btn-remover,
+    .btn-logout {
         border: set !important;
         background: transparent !important;
         padding: 2px 0 !important;
@@ -478,8 +503,8 @@ li {
 
     .print-page-warranty {
         page-break-before: always;
-        margin-top: 40px;
-        padding-top: 20px;
+        /*margin-top: 40px;
+        padding-top: 20px;*/
         border-top: 2px dashed #333;
     }
 
@@ -487,13 +512,13 @@ li {
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
     }
 
     .print-header .logo {
         position: absolute;
         right: 0;
-        bottom: 370px;
+        bottom: 380px;
     }
 
     .print-header h1 {

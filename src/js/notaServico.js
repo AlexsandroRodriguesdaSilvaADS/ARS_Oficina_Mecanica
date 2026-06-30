@@ -17,6 +17,11 @@ function autenticar(event) {
     }
 }
 
+function logout() {
+    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const mainContent = document.getElementById('main-content');
     const loginScreen = document.getElementById('login-screen');
