@@ -400,163 +400,22 @@ li {
     background-color: #1a252f;
 }
 
-/* Esqueleto Oculto do Termo de Garantia na Tela Comercial */
-#print-termo-garantia {
+/* PÁGINA DO TERMO DE GARANTIA */
+.quebrar-pagina {
+    break-before: page;
+}
+
+#print-area {
     display: none;
 }
 
-
-@media print {
-    @page {
-        size: A4;
-        margin: 18mm 15mm;
-    }
-
-    *,
-    *::before,
-    *::after {
-        box-sizing: border-box;
-    }
-
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        color: #2d3748;
-        line-height: 1.4;
-    }
-
-    .header {
-        border-bottom: 3px solid #2b6cb0;
-        padding-bottom: 8px;
-        margin-bottom: 18px;
-        text-align: center;
-    }
-
-    .header h1 {
-        font-size: 22pt;
-        margin: 0;
-        color: #2b6cb0;
-        text-transform: uppercase;
-        font-weight: bold;
-    }
-
-    .header p {
-        font-size: 11pt;
-        color: #4a5568;
-        margin: 4px 0 0 0;
-        font-weight: bold;
-    }
-
-    .grid {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 12px;
-    }
-
-    .grid td {
-        border: 1px solid #e2e8f0;
-        padding: 6px 10px;
-        vertical-align: top;
-    }
-
-    .bg-gray {
-        background-color: #f7fafc;
-    }
-
-    .label {
-        font-size: 8pt;
-        text-transform: uppercase;
-        color: #718096;
-        font-weight: bold;
-        display: block;
-        margin-bottom: 2px;
-    }
-
-    .value {
-        font-size: 10.5pt;
-        color: #1a202c;
-        font-weight: 500;
-    }
-
-    .section-title {
-        font-size: 11pt;
-        font-weight: bold;
-        color: #2b6cb0;
-        background-color: #ebf8ff;
-        padding: 5px 10px;
-        margin: 15px 0 8px 0;
-        border-left: 4px solid #3182ce;
-        text-transform: uppercase;
-    }
-
-    .table-itens {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 8px;
-    }
-
-    .table-itens th {
-        background-color: #4a5568;
-        color: #fff;
-        padding: 6px 10px;
-        font-size: 9pt;
-        text-align: left;
-        text-transform: uppercase;
-    }
-
-    .total-box {
-        text-align: right;
-        font-size: 11.5pt;
-        font-weight: bold;
-        color: #2b6cb0;
-        margin: 10px 0;
-    }
-
-    .text-condicoes {
-        font-size: 9pt;
-        color: #4a5568;
-        text-align: justify;
-        margin: 0 0 6px 0;
-    }
-
-    .signatures {
-        width: 100%;
-        margin-top: 40px;
-        border-collapse: collapse;
-    }
-
-    .signatures td {
-        border: none;
-        text-align: center;
-        width: 50%;
-        padding: 10px;
-    }
-
-    .line {
-        border-top: 1px solid #a0aec0;
-        width: 80%;
-        margin: 0 auto 4px auto;
-    }
-
-    .line-lbl {
-        font-size: 8.5pt;
-        color: #4a5568;
-    }
-}
-
-
 /* ESTILOS EXCLUSIVOS DE IMPRESSÃO NATIVA */
 @media print {
-
-    /* Remove cabeçalhos e rodapés padrões do navegador (data, URL, título da página) */
     @page {
         size: A4;
         margin: 10mm !important;
-        /* Margem limpa para o documento */
     }
 
-    /* Reseta o fundo e esconde as barras de rolagem do navegador */
     html,
     body {
         background: #ffffff !important;
@@ -589,10 +448,10 @@ li {
     textarea,
     .btn-adicionar,
     .btn-remover {
-        border: none;
-        background: transparent;
-        padding: 2px 0;
-        appearance: none;
+        /*border: none !important;*/
+        background: transparent !important;
+        padding: 2px 0 !important;
+        appearance: none !important;
     }
 
     .box {
@@ -607,12 +466,47 @@ li {
         print-color-adjust: exact;
     }
 
-    /* Força a renderização correta do Termo e quebra para a Página 2 */
+
+    /* Esqueleto Oculto do Termo de Garantia na Tela Comercial */
+    #print-termo-garantia {
+        display: flex;
+    }
+
+    .print-header h1 {
+        margin: 0;
+        color: #1a365d;
+        font-size: 22px;
+    }
+
+    .print-header h2 {
+        margin: 3px 0 0 0;
+        font-size: 16px;
+        color: #555;
+    }
+
+    .print-header p {
+        margin: 3px 0 0 0;
+        font-size: 11px;
+        color: #555;
+    }
+
+    .print-header .os {
+        text-align: right;
+    }
+
+    .print-header .nota {
+        background: #4a5568;
+        color: white;
+        padding: 4px 8px;
+        font-weight: bold;
+        border-radius: 4px;
+        font-size: 13px;
+    }
+
     #print-termo-garantia {
         height: 100vh !important;
         display: block !important;
         page-break-before: always;
-        margin-top: 40px;
         font-family: Arial, sans-serif;
         color: #2d3748;
     }

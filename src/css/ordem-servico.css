@@ -380,7 +380,6 @@ li {
         /* Margens ligeiramente maiores para evitar cortes */
     }
 
-    /* Reseta o fundo e esconde as barras de rolagem do navegador */
     html,
     body {
         background: #ffffff !important;

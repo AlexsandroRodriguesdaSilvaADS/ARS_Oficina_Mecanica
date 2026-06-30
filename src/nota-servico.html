@@ -27,11 +27,13 @@
             <form onsubmit="autenticar(event)">
                 <div class="login-group">
                     <label for="username">Usuário</label>
-                    <input type="text" id="username" required placeholder="Digite o usuário">
+                    <input type="text" id="username" require
+                     placeholder="Digite o usuário">
                 </div>
                 <div class="login-group">
                     <label for="password">Senha</label>
-                    <input type="password" id="password" required placeholder="Digite a senha">
+                    <input type="password" id="password" require
+                     placeholder="Digite a senha">
                 </div>
                 <button type="submit" class="btn-login">Entrar</button>
                 <div id="login-error" style="display: none;">Usuário ou senha incorretos!</div>
@@ -47,7 +49,6 @@
                     <div class="logo-area">
                         <img class="logo" src="./imagens/logo.png" title="Soluções integradas para o seu veículo"
                             alt="Logo de ARS Mecânico Automotivo" />
-
                         <p>Oficina Mecânica Automotiva</p>
                         <p>Rua Exemplo, 171 - São João da Escócia | Tel: (81) 99809-0037</p>
                         <p>CNPJ: 00.000.000/0001-00</p>
@@ -193,49 +194,126 @@
                     </div>
                 </div>
 
-                <!--<div class="footer-section">
-                    <div class="payment-info box">
-                        <h3>Informações e Observações</h3>
-                        <div class="form-group">
-                            <label>Forma de Pagamento</label>
-                            <input type="text" placeholder="Ex: PIX, Cartão 3x, Dinheiro">
-                        </div>
-                        <div class="form-group">
-                            <label>Observações Adicionais / Laudo Resumido</label>
-                            <textarea id="f_nota_laudo" rows="3"
-                                placeholder="Insira o parecer técnico ou observações que constarão no termo..."></textarea>
-                        </div>
-                    </div>
-
-                    <div class="totals">
-                        <div class="total-row">
-                            <span>Subtotal Serviços:</span>
-                            <input type="text" id="subtotal-servicos" value="R$ 0,00" readonly
-                                style="border:none; background:transparent;">
-                        </div>
-                        <div class="total-row">
-                            <span>Subtotal Peças:</span>
-                            <input type="text" id="subtotal-pecas" value="R$ 0,00" readonly
-                                style="border:none; background:transparent;">
-                        </div>
-                        <div class="total-row">
-                            <span>Desconto (R$):</span>
-                            <input type="number" id="desconto-valor" value="0.00" step="0.01"
-                                onchange="calcularTotais()">
-                        </div>
-                        <div class="total-row final">
-                            <span>Total Geral:</span>
-                            <input type="text" id="total-geral" value="R$ 0,00" readonly>
-                        </div>
-                    </div>
-                </div>-->
-
-                <div id="print-termo-garantia"></div>
             </form>
 
             <div class="no-print-zone">
                 <button class="btn btn-print" onclick="dispararImpressaoDupla()">Imprimir / Salvar PDF</button>
                 <button class="btn btn-clear" id="btnLimpar">Limpar Formulário</button>
+            </div>
+
+
+            <!-- ÁREA PARA IMPRESSÃO --
+            <div id="print-area" class="print-area" style="display: none;">
+
+                <div class="print-page-invoice">
+                    <div class="print-header">
+                        <div>
+                            <h1 style="margin:0; color:#1a365d; font-size: 22px;">ARS Oficina Mecânica</h1>
+                            <p style="margin:3px 0 0 0; font-size:11px; color:#555;">Contato: autonomosslm@gmail.com |
+                                Tel: (81) 99809-0037</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <div
+                                style="background:#1a365d; color:white; padding: 4px 8px; font-weight:bold; border-radius:4px; font-size: 13px;">
+                                ORDEM DE SERVIÇO Nº <span id="p_numero"></span>
+                            </div>
+                            <p style="margin: 4px 0 0 0; font-size:11px;">Data: <span id="p_data"></span></p>
+                        </div>
+                    </div>
+
+                    <div class="print-section">
+                        <h3>Dados do Cliente</h3>
+                        <div class="print-grid">
+                            <div><strong>Cliente:</strong> <span id="p_cliente"></span></div>
+                            <div><strong>CPF/CNPJ:</strong> <span id="p_documento"></span></div>
+                            <div><strong>Telefone:</strong> <span id="p_telefone"></span></div>
+                            <div><strong>E-mail:</strong> <span id="p_email"></span></div>
+                        </div>
+                    </div>
+
+                    <div class="print-section">
+                        <h3>Identificação do Veículo</h3>
+                        <div class="print-grid">
+                            <div><strong>Veículo:</strong> <span id="p_objeto"></span></div>
+                            <div><strong>Marca/Modelo/Cor:</strong> <span id="p_modelo"></span></div>
+                            <div><strong>Nº Série/Placa:</strong> <span id="p_serial"></span></div>
+                            <div><strong>Status:</strong> <span id="p_status" style="font-weight: bold;"></span></div>
+                        </div>
+                    </div>
+
+                    <div class="print-section">
+                        <h3>Defeito Relatado</h3>
+                        <div class="print-block" id="p_defeito"></div>
+                    </div>
+
+                    <div class="print-section">
+                        <h3>Laudo Técnico / Solução</h3>
+                        <div class="print-block" id="p_laudo"></div>
+                    </div>
+
+                    <div class="print-section" id="print-section-itens">
+                        <h3>Serviço a ser Realizado</h3>
+                        <div class="print-block">
+                            <ul id="p_lista"></ul>
+                        </div>
+                    </div>
+
+                    <div class="signatures">
+                        <div class="sig-line">Assinatura do Cliente</div>
+                        <div class="sig-line">Responsável Técnico</div>
+                    </div>
+                </div>
+
+            </div>-->
+
+            <!-- TERMO DE GARANTIA -->
+            <div id="print-termo-garantia" style="display: none;">
+                <div class="print-page-warranty"
+                    style="page-break-before: always; margin-top: 40px; padding-top: 20px; border-top: 2px dashed #333;">
+                    <div class="print-header">
+                        <div>
+                            <h1>ARS Oficina Mecânica</h1>
+                            <h2>TERMO DE GARANTIA DE SERVIÇO</h2>
+                        </div>
+                        <div style="text-align: right;">
+                            <div class="nota">REF. NOTA Nº <span id="p_garantia_numero"></span>
+                            </div>
+                            <p style="margin: 4px 0 0 0; font-size:11px;">Emissão: <span id="p_garantia_data"></span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="print-section">
+                        <h3>Dados de Identificação Clonados</h3>
+                        <div class="print-grid"
+                            style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 13px;">
+                            <div><strong>Cliente:</strong> <span id="p_garantia_cliente"></span></div>
+                            <div><strong>Telefone:</strong> <span id="p_garantia_telefone"></span></div>
+                            <div><strong>Veículo:</strong> <span id="p_garantia_veiculo"></span></div>
+                            <div><strong>Placa:</strong> <span id="p_garantia_placa"></span></div>
+                            <div><strong>Quilometragem:</strong> <span id="p_garantia_km"></span> KM</div>
+                        </div>
+                    </div>
+
+                    <div class="print-section">
+                        <h3>Cláusulas e Condições da Garantia</h3>
+                        <div class="print-block"
+                            style="font-size: 12px; text-align: justify; line-height: 1.6; color: #333;">
+                            <p>1. A <strong>ARS Oficina Mecânica</strong> assegura ao cliente acima identificado
+                                garantia legal de <strong>90 (noventa) dias</strong> sobre os serviços executados
+                                nesta Ordem de Serviço, contados a partir da data de emissão deste termo.</p>
+                            <p>2. A garantia abrange exclusivamente defeitos decorrentes da mão de obra aplicada.</p>
+                            <p>3. Esta garantia perderá validade se o veículo apresentar sinais de mau uso,
+                                sobrecarga, acidentes, modificações mecânicas não autorizadas ou se sofrer intervenção técnica
+                                por profissionais de terceiros sem prévio consentimento desta empresa.</p>
+                        </div>
+                    </div>
+
+                    <div class="signatures" style="margin-top: 60px;">
+                        <div class="sig-line">Assinatura do Cliente</div>
+                        <div class="sig-line">Carimbo / Assinatura da Empresa</div>
+                    </div>
+                </div>
             </div>
 
         </div>
