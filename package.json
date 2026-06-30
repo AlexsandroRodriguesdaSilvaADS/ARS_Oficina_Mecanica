@@ -1,0 +1,20 @@
+{
+  "name": "ars_oficina_mecanica",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexsandroRodriguesdaSilvaADS/ARS_Oficina_Mecanica.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexsandroRodriguesdaSilvaADS/ARS_Oficina_Mecanica/issues"
+  },
+  "homepage": "https://github.com/AlexsandroRodriguesdaSilvaADS/ARS_Oficina_Mecanica#readme"
+}

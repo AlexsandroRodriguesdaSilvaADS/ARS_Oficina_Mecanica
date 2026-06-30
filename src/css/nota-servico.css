@@ -547,6 +547,7 @@ li {
         grid-template-columns: 1fr 1fr;
         gap: 10px;
         font-size: 13px;
+        text-transform: uppercase;
     }
 
     .print-section .print-block {
