@@ -4,6 +4,7 @@ html {
 }
 
 #login-screen {
+    background: url('../imagens/logo-p.png') center / cover;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,7 +13,7 @@ html {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #1a365d;
+    /*background-color: #1a365d;*/
     z-index: 9999;
 }
 
@@ -22,7 +23,7 @@ html {
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     width: 100%;
-    max-width: 360px;
+    max-width: 400px;
     text-align: center;
 }
 
@@ -30,6 +31,7 @@ html {
     margin-top: 0;
     color: #1a365d;
     margin-bottom: 20px;
+    text-transform: uppercase;
 }
 
 .login-group {

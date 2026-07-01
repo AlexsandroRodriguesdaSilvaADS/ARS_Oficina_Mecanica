@@ -18,15 +18,15 @@
     <link rel="stylesheet" href="./css/estilos.css" />
     <link rel="stylesheet" href="./css/responsivo.css" />
     <link rel="stylesheet" href="./css/ordem-servico.css" />
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 
 <body cz-shortcut-listen="true">
-    
+
     <div id="login-screen">
         <div class="login-box">
-            <h3>Emissão de Ordem de Serviço</h3>
+            <h3 style="font-size: 24px">Emissão de Ordem de Serviço</h3>
             <h3>Acesso Restrito</h3>
             <form onsubmit="autenticar(event)">
                 <div class="login-group">
@@ -125,7 +125,8 @@
 
                         <div class="form-group full-width">
                             <label for="f_laudo">Laudo Técnico / Previsão</label>
-                            <textarea id="f_laudo" placeholder="O que poderá ser feito para resolver o problema..."></textarea>
+                            <textarea id="f_laudo"
+                                placeholder="O que poderá ser feito para resolver o problema..."></textarea>
                         </div>
 
                         <div class="form-group flex-wrap">
@@ -233,24 +234,65 @@
 
             <!-- ÁREA PARA IMPRESSÃO -->
             <div id="print-area" class="print-area" style="display: none;">
-                <div class="print-header">
+
+                <div class="print-header"
+                style="display: flex;
+                justify-content: space-between;
+                border-bottom: 2px solid #000;
+                padding-bottom: 8px;
+                margin-bottom: 12px;">
+
                     <div>
-                        <h1 style="margin:0; color:#1a365d; font-size: 22px;">ARS Oficina Mecânica</h1>
-                        <p style="margin:3px 0 0 0; font-size:11px; color:#555;">Contato: autonomosslm@gmail.com | Tel:
-                            (81) 99809-0037</p>
+                        <h1
+                        style="margin:0;
+                        color:#1a365d;
+                        font-size: 22px;">
+                        ARS Oficina Mecânica</h1>
+
+                        <p
+                        style="margin:3px 0 0 0;
+                        font-size:11px;
+                        color:#555;">
+                        Contato: autonomosslm@gmail.com | Tel: (81) 99809-0037</p>
                     </div>
-                    <div style="text-align: right;">
+
+                    <div
+                    style="text-align: right;">
                         <div
-                            style="background:#1a365d; color:white; padding: 4px 8px; font-weight:bold; border-radius:4px; font-size: 13px;">
-                            ORDEM DE SERVIÇO Nº <span id="p_numero"></span>
+                        style="background:#1a365d;
+                        color:white;
+                        padding: 4px 8px;
+                        font-weight:bold;
+                        border-radius:4px;
+                        font-size: 13px;">ORDEM DE SERVIÇO Nº <span id="p_numero"></span>
                         </div>
-                        <p style="margin: 4px 0 0 0; font-size:11px;">Data: <span id="p_data"></span></p>
+                        <p
+                        style="margin: 4px 0 0 0;
+                        font-size:11px;">Data: <span id="p_data"></span></p>
                     </div>
                 </div>
 
-                <div class="print-section">
-                    <h3>Dados do Cliente</h3>
-                    <div class="print-grid">
+                <div class="print-section"
+                style="margin-bottom: 12px;
+                page-break-inside: avoid;">
+
+                    <h3
+                    style="background: #f0f4f8 !important;
+                    /* Força o fundo cinza claro */
+                    -webkit-print-color-adjust: exact;
+                    /* Força navegadores baseados em Chrome a exibir o fundo */
+                    print-color-adjust: exact;
+                    padding: 4px 6px;
+                    margin: 0 0 6px 0;
+                    font-size: 12px;
+                    text-transform: uppercase;
+                    border-left: 4px solid #1a365d;">Dados do Cliente</h3>
+
+                    <div class="print-grid"
+                    style="display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 6px;
+                    font-size: 12px;">
                         <div><strong>Cliente:</strong> <span id="p_cliente"></span></div>
                         <div><strong>CPF/CNPJ:</strong> <span id="p_documento"></span></div>
                         <div><strong>Telefone:</strong> <span id="p_telefone"></span></div>
@@ -258,9 +300,27 @@
                     </div>
                 </div>
 
-                <div class="print-section">
-                    <h3>Identificação do Veículo</h3>
-                    <div class="print-grid">
+                <div class="print-section"
+                style="margin-bottom: 12px;
+                page-break-inside: avoid;">
+
+                    <h3
+                    style="background: #f0f4f8 !important;
+                    /* Força o fundo cinza claro */
+                    -webkit-print-color-adjust: exact;
+                    /* Força navegadores baseados em Chrome a exibir o fundo */
+                    print-color-adjust: exact;
+                    padding: 4px 6px;
+                    margin: 0 0 6px 0;
+                    font-size: 12px;
+                    text-transform: uppercase;
+                    border-left: 4px solid #1a365d;">Identificação do Veículo</h3>
+
+                    <div class="print-grid" 
+                    style="display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 6px;
+                    font-size: 12px;">
                         <div><strong>Veículo:</strong> <span id="p_objeto"></span></div>
                         <div><strong>Marca/Modelo/Cor:</strong> <span id="p_modelo"></span></div>
                         <div><strong>Nº Série/Placa:</strong> <span id="p_serial"></span></div>
@@ -268,20 +328,83 @@
                     </div>
                 </div>
 
-                <div class="print-section">
-                    <h3>Defeito Relatado</h3>
-                    <div class="print-block" id="p_defeito"></div>
+                <div class="print-section"
+                style="margin-bottom: 12px;
+                page-break-inside: avoid;">
+
+                    <h3
+                    style="background: #f0f4f8 !important;
+                    /* Força o fundo cinza claro */
+                    -webkit-print-color-adjust: exact;
+                    /* Força navegadores baseados em Chrome a exibir o fundo */
+                    print-color-adjust: exact;
+                    padding: 4px 6px;
+                    margin: 0 0 6px 0;
+                    font-size: 12px;
+                    text-transform: uppercase;
+                    border-left: 4px solid #1a365d;">Defeito Relatado</h3>
+
+                    <div class="print-block" id="p_defeito"
+                    style="border: 1px solid #ddd;
+                    padding: 6px 10px;
+                    font-size: 12px;
+                    min-height: 40px;
+                    background: #fafafa !important;
+                    -webkit-print-color-adjust: exact;
+                    print-color-adjust: exact;
+                    white-space: pre-wrap;
+                    text-transform: uppercase;">
+                    </div>
                 </div>
 
-                <div class="print-section">
-                    <h3>Laudo Técnico / Solução</h3>
-                    <div class="print-block" id="p_laudo"></div>
+                <div class="print-section"
+                style="margin-bottom: 12px;
+                page-break-inside: avoid;">
+
+                    <h3
+                    style="background: #f0f4f8 !important;
+                    /* Força o fundo cinza claro */
+                    -webkit-print-color-adjust: exact;
+                    /* Força navegadores baseados em Chrome a exibir o fundo */
+                    print-color-adjust: exact;
+                    padding: 4px 6px;
+                    margin: 0 0 6px 0;
+                    font-size: 12px;
+                    text-transform: uppercase;
+                    border-left: 4px solid #1a365d;">Laudo Técnico / Solução</h3>
+
+                    <div class="print-block" id="p_laudo"
+                    style="border: 1px solid #ddd;
+                    padding: 6px 10px;
+                    font-size: 12px;
+                    min-height: 40px;
+                    background: #fafafa !important;
+                    -webkit-print-color-adjust: exact;
+                    print-color-adjust: exact;
+                    white-space: pre-wrap;
+                    text-transform: uppercase;">
+                    </div>
                 </div>
 
-                <div class="print-section" id="print-section-itens">
+                <div class="print-section" id="print-section-itens"
+                style="margin-bottom: 12px;
+                page-break-inside: avoid;">
+
                     <h3>Serviço a ser Realizado</h3>
-                    <div class="print-block">
+
+                    <div class="print-block"
+                    style="border: 1px solid #ddd;
+                    padding: 6px 10px;
+                    font-size: 12px;
+                    min-height: 40px;
+                    background: #fafafa !important;
+                    -webkit-print-color-adjust: exact;
+                    print-color-adjust: exact;
+                    white-space: pre-wrap;
+                    text-transform: uppercase;">
+
                         <ul id="p_lista"></ul>
+
                     </div>
                 </div>
 
@@ -289,13 +412,29 @@
                     <span id="v-total">VALOR TOTAL: <span id="p_valor">R$ 0,00</span></span>
                 </div>-->
 
-                <div class="signatures">
-                    <div class="sig-line">Assinatura do Cliente</div>
-                    <div class="sig-line">Responsável Técnico</div>
+                <div class="signatures"
+                style="display: flex;
+                justify-content: space-between;
+                margin-top: 50px;
+                page-break-inside: avoid;">
+
+                    <div class="sig-line"
+                    style="border-top: 1px solid #000;
+                    width: 42%;
+                    text-align: center;
+                    padding-top: 4px;
+                    font-size: 11px;">Assinatura do Cliente</div>
+
+                    <div class="sig-line"
+                    style="border-top: 1px solid #000;
+                    width: 42%;
+                    text-align: center;
+                    padding-top: 4px;
+                    font-size: 11px;">Responsável Técnico</div>
                 </div>
 
             </div>
-        
+
         </div>
     </div>
 

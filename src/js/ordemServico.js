@@ -140,22 +140,22 @@ function gerarOS(event) {
 
     // Configurações do html2pdf para gerar um arquivo otimizado
     const opt = {
-        margin:       10,
-        filename:     `OS_${dadosOS.numero}_${dadosOS.cliente.replace(/\s+/g, '_')}.pdf`,
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        margin: 10,
+        filename: 'documento.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, scrollY: 0 }, // O scrollY: 0 evita cortes se a página tiver rolagem
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
     };
 
     // Temporariamente exibe a área oculta para que o html2pdf consiga lê-la perfeitamente
     printArea.style.display = 'block';
 
     // 1. Executa a conversão para PDF e extrai o Blob binário
-    html2pdf().set(opt).from(printArea).toPdf().output('blob').then(function(pdfBlob) {
-        
+    html2pdf().set(opt).from(printArea).toPdf().output('blob').then(function (pdfBlob) {
+
         // Nome limpo para o arquivo no Drive
         const nomeArquivo = `OS_${dadosOS.numero}_${dadosOS.cliente}.pdf`;
-        
+
         // Chamada assíncrona em segundo plano para enviar o documento para a nuvem
         enviarParaGoogleDrive(pdfBlob, nomeArquivo);
 
@@ -169,23 +169,27 @@ function gerarOS(event) {
         incrementarNumeroOS();
         limparCamposFormulario();
 
-    }).catch(err => {
-        console.error("Erro no fluxo do PDF:", err);
-        printArea.style.display = 'none';
-        alert("Ocorreu uma falha ao processar o PDF.");
-    });
+    })
+        .catch(err => {
+            console.error("Erro no fluxo do PDF:", err);
+            printArea.style.display = 'none';
+            alert("Ocorreu uma falha ao processar o PDF.");
+        });
 }
 
 // ==========================================
 // 5. SUBMISSÃO DO ARQUIVO BINÁRIO AO GOOGLE DRIVE
 // ==========================================
 function enviarParaGoogleDrive(blob, nomeArquivo) {
+
+    window.open(URL.createObjectURL(blob), '_blank');
+
     // Sua URL do Google Apps Script (Web App)
-    const urlScript = 'https://script.google.com/macros/s/AKfycbyocGP5FboSM7waZ-P5VIdndGyOIHDaZXLwzeE_p9shCxDRmWB5XT-ABVuMedWqVqDy/exec';
+    const urlScript = 'https://script.google.com/macros/s/AKfycbyu6deGS1x5_BOosBEEeyzLHk6HO2Y_5tzpABUtcmdZFN6LuRrH7_6_hcKV6-l52OW6/exec';
 
     const reader = new FileReader();
-    reader.readAsDataURL(blob); 
-    reader.onloadend = function() {
+    reader.readAsDataURL(blob);
+    reader.onloadend = function () {
         // Extrai apenas a string base64 pura (removendo o cabeçalho data:application/pdf;base64,)
         const base64data = reader.result.split(',')[1];
 
@@ -205,15 +209,15 @@ function enviarParaGoogleDrive(blob, nomeArquivo) {
             },
             body: JSON.stringify(payload)
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                console.log('Documento gravado com sucesso no Google Drive! ID do arquivo: ' + data.fileId);
-            } else {
-                console.error('Falha interna no Drive:', data.message);
-            }
-        })
-        .catch(error => console.error('Erro de rede na API da Nuvem:', error));
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    console.log('Documento gravado com sucesso no Google Drive! ID do arquivo: ' + data.fileId);
+                } else {
+                    console.error('Falha interna no Drive:', data.message);
+                }
+            })
+            .catch(error => console.error('Erro de rede na API da Nuvem:', error));
     };
 }
 

@@ -3,6 +3,25 @@
 // ==========================================
 function autenticar(event) {
     event.preventDefault();
+    const user = document.getElementById('username').value.trim();
+    const pass = document.getElementById('password').value.trim();
+    const errorMsg = document.getElementById('login-error');
+
+    if (user === "admin" && pass === "1234") {
+        errorMsg.style.display = 'none';
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+
+        inicializarNumeroOS();
+        event.target.reset();
+    } else {
+        errorMsg.style.display = 'block';
+    }
+}
+
+
+/*function autenticar(event) {
+    event.preventDefault();
     
     const usuario = document.getElementById('username').value;
     const senha = document.getElementById('password').value;
@@ -15,7 +34,7 @@ function autenticar(event) {
     } else {
         if (erroLogin) erroLogin.style.display = 'block';
     }
-}
+}*/
 
 function logout() {
     document.getElementById('main-content').style.display = 'none';
