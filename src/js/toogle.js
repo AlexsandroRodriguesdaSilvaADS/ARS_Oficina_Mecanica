@@ -13,6 +13,10 @@ function toggleMenu3() {
     document.getElementById("navbar").classList.toggle("ativo");
 }
 
+function toggleMenu4() {
+    document.getElementById("frame").classList.toggle("ativo");
+}
+
 
 let show = true;
 

@@ -227,12 +227,13 @@
 
                 <div class="btn-group">
                     <button type="submit" class="btn-submit">Gerar OS para Impressão</button>
+                    <button type="button" class="btn-drive" onclick="toggleMenu4()">Drive</button>
                     <button type="button" class="btn-clear" id="btn-limpar" onclick="limparFormulario()">Limpar</button>
                 </div>
             </form>
-
+            
             <div class="frame">
-                <iframe src="https://drive.google.com/embeddedfolderview?id=1_Cnp9gto4uzGO5moc-CLgs3Xi2CkXu0r#list"
+                <iframe id="frame" src="https://drive.google.com/embeddedfolderview?id=1_Cnp9gto4uzGO5moc-CLgs3Xi2CkXu0r#list"
                     frameborder="0">
                 </iframe>
             </div>
@@ -422,6 +423,7 @@
     </div>
 
     <script src="./js/ordemServico.js"></script>
+    <script src="./js/toogle.js"></script>
 
 </body>
 
