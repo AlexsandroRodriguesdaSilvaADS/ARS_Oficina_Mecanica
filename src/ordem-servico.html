@@ -231,53 +231,51 @@
                 </div>
             </form>
 
+            <div class="frame">
+                <iframe src="https://drive.google.com/embeddedfolderview?id=1_Cnp9gto4uzGO5moc-CLgs3Xi2CkXu0r#list"
+                    frameborder="0">
+                </iframe>
+            </div>
+
 
             <!-- ÁREA PARA IMPRESSÃO -->
             <div id="print-area" class="print-area" style="display: none;">
 
-                <div class="print-header"
-                style="display: flex;
+                <div class="print-header" style="display: flex;
                 justify-content: space-between;
                 border-bottom: 2px solid #000;
                 padding-bottom: 8px;
                 margin-bottom: 12px;">
 
                     <div>
-                        <h1
-                        style="margin:0;
+                        <h1 style="margin:0;
                         color:#1a365d;
                         font-size: 22px;">
-                        ARS Oficina Mecânica</h1>
+                            ARS Oficina Mecânica</h1>
 
-                        <p
-                        style="margin:3px 0 0 0;
+                        <p style="margin:3px 0 0 0;
                         font-size:11px;
                         color:#555;">
-                        Contato: autonomosslm@gmail.com | Tel: (81) 99809-0037</p>
+                            Contato: autonomosslm@gmail.com | Tel: (81) 99809-0037</p>
                     </div>
 
-                    <div
-                    style="text-align: right;">
-                        <div
-                        style="background:#1a365d;
+                    <div style="text-align: right;">
+                        <div style="background:#1a365d;
                         color:white;
                         padding: 4px 8px;
                         font-weight:bold;
                         border-radius:4px;
                         font-size: 13px;">ORDEM DE SERVIÇO Nº <span id="p_numero"></span>
                         </div>
-                        <p
-                        style="margin: 4px 0 0 0;
+                        <p style="margin: 4px 0 0 0;
                         font-size:11px;">Data: <span id="p_data"></span></p>
                     </div>
                 </div>
 
-                <div class="print-section"
-                style="margin-bottom: 12px;
+                <div class="print-section" style="margin-bottom: 12px;
                 page-break-inside: avoid;">
 
-                    <h3
-                    style="background: #f0f4f8 !important;
+                    <h3 style="background: #f0f4f8 !important;
                     /* Força o fundo cinza claro */
                     -webkit-print-color-adjust: exact;
                     /* Força navegadores baseados em Chrome a exibir o fundo */
@@ -288,8 +286,7 @@
                     text-transform: uppercase;
                     border-left: 4px solid #1a365d;">Dados do Cliente</h3>
 
-                    <div class="print-grid"
-                    style="display: grid;
+                    <div class="print-grid" style="display: grid;
                     grid-template-columns: repeat(2, 1fr);
                     gap: 6px;
                     font-size: 12px;">
@@ -300,12 +297,10 @@
                     </div>
                 </div>
 
-                <div class="print-section"
-                style="margin-bottom: 12px;
+                <div class="print-section" style="margin-bottom: 12px;
                 page-break-inside: avoid;">
 
-                    <h3
-                    style="background: #f0f4f8 !important;
+                    <h3 style="background: #f0f4f8 !important;
                     /* Força o fundo cinza claro */
                     -webkit-print-color-adjust: exact;
                     /* Força navegadores baseados em Chrome a exibir o fundo */
@@ -316,8 +311,7 @@
                     text-transform: uppercase;
                     border-left: 4px solid #1a365d;">Identificação do Veículo</h3>
 
-                    <div class="print-grid" 
-                    style="display: grid;
+                    <div class="print-grid" style="display: grid;
                     grid-template-columns: repeat(2, 1fr);
                     gap: 6px;
                     font-size: 12px;">
@@ -328,12 +322,10 @@
                     </div>
                 </div>
 
-                <div class="print-section"
-                style="margin-bottom: 12px;
+                <div class="print-section" style="margin-bottom: 12px;
                 page-break-inside: avoid;">
 
-                    <h3
-                    style="background: #f0f4f8 !important;
+                    <h3 style="background: #f0f4f8 !important;
                     /* Força o fundo cinza claro */
                     -webkit-print-color-adjust: exact;
                     /* Força navegadores baseados em Chrome a exibir o fundo */
@@ -344,8 +336,7 @@
                     text-transform: uppercase;
                     border-left: 4px solid #1a365d;">Defeito Relatado</h3>
 
-                    <div class="print-block" id="p_defeito"
-                    style="border: 1px solid #ddd;
+                    <div class="print-block" id="p_defeito" style="border: 1px solid #ddd;
                     padding: 6px 10px;
                     font-size: 12px;
                     min-height: 40px;
@@ -357,12 +348,10 @@
                     </div>
                 </div>
 
-                <div class="print-section"
-                style="margin-bottom: 12px;
+                <div class="print-section" style="margin-bottom: 12px;
                 page-break-inside: avoid;">
 
-                    <h3
-                    style="background: #f0f4f8 !important;
+                    <h3 style="background: #f0f4f8 !important;
                     /* Força o fundo cinza claro */
                     -webkit-print-color-adjust: exact;
                     /* Força navegadores baseados em Chrome a exibir o fundo */
@@ -373,8 +362,7 @@
                     text-transform: uppercase;
                     border-left: 4px solid #1a365d;">Laudo Técnico / Solução</h3>
 
-                    <div class="print-block" id="p_laudo"
-                    style="border: 1px solid #ddd;
+                    <div class="print-block" id="p_laudo" style="border: 1px solid #ddd;
                     padding: 6px 10px;
                     font-size: 12px;
                     min-height: 40px;
@@ -386,14 +374,12 @@
                     </div>
                 </div>
 
-                <div class="print-section" id="print-section-itens"
-                style="margin-bottom: 12px;
+                <div class="print-section" id="print-section-itens" style="margin-bottom: 12px;
                 page-break-inside: avoid;">
 
                     <h3>Serviço a ser Realizado</h3>
 
-                    <div class="print-block"
-                    style="border: 1px solid #ddd;
+                    <div class="print-block" style="border: 1px solid #ddd;
                     padding: 6px 10px;
                     font-size: 12px;
                     min-height: 40px;
@@ -412,21 +398,18 @@
                     <span id="v-total">VALOR TOTAL: <span id="p_valor">R$ 0,00</span></span>
                 </div>-->
 
-                <div class="signatures"
-                style="display: flex;
+                <div class="signatures" style="display: flex;
                 justify-content: space-between;
                 margin-top: 50px;
                 page-break-inside: avoid;">
 
-                    <div class="sig-line"
-                    style="border-top: 1px solid #000;
+                    <div class="sig-line" style="border-top: 1px solid #000;
                     width: 42%;
                     text-align: center;
                     padding-top: 4px;
                     font-size: 11px;">Assinatura do Cliente</div>
 
-                    <div class="sig-line"
-                    style="border-top: 1px solid #000;
+                    <div class="sig-line" style="border-top: 1px solid #000;
                     width: 42%;
                     text-align: center;
                     padding-top: 4px;

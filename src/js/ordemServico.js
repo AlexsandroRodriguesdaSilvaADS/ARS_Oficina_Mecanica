@@ -185,7 +185,7 @@ function enviarParaGoogleDrive(blob, nomeArquivo) {
     window.open(URL.createObjectURL(blob), '_blank');
 
     // Sua URL do Google Apps Script (Web App)
-    const urlScript = 'https://script.google.com/macros/s/AKfycbyu6deGS1x5_BOosBEEeyzLHk6HO2Y_5tzpABUtcmdZFN6LuRrH7_6_hcKV6-l52OW6/exec';
+    const urlScript = 'https://script.google.com/macros/s/AKfycbwrYuHxa4aY1zgFAaDmZrALFkjld2D7gT378bOlezmS6faB8wqvwN0ZjC84XGR_-bU9/exec';
 
     const reader = new FileReader();
     reader.readAsDataURL(blob);

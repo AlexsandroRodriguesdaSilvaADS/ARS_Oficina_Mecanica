@@ -44,10 +44,10 @@ function logout() {
 document.addEventListener("DOMContentLoaded", () => {
     const mainContent = document.getElementById('main-content');
     const loginScreen = document.getElementById('login-screen');
-    
+
     if (mainContent) mainContent.style.display = 'none';
     if (loginScreen) loginScreen.style.display = 'flex';
-    
+
     const fData = document.getElementById('f_nota_data');
     if (fData) {
         const hoje = new Date().toISOString().split('T')[0];
@@ -76,10 +76,10 @@ const formaPagamentoSelect = document.getElementById('formaPagamento');
 const descontoInput = document.getElementById('desconto');
 
 if (formaPagamentoSelect && descontoInput) {
-    formaPagamentoSelect.addEventListener('change', function() {
+    formaPagamentoSelect.addEventListener('change', function () {
         if (this.value === 'pix' || this.value === 'dinheiro') {
             descontoInput.disabled = false;
-            descontoInput.value = 5; 
+            descontoInput.value = 5;
         } else {
             descontoInput.disabled = true;
             descontoInput.value = '';
@@ -100,13 +100,13 @@ if (btnAdicionar) {
         const servicoSelect = document.getElementById('servico');
         const quantidadeInput = document.getElementById('quantidade');
         const valorInput = document.getElementById('valor');
-        
+
         if (!servicoSelect || !quantidadeInput || !valorInput) return;
 
         const servicoNome = servicoSelect.value;
         const qtd = parseInt(quantidadeInput.value);
         const valorUnitarioOriginal = parseFloat(valorInput.value);
-        
+
         if (!servicoNome) {
             alert("Por favor, selecione um serviço.");
             return;
@@ -124,7 +124,7 @@ if (btnAdicionar) {
         const itemExistente = servicosAdicionados.find(item => item.nome === servicoNome);
         if (itemExistente) {
             alert(`O serviço "${servicoNome}" já foi adicionado à lista. Remova-o antes se desejar alterar os valores.`);
-            return; 
+            return;
         }
 
         let descontoPorcentagem = 0;
@@ -167,13 +167,13 @@ function removerServico(id) {
 
 function atualizarInterfaceServicos() {
     if (!listaServicosUl || !totalGeralInput) return;
-    
+
     listaServicosUl.innerHTML = '';
     let somaTotal = 0;
 
     servicosAdicionados.forEach(item => {
         somaTotal += item.total;
-        
+
         const li = document.createElement('li');
         li.style.display = 'flex';
         li.style.justifyContent = 'space-between';
@@ -181,14 +181,14 @@ function atualizarInterfaceServicos() {
         li.style.marginBottom = '8px';
         li.style.padding = '6px';
         li.style.borderBottom = '1px dashed #ddd';
-        
+
         let detalheValor = `Un: R$ ${item.valorComDesconto.toFixed(2)}`;
         if (item.desconto > 0) {
             detalheValor = `Un: R$ ${item.valorComDesconto.toFixed(2)} (com ${item.desconto}% desc. de R$ ${item.valorOriginal.toFixed(2)})`;
         }
 
         const infoTexto = `${item.nome} (x${item.qtd}) - ${detalheValor} | Total: R$ ${item.total.toFixed(2)}`;
-        
+
         li.innerHTML = `
             <span>${infoTexto}</span>
             <button type="button" class="btn-remover" onclick="removerServico(${item.id})" style="background:#dc3545; color:white; border:none; padding: 4px 8px; cursor:pointer; border-radius:3px;">
@@ -238,7 +238,131 @@ function dispararImpressaoDupla() {
     if (document.getElementById('p_objeto')) document.getElementById('p_objeto').innerText = 'Automóvel';
     if (document.getElementById('p_modelo')) document.getElementById('p_modelo').innerText = modVeiculo;
     if (document.getElementById('p_serial')) document.getElementById('p_serial').innerText = placaVeiculo.toUpperCase();
+
+    if (document.getElementById('p_status') && formaPagamentoSelect) {
+        document.getElementById('p_status').innerText = 'Concluído / Pago via ' + formaPagamentoSelect.options[formaPagamentoSelect.selectedIndex].text;
+    }
+
+    if (document.getElementById('p_defeito')) document.getElementById('p_defeito').innerText = 'Manutenção / Reparo preventivo ou corretivo veicular.';
+    if (document.getElementById('p_laudo')) document.getElementById('p_laudo').innerText = 'Substituição e ajustes dos componentes especificados com testes dinâmicos de rodagem concluídos.';
+
+    // Lista dinâmica de serviços
+    const pLista = document.getElementById('p_lista');
+    if (pLista) {
+        pLista.innerHTML = '';
+        servicosAdicionados.forEach(item => {
+            const liItem = document.createElement('li');
+            liItem.style.listStyle = 'none';
+            liItem.style.margin = '5px 0';
+            liItem.style.fontSize = '13px';
+            liItem.innerText = `- ${item.nome} | Qtd: ${item.qtd} | Vlr. Unit: R$ ${item.valorComDesconto.toFixed(2)} ${item.desconto > 0 ? `(Desc. aplicado: ${item.desconto}%)` : ''} -> Subtotal: R$ ${item.total.toFixed(2)}`;
+            pLista.appendChild(liItem);
+        });
+
+        if (totalGeralInput) {
+            const totalLi = document.createElement('li');
+            totalLi.style.listStyle = 'none';
+            totalLi.style.marginTop = '15px';
+            totalLi.style.fontWeight = 'bold';
+            totalLi.style.fontSize = '16px';
+            totalLi.style.textAlign = 'right';
+            totalLi.innerText = `VALOR TOTAL DA NOTA: ${totalGeralInput.value}`;
+            pLista.appendChild(totalLi);
+        }
+    }
+
+    // =========================================================
+    // BLOCO 2: CLONA PARA O TERMO DE GARANTIA (Protegido)
+    // =========================================================
+    if (document.getElementById('p_garantia_numero')) document.getElementById('p_garantia_numero').innerText = numeroNotaStr;
+    if (document.getElementById('p_garantia_data')) document.getElementById('p_garantia_data').innerText = dataNotaStr;
+    if (document.getElementById('p_garantia_cliente')) document.getElementById('p_garantia_cliente').innerText = nomeCliente;
+    if (document.getElementById('p_garantia_telefone')) document.getElementById('p_garantia_telefone').innerText = telCliente;
+    if (document.getElementById('p_garantia_veiculo')) document.getElementById('p_garantia_veiculo').innerText = modVeiculo;
+    if (document.getElementById('p_garantia_placa')) document.getElementById('p_garantia_placa').innerText = placaVeiculo.toUpperCase();
+    if (document.getElementById('p_garantia_km')) document.getElementById('p_garantia_km').innerText = kmVeiculo;
+
+    // Salva o número atualizado sequencial no LocalStorage
+    const numeroAtualOriginal = numeroNotaStr.replace('#', '');
+    localStorage.setItem('ultimo_numero_nota', numeroAtualOriginal);
+
+    // =========================================================
+    // INCREMENTADO: INTEGRAÇÃO COM HTML2PDF E GOOGLE DRIVE
+    // =========================================================
     
+    // Alvo que contém a folha de impressão técnica (ajuste o ID 'print-area' para o ID correto do seu container HTML se necessário)
+    const printArea = document.getElementById('print-area') || document.body; 
+
+    const opt = {
+        margin: 10,
+        filename: `Nota_${numeroAtualOriginal}_${nomeCliente.replace(/\s+/g, '_')}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+
+    // Gera o blob em segundo plano e envia para o drive
+    html2pdf().set(opt).from(printArea).toPdf().output('blob').then(function (pdfBlob) {
+        const nomeArquivo = `Nota_${numeroAtualOriginal}_${nomeCliente.replace(/\s+/g, '_')}.pdf`;
+        
+        // Dispara o upload em segundo plano para o Google Drive
+        enviarParaGoogleDrive(pdfBlob, nomeArquivo);
+
+        // Dispara a janela de impressão física nativa do navegador
+        window.print();
+
+        // Gera o próximo número para a tela após a conclusão
+        definirProximoNumeroNota();
+    }).catch(err => {
+        console.error("Erro ao gerar o PDF para salvar no Drive:", err);
+        // Fallback: Se o PDF falhar, ainda tenta executar a impressão padrão da tela
+        window.print();
+        definirProximoNumeroNota();
+    });
+}
+
+
+
+
+/*
+// ==========================================
+// 4. IMPRESSÃO E ATUALIZAÇÃO DA ÁREA DE IMPRESSÃO
+// ==========================================
+function dispararImpressaoDupla() {
+    // Validação inicial
+    const nomeCliente = document.getElementById('f_cliente_nome')?.value;
+    const telCliente = document.getElementById('f_cliente_tel')?.value;
+    const modVeiculo = document.getElementById('f_veiculo_mod')?.value;
+    const placaVeiculo = document.getElementById('f_veiculo_placa')?.value;
+    const kmVeiculo = document.getElementById('f_kilometragem')?.value;
+
+    if (!nomeCliente || !telCliente || !modVeiculo || !placaVeiculo || !kmVeiculo) {
+        alert("Por favor, preencha todos os campos obrigatórios (*) antes de imprimir.");
+        return;
+    }
+
+    if (servicosAdicionados.length === 0) {
+        alert("Adicione pelo menos um serviço à lista antes de imprimir.");
+        return;
+    }
+
+    const numeroNotaStr = document.getElementById('f_nota_num')?.value || "#1001";
+    const dataNotaStr = document.getElementById('f_nota_data')?.value ? document.getElementById('f_nota_data').value.split('-').reverse().join('/') : "";
+
+    // =========================================================
+    // BLOCO 1: ATUALIZA A NOTA DE SERVIÇO PRINCIPAL (Protegido)
+    // =========================================================
+    if (document.getElementById('p_numero')) document.getElementById('p_numero').innerText = numeroNotaStr;
+    if (document.getElementById('p_data')) document.getElementById('p_data').innerText = dataNotaStr;
+    if (document.getElementById('p_cliente')) document.getElementById('p_cliente').innerText = nomeCliente;
+    if (document.getElementById('p_documento')) document.getElementById('p_documento').innerText = document.getElementById('f_cliente_id')?.value || 'Não Informado';
+    if (document.getElementById('p_telefone')) document.getElementById('p_telefone').innerText = telCliente;
+    if (document.getElementById('p_email')) document.getElementById('p_email').innerText = 'autonomosslm@gmail.com';
+
+    if (document.getElementById('p_objeto')) document.getElementById('p_objeto').innerText = 'Automóvel';
+    if (document.getElementById('p_modelo')) document.getElementById('p_modelo').innerText = modVeiculo;
+    if (document.getElementById('p_serial')) document.getElementById('p_serial').innerText = placaVeiculo.toUpperCase();
+
     if (document.getElementById('p_status') && formaPagamentoSelect) {
         document.getElementById('p_status').innerText = 'Concluído / Pago via ' + formaPagamentoSelect.options[formaPagamentoSelect.selectedIndex].text;
     }
@@ -292,9 +416,54 @@ function dispararImpressaoDupla() {
     // Gera o próximo número para a tela
     definirProximoNumeroNota();
 }
+*/
 
 // ==========================================
-// 5. LIMPEZA TOTAL DO FORMULÁRIO
+// 5. SUBMISSÃO DO ARQUIVO BINÁRIO AO GOOGLE DRIVE
+// ==========================================
+function enviarParaGoogleDrive(blob, nomeArquivo) {
+
+    window.open(URL.createObjectURL(blob), '_blank');
+
+    // Sua URL do Google Apps Script (Web App)
+    const urlScript = 'https://script.google.com/macros/s/AKfycbxCqs54YOT2siJjVMbCbUrh253lfhjTgvJkLV8_WE5jYUIecoSc95McJrrQnjQgvzML/exec';
+
+    const reader = new FileReader();
+    reader.readAsDataURL(blob);
+    reader.onloadend = function () {
+        // Extrai apenas a string base64 pura (removendo o cabeçalho data:application/pdf;base64,)
+        const base64data = reader.result.split(',')[1];
+
+        // Monta o objeto que o Apps Script espera receber
+        const payload = {
+            arquivoBase64: base64data,
+            nome: nomeArquivo,
+            mimeType: 'application/pdf'
+        };
+
+        // Faz o envio usando POST e JSON estruturado
+        fetch(urlScript, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'text/plain;charset=utf-8', // Evita requisições preflight (OPTIONS) complexas
+            },
+            body: JSON.stringify(payload)
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    console.log('Documento gravado com sucesso no Google Drive! ID do arquivo: ' + data.fileId);
+                } else {
+                    console.error('Falha interna no Drive:', data.message);
+                }
+            })
+            .catch(error => console.error('Erro de rede na API da Nuvem:', error));
+    };
+}
+
+// ==========================================
+// 6. LIMPEZA TOTAL DO FORMULÁRIO
 // ==========================================
 const btnLimpar = document.getElementById('btnLimpar');
 if (btnLimpar) {
@@ -306,14 +475,14 @@ if (btnLimpar) {
             if (document.getElementById('f_veiculo_mod')) document.getElementById('f_veiculo_mod').value = '';
             if (document.getElementById('f_veiculo_placa')) document.getElementById('f_veiculo_placa').value = '';
             if (document.getElementById('f_kilometragem')) document.getElementById('f_kilometragem').value = '';
-            
+
             if (document.getElementById('servico')) document.getElementById('servico').value = '';
             if (document.getElementById('quantidade')) document.getElementById('quantidade').value = '1';
             if (document.getElementById('valor')) document.getElementById('valor').value = '';
             if (document.getElementById('desconto')) document.getElementById('desconto').value = '';
             if (document.getElementById('desconto')) document.getElementById('desconto').disabled = true;
             if (document.getElementById('formaPagamento')) document.getElementById('formaPagamento').value = 'cartao';
-            
+
             servicosAdicionados = [];
             atualizarInterfaceServicos();
             definirProximoNumeroNota();
