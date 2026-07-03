@@ -18,8 +18,6 @@
     <link rel="stylesheet" href="./css/estilos.css" />
     <link rel="stylesheet" href="./css/responsivo.css" />
     <link rel="stylesheet" href="./css/ordem-servico.css" />
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 
 <body cz-shortcut-listen="true">
@@ -130,94 +128,91 @@
 
                         <div class="form-group flex-wrap">
                             <div class="form-grupo">
-                                <label class="services" for="servico">Selecione Serviço</label>
-                                <select id="servico">
-                                    <option value="">Selecione um serviço...</option>
-                                    <option value="Amortecedor dianteiro" data-valor="">Amortecedor dianteiro
-                                    </option>
-                                    <option value="Amortecedor traseiro" data-valor="">Amortecedor traseiro</option>
-                                    <option value="Bandeja completa" data-valor="">Bandeja completa</option>
-                                    <option value="Bobinas" data-valor="">Bobinas</option>
-                                    <option value="Braços axial" data-valor="">Braços axial</option>
-                                    <option value="Bucha da bandeja" data-valor="">Bucha da bandeja</option>
-                                    <option value="Bucha da suspensão traseira" data-valor="">Bucha da suspensão
-                                        traseira</option>
-                                    <option value="Caixa de direção" data-valor="">Caixa de direção</option>
-                                    <option value="Cilindro mestre" data-valor="">Cilindro mestre</option>
-                                    <option value="Coifa da deslizante" data-valor="">Coifa da deslizante</option>
-                                    <option value="Coifa da homocinética" data-valor="">Coifa da homocinética</option>
-                                    <option value="Correia de acessórios e rolamento" data-valor="">Correia de
-                                        acessórios e rolamento
-                                    </option>
-                                    <option value="Coxin do amortecedor" data-valor="">Coxin do amortecedor</option>
-                                    <option value="Coxin do câmbio" data-valor="">Coxin do câmbio</option>
-                                    <option value="Coxin do motor LD" data-valor="">Coxin do motor LD</option>
-                                    <option value="Coxin do motor LE" data-valor="">Coxin do motor LE</option>
-                                    <option value="Cubo de roda dianteiro" data-valor="">Cubo de roda dianteiro</option>
-                                    <option value="Cubo de roda traseiro" data-valor="">Cubo de roda traseiro</option>
-                                    <option value="Disco de freios" data-valor="">Disco de freios</option>
-                                    <option value="Eletro ventilador" data-valor="">Eletro ventilador</option>
-                                    <option value="Filto do motor" data-valor="">Filto do motor</option>
-                                    <option value="Filtro do combustível" data-valor="">Filtro do combustível</option>
-                                    <option value="Filtro do condicionador de ar" data-valor="">Filtro do condicionador
-                                        de ar</option>
-                                    <option value="Fluído de freios" data-valor="">Fluído de freios</option>
-                                    <option value="Hidrovácuo (servo freio)" data-valor="">Hidrovácuo (servo freio)
-                                    </option>
-                                    <option value="Kit batedor e coifa" data-valor="">Kit batedor e coifa</option>
-                                    <option value="Kit de embreagem" data-valor="">Kit de embreagem</option>
-                                    <option value="Lâmpadas dianteiras" data-valor="">Lâmpadas dianteiras</option>
-                                    <option value="Lâmpadas traseiras" data-valor="">Lâmpadas traseiras</option>
-                                    <option value="Lonas de freios" data-valor="">Lonas de freios</option>
-                                    <option value="Óleo do câmbio" data-valor="">Óleo do câmbio</option>
-                                    <option value="Óleo do motor" data-valor="">Óleo do motor</option>
-                                    <option value="Pastilhas de freios" data-valor="">Pastilhas de freios</option>
-                                    <option value="Pinça de freios" data-valor="">Pinça de freios</option>
-                                    <option value="Pivô" data-valor="">Pivô</option>
-                                    <option value="Radiador" data-valor="">Radiador</option>
-                                    <option value="Rolamento de roda dianteiro" data-valor="">Rolamento de roda
-                                        dianteiro</option>
-                                    <option value="Rolamento de roda traseiro" data-valor="">Rolamento de roda traseiro
-                                    </option>
-                                    <option value="Semi-eixo" data-valor="">Semi-eixo</option>
-                                    <option value="Terminal de direção" data-valor="">Terminal de direção</option>
-                                    <option value="Válvula termostática" data-valor="">Válvula termostática</option>
-                                    <option value="Velas" data-valor="">Velas</option>
+                                <label class="services" for="item-selecionado">Selecione o Serviço ou Produto</label>
+                                <select id="item-selecionado">
+                                    <option value="">Selecione uma opção...</option>
+                                    <optgroup label="Serviços">
+                                        <option value="Amortecedor dianteiro" data-valor="">Amortecedor dianteiro
+                                        </option>
+                                        <option value="Amortecedor traseiro" data-valor="">Amortecedor traseiro</option>
+                                        <option value="Bandeja completa" data-valor="">Bandeja completa</option>
+                                        <option value="Bobinas" data-valor="">Bobinas</option>
+                                        <option value="Braços axial" data-valor="">Braços axial</option>
+                                        <option value="Bucha da bandeja" data-valor="">Bucha da bandeja</option>
+                                        <option value="Bucha da suspensão traseira" data-valor="">Bucha da suspensão
+                                            traseira</option>
+                                        <option value="Caixa de direção" data-valor="">Caixa de direção</option>
+                                        <option value="Cilindro mestre" data-valor="">Cilindro mestre</option>
+                                        <option value="Coifa da deslizante" data-valor="">Coifa da deslizante</option>
+                                        <option value="Coifa da homocinética" data-valor="">Coifa da homocinética
+                                        </option>
+                                        <option value="Correia de acessórios e rolamento" data-valor="">Correia de
+                                            acessórios e rolamento</option>
+                                        <option value="Coxin do amortecedor" data-valor="">Coxin do amortecedor</option>
+                                        <option value="Coxin do câmbio" data-valor="">Coxin do câmbio</option>
+                                        <option value="Coxin do motor LD" data-valor="">Coxin do motor LD</option>
+                                        <option value="Coxin do motor LE" data-valor="">Coxin do motor LE</option>
+                                        <option value="Cubo de roda dianteiro" data-valor="">Cubo de roda dianteiro
+                                        </option>
+                                        <option value="Cubo de roda traseiro" data-valor="">Cubo de roda traseiro
+                                        </option>
+                                        <option value="Disco de freios" data-valor="">Disco de freios</option>
+                                        <option value="Eletro ventilador" data-valor="">Eletro ventilador</option>
+                                        <option value="Filto do motor" data-valor="">Filto do motor</option>
+                                        <option value="Filtro do combustível" data-valor="">Filtro do combustível
+                                        </option>
+                                        <option value="Filtro do condicionador de ar" data-valor="">Filtro do
+                                            condicionador de ar</option>
+                                        <option value="Fluído de freios" data-valor="">Fluído de freios</option>
+                                        <option value="Hidrovácuo (servo freio)" data-valor="">Hidrovácuo (servo freio)
+                                        </option>
+                                        <option value="Kit batedor e coifa" data-valor="">Kit batedor e coifa</option>
+                                        <option value="Kit de embreagem" data-valor="">Kit de embreagem</option>
+                                        <option value="Lâmpadas dianteiras" data-valor="">Lâmpadas dianteiras</option>
+                                        <option value="Lâmpadas traseiras" data-valor="">Lâmpadas traseiras</option>
+                                        <option value="Lonas de freios" data-valor="">Lonas de freios</option>
+                                        <option value="Óleo do câmbio" data-valor="">Óleo do câmbio</option>
+                                        <option value="Óleo do motor" data-valor="">Óleo do motor</option>
+                                        <option value="Pastilhas de freios" data-valor="">Pastilhas de freios</option>
+                                        <option value="Pinça de freios" data-valor="">Pinça de freios</option>
+                                        <option value="Pivô" data-valor="">Pivô</option>
+                                        <option value="Radiador" data-valor="">Radiador</option>
+                                        <option value="Rolamento de roda dianteiro" data-valor="">Rolamento de roda
+                                            dianteiro</option>
+                                        <option value="Rolamento de roda traseiro" data-valor="">Rolamento de roda
+                                            traseiro</option>
+                                        <option value="Semi-eixo" data-valor="">Semi-eixo</option>
+                                        <option value="Terminal de direção" data-valor="">Terminal de direção</option>
+                                        <option value="Válvula termostática" data-valor="">Válvula termostática</option>
+                                        <option value="Velas" data-valor="">Velas</option>
+                                    </optgroup>
+
+                                    <optgroup label="Produtos / Peças">
+                                        <option value="Aditivo de radiador" data-valor="">Aditivo de radiador</option>
+                                        <option value="Água desmineralizada" data-valor="">Água desmineralizada</option>
+                                        <option value="Descarbonizante / Spray" data-valor="">Descarbonizante / Spray
+                                        </option>
+                                        <option value="Fluido de arrefecimento" data-valor="">Fluido de arrefecimento
+                                        </option>
+                                        <option value="Graxa para homocinética" data-valor="">Graxa para homocinética
+                                        </option>
+                                        <option value="Limpa contato" data-valor="">Limpa contato</option>
+                                        <option value="Palheta do limpador" data-valor="">Palheta do limpador</option>
+                                        <option value="Parafuso de roda" data-valor="">Parafuso de roda</option>
+                                        <option value="Silicone de alta temperatura" data-valor="">Silicone de alta
+                                            temperatura</option>
+                                    </optgroup>
                                 </select>
                             </div>
 
-                            <!--<div class="form-grupo">
-                                <label class="services" for="valor">Valor do Serviço (R$)</label>
-                                <input type="number" id="valor" step="0.01" min="0" placeholder="Ex: 150.00">
-                            </div>
-                            <div class="form-grupo">
-                                <label class="services" for="valor">Forma de pagamento</label>
-                                <select id="formaPagamento">
-                                    <option value="cartao">Cartão</option>
-                                    <option value="dinheiro">Dinheiro</option>
-                                    <option value="pix">Pix</option>
-                                </select>
-                            </div>
-                            <div class="form-grupo">
-                                <label class="services" for="valor">Desconto</label>
-                                <input type="number" id="desconto" min="5" max="10" disabled />
-                            </div>-->
-
-                            <button type="button" class="btn-adicionar" id="btnAdicionar">Adicionar Serviço</button>
+                            <button type="button" class="btn-adicionar" id="btnAdicionar">Adicionar Item</button>
                         </div>
 
                         <div class="form-group full-width">
                             <div class="lista-container">
-                                <!--<h3>Serviços Realizados</h3>-->
                                 <ul id="listaServicos">
-                                    <!--LI criadas aparecem aqui-->
+                                    <!--As LI criadas aparecem aqui-->
                                 </ul>
-
-                                <!--<div class="total-container">
-                                    <label for="totalGeral">Soma Total:</label>
-                                    <input type="text" id="totalGeral" readonly value="R$ 0,00">
-                                </div>-->
-
                             </div>
                         </div>
 
@@ -229,6 +224,7 @@
                     <button type="button" class="btn-drive" onclick="toggleMenu4()">Consultar</button>
                     <button type="button" class="btn-clear" id="btn-limpar" onclick="limparFormulario()">Limpar</button>
                 </div>
+
             </form>
 
             <div class="frame">
@@ -395,10 +391,6 @@
                     </div>
                 </div>
 
-                <!--<div class="print-section v-total">
-                    <span id="v-total">VALOR TOTAL: <span id="p_valor">R$ 0,00</span></span>
-                </div>-->
-
                 <div class="signatures" style="display: flex;
                 justify-content: space-between;
                 margin-top: 50px;
@@ -422,6 +414,7 @@
         </div>
     </div>
 
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>-->
     <script src="./js/ordemServico.js"></script>
     <script src="./js/toogle.js"></script>
 

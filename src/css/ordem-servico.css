@@ -209,18 +209,9 @@ h3 {
     margin-top: 5px;
 }
 
-.form-group.flex-wrap select#servico {
+.form-group.flex-wrap select#item-selecionado {
     width: 400px;
     margin-top: 5px;
-}
-
-.form-group.flex-wrap select#formaPagamento {
-    width: 200px;
-    margin-top: 5px;
-}
-
-.form-group.flex-wrap input#desconto {
-    width: 100px;
 }
 
 label {
@@ -497,7 +488,6 @@ iframe.ativo {
     .print-section {
         margin-bottom: 12px;
         page-break-inside: avoid;
-        /* Evita que uma seção quebre no meio entre duas páginas */
     }
 
     li {
@@ -520,9 +510,7 @@ iframe.ativo {
 
     .print-section h3 {
         background: #f0f4f8 !important;
-        /* Força o fundo cinza claro */
         -webkit-print-color-adjust: exact;
-        /* Força navegadores baseados em Chrome a exibir o fundo */
         print-color-adjust: exact;
         padding: 4px 6px;
         margin: 0 0 6px 0;
@@ -573,18 +561,15 @@ iframe.ativo {
     /* Ajuste específico para as LIs não perderem a formatação de lista */
     #listaServicos li {
         display: list-item !important;
-        /* Mantém a bolinha/marcador da lista se quiser */
         margin-bottom: 8px;
         font-size: 14px;
         border-bottom: 1px dashed #ccc;
-        /* Linha pontilhada estilosa para a impressão */
         padding-bottom: 4px;
     }
 
     /* Se o input do Total sumir ou ficar cinza, isso força ele a aparecer negrito */
     #TotalGeral {
         border: none !important;
-        /*font-weight: bold;*/
         font-size: 16px;
         background: transparent !important;
     }
