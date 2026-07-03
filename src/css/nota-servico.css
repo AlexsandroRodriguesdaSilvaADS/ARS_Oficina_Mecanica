@@ -153,7 +153,6 @@ textarea:focus {
     background-color: #fff;
 }
 
-
 .form-group {
     display: flex;
     gap: 15px;
@@ -256,7 +255,6 @@ li {
     width: 150px;
 }
 
-
 .form-group {
     margin-bottom: 10px;
 }
@@ -285,7 +283,6 @@ li {
     width: 135px;
     box-shadow: 0 0 10px #fff;
     padding: 2px;
-    /*margin: 10px auto;*/
 }
 
 .logo-area {
@@ -417,12 +414,14 @@ li {
 }
 
 .btn-print,
-.btn-clear {
+.btn-clear,
+.btn-drive {
     background-color: var(--primary-color);
 }
 
 .btn-print:hover,
-.btn-clear:hover {
+.btn-clear:hover, 
+.btn-drive:hover {
     background-color: #1a252f;
 }
 
@@ -433,8 +432,13 @@ li {
 }
 
 iframe {
+    display: none;
     width: 100%;
-    height: 80px;
+    height: 50%;
+}
+
+iframe.ativo {
+    display: block;
 }
 
 /* PÁGINA DO TERMO DE GARANTIA */
@@ -485,11 +489,16 @@ iframe {
     textarea,
     .btn-adicionar,
     .btn-remover,
-    .btn-logout {
+    .btn-logout, 
+    .frame {
         border: set !important;
         background: transparent !important;
         padding: 2px 0 !important;
         appearance: none !important;
+    }
+
+    .frame {
+        border: none !important;
     }
 
     .box {

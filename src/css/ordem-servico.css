@@ -99,22 +99,23 @@ body {
 }
 
 .logo {
+    margin: 40px 0;
     position: relative;
     width: 135px;
     box-shadow: 0 0 10px #fff;
     padding: 2px;
-    /*margin: 10px auto;*/
 }
 
 .container #main-title {
     position: absolute;
-    top: 60px;
+    top: 100px;
     left: 30%;
     right: 30%;
     font-size: 26px;
     color: #1a365d;
     padding-bottom: 8px;
     text-align: center;
+    justify-content: center;
     text-transform: uppercase;
 }
 

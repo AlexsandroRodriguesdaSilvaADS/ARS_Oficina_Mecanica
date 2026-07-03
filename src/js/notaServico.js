@@ -418,7 +418,7 @@ function dispararImpressaoDupla() {
 }
 */
 
-// ==========================================
+/*// ==========================================
 // 5. SUBMISSÃO DO ARQUIVO BINÁRIO AO GOOGLE DRIVE
 // ==========================================
 function enviarParaGoogleDrive(blob, nomeArquivo) {
@@ -460,7 +460,7 @@ function enviarParaGoogleDrive(blob, nomeArquivo) {
             })
             .catch(error => console.error('Erro de rede na API da Nuvem:', error));
     };
-}
+}*/
 
 // ==========================================
 // 6. LIMPEZA TOTAL DO FORMULÁRIO

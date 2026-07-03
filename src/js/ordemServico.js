@@ -159,6 +159,31 @@ function gerarOS(event) {
         // Chamada assíncrona em segundo plano para enviar o documento para a nuvem
         enviarParaGoogleDrive(pdfBlob, nomeArquivo);
 
+        // A CORREÇÃO: Colocar o print e o fechamento dentro de um curtíssimo timeout (Ex: 350ms)
+        // Isso garante que o FileReader leia o PDF antes do navegador congelar a tela.
+        setTimeout(() => {
+            // 2. Dispara a janela de impressão nativa
+            window.print();
+
+            // Oculta novamente a área técnica após terminar os procedimentos
+            printArea.style.display = 'none';
+
+            // 3. Finaliza incrementando e limpando a interface
+            incrementarNumeroOS();
+            limparCamposFormulario();
+        }, 350); // 350 milissegundos são suficientes para salvar o fluxo
+
+    })
+
+    /*// 1. Executa a conversão para PDF e extrai o Blob binário
+    html2pdf().set(opt).from(printArea).toPdf().output('blob').then(function (pdfBlob) {
+
+        // Nome limpo para o arquivo no Drive
+        const nomeArquivo = `OS_${dadosOS.numero}_${dadosOS.cliente}.pdf`;
+
+        // Chamada assíncrona em segundo plano para enviar o documento para a nuvem
+        enviarParaGoogleDrive(pdfBlob, nomeArquivo);
+
         // 2. Dispara a janela de impressão nativa IMEDIATAMENTE após a criação do blob
         window.print();
 
@@ -169,7 +194,7 @@ function gerarOS(event) {
         incrementarNumeroOS();
         limparCamposFormulario();
 
-    })
+    })*/
         .catch(err => {
             console.error("Erro no fluxo do PDF:", err);
             printArea.style.display = 'none';
@@ -185,7 +210,7 @@ function enviarParaGoogleDrive(blob, nomeArquivo) {
     window.open(URL.createObjectURL(blob), '_blank');
 
     // Sua URL do Google Apps Script (Web App)
-    const urlScript = 'https://script.google.com/macros/s/AKfycbwrYuHxa4aY1zgFAaDmZrALFkjld2D7gT378bOlezmS6faB8wqvwN0ZjC84XGR_-bU9/exec';
+    const urlScript = 'https://script.google.com/macros/s/AKfycbwtsuxrWViHN-o4oHLdDuRqZ9HkOU2ca1u3VDdKpZDz_wxpNhQBZqEz4T1E9TsYIU9b/exec';
 
     const reader = new FileReader();
     reader.readAsDataURL(blob);

@@ -200,11 +200,13 @@
 
             <div class="no-print-zone">
                 <button class="btn btn-print" onclick="dispararImpressaoDupla()">Imprimir / Salvar PDF</button>
+                <button type="button" class="btn btn-drive" onclick="toggleMenu4()">Consultar</button>
                 <button class="btn btn-clear" id="btnLimpar">Limpar Formulário</button>
             </div>
 
             <div class="frame">
-                <iframe src="https://drive.google.com/embeddedfolderview?id=1gfRPyxmXDCxrV_QmD8-jQI0PeInJItFS#list"
+                <iframe id="frame"
+                    src="https://drive.google.com/embeddedfolderview?id=1gfRPyxmXDCxrV_QmD8-jQI0PeInJItFS#list"
                     frameborder="0">
                 </iframe>
             </div>
@@ -273,6 +275,7 @@
     </div>
 
     <script src="./js/notaServico.js"></script>
+    <script src="./js/toogle.js"></script>
 
 </body>
 
