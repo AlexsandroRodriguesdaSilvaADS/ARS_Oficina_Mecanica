@@ -51,7 +51,7 @@
                     <div class="logo-area">
                         <img class="logo" src="./imagens/logo.png" title="Soluções integradas para o seu veículo"
                             alt="Logo de ARS Mecânico Automotivo" />
-                        <p>Oficina Mecânica Automotiva</p>
+                        <p>Mecânico Automotivo</p>
                         <p>Rua Exemplo, 171 - São João da Escócia | Tel: (81) 99809-0037</p>
                         <p>CNPJ: 00.000.000/0001-00</p>
                     </div>
@@ -108,51 +108,80 @@
 
                 <div class="form-group flex-wrap">
                     <div class="form-grupo">
-                        <label class="services" for="servico">Selecione Serviço</label>
-                        <select id="servico">
-                            <option value="">Selecione um serviço...</option>
-                            <option value="Amortecedor dianteiro">Amortecedor dianteiro</option>
-                            <option value="Amortecedor traseiro">Amortecedor traseiro</option>
-                            <option value="Bandeja completa">Bandeja completa</option>
-                            <option value="Bobinas">Bobinas</option>
-                            <option value="Braços axial">Braços axial</option>
-                            <option value="Bucha da bandeja">Bucha da bandeja</option>
-                            <option value="Bucha da suspensão traseira">Bucha da suspensão traseira</option>
-                            <option value="Caixa de direção">Caixa de direção</option>
-                            <option value="Cilindro mestre">Cilindro mestre</option>
-                            <option value="Coifa da deslizante">Coifa da deslizante</option>
-                            <option value="Coifa da homocinética">Coifa da homocinética</option>
-                            <option value="Correia de acessórios e rolamento">Correia de acessórios e rolamento</option>
-                            <option value="Coxin do amortecedor">Coxin do amortecedor</option>
-                            <option value="Coxin do câmbio">Coxin do câmbio</option>
-                            <option value="Coxin do motor LD">Coxin do motor LD</option>
-                            <option value="Coxin do motor LE">Coxin do motor LE</option>
-                            <option value="Cubo de roda dianteiro">Cubo de roda dianteiro</option>
-                            <option value="Cubo de roda traseiro">Cubo de roda traseiro</option>
-                            <option value="Disco de freios">Disco de freios</option>
-                            <option value="Eletro ventilador">Eletro ventilador</option>
-                            <option value="Filto do motor">Filto do motor</option>
-                            <option value="Filtro do combustível">Filtro do combustível</option>
-                            <option value="Filtro do condicionador de ar">Filtro do condicionador de ar</option>
-                            <option value="Fluído de freios">Fluído de freios</option>
-                            <option value="Hidrovácuo (servo freio)">Hidrovácuo (servo freio)</option>
-                            <option value="Kit batedor e coifa">Kit batedor e coifa</option>
-                            <option value="Kit de embreagem">Kit de embreagem</option>
-                            <option value="Lâmpadas dianteiras">Lâmpadas dianteiras</option>
-                            <option value="Lâmpadas traseiras">Lâmpadas traseiras</option>
-                            <option value="Lonas de freios">Lonas de freios</option>
-                            <option value="Óleo do câmbio">Óleo do câmbio</option>
-                            <option value="Óleo do motor">Óleo do motor</option>
-                            <option value="Pastilhas de freios">Pastilhas de freios</option>
-                            <option value="Pinça de freios">Pinça de freios</option>
-                            <option value="Pivô">Pivô</option>
-                            <option value="Radiador">Radiador</option>
-                            <option value="Rolamento de roda dianteiro">Rolamento de roda dianteiro</option>
-                            <option value="Rolamento de roda traseiro">Rolamento de roda traseiro</option>
-                            <option value="Semi-eixo">Semi-eixo</option>
-                            <option value="Terminal de direção">Terminal de direção</option>
-                            <option value="Válvula termostática">Válvula termostática</option>
-                            <option value="Velas">Velas</option>
+                        <label class="services" for="item-selecionado">Selecione o Serviço ou Produto</label>
+                        <select type="text" name="item" id="item-selecionado">
+                            <option value="">Selecione uma opção...</option>
+                            <optgroup label="Serviços">
+                                <option value="Amortecedor dianteiro" data-valor="">Amortecedor dianteiro
+                                </option>
+                                <option value="Amortecedor traseiro" data-valor="">Amortecedor traseiro</option>
+                                <option value="Bandeja completa" data-valor="">Bandeja completa</option>
+                                <option value="Bobinas" data-valor="">Bobinas</option>
+                                <option value="Braços axial" data-valor="">Braços axial</option>
+                                <option value="Bucha da bandeja" data-valor="">Bucha da bandeja</option>
+                                <option value="Bucha da suspensão traseira" data-valor="">Bucha da suspensão
+                                    traseira</option>
+                                <option value="Caixa de direção" data-valor="">Caixa de direção</option>
+                                <option value="Cilindro mestre" data-valor="">Cilindro mestre</option>
+                                <option value="Coifa da deslizante" data-valor="">Coifa da deslizante</option>
+                                <option value="Coifa da homocinética" data-valor="">Coifa da homocinética
+                                </option>
+                                <option value="Correia de acessórios e rolamento" data-valor="">Correia de
+                                    acessórios e rolamento</option>
+                                <option value="Coxin do amortecedor" data-valor="">Coxin do amortecedor</option>
+                                <option value="Coxin do câmbio" data-valor="">Coxin do câmbio</option>
+                                <option value="Coxin do motor LD" data-valor="">Coxin do motor LD</option>
+                                <option value="Coxin do motor LE" data-valor="">Coxin do motor LE</option>
+                                <option value="Cubo de roda dianteiro" data-valor="">Cubo de roda dianteiro
+                                </option>
+                                <option value="Cubo de roda traseiro" data-valor="">Cubo de roda traseiro
+                                </option>
+                                <option value="Disco de freios" data-valor="">Disco de freios</option>
+                                <option value="Eletro ventilador" data-valor="">Eletro ventilador</option>
+                                <option value="Filto do motor" data-valor="">Filto do motor</option>
+                                <option value="Filtro do combustível" data-valor="">Filtro do combustível
+                                </option>
+                                <option value="Filtro do condicionador de ar" data-valor="">Filtro do
+                                    condicionador de ar</option>
+                                <option value="Fluído de freios" data-valor="">Fluído de freios</option>
+                                <option value="Hidrovácuo (servo freio)" data-valor="">Hidrovácuo (servo freio)
+                                </option>
+                                <option value="Kit batedor e coifa" data-valor="">Kit batedor e coifa</option>
+                                <option value="Kit de embreagem" data-valor="">Kit de embreagem</option>
+                                <option value="Lâmpadas dianteiras" data-valor="">Lâmpadas dianteiras</option>
+                                <option value="Lâmpadas traseiras" data-valor="">Lâmpadas traseiras</option>
+                                <option value="Lonas de freios" data-valor="">Lonas de freios</option>
+                                <option value="Óleo do câmbio" data-valor="">Óleo do câmbio</option>
+                                <option value="Óleo do motor" data-valor="">Óleo do motor</option>
+                                <option value="Pastilhas de freios" data-valor="">Pastilhas de freios</option>
+                                <option value="Pinça de freios" data-valor="">Pinça de freios</option>
+                                <option value="Pivô" data-valor="">Pivô</option>
+                                <option value="Radiador" data-valor="">Radiador</option>
+                                <option value="Rolamento de roda dianteiro" data-valor="">Rolamento de roda
+                                    dianteiro</option>
+                                <option value="Rolamento de roda traseiro" data-valor="">Rolamento de roda
+                                    traseiro</option>
+                                <option value="Semi-eixo" data-valor="">Semi-eixo</option>
+                                <option value="Terminal de direção" data-valor="">Terminal de direção</option>
+                                <option value="Válvula termostática" data-valor="">Válvula termostática</option>
+                                <option value="Velas" data-valor="">Velas</option>
+                            </optgroup>
+
+                            <optgroup label="Produtos / Peças">
+                                <option value="Aditivo de radiador" data-valor="">Aditivo de radiador</option>
+                                <option value="Água desmineralizada" data-valor="">Água desmineralizada</option>
+                                <option value="Descarbonizante / Spray" data-valor="">Descarbonizante / Spray
+                                </option>
+                                <option value="Fluido de arrefecimento" data-valor="">Fluido de arrefecimento
+                                </option>
+                                <option value="Graxa para homocinética" data-valor="">Graxa para homocinética
+                                </option>
+                                <option value="Limpa contato" data-valor="">Limpa contato</option>
+                                <option value="Palheta do limpador" data-valor="">Palheta do limpador</option>
+                                <option value="Parafuso de roda" data-valor="">Parafuso de roda</option>
+                                <option value="Silicone de alta temperatura" data-valor="">Silicone de alta
+                                    temperatura</option>
+                            </optgroup>
                         </select>
                     </div>
 
@@ -211,28 +240,22 @@
                 </iframe>
             </div>
 
-
             <!-- TERMO DE GARANTIA -->
             <div id="print-termo-garantia" style="display: none;">
                 <div class="print-page-warranty">
                     <div class="print-header">
                         <div class="logo-area">
-                            <h1>ARS Oficina Mecânica</h1>
+                            <h1>ARS Mecânico Autonomo</h1>
                             <img class="logo" src="./imagens/logo.png" title="Soluções integradas para o seu veículo"
                                 alt="Logo de ARS Mecânico Automotivo" />
                         </div>
                         <div>
                             <h2>TERMO DE GARANTIA DE SERVIÇO</h2>
-                            <p>Oficina Mecânica Automotiva</p>
+                            <p>Mecânico Automotivo</p>
                             <p>Rua Exemplo, 171 - São João da Escócia | Tel: (81) 99809-0037</p>
-                            <p>CNPJ: 00.000.000/0001-00</p>
+                            <!--<p>CPF: 047.874.904-00</p>-->
                         </div>
-                        <!--<div>
-                            <img class="logo" src="./imagens/logo.png" title="Soluções integradas para o seu veículo"
-                                alt="Logo de ARS Mecânico Automotivo" />
-                            <h1>ARS Oficina Mecânica</h1>
-                            <h2>TERMO DE GARANTIA DE SERVIÇO</h2>
-                        </div>-->
+
                         <div class="container-nota">
                             <div class="nota">REF. NOTA Nº <span id="p_garantia_numero"></span></div>
                             <p>Emissão: <span id="p_garantia_data"></span></p>
@@ -266,7 +289,7 @@
 
                     <div class="signatures">
                         <div class="sig-line">Assinatura do Cliente</div>
-                        <div class="sig-line">Carimbo / Assinatura da Empresa</div>
+                        <div class="sig-line">Carimbo / Assinatura do Responsável Técnico</div>
                     </div>
                 </div>
             </div>

@@ -85,7 +85,7 @@ html {
 }
 
 .container {
-    max-width: 80%;
+    max-width: 70%;
     margin: 0 auto;
     background: #fff;
     padding: 30px;
@@ -160,9 +160,9 @@ textarea:focus {
 }
 
 .flex-wrap {
-    flex-wrap: wrap;
-    align-items: flex-end;
-    gap: 50px;
+    display: flex;
+    align-items:end;
+    gap: 40px;
 }
 
 .form-grupo {
@@ -219,7 +219,6 @@ ul {
 }
 
 li {
-    /*  letter-spacing: 2pt;*/
     padding: 10px;
     border-bottom: 1px solid #eee;
     display: flex;

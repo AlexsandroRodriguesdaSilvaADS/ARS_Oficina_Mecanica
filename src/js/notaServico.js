@@ -12,29 +12,11 @@ function autenticar(event) {
         document.getElementById('login-screen').style.display = 'none';
         document.getElementById('main-content').style.display = 'block';
 
-        inicializarNumeroOS();
         event.target.reset();
     } else {
         errorMsg.style.display = 'block';
     }
 }
-
-
-/*function autenticar(event) {
-    event.preventDefault();
-    
-    const usuario = document.getElementById('username').value;
-    const senha = document.getElementById('password').value;
-    const erroLogin = document.getElementById('login-error');
-    
-    if (usuario === "admin" && senha === "1234") {
-        document.getElementById('login-screen').style.display = 'none';
-        document.getElementById('main-content').style.display = 'block';
-        if (erroLogin) erroLogin.style.display = 'none';
-    } else {
-        if (erroLogin) erroLogin.style.display = 'block';
-    }
-}*/
 
 function logout() {
     document.getElementById('main-content').style.display = 'none';
@@ -79,7 +61,7 @@ if (formaPagamentoSelect && descontoInput) {
     formaPagamentoSelect.addEventListener('change', function () {
         if (this.value === 'pix' || this.value === 'dinheiro') {
             descontoInput.disabled = false;
-            descontoInput.value = 5;
+            descontoInput.value = 5; // Desconto padrão sugerido
         } else {
             descontoInput.disabled = true;
             descontoInput.value = '';
@@ -90,27 +72,27 @@ if (formaPagamentoSelect && descontoInput) {
 // ==========================================
 // 3. GERENCIAMENTO DA LISTA DE SERVIÇOS
 // ==========================================
-let servicosAdicionados = [];
+let servicosAdicionados = []; // O array que a função de impressão precisa ler!
 const btnAdicionar = document.getElementById('btnAdicionar');
+const selectItem = document.getElementById('item-selecionado');
 const listaServicosUl = document.getElementById('listaServicos');
 const totalGeralInput = document.getElementById('totalGeral');
 
-if (btnAdicionar) {
+if (btnAdicionar && selectItem) {
     btnAdicionar.addEventListener('click', () => {
-        const servicoSelect = document.getElementById('servico');
+        const itemSelecionado = selectItem.value;
         const quantidadeInput = document.getElementById('quantidade');
         const valorInput = document.getElementById('valor');
 
-        if (!servicoSelect || !quantidadeInput || !valorInput) return;
+        // 1. Valida se o usuário selecionou algo
+        if (!itemSelecionado) {
+            alert('Por favor, selecione um serviço ou produto válido.');
+            return;
+        }
 
-        const servicoNome = servicoSelect.value;
         const qtd = parseInt(quantidadeInput.value);
         const valorUnitarioOriginal = parseFloat(valorInput.value);
 
-        if (!servicoNome) {
-            alert("Por favor, selecione um serviço.");
-            return;
-        }
         if (isNaN(qtd) || qtd <= 0) {
             alert("Insira uma quantidade válida.");
             return;
@@ -120,13 +102,24 @@ if (btnAdicionar) {
             return;
         }
 
-        // Proibir duplicação estrita
-        const itemExistente = servicosAdicionados.find(item => item.nome === servicoNome);
+        // 2. Evita duplicados na lista (Varrendo o array correto)
+        const itemExistente = servicosAdicionados.find(item => item.nome === itemSelecionado);
         if (itemExistente) {
-            alert(`O serviço "${servicoNome}" já foi adicionado à lista. Remova-o antes se desejar alterar os valores.`);
+            alert(`O item "${itemSelecionado}" já foi adicionado à lista.`);
             return;
         }
 
+        // 3. Descobre qual é o optgroup (Grupo) para definir o ícone
+        const opcaoSelecionada = selectItem.options[selectItem.selectedIndex];
+        const optgroupPai = opcaoSelecionada.parentNode;
+        const tipoGrupo = optgroupPai.tagName === 'OPTGROUP' ? optgroupPai.label.toLowerCase() : '';
+
+        let icone = 'fas fa-wrench'; // Padrão para Serviços
+        if (tipoGrupo.includes('produto') || tipoGrupo.includes('peça')) {
+            icone = 'fas fa-box'; // Ícone para Produtos
+        }
+
+        // 4. Calcula o Desconto se aplicável
         let descontoPorcentagem = 0;
         let valorUnitarioComDesconto = valorUnitarioOriginal;
 
@@ -141,9 +134,11 @@ if (btnAdicionar) {
 
         const subtotalFinal = qtd * valorUnitarioComDesconto;
 
+        // 5. Salva o objeto no array que a Impressão consome
         const novoServico = {
             id: Date.now(),
-            nome: servicoNome,
+            nome: itemSelecionado,
+            icone: icone,
             qtd: qtd,
             valorOriginal: valorUnitarioOriginal,
             valorComDesconto: valorUnitarioComDesconto,
@@ -152,12 +147,57 @@ if (btnAdicionar) {
         };
 
         servicosAdicionados.push(novoServico);
+
+        // 6. Atualiza a tela de forma limpa
         atualizarInterfaceServicos();
 
-        servicoSelect.value = '';
+        // 7. Reseta os seletores para a próxima inserção
+        selectItem.value = '';
         quantidadeInput.value = '1';
         valorInput.value = '';
     });
+}
+
+function removerServico(id) {
+    servicosAdicionados = servicosAdicionados.filter(item => item.id !== id);
+    atualizarInterfaceServicos();
+}
+
+function atualizarInterfaceServicos() {
+    if (!listaServicosUl || !totalGeralInput) return;
+
+    listaServicosUl.innerHTML = '';
+    let somaTotal = 0;
+
+    servicosAdicionados.forEach(item => {
+        somaTotal += item.total;
+
+        const li = document.createElement('li');
+        li.style.display = 'flex';
+        li.style.justifyContent = 'space-between';
+        li.style.alignItems = 'center';
+        li.style.marginBottom = '8px';
+        li.style.padding = '6px';
+        li.style.borderBottom = '1px dashed #ddd';
+
+        let detalheValor = `Un: R$ ${item.valorComDesconto.toFixed(2)}`;
+        if (item.desconto > 0) {
+            detalheValor = `Un: R$ ${item.valorComDesconto.toFixed(2)} (com ${item.desconto}% desc. de R$ ${item.valorOriginal.toFixed(2)})`;
+        }
+
+        li.innerHTML = `
+            <span>
+                <i class="${item.icone}" style="margin-right: 8px; color: #1a365d;"></i>
+                <strong>${item.nome}</strong> (x${item.qtd}) - ${detalheValor} | Total: R$ ${item.total.toFixed(2)}
+            </span>
+            <button type="button" class="btn-remove-item" onclick="removerServico(${item.id})" style="background:none; border:none; color:#e53e3e; cursor:pointer; margin-left: 10px;" title="Remover">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        `;
+        listaServicosUl.appendChild(li);
+    });
+
+    totalGeralInput.value = `R$ ${somaTotal.toFixed(2).replace('.', ',')}`;
 }
 
 function removerServico(id) {
@@ -192,7 +232,7 @@ function atualizarInterfaceServicos() {
         li.innerHTML = `
             <span>${infoTexto}</span>
             <button type="button" class="btn-remover" onclick="removerServico(${item.id})" style="background:#dc3545; color:white; border:none; padding: 4px 8px; cursor:pointer; border-radius:3px;">
-                <i class="fas fa-trash"></i>
+                Excluir
             </button>
         `;
         listaServicosUl.appendChild(li);
@@ -205,7 +245,7 @@ function atualizarInterfaceServicos() {
 // 4. IMPRESSÃO E ATUALIZAÇÃO DA ÁREA DE IMPRESSÃO
 // ==========================================
 function dispararImpressaoDupla() {
-    // Validação inicial
+    // Validação inicial dos campos obrigatórios
     const nomeCliente = document.getElementById('f_cliente_nome')?.value;
     const telCliente = document.getElementById('f_cliente_tel')?.value;
     const modVeiculo = document.getElementById('f_veiculo_mod')?.value;
@@ -226,7 +266,7 @@ function dispararImpressaoDupla() {
     const dataNotaStr = document.getElementById('f_nota_data')?.value ? document.getElementById('f_nota_data').value.split('-').reverse().join('/') : "";
 
     // =========================================================
-    // BLOCO 1: ATUALIZA A NOTA DE SERVIÇO PRINCIPAL (Protegido)
+    // BLOCO 1: ATUALIZA A NOTA DE SERVIÇO PRINCIPAL
     // =========================================================
     if (document.getElementById('p_numero')) document.getElementById('p_numero').innerText = numeroNotaStr;
     if (document.getElementById('p_data')) document.getElementById('p_data').innerText = dataNotaStr;
@@ -246,7 +286,7 @@ function dispararImpressaoDupla() {
     if (document.getElementById('p_defeito')) document.getElementById('p_defeito').innerText = 'Manutenção / Reparo preventivo ou corretivo veicular.';
     if (document.getElementById('p_laudo')) document.getElementById('p_laudo').innerText = 'Substituição e ajustes dos componentes especificados com testes dinâmicos de rodagem concluídos.';
 
-    // Lista dinâmica de serviços
+    // Lista dinâmica de serviços na Nota
     const pLista = document.getElementById('p_lista');
     if (pLista) {
         pLista.innerHTML = '';
@@ -272,7 +312,7 @@ function dispararImpressaoDupla() {
     }
 
     // =========================================================
-    // BLOCO 2: CLONA PARA O TERMO DE GARANTIA (Protegido)
+    // BLOCO 2: CLONA PARA O TERMO DE GARANTIA
     // =========================================================
     if (document.getElementById('p_garantia_numero')) document.getElementById('p_garantia_numero').innerText = numeroNotaStr;
     if (document.getElementById('p_garantia_data')) document.getElementById('p_garantia_data').innerText = dataNotaStr;
@@ -282,188 +322,19 @@ function dispararImpressaoDupla() {
     if (document.getElementById('p_garantia_placa')) document.getElementById('p_garantia_placa').innerText = placaVeiculo.toUpperCase();
     if (document.getElementById('p_garantia_km')) document.getElementById('p_garantia_km').innerText = kmVeiculo;
 
-    // Salva o número atualizado sequencial no LocalStorage
+    // Salva o número sequencial no LocalStorage para controle interno
     const numeroAtualOriginal = numeroNotaStr.replace('#', '');
     localStorage.setItem('ultimo_numero_nota', numeroAtualOriginal);
 
-    // =========================================================
-    // INCREMENTADO: INTEGRAÇÃO COM HTML2PDF E GOOGLE DRIVE
-    // =========================================================
-    
-    // Alvo que contém a folha de impressão técnica (ajuste o ID 'print-area' para o ID correto do seu container HTML se necessário)
-    const printArea = document.getElementById('print-area') || document.body; 
-
-    const opt = {
-        margin: 10,
-        filename: `Nota_${numeroAtualOriginal}_${nomeCliente.replace(/\s+/g, '_')}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    };
-
-    // Gera o blob em segundo plano e envia para o drive
-    html2pdf().set(opt).from(printArea).toPdf().output('blob').then(function (pdfBlob) {
-        const nomeArquivo = `Nota_${numeroAtualOriginal}_${nomeCliente.replace(/\s+/g, '_')}.pdf`;
-        
-        // Dispara o upload em segundo plano para o Google Drive
-        enviarParaGoogleDrive(pdfBlob, nomeArquivo);
-
-        // Dispara a janela de impressão física nativa do navegador
-        window.print();
-
-        // Gera o próximo número para a tela após a conclusão
-        definirProximoNumeroNota();
-    }).catch(err => {
-        console.error("Erro ao gerar o PDF para salvar no Drive:", err);
-        // Fallback: Se o PDF falhar, ainda tenta executar a impressão padrão da tela
-        window.print();
-        definirProximoNumeroNota();
-    });
-}
-
-
-
-
-/*
-// ==========================================
-// 4. IMPRESSÃO E ATUALIZAÇÃO DA ÁREA DE IMPRESSÃO
-// ==========================================
-function dispararImpressaoDupla() {
-    // Validação inicial
-    const nomeCliente = document.getElementById('f_cliente_nome')?.value;
-    const telCliente = document.getElementById('f_cliente_tel')?.value;
-    const modVeiculo = document.getElementById('f_veiculo_mod')?.value;
-    const placaVeiculo = document.getElementById('f_veiculo_placa')?.value;
-    const kmVeiculo = document.getElementById('f_kilometragem')?.value;
-
-    if (!nomeCliente || !telCliente || !modVeiculo || !placaVeiculo || !kmVeiculo) {
-        alert("Por favor, preencha todos os campos obrigatórios (*) antes de imprimir.");
-        return;
-    }
-
-    if (servicosAdicionados.length === 0) {
-        alert("Adicione pelo menos um serviço à lista antes de imprimir.");
-        return;
-    }
-
-    const numeroNotaStr = document.getElementById('f_nota_num')?.value || "#1001";
-    const dataNotaStr = document.getElementById('f_nota_data')?.value ? document.getElementById('f_nota_data').value.split('-').reverse().join('/') : "";
-
-    // =========================================================
-    // BLOCO 1: ATUALIZA A NOTA DE SERVIÇO PRINCIPAL (Protegido)
-    // =========================================================
-    if (document.getElementById('p_numero')) document.getElementById('p_numero').innerText = numeroNotaStr;
-    if (document.getElementById('p_data')) document.getElementById('p_data').innerText = dataNotaStr;
-    if (document.getElementById('p_cliente')) document.getElementById('p_cliente').innerText = nomeCliente;
-    if (document.getElementById('p_documento')) document.getElementById('p_documento').innerText = document.getElementById('f_cliente_id')?.value || 'Não Informado';
-    if (document.getElementById('p_telefone')) document.getElementById('p_telefone').innerText = telCliente;
-    if (document.getElementById('p_email')) document.getElementById('p_email').innerText = 'autonomosslm@gmail.com';
-
-    if (document.getElementById('p_objeto')) document.getElementById('p_objeto').innerText = 'Automóvel';
-    if (document.getElementById('p_modelo')) document.getElementById('p_modelo').innerText = modVeiculo;
-    if (document.getElementById('p_serial')) document.getElementById('p_serial').innerText = placaVeiculo.toUpperCase();
-
-    if (document.getElementById('p_status') && formaPagamentoSelect) {
-        document.getElementById('p_status').innerText = 'Concluído / Pago via ' + formaPagamentoSelect.options[formaPagamentoSelect.selectedIndex].text;
-    }
-
-    if (document.getElementById('p_defeito')) document.getElementById('p_defeito').innerText = 'Manutenção / Reparo preventivo ou corretivo veicular.';
-    if (document.getElementById('p_laudo')) document.getElementById('p_laudo').innerText = 'Substituição e ajustes dos componentes especificados com testes dinâmicos de rodagem concluídos.';
-
-    // Lista dinâmica de serviços
-    const pLista = document.getElementById('p_lista');
-    if (pLista) {
-        pLista.innerHTML = '';
-        servicosAdicionados.forEach(item => {
-            const liItem = document.createElement('li');
-            liItem.style.listStyle = 'none';
-            liItem.style.margin = '5px 0';
-            liItem.style.fontSize = '13px';
-            liItem.innerText = `- ${item.nome} | Qtd: ${item.qtd} | Vlr. Unit: R$ ${item.valorComDesconto.toFixed(2)} ${item.desconto > 0 ? `(Desc. aplicado: ${item.desconto}%)` : ''} -> Subtotal: R$ ${item.total.toFixed(2)}`;
-            pLista.appendChild(liItem);
-        });
-
-        if (totalGeralInput) {
-            const totalLi = document.createElement('li');
-            totalLi.style.listStyle = 'none';
-            totalLi.style.marginTop = '15px';
-            totalLi.style.fontWeight = 'bold';
-            totalLi.style.fontSize = '16px';
-            totalLi.style.textAlign = 'right';
-            totalLi.innerText = `VALOR TOTAL DA NOTA: ${totalGeralInput.value}`;
-            pLista.appendChild(totalLi);
-        }
-    }
-
-    // =========================================================
-    // BLOCO 2: CLONA PARA O TERMO DE GARANTIA (Protegido)
-    // =========================================================
-    if (document.getElementById('p_garantia_numero')) document.getElementById('p_garantia_numero').innerText = numeroNotaStr;
-    if (document.getElementById('p_garantia_data')) document.getElementById('p_garantia_data').innerText = dataNotaStr;
-    if (document.getElementById('p_garantia_cliente')) document.getElementById('p_garantia_cliente').innerText = nomeCliente;
-    if (document.getElementById('p_garantia_telefone')) document.getElementById('p_garantia_telefone').innerText = telCliente;
-    if (document.getElementById('p_garantia_veiculo')) document.getElementById('p_garantia_veiculo').innerText = modVeiculo;
-    if (document.getElementById('p_garantia_placa')) document.getElementById('p_garantia_placa').innerText = placaVeiculo.toUpperCase();
-    if (document.getElementById('p_garantia_km')) document.getElementById('p_garantia_km').innerText = kmVeiculo;
-
-    // Salva o número atualizado sequencial no LocalStorage
-    const numeroAtualOriginal = numeroNotaStr.replace('#', '');
-    localStorage.setItem('ultimo_numero_nota', numeroAtualOriginal);
-
-    // Dispara a impressão
+    // Dispara a visualização de impressão/salvamento nativa
     window.print();
 
-    // Gera o próximo número para a tela
+    // Gera o próximo número automaticamente para a próxima venda
     definirProximoNumeroNota();
 }
-*/
-
-/*// ==========================================
-// 5. SUBMISSÃO DO ARQUIVO BINÁRIO AO GOOGLE DRIVE
-// ==========================================
-function enviarParaGoogleDrive(blob, nomeArquivo) {
-
-    window.open(URL.createObjectURL(blob), '_blank');
-
-    // Sua URL do Google Apps Script (Web App)
-    const urlScript = 'https://script.google.com/macros/s/AKfycbxCqs54YOT2siJjVMbCbUrh253lfhjTgvJkLV8_WE5jYUIecoSc95McJrrQnjQgvzML/exec';
-
-    const reader = new FileReader();
-    reader.readAsDataURL(blob);
-    reader.onloadend = function () {
-        // Extrai apenas a string base64 pura (removendo o cabeçalho data:application/pdf;base64,)
-        const base64data = reader.result.split(',')[1];
-
-        // Monta o objeto que o Apps Script espera receber
-        const payload = {
-            arquivoBase64: base64data,
-            nome: nomeArquivo,
-            mimeType: 'application/pdf'
-        };
-
-        // Faz o envio usando POST e JSON estruturado
-        fetch(urlScript, {
-            method: 'POST',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'text/plain;charset=utf-8', // Evita requisições preflight (OPTIONS) complexas
-            },
-            body: JSON.stringify(payload)
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    console.log('Documento gravado com sucesso no Google Drive! ID do arquivo: ' + data.fileId);
-                } else {
-                    console.error('Falha interna no Drive:', data.message);
-                }
-            })
-            .catch(error => console.error('Erro de rede na API da Nuvem:', error));
-    };
-}*/
 
 // ==========================================
-// 6. LIMPEZA TOTAL DO FORMULÁRIO
+// 5. LIMPEZA TOTAL DO FORMULÁRIO
 // ==========================================
 const btnLimpar = document.getElementById('btnLimpar');
 if (btnLimpar) {

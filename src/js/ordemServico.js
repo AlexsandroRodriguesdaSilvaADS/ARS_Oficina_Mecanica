@@ -72,11 +72,11 @@ if (btnAdicionar && selectItem) {
         const optgroupPai = opcaoSelecionada.parentNode;
         const tipoGrupo = optgroupPai.tagName === 'OPTGROUP' ? optgroupPai.label : '';
 
-        let icone = 'fas fa-wrench'; 
+        let icone = 'fas fa-wrench';
         if (tipoGrupo.toLowerCase().includes('produto')) {
-            icone = 'fas fa-box'; 
+            icone = 'fas fa-box';
         } else if (tipoGrupo.toLowerCase().includes('serviço')) {
-            icone = 'fas fa-wrench'; 
+            icone = 'fas fa-wrench';
         }
 
         const li = document.createElement('li');
@@ -92,10 +92,42 @@ if (btnAdicionar && selectItem) {
         `;
 
         li.querySelector('.btn-remove-item').addEventListener('click', () => li.remove());
-        
+
         listaServicos.appendChild(li);
-        selectItem.value = ""; 
+        selectItem.value = "";
     });
+}
+
+// Alteramos a função para receber os dados prontos como argumento
+const enviarParaSheetMonkey = (dadosOS, itens) => {
+
+    // Criamos o objeto final que vai virar colunas na sua planilha
+    const dadosParaEnviar = {
+        Numero_OS: dadosOS.numero,
+        Status: dadosOS.status,
+        Cliente: dadosOS.cliente,
+        Documento: dadosOS.documento,
+        Telefone: dadosOS.telefone,
+        Email: dadosOS.email,
+        Veiculo: dadosOS.objeto,
+        Modelo: dadosOS.modelo,
+        Placa: dadosOS.serial,
+        Defeito: dadosOS.defeito,
+        Laudo: dadosOS.laudo,
+        Data: dadosOS.data,
+        Itens_Adicionados: itens // Aqui vai a lista de serviços/produtos como texto
+    };
+
+    fetch('https://api.sheetmonkey.io/form/YysUFctamTP45zycCGFKA', {
+        method: 'post',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dadosParaEnviar), // Enviamos o objeto completo
+    })
+        .then(() => console.log('Dados salvos na planilha com sucesso!'))
+        .catch(err => console.error('Erro ao salvar na planilha:', err));
 }
 
 // ==========================================
@@ -149,6 +181,15 @@ function gerarOS(event) {
         pLista.appendChild(novoLi);
     });
 
+
+    // Captura os itens da lista e junta tudo em um único texto separado por vírgulas
+    const listaTexto = Array.from(itensServico)
+        .map(li => li.innerText.replace(/[\n\r]+/g, ' ').trim())
+        .join(', ');
+
+    // Chame a função de envio passando os dados do formulário e a lista de itens
+    enviarParaSheetMonkey(dadosOS, listaTexto);
+    
     const printArea = document.getElementById('print-area');
 
     // 1. Guarda o título original da aba do sistema para restaurar depois

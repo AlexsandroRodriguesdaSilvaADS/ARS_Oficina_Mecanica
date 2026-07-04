@@ -89,7 +89,7 @@ body {
 }
 
 .container {
-    max-width: 80%;
+    max-width: 70%;
     margin: 0 auto;
     background: #fff;
     padding: 30px;
@@ -197,7 +197,7 @@ h3 {
 
 .form-group.flex-wrap {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 30px;
     margin: auto;
@@ -305,8 +305,7 @@ li {
     width: 300px;
     color: white;
     padding: 12px;
-    margin-top: 20px;
-    margin-left: 100px;
+    margin-top: 25px;
     border: none;
     border-radius: 5px;
     font-size: 16px;
@@ -320,10 +319,10 @@ li {
 
 /* Área dos Botões */
 .btn-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 15px;
-    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 150px;
 }
 
 .btn-submit {
@@ -384,7 +383,7 @@ li {
 iframe {
     display: none;
     width: 100%;
-    height: 50%;
+    height: 100%;
 }
 
 iframe.ativo {
