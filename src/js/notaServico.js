@@ -39,6 +39,16 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!localStorage.getItem('ultimo_numero_nota')) {
         localStorage.setItem('ultimo_numero_nota', '1000');
     }
+
+
+const fNotaNum = document.getElementById('f_nota_ref');
+if (fNotaNum) {
+    fNotaNum.readOnly = false; // Permite que você apague o número automático e digite o da OS
+    fNotaNum.addEventListener('input', puxarDadosDaOS); // Dispara a busca a cada número digitado
+}
+
+
+
     definirProximoNumeroNota();
 });
 
@@ -359,4 +369,58 @@ if (btnLimpar) {
             definirProximoNumeroNota();
         }
     });
+}
+
+
+
+
+// ==========================================================
+// FUNÇÃO PARA BUSCAR A OS E PREENCHER O FORMULÁRIO DE NOTAS
+// ==========================================================
+function puxarDadosDaOS() {
+    const campoNumeroNota = document.getElementById('f_nota_ref');
+    if (!campoNumeroNota) return;
+
+    // Remove o '#' caso você digite com ele, deixando apenas os números (ex: 2601)
+    const numeroBusca = campoNumeroNota.value.replace('#', '').trim();
+    if (!numeroBusca) return;
+
+    const historicoOS = JSON.parse(localStorage.getItem('historico_ordens_locais')) || {};
+    const osEncontrada = historicoOS[numeroBusca];
+
+    if (osEncontrada) {
+        // Preenche os campos de texto do formulário de Nota de Serviço
+        if (document.getElementById('f_cliente_nome')) document.getElementById('f_cliente_nome').value = osEncontrada.cliente || '';
+        if (document.getElementById('f_cliente_tel')) document.getElementById('f_cliente_tel').value = osEncontrada.telefone || '';
+        if (document.getElementById('f_cliente_id')) document.getElementById('f_cliente_id').value = osEncontrada.documento || '';
+        if (document.getElementById('f_veiculo_mod')) document.getElementById('f_veiculo_mod').value = osEncontrada.modelo || '';
+        if (document.getElementById('f_veiculo_placa')) document.getElementById('f_veiculo_placa').value = osEncontrada.serial || '';
+
+        // Limpa a lista atual de serviços da nota para colocar os da OS
+        servicosAdicionados = [];
+
+        // Trata os itens enviados pela OS para não quebrar os cálculos da nota
+        if (osEncontrada.itens && Array.isArray(osEncontrada.itens)) {
+            osEncontrada.itens.forEach((nomeItem, index) => {
+                let icone = 'fas fa-wrench';
+                if (nomeItem.toLowerCase().includes('produto') || nomeItem.toLowerCase().includes('peça')) {
+                    icone = 'fas fa-box';
+                }
+
+                /*servicosAdicionados.push({
+                    id: Date.now() + index,
+                    nome: nomeItem,
+                    icone: icone,
+                    qtd: 1,                 // Define quantidade padrão como 1
+                    valorOriginal: 10,      // Define o valor mínimo exigido pelo seu código (R$ 10,00)
+                    valorComDesconto: 10,
+                    desconto: 0,
+                    total: 10               // Evita que o cálculo resulte em NaN
+                });*/
+            });
+        }
+
+        // Atualiza a lista visual na tela de notas e recalcula os totais
+        atualizarInterfaceServicos();
+    }
 }
