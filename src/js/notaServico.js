@@ -389,7 +389,18 @@ function puxarDadosDaOS() {
         if (document.getElementById('f_cliente_id')) document.getElementById('f_cliente_id').value = osEncontrada.documento || '';
         if (document.getElementById('f_veiculo_mod')) document.getElementById('f_veiculo_mod').value = osEncontrada.modelo || '';
         if (document.getElementById('f_veiculo_placa')) document.getElementById('f_veiculo_placa').value = osEncontrada.serial || '';
-        if (document.getElementById('f_veiculo_kilometragem')) document.getElementById('f_veiculo_kilometragem').value = osEncontrada.quilometragem || '';
+        if (document.getElementById('f_veiculo_quilometragem')) document.getElementById('f_veiculo_quilometragem').value = osEncontrada.quilometragem || '';
+
+
+        /*// CORREÇÃO: Aguarda a automação do sistema gerar o ID f_veiculo_quilometragem na tela
+        setTimeout(() => {
+            const campoKM = document.getElementById('f_veiculo_quilometragem');
+            if (campoKM) {
+                campoKM.value = osEncontrada.quilometragem || '';
+            } else {
+                console.error("Mesmo aguardando, o campo f_veiculo_quilometragem não foi achado.");
+            }
+        }, 150);*/
 
         // Limpa a lista atual de serviços da nota para colocar os da OS
         servicosAdicionados = [];
