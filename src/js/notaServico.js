@@ -40,15 +40,11 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem('ultimo_numero_nota', '1000');
     }
 
-
-const fNotaNum = document.getElementById('f_nota_ref');
-if (fNotaNum) {
-    fNotaNum.readOnly = false; // Permite que você apague o número automático e digite o da OS
-    fNotaNum.addEventListener('input', puxarDadosDaOS); // Dispara a busca a cada número digitado
-}
-
-
-
+    const fNotaNum = document.getElementById('f_nota_ref');
+    if (fNotaNum) {
+        fNotaNum.readOnly = false; // Permite que você apague o número automático e digite o da OS
+        fNotaNum.addEventListener('input', puxarDadosDaOS); // Dispara a busca a cada número digitado
+    }
     definirProximoNumeroNota();
 });
 
@@ -168,7 +164,7 @@ if (btnAdicionar && selectItem) {
     });
 }
 
-function removerServico(id) {
+/*function removerServico(id) {
     servicosAdicionados = servicosAdicionados.filter(item => item.id !== id);
     atualizarInterfaceServicos();
 }
@@ -208,7 +204,7 @@ function atualizarInterfaceServicos() {
     });
 
     totalGeralInput.value = `R$ ${somaTotal.toFixed(2).replace('.', ',')}`;
-}
+}*/
 
 function removerServico(id) {
     servicosAdicionados = servicosAdicionados.filter(item => item.id !== id);
@@ -288,6 +284,7 @@ function dispararImpressaoDupla() {
     if (document.getElementById('p_objeto')) document.getElementById('p_objeto').innerText = 'Automóvel';
     if (document.getElementById('p_modelo')) document.getElementById('p_modelo').innerText = modVeiculo;
     if (document.getElementById('p_serial')) document.getElementById('p_serial').innerText = placaVeiculo.toUpperCase();
+    if (document.getElementById('p_kilometragem')) document.getElementById('p_kilometragem').innerText = kmVeiculo;
 
     if (document.getElementById('p_status') && formaPagamentoSelect) {
         document.getElementById('p_status').innerText = 'Concluído / Pago via ' + formaPagamentoSelect.options[formaPagamentoSelect.selectedIndex].text;
@@ -371,9 +368,6 @@ if (btnLimpar) {
     });
 }
 
-
-
-
 // ==========================================================
 // FUNÇÃO PARA BUSCAR A OS E PREENCHER O FORMULÁRIO DE NOTAS
 // ==========================================================
@@ -395,6 +389,7 @@ function puxarDadosDaOS() {
         if (document.getElementById('f_cliente_id')) document.getElementById('f_cliente_id').value = osEncontrada.documento || '';
         if (document.getElementById('f_veiculo_mod')) document.getElementById('f_veiculo_mod').value = osEncontrada.modelo || '';
         if (document.getElementById('f_veiculo_placa')) document.getElementById('f_veiculo_placa').value = osEncontrada.serial || '';
+        if (document.getElementById('f_veiculo_kilometragem')) document.getElementById('f_veiculo_kilometragem').value = osEncontrada.quilometragem || '';
 
         // Limpa a lista atual de serviços da nota para colocar os da OS
         servicosAdicionados = [];
