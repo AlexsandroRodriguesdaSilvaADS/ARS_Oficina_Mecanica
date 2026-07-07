@@ -169,6 +169,10 @@ h3 {
     gap: 15px;
 }
 
+#f_status {
+    width: 300px;
+}
+
 .form-grid-1 {
     display: grid;
     grid-template-columns: 1fr 1fr;
