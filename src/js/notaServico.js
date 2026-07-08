@@ -103,7 +103,7 @@ if (btnAdicionar && selectItem) {
             alert("Insira uma quantidade válida.");
             return;
         }
-        if (isNaN(valorUnitarioOriginal) || valorUnitarioOriginal < 10) {
+        if (isNaN(valorUnitarioOriginal) || valorUnitarioOriginal < 20) {
             alert("O valor unitário mínimo deve ser R$ 10,00.");
             return;
         }
