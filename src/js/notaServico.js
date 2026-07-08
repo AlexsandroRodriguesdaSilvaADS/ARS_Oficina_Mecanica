@@ -7,7 +7,7 @@ function autenticar(event) {
     const pass = document.getElementById('password').value.trim();
     const errorMsg = document.getElementById('login-error');
 
-    if (user === "admin" && pass === "1234") {
+    if (user === "AlexAdmin" && pass === "047874") {
         errorMsg.style.display = 'none';
         document.getElementById('login-screen').style.display = 'none';
         document.getElementById('main-content').style.display = 'block';
@@ -23,6 +23,7 @@ function logout() {
     document.getElementById('login-screen').style.display = 'flex';
 }
 
+// Carrega os dados da OS
 document.addEventListener("DOMContentLoaded", () => {
     const mainContent = document.getElementById('main-content');
     const loginScreen = document.getElementById('login-screen');
@@ -43,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const fNotaNum = document.getElementById('f_nota_ref');
     if (fNotaNum) {
         fNotaNum.readOnly = false; // Permite que você apague o número automático e digite o da OS
-        fNotaNum.addEventListener('input', puxarDadosDaOS); // Dispara a busca a cada número digitado
+        fNotaNum.addEventListener('change', puxarDadosDaOS); // Dispara a busca com "enter"
     }
     definirProximoNumeroNota();
 });
@@ -90,6 +91,9 @@ if (btnAdicionar && selectItem) {
         const quantidadeInput = document.getElementById('quantidade');
         const valorInput = document.getElementById('valor');
 
+        const ladoSelect = document.getElementById('lado-selecionado');
+        const ladoValor = ladoSelect ? ladoSelect.value : '';
+
         // 1. Valida se o usuário selecionou algo
         if (!itemSelecionado) {
             alert('Por favor, selecione um serviço ou produto válido.');
@@ -103,10 +107,14 @@ if (btnAdicionar && selectItem) {
             alert("Insira uma quantidade válida.");
             return;
         }
-        if (isNaN(valorUnitarioOriginal) || valorUnitarioOriginal < 20) {
+        if (isNaN(valorUnitarioOriginal) || valorUnitarioOriginal < 10) {
             alert("O valor unitário mínimo deve ser R$ 10,00.");
             return;
         }
+
+        // Modificação no Nome: Se houver um lado selecionado (LD/LE), junta ao nome do item
+        // Exemplo: "Troca de Amortecedor" vira "Troca de Amortecedor (LD)"
+        const nomeCompletoItem = ladoValor ? `${itemSelecionado} (${ladoValor})` : itemSelecionado;
 
         // 2. Evita duplicados na lista (Varrendo o array correto)
         const itemExistente = servicosAdicionados.find(item => item.nome === itemSelecionado);
@@ -143,8 +151,8 @@ if (btnAdicionar && selectItem) {
         // 5. Salva o objeto no array que a Impressão consome
         const novoServico = {
             id: Date.now(),
-            nome: itemSelecionado,
-            icone: icone,
+            nome: nomeCompletoItem,
+            lado: ladoValor,
             qtd: qtd,
             valorOriginal: valorUnitarioOriginal,
             valorComDesconto: valorUnitarioComDesconto,
@@ -163,48 +171,6 @@ if (btnAdicionar && selectItem) {
         valorInput.value = '';
     });
 }
-
-/*function removerServico(id) {
-    servicosAdicionados = servicosAdicionados.filter(item => item.id !== id);
-    atualizarInterfaceServicos();
-}
-
-function atualizarInterfaceServicos() {
-    if (!listaServicosUl || !totalGeralInput) return;
-
-    listaServicosUl.innerHTML = '';
-    let somaTotal = 0;
-
-    servicosAdicionados.forEach(item => {
-        somaTotal += item.total;
-
-        const li = document.createElement('li');
-        li.style.display = 'flex';
-        li.style.justifyContent = 'space-between';
-        li.style.alignItems = 'center';
-        li.style.marginBottom = '8px';
-        li.style.padding = '6px';
-        li.style.borderBottom = '1px dashed #ddd';
-
-        let detalheValor = `Un: R$ ${item.valorComDesconto.toFixed(2)}`;
-        if (item.desconto > 0) {
-            detalheValor = `Un: R$ ${item.valorComDesconto.toFixed(2)} (com ${item.desconto}% desc. de R$ ${item.valorOriginal.toFixed(2)})`;
-        }
-
-        li.innerHTML = `
-            <span>
-                <i class="${item.icone}" style="margin-right: 8px; color: #1a365d;"></i>
-                <strong>${item.nome}</strong> (x${item.qtd}) - ${detalheValor} | Total: R$ ${item.total.toFixed(2)}
-            </span>
-            <button type="button" class="btn-remove-item" onclick="removerServico(${item.id})" style="background:none; border:none; color:#e53e3e; cursor:pointer; margin-left: 10px;" title="Remover">
-                <i class="fas fa-trash-alt"></i>
-            </button>
-        `;
-        listaServicosUl.appendChild(li);
-    });
-
-    totalGeralInput.value = `R$ ${somaTotal.toFixed(2).replace('.', ',')}`;
-}*/
 
 function removerServico(id) {
     servicosAdicionados = servicosAdicionados.filter(item => item.id !== id);
@@ -256,7 +222,7 @@ function dispararImpressaoDupla() {
     const telCliente = document.getElementById('f_cliente_tel')?.value;
     const modVeiculo = document.getElementById('f_veiculo_mod')?.value;
     const placaVeiculo = document.getElementById('f_veiculo_placa')?.value;
-    const kmVeiculo = document.getElementById('f_kilometragem')?.value;
+    const kmVeiculo = document.getElementById('f_veiculo_quilometragem')?.value;
 
     if (!nomeCliente || !telCliente || !modVeiculo || !placaVeiculo || !kmVeiculo) {
         alert("Por favor, preencha todos os campos obrigatórios (*) antes de imprimir.");
@@ -284,7 +250,7 @@ function dispararImpressaoDupla() {
     if (document.getElementById('p_objeto')) document.getElementById('p_objeto').innerText = 'Automóvel';
     if (document.getElementById('p_modelo')) document.getElementById('p_modelo').innerText = modVeiculo;
     if (document.getElementById('p_serial')) document.getElementById('p_serial').innerText = placaVeiculo.toUpperCase();
-    if (document.getElementById('p_kilometragem')) document.getElementById('p_kilometragem').innerText = kmVeiculo;
+    if (document.getElementById('p_quilometragem')) document.getElementById('p_quilometragem').innerText = kmVeiculo;
 
     if (document.getElementById('p_status') && formaPagamentoSelect) {
         document.getElementById('p_status').innerText = 'Concluído / Pago via ' + formaPagamentoSelect.options[formaPagamentoSelect.selectedIndex].text;
@@ -347,14 +313,15 @@ const btnLimpar = document.getElementById('btnLimpar');
 if (btnLimpar) {
     btnLimpar.addEventListener('click', () => {
         if (confirm("Tem certeza que deseja limpar todo o formulário?")) {
+            if (document.getElementById('f_nota_ref')) document.getElementById('f_nota_ref').value = '';
             if (document.getElementById('f_cliente_nome')) document.getElementById('f_cliente_nome').value = '';
             if (document.getElementById('f_cliente_tel')) document.getElementById('f_cliente_tel').value = '';
             if (document.getElementById('f_cliente_id')) document.getElementById('f_cliente_id').value = '';
             if (document.getElementById('f_veiculo_mod')) document.getElementById('f_veiculo_mod').value = '';
             if (document.getElementById('f_veiculo_placa')) document.getElementById('f_veiculo_placa').value = '';
-            if (document.getElementById('f_kilometragem')) document.getElementById('f_kilometragem').value = '';
-
+            if (document.getElementById('f_veiculo_quilometragem')) document.getElementById('f_veiculo_quilometragem').value = '';
             if (document.getElementById('servico')) document.getElementById('servico').value = '';
+            if (document.getElementById('lado-selecionado')) document.getElementById('lado-selecionado').value = '';
             if (document.getElementById('quantidade')) document.getElementById('quantidade').value = '1';
             if (document.getElementById('valor')) document.getElementById('valor').value = '';
             if (document.getElementById('desconto')) document.getElementById('desconto').value = '';

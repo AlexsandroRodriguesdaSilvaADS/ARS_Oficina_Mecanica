@@ -101,7 +101,7 @@
                         </div>
                         <div class="form-group">
                             <label for="quilometragem">Quilometragem atual (KM)*</label>
-                            <input type="text" id="f_kilometragem" required>
+                            <input type="text" id="f_veiculo_quilometragem" required>
                         </div>
                     </div>
                 </div>
@@ -143,7 +143,6 @@
                                 </option>
                                 <option value="Filtro do condicionador de ar" data-valor="">Filtro do
                                     condicionador de ar</option>
-                                <option value="Fluído de freios" data-valor="">Fluído de freios</option>
                                 <option value="Hidrovácuo (servo freio)" data-valor="">Hidrovácuo (servo freio)
                                 </option>
                                 <option value="Kit batedor e coifa" data-valor="">Kit batedor e coifa</option>
@@ -174,6 +173,7 @@
                                 </option>
                                 <option value="Fluido de arrefecimento" data-valor="">Fluido de arrefecimento
                                 </option>
+                                <option value="Fluído de freios" data-valor="">Fluído de freios</option>
                                 <option value="Graxa para homocinética" data-valor="">Graxa para homocinética
                                 </option>
                                 <option value="Limpa contato" data-valor="">Limpa contato</option>
@@ -186,13 +186,24 @@
                     </div>
 
                     <div class="form-grupo">
+                        <label class="services" for="item-selecionado">Lado</label>
+                        <select type="text" name="item" id="lado-selecionado">
+                            <option value="">Opção...</option>
+                            <option value="LD" data-valor="">LD</option>
+                            <option value="LE" data-valor="">LE</option>
+                            <option value="LD / LE" data-valor="">LD / LE</option>
+                        </select>
+                    </div>
+
+                    <div class="form-grupo">
                         <label class="services" for="quantidade">Qtd</label>
                         <input type="number" id="quantidade" min="1" value="1" style="width: 60px;" required>
                     </div>
 
                     <div class="form-grupo">
                         <label class="services" for="valor">Valor Unitário (R$)</label>
-                        <input type="number" id="valor" step="0.10" min="10.00" placeholder="Ex: 150.00" required>
+                        <input type="number" id="valor" step="0.10" min="10.00" placeholder="Valor mínimo R$10,00"
+                            required>
                     </div>
 
                     <div class="form-grupo">
