@@ -1,13 +1,58 @@
 // ==========================================
 // 1. SISTEMA DE LOGIN E CONTROLE DE TELAS
 // ==========================================
+// Variável global para saber quem está operando o sistema neste momento
+let usuarioLogado = "";
+
 function autenticar(event) {
+    event.preventDefault();
+    const user = document.getElementById('username').value.trim().toLowerCase();
+    const pass = document.getElementById('password').value.trim();
+    const errorMsg = document.getElementById('login-error');
+
+    const usuariosPermitidos = {
+        "alex": "047874",
+        "lindovaldo": "123456",
+        "midiam": "013335",
+    };
+
+    if (usuariosPermitidos[user] && usuariosPermitidos[user] === pass) {
+        if (errorMsg) errorMsg.style.display = 'none';
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+
+        const nomeFormatado = user.toUpperCase();
+
+        // 1. Salva na sessão para as funções de serviços usarem
+        sessionStorage.setItem('usuario_ativo', nomeFormatado);
+
+        // 2. NOVO: Faz o nome aparecer na tela (HTML) imediatamente
+        const elementoNome = document.getElementById('nome-usuario-logado');
+        if (elementoNome) {
+            elementoNome.innerText = nomeFormatado;
+        }
+
+        if (typeof inicializarNumeroOS === 'function') {
+            inicializarNumeroOS();
+        } else if (typeof definirProximoNumeroNota === 'function') {
+            definirProximoNumeroNota();
+        }
+        
+        if (event.target && typeof event.target.reset === 'function') {
+            event.target.reset();
+        }
+    } else {
+        if (errorMsg) errorMsg.style.display = 'block';
+    }
+}
+
+/*function autenticar(event) {
     event.preventDefault();
     const user = document.getElementById('username').value.trim();
     const pass = document.getElementById('password').value.trim();
     const errorMsg = document.getElementById('login-error');
 
-    if (user === "AlexAdmin" && pass === "047874") {
+    if (user === "alex" && pass === "047874") {
         errorMsg.style.display = 'none';
         document.getElementById('login-screen').style.display = 'none';
         document.getElementById('main-content').style.display = 'block';
@@ -16,12 +61,21 @@ function autenticar(event) {
     } else {
         errorMsg.style.display = 'block';
     }
-}
+}*/
 
 function logout() {
     document.getElementById('main-content').style.display = 'none';
     document.getElementById('login-screen').style.display = 'flex';
+
+    // Limpa o usuário ativo ao deslogar
+    usuarioLogado = "";
+    sessionStorage.removeItem('usuario_ativo');
 }
+
+/*function logout() {
+    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
+}*/
 
 // Carrega os dados da OS
 document.addEventListener("DOMContentLoaded", () => {
@@ -47,6 +101,13 @@ document.addEventListener("DOMContentLoaded", () => {
         fNotaNum.addEventListener('change', puxarDadosDaOS); // Dispara a busca com "enter"
     }
     definirProximoNumeroNota();
+
+    // Recarrega o nome do usuário na tela caso a página seja atualizada
+    const usuarioSalvo = sessionStorage.getItem('usuario_ativo');
+    const elementoNome = document.getElementById('nome-usuario-logado');
+    if (usuarioSalvo && elementoNome) {
+        elementoNome.innerText = usuarioSalvo;
+    }
 });
 
 function definirProximoNumeroNota() {
@@ -153,12 +214,27 @@ if (btnAdicionar && selectItem) {
             id: Date.now(),
             nome: nomeCompletoItem,
             lado: ladoValor,
+            icone: icone,
+            qtd: qtd,
+            valorOriginal: valorUnitarioOriginal,
+            valorComDesconto: valorUnitarioComDesconto,
+            desconto: descontoPorcentagem,
+            total: subtotalFinal,
+
+            // NOVO: Vincula o funcionário/usuário logado a este serviço específico
+            usuario: usuarioLogado || sessionStorage.getItem('usuario_ativo') || "NÃO IDENTIFICADO"
+        };
+
+        /*const novoServico = {
+            id: Date.now(),
+            nome: nomeCompletoItem,
+            lado: ladoValor,
             qtd: qtd,
             valorOriginal: valorUnitarioOriginal,
             valorComDesconto: valorUnitarioComDesconto,
             desconto: descontoPorcentagem,
             total: subtotalFinal
-        };
+        };*/
 
         servicosAdicionados.push(novoServico);
 

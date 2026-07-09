@@ -88,6 +88,14 @@ body {
     display: none;
 }
 
+.logo {
+    margin: 40px 0;
+    position: relative;
+    width: 135px;
+    box-shadow: 0 0 10px #fff;
+    padding: 2px;
+}
+
 .container {
     max-width: 70%;
     margin: 0 auto;
@@ -98,12 +106,10 @@ body {
     position: relative;
 }
 
-.logo {
-    margin: 40px 0;
+.container #user {
     position: relative;
-    width: 135px;
-    box-shadow: 0 0 10px #fff;
-    padding: 2px;
+    color: #1a365d;
+    font-weight: bold;
 }
 
 .container #main-title {
@@ -177,6 +183,7 @@ h3 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
+    margin-top: 15px;
 }
 
 .form-group,
@@ -188,6 +195,7 @@ h3 {
 
 .form-group-1 input {
     width: 100px;
+
 }
 
 .form-group-1 input label {
@@ -453,6 +461,24 @@ iframe.ativo {
         background: transparent !important;
     }
 
+    .container #user {
+        bottom: -180px;
+        display: block !important;
+        visibility: visible !important;
+    }
+
+    .container #main-title {
+        position: absolute;
+        top: 70px;
+        left: 30%;
+        right: 30%;
+        font-size: 26px;
+        color: #1a365d;
+        padding-bottom: 8px;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
     .logo,
     .container #main-title {
         display: block !important;
@@ -460,6 +486,7 @@ iframe.ativo {
     }
 
     /* EXIBE APENAS A ÁREA DO ESPELHO DE IMPRESSÃO */
+
     .print-area {
         display: block !important;
         visibility: visible !important;
@@ -474,18 +501,6 @@ iframe.ativo {
         border-bottom: 2px solid #000;
         padding-bottom: 8px;
         margin-bottom: 12px;
-    }
-
-    .container #main-title {
-        position: absolute;
-        top: 30px;
-        left: 30%;
-        right: 30%;
-        font-size: 26px;
-        color: #1a365d;
-        padding-bottom: 8px;
-        text-align: center;
-        text-transform: uppercase;
     }
 
     .print-section {

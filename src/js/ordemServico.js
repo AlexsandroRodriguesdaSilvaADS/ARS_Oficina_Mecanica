@@ -25,13 +25,57 @@ function incrementarNumeroOS() {
 // ==========================================
 // 2. CONTROLE DE ACESSO (LOGIN / LOGOUT)
 // ==========================================
+let usuarioLogado = "";
+
 function autenticar(event) {
+    event.preventDefault();
+    const user = document.getElementById('username').value.trim().toLowerCase();
+    const pass = document.getElementById('password').value.trim();
+    const errorMsg = document.getElementById('login-error');
+
+    const usuariosPermitidos = {
+        "alex": "047874",
+        "lindovaldo": "12345",
+        "midiam": "12345"
+    };
+
+    if (usuariosPermitidos[user] && usuariosPermitidos[user] === pass) {
+        if (errorMsg) errorMsg.style.display = 'none';
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+
+        const nomeFormatado = user.toUpperCase();
+
+        // 1. Salva na sessão para as funções de serviços usarem
+        sessionStorage.setItem('usuario_ativo', nomeFormatado);
+
+        // 2. NOVO: Faz o nome aparecer na tela (HTML) imediatamente
+        const elementoNome = document.getElementById('nome-usuario-logado');
+        if (elementoNome) {
+            elementoNome.innerText = nomeFormatado;
+        }
+
+        if (typeof inicializarNumeroOS === 'function') {
+            inicializarNumeroOS();
+        } else if (typeof definirProximoNumeroNota === 'function') {
+            definirProximoNumeroNota();
+        }
+        
+        if (event.target && typeof event.target.reset === 'function') {
+            event.target.reset();
+        }
+    } else {
+        if (errorMsg) errorMsg.style.display = 'block';
+    }
+}
+
+/*function autenticar(event) {
     event.preventDefault();
     const user = document.getElementById('username').value.trim();
     const pass = document.getElementById('password').value.trim();
     const errorMsg = document.getElementById('login-error');
 
-    if (user === "admin" && pass === "1234") {
+    if (user === "alex" && pass === "047874") {
         if (errorMsg) errorMsg.style.display = 'none';
         document.getElementById('login-screen').style.display = 'none';
         document.getElementById('main-content').style.display = 'block';
@@ -41,12 +85,21 @@ function autenticar(event) {
     } else {
         if (errorMsg) errorMsg.style.display = 'block';
     }
-}
+}*/
 
 function logout() {
     document.getElementById('main-content').style.display = 'none';
     document.getElementById('login-screen').style.display = 'flex';
+
+    // Limpa o usuário ativo ao deslogar
+    usuarioLogado = "";
+    sessionStorage.removeItem('usuario_ativo');
 }
+
+/*function logout() {
+    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
+}*/
 
 // ==========================================
 // 3. GERENCIAMENTO DA LISTA DE SERVIÇOS E PRODUTOS
@@ -268,6 +321,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (loginScreen) loginScreen.style.display = 'flex';
     if (mainContent) mainContent.style.display = 'none';
     inicializarNumeroOS();
+
+    // Recarrega o nome do usuário na tela caso a página seja atualizada
+    const usuarioSalvo = sessionStorage.getItem('usuario_ativo');
+    const elementoNome = document.getElementById('nome-usuario-logado');
+    if (usuarioSalvo && elementoNome) {
+        elementoNome.innerText = usuarioSalvo;
+    }
 });
 
 
