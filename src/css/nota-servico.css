@@ -49,6 +49,7 @@ html {
 }
 
 .login-group input {
+    width: 100%;
     padding: 10px;
     border: 1px solid #cbd5e0;
     border-radius: 5px;

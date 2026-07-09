@@ -35,8 +35,8 @@ function autenticar(event) {
 
     const usuariosPermitidos = {
         "alex": "047874",
-        "lindovaldo": "12345",
-        "midiam": "12345"
+        "lindovaldo": "123456",
+        "midiam": "123456"
     };
 
     if (usuariosPermitidos[user] && usuariosPermitidos[user] === pass) {
