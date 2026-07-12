@@ -151,7 +151,6 @@ if (btnAdicionar && selectItem) {
         const itemSelecionado = selectItem.value;
         const quantidadeInput = document.getElementById('quantidade');
         const valorInput = document.getElementById('valor');
-
         const ladoSelect = document.getElementById('lado-selecionado');
         const ladoValor = ladoSelect ? ladoSelect.value : '';
 
@@ -220,7 +219,6 @@ if (btnAdicionar && selectItem) {
             valorComDesconto: valorUnitarioComDesconto,
             desconto: descontoPorcentagem,
             total: subtotalFinal,
-
             // NOVO: Vincula o funcionário/usuário logado a este serviço específico
             usuario: usuarioLogado || sessionStorage.getItem('usuario_ativo') || "NÃO IDENTIFICADO"
         };

@@ -17,7 +17,7 @@ function incrementarNumeroOS() {
     let atual = parseInt(localStorage.getItem('proximo_numero_os'), 10) || 1001;
     let proximo = atual + 1;
     localStorage.setItem('proximo_numero_os', proximo.toString());
-    
+
     const fNumero = document.getElementById('f_numero');
     if (fNumero) fNumero.value = proximo;
 }
@@ -60,7 +60,7 @@ function autenticar(event) {
         } else if (typeof definirProximoNumeroNota === 'function') {
             definirProximoNumeroNota();
         }
-        
+
         if (event.target && typeof event.target.reset === 'function') {
             event.target.reset();
         }
@@ -102,9 +102,271 @@ function logout() {
 }*/
 
 // ==========================================
+// 2. CONTROLE DE FORMA DE PAGAMENTO E DESCONTO
+// ==========================================
+const formaPagamentoSelect = document.getElementById('formaPagamento');
+const descontoInput = document.getElementById('desconto');
+
+if (formaPagamentoSelect && descontoInput) {
+    formaPagamentoSelect.addEventListener('change', function () {
+        // Habilita desconto de 5% a 10% apenas para Pix ou Dinheiro
+        if (this.value === 'pix' || this.value === 'dinheiro') {
+            descontoInput.disabled = false;
+            descontoInput.value = 5; // Desconto padrão sugerido inicial
+        } else {
+            descontoInput.disabled = true;
+            descontoInput.value = '';
+        }
+    });
+}
+
+// ==========================================
+// 3. GERENCIAMENTO DA LISTA DE SERVIÇOS
+// ==========================================
+let servicosAdicionados = []; // O array que guarda os itens adicionados
+const btnAdicionar = document.getElementById('btnAdicionar');
+const selectItem = document.getElementById('item-selecionado');
+const listaServicosUl = document.getElementById('listaServicos');
+const totalGeralInput = document.getElementById('totalGeral');
+
+if (btnAdicionar && selectItem) {
+    btnAdicionar.addEventListener('click', () => {
+        const itemSelecionado = selectItem.value;
+        const quantidadeInput = document.getElementById('quantidade');
+        const valorInput = document.getElementById('valor');
+        const ladoSelect = document.getElementById('lado-selecionado');
+        const ladoValor = ladoSelect ? ladoSelect.value : '';
+
+        // 1. Validações básicas de preenchimento
+        if (!itemSelecionado) {
+            alert('Por favor, selecione um serviço ou produto válido.');
+            return;
+        }
+
+        const qtd = parseInt(quantidadeInput.value);
+        const valorUnitarioOriginal = parseFloat(valorInput.value);
+
+        if (isNaN(qtd) || qtd <= 0) {
+            alert("Insira uma quantidade válida.");
+            return;
+        }
+        if (isNaN(valorUnitarioOriginal) || valorUnitarioOriginal < 10) {
+            alert("O valor unitário mínimo deve ser R$ 10,00.");
+            return;
+        }
+
+        // Formatação do Nome: Se houver lado selecionado, adiciona ao texto do item
+        // Exemplo: "Amortecedor dianteiro (LD)" ou "Pastilhas de freios (LD / LE)"
+        const nomeCompletoItem = ladoValor ? `${itemSelecionado} (${ladoValor})` : itemSelecionado;
+
+        // 2. Evita duplicados idênticos na lista (Varre pelo nome completo + lado montado)
+        const itemExistente = servicosAdicionados.find(item => item.nome === itemSelecionado); //nomeCompletoItem
+        if (itemExistente) {
+            alert(`O item "${itemSelecionado}" já foi adicionado à lista.`);
+            return;
+        }
+
+        // 3. Identifica se é Serviço ou Produto/Peça pelo optgroup para definir o ícone
+        const opcaoSelecionada = selectItem.options[selectItem.selectedIndex];
+        const optgroupPai = opcaoSelecionada.parentNode;
+        const tipoGrupo = optgroupPai.tagName === 'OPTGROUP' ? optgroupPai.label.toLowerCase() : '';
+
+        let icone = 'fas fa-wrench'; // Ícone padrão para Serviços
+        if (tipoGrupo.includes('produto') || tipoGrupo.includes('peça')) {
+            icone = 'fas fa-box'; // Ícone para Produtos / Peças
+        }
+
+        // 4. Tratamento e cálculo do Desconto (Caso o campo esteja ativo)
+        let descontoPorcentagem = 0;
+        let valorUnitarioComDesconto = valorUnitarioOriginal;
+
+        if (descontoInput && !descontoInput.disabled && descontoInput.value) {
+            descontoPorcentagem = parseFloat(descontoInput.value);
+            if (descontoPorcentagem < 5 || descontoPorcentagem > 10) {
+                alert("O desconto permitido deve ser entre 5% e 10%.");
+                return;
+            }
+            valorUnitarioComDesconto = valorUnitarioOriginal * (1 - (descontoPorcentagem / 100));
+        }
+
+        const subtotalFinal = qtd * valorUnitarioComDesconto;
+
+        // 5. Estrutura do objeto salva no array global
+        const novoServico = {
+            id: Date.now(),
+            nome: nomeCompletoItem,
+            lado: ladoValor,
+            icone: icone,
+            qtd: qtd,
+            valorOriginal: valorUnitarioOriginal,
+            valorComDesconto: valorUnitarioComDesconto,
+            desconto: descontoPorcentagem,
+            total: subtotalFinal,
+            // Puxa o usuário ativo se houver controle de login no seu app
+            usuario: (typeof usuarioLogado !== 'undefined' ? usuarioLogado : null) || sessionStorage.getItem('usuario_ativo') || "NÃO IDENTIFICADO"
+        };
+
+        servicosAdicionados.push(novoServico);
+
+        // 6. Chama a função que renderiza as `<li>` na tela
+        /*if (typeof atualizarInterfaceServicos === 'function') {
+            atualizarInterfaceServicos();
+        } else {
+            console.error("A função atualizarInterfaceServicos() não foi implementada ainda.");
+        }*/
+        atualizarInterfaceServicos();
+
+        // 7. Reseta os campos do formulário para o próximo item
+        selectItem.value = '';
+        if (ladoSelect) ladoSelect.value = '';
+        quantidadeInput.value = '1';
+        if (valorInput) valorInput.value = '';
+    });
+
+
+}
+
+// ==========================================
+// 4. RENDERIZAÇÃO DA INTERFACE (CRIAR AS LI)
+// ==========================================
+function atualizarInterfaceServicos() {
+    // 1. Limpa a lista atual para não duplicar visualmente
+    listaServicosUl.innerHTML = '';
+
+    let totalAcumuladoOS = 0;
+
+    // 2. Se não houver itens, mostra uma mensagem amigável ou deixa vazia
+    if (servicosAdicionados.length === 0) {
+        listaServicosUl.innerHTML = '<li class="lista-vazia">Nenhum serviço ou produto adicionado.</li>';
+        if (totalGeralInput) totalGeralInput.value = 'R$ 0,00';
+
+        // Atualiza também a label de total geral caso use ela em algum lugar da tela
+        const labelTotalOS = document.getElementById('valor-total-os');
+        if (labelTotalOS) labelTotalOS.innerText = 'R$ 0,00';
+        return;
+    }
+
+    // 3. Percorre o array e cria o HTML de cada item dinamicamente
+    servicosAdicionados.forEach((item) => {
+        const li = document.createElement('li');
+        li.className = 'item-servico-adicionado'; // Você pode estilizar essa classe no seu CSS
+
+        // Acumula o valor para o total geral
+        totalAcumuladoOS += item.total;
+
+        // Monta o conteúdo interno da LI usando os dados do objeto
+        li.innerHTML = `
+            <div class="item-info">
+                <i class="${item.icone}"></i> 
+                <strong>${item.nome}</strong>
+                <span class="item-detalhes">
+                    (${item.qtd}x - R$ ${item.valorComDesconto.toFixed(2)})
+                    ${item.desconto > 0 ? `<small class="txt-desconto">-${item.desconto}%</small>` : ''}
+                </span>
+            </div>
+            <div class="item-valores">
+                <span class="item-subtotal">R$ ${item.total.toFixed(2)}</span>
+                <button type="button" class="btn-remover-item" data-id="${item.id}" title="Remover item">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>
+        `;
+
+        // Adiciona a LI recém-criada dentro da sua UL do HTML
+        listaServicosUl.appendChild(li);
+    });
+
+    // 4. Atualiza os campos de preço total na tela
+    const totalFormatado = `R$ ${totalAcumuladoOS.toFixed(2).replace('.', ',')}`;
+
+    if (totalGeralInput) {
+        totalGeralInput.value = totalFormatado;
+    }
+
+    // Alimenta também a tag onde a função da planilha busca o total geral
+    const labelTotalOS = document.getElementById('valor-total-os');
+    if (labelTotalOS) {
+        labelTotalOS.innerText = totalFormatado;
+    }
+
+    // 5. Ativa os eventos de clique dos botões "Remover" de cada LI criada
+    configurarBotoesRemover();
+}
+
+// Funçao auxiliar para fazer o botão de lixeira (remover) funcionar
+function configurarBotoesRemover() {
+    const botoesRemover = listaServicosUl.querySelectorAll('.btn-remover-item');
+
+    botoesRemover.forEach(botao => {
+        botao.addEventListener('click', function () {
+            const idParaRemover = parseInt(this.getAttribute('data-id'));
+
+            // Filtra o array removendo o item que possui o ID clicado
+            servicosAdicionados = servicosAdicionados.filter(item => item.id !== idParaRemover);
+
+            // Recarrega as LI's na tela com o array atualizado
+            atualizarInterfaceServicos();
+        });
+    });
+}
+
+const enviarParaSheetMonkey = (dadosOS, itens) => {
+    // 1. Busca o texto do total geral da Ordem de Serviço
+    const textoTotal = document.getElementById('valor-total-os')?.innerText || 'R$ 0,00';
+
+    // 2. Formata o array de itens/serviços em um texto limpo e legível para a célula da planilha
+    // Se o array estiver vazio, gera um texto padrão
+    const itensFormatadosTexto = Array.isArray(itens) && itens.length > 0
+        ? itens.map((item, index) => {
+            const detalheLado = item.lado ? ` | Lado: ${item.lado}` : '';
+            const detalheDesconto = item.desconto > 0 ? ` | Desc: ${item.desconto}%` : '';
+            const detalheUsuario = item.usuario ? ` | Por: ${item.usuario}` : '';
+
+            return `${index + 1}. [${item.qtd}x] ${item.nome}${detalheLado} (Unit: R$ ${parseFloat(item.valorOriginal).toFixed(2)}${detalheDesconto}) -> Subtotal: R$ ${parseFloat(item.total).toFixed(2)}${detalheUsuario}`;
+        }).join('\n') // Quebra uma linha para cada item adicionado
+        : 'Nenhum item ou serviço adicionado.';
+
+    // 3. Monta o objeto final mapeando as propriedades para a sua Sheet
+    const dadosParaEnviar = {
+        Numero_OS: dadosOS.numero,
+        Status: dadosOS.status,
+        Cliente: dadosOS.cliente,
+        Documento: dadosOS.documento,
+        Telefone: dadosOS.telefone,
+        Email: dadosOS.email,
+        Veiculo: dadosOS.objeto,
+        Modelo: dadosOS.modelo,
+        Placa: dadosOS.serial,
+        Quilometragem: dadosOS.quilometragem,
+        Defeito: dadosOS.defeito,
+        Laudo: dadosOS.laudo,
+        Data: dadosOS.data,
+        Itens_Adicionados: itensFormatadosTexto, // Agora envia o texto estruturado com Lado, Qtd e Desconto
+        Valor_Total: textoTotal
+    };
+
+    // 4. Envio para o Sheet Monkey via Fetch API
+    fetch('https://api.sheetmonkey.io/form/YysUFctamTP45zycCGFKA', {
+        method: 'POST', // Padronizado em maiúsculo por boa prática
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dadosParaEnviar),
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro na requisição: ${response.statusText}`);
+            }
+            console.log('Dados salvos na planilha com sucesso!');
+        })
+        .catch(err => console.error('Erro ao salvar na planilha:', err));
+}
+
+// ==========================================
 // 3. GERENCIAMENTO DA LISTA DE SERVIÇOS E PRODUTOS
 // ==========================================
-const btnAdicionar = document.getElementById('btnAdicionar');
+/*const btnAdicionar = document.getElementById('btnAdicionar');
 const selectItem = document.getElementById('item-selecionado');
 const listaServicos = document.getElementById('listaServicos');
 
@@ -178,7 +440,7 @@ const enviarParaSheetMonkey = (dadosOS, itens) => {
     })
     .then(() => console.log('Dados salvos na planilha com sucesso!'))
     .catch(err => console.error('Erro ao salvar na planilha:', err));
-}
+}*/
 
 // ==========================================
 // 4. PROCESSAR DADOS E ABRIR TELA DE IMPRESSÃO
@@ -195,7 +457,7 @@ function gerarOS(event) {
 
     const camposObrigatorios = [
         'f_numero', 'f_status', 'f_cliente', 'f_telefone',
-        'f_objeto', 'f_modelo', 'f_serial', 'f_quilometragem', 'f_defeito', 'f_laudo'
+        'f_objeto', 'f_modelo', 'f_serial', 'f_quilometragem', 'f_defeito', 'f_laudo', '',
     ];
 
     for (const id of camposObrigatorios) {
@@ -306,10 +568,24 @@ function limparCamposFormulario() {
     const form = document.getElementById('os-form');
     if (form) form.reset();
     if (listaServicos) listaServicos.innerHTML = '';
-    
+
+    // Zera o texto do totalizador ao limpar tudo
+    const elementoTotal = document.getElementById('valor-total-os');
+    if (elementoTotal) elementoTotal.innerHTML = 'Total Geral: R$ 0,00';
+
     const fNumero = document.getElementById('f_numero');
     if (fNumero) fNumero.value = numeroAtual;
 }
+
+/*function limparCamposFormulario() {
+    const numeroAtual = localStorage.getItem('proximo_numero_os');
+    const form = document.getElementById('os-form');
+    if (form) form.reset();
+    if (listaServicos) listaServicos.innerHTML = '';
+    
+    const fNumero = document.getElementById('f_numero');
+    if (fNumero) fNumero.value = numeroAtual;
+}*/
 
 // ==========================================
 // 6. CONFIGURAÇÃO INICIAL
@@ -317,7 +593,7 @@ function limparCamposFormulario() {
 document.addEventListener('DOMContentLoaded', () => {
     const loginScreen = document.getElementById('login-screen');
     const mainContent = document.getElementById('main-content');
-    
+
     if (loginScreen) loginScreen.style.display = 'flex';
     if (mainContent) mainContent.style.display = 'none';
     inicializarNumeroOS();
@@ -329,281 +605,3 @@ document.addEventListener('DOMContentLoaded', () => {
         elementoNome.innerText = usuarioSalvo;
     }
 });
-
-
-/*// ==========================================
-// 1. CONTROLADOR DO NÚMERO SEQUENCIAL (OS)
-// ==========================================
-function inicializarNumeroOS() {
-    const fNumero = document.getElementById('f_numero');
-    if (!fNumero) return;
-
-    if (!localStorage.getItem('proximo_numero_os')) {
-        localStorage.setItem('proximo_numero_os', '2601');
-    }
-
-    fNumero.value = localStorage.getItem('proximo_numero_os');
-    fNumero.readOnly = true;
-}
-
-function incrementarNumeroOS() {
-    let atual = parseInt(localStorage.getItem('proximo_numero_os'), 10) || 1001;
-    let proximo = atual + 1;
-    localStorage.setItem('proximo_numero_os', proximo.toString());
-    document.getElementById('f_numero').value = proximo;
-}
-
-// ==========================================
-// 2. CONTROLE DE ACESSO (LOGIN / LOGOUT)
-// ==========================================
-function autenticar(event) {
-    event.preventDefault();
-    const user = document.getElementById('username').value.trim();
-    const pass = document.getElementById('password').value.trim();
-    const errorMsg = document.getElementById('login-error');
-
-    if (user === "admin" && pass === "1234") {
-        errorMsg.style.display = 'none';
-        document.getElementById('login-screen').style.display = 'none';
-        document.getElementById('main-content').style.display = 'block';
-
-        inicializarNumeroOS();
-        event.target.reset();
-    } else {
-        errorMsg.style.display = 'block';
-    }
-}
-
-function logout() {
-    document.getElementById('main-content').style.display = 'none';
-    document.getElementById('login-screen').style.display = 'flex';
-}
-
-// ==========================================
-// 3. GERENCIAMENTO DA LISTA DE SERVIÇOS E PRODUTOS
-// ==========================================
-const btnAdicionar = document.getElementById('btnAdicionar');
-const selectItem = document.getElementById('item-selecionado');
-const listaServicos = document.getElementById('listaServicos');
-
-if (btnAdicionar && selectItem) {
-    btnAdicionar.addEventListener('click', () => {
-        const itemSelecionado = selectItem.value;
-
-        if (!itemSelecionado) {
-            alert('Por favor, selecione um serviço ou produto válido.');
-            return;
-        }
-
-        const itensAtuais = Array.from(listaServicos.querySelectorAll('li')).map(li => li.dataset.value);
-        if (itensAtuais.includes(itemSelecionado)) {
-            alert('Este item já foi adicionado.');
-            return;
-        }
-
-        const opcaoSelecionada = selectItem.options[selectItem.selectedIndex];
-        const optgroupPai = opcaoSelecionada.parentNode;
-        const tipoGrupo = optgroupPai.tagName === 'OPTGROUP' ? optgroupPai.label : '';
-
-        let icone = 'fas fa-wrench';
-        if (tipoGrupo.toLowerCase().includes('produto')) {
-            icone = 'fas fa-box';
-        } else if (tipoGrupo.toLowerCase().includes('serviço')) {
-            icone = 'fas fa-wrench';
-        }
-
-        const li = document.createElement('li');
-        li.dataset.value = itemSelecionado;
-        li.innerHTML = `
-            <span>
-                <i class="${icone}" style="margin-right: 8px; color: #1a365d;"></i>
-                ${itemSelecionado}
-            </span>
-            <button type="button" class="btn-remove-item" style="background:none; border:none; color:#e53e3e; cursor:pointer;" title="Remover">
-                <i class="fas fa-trash-alt"></i>
-            </button>
-        `;
-
-        li.querySelector('.btn-remove-item').addEventListener('click', () => li.remove());
-
-        listaServicos.appendChild(li);
-        selectItem.value = "";
-    });
-}
-
-// Alteramos a função para receber os dados prontos como argumento
-const enviarParaSheetMonkey = (dadosOS, itens) => {
-
-    // Criamos o objeto final que vai virar colunas na sua planilha
-    const dadosParaEnviar = {
-        Numero_OS: dadosOS.numero,
-        Status: dadosOS.status,
-        Cliente: dadosOS.cliente,
-        Documento: dadosOS.documento,
-        Telefone: dadosOS.telefone,
-        Email: dadosOS.email,
-        Veiculo: dadosOS.objeto,
-        Modelo: dadosOS.modelo,
-        Placa: dadosOS.serial,
-        Quilometragem: dadosOS.quilometragem,
-        Defeito: dadosOS.defeito,
-        Laudo: dadosOS.laudo,
-        Data: dadosOS.data,
-        Itens_Adicionados: itens // Aqui vai a lista de serviços/produtos como texto
-    };
-
-    fetch('https://api.sheetmonkey.io/form/YysUFctamTP45zycCGFKA', {
-        method: 'post',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dadosParaEnviar), // Enviamos o objeto completo
-    })
-        .then(() => console.log('Dados salvos na planilha com sucesso!'))
-        .catch(err => console.error('Erro ao salvar na planilha:', err));
-}
-
-// ==========================================
-// 4. PROCESSAR DADOS E ABRIR TELA DE IMPRESSÃO
-// ==========================================
-function gerarOS(event) {
-    event.preventDefault();
-
-    // Importante: certifique-se de que a variável 'listaServicos' existe globalmente, 
-    // caso contrário, adicione: const listaServicos = document.getElementById('listaServicos');
-    const itensServico = listaServicos.querySelectorAll('li');
-    if (itensServico.length === 0) {
-        alert('Adicione pelo menos um serviço antes de gerar a Ordem de Serviço.');
-        return;
-    }
-
-    const camposObrigatorios = [
-        'f_numero', 'f_status', 'f_cliente', 'f_telefone',
-        'f_objeto', 'f_modelo', 'f_serial', 'f_quilometragem', 'f_defeito', 'f_laudo'
-    ];
-
-    for (const id of camposObrigatorios) {
-        const campo = document.getElementById(id);
-
-        // 1. Verifica se o campo existe no HTML
-        if (!campo) {
-            alert(`Erro interno: O campo com ID "${id}" não foi encontrado no sistema.`);
-            return;
-        }
-
-        // 2. Verifica se está vazio
-        if (campo.value.trim() === '') {
-            alert('Por favor, preencha todos os campos do formulário antes de gerar a OS.');
-            campo.focus();
-            return;
-        }
-    }
-
-    const dadosOS = {
-        numero: document.getElementById('f_numero').value,
-        status: document.getElementById('f_status').value,
-        cliente: document.getElementById('f_cliente').value,
-        documento: document.getElementById('f_documento')?.value || 'NÃO INFORMADO',
-        telefone: document.getElementById('f_telefone').value,
-        email: document.getElementById('f_email')?.value || 'NÃO INFORMADO',
-        objeto: document.getElementById('f_objeto').value,
-        modelo: document.getElementById('f_modelo').value,
-        serial: document.getElementById('f_serial').value,
-        quilometragem: document.getElementById('f_quilometragem').value,
-        defeito: document.getElementById('f_defeito').value,
-        laudo: document.getElementById('f_laudo').value,
-        data: new Date().toLocaleDateString('pt-BR')
-    };
-
-    // Salva no LocalStorage
-    const historicoOS = JSON.parse(localStorage.getItem('historico_ordens_locais')) || {};
-
-    const listaItensFinais = Array.from(itensServico).map(li => {
-        return li.innerText.replace(/[\n\r]+/g, ' ').replace('Excluir', '').trim();
-    });
-
-    historicoOS[dadosOS.numero] = {
-        ...dadosOS,
-        itens: listaItensFinais
-    };
-
-    localStorage.setItem('historico_ordens_locais', JSON.stringify(historicoOS));
-
-    // Preenche a área de visualização técnica da OS (com tratamento seguro para evitar erros)
-    if (document.getElementById('p_numero')) document.getElementById('p_numero').textContent = dadosOS.numero;
-    if (document.getElementById('p_status')) document.getElementById('p_status').textContent = dadosOS.status;
-    if (document.getElementById('p_cliente')) document.getElementById('p_cliente').textContent = dadosOS.cliente;
-    if (document.getElementById('p_documento')) document.getElementById('p_documento').textContent = dadosOS.documento;
-    if (document.getElementById('p_telefone')) document.getElementById('p_telefone').textContent = dadosOS.telefone;
-    if (document.getElementById('p_email')) document.getElementById('p_email').textContent = dadosOS.email;
-    if (document.getElementById('p_objeto')) document.getElementById('p_objeto').textContent = dadosOS.objeto;
-    if (document.getElementById('p_modelo')) document.getElementById('p_modelo').textContent = dadosOS.modelo;
-    if (document.getElementById('p_serial')) document.getElementById('p_serial').textContent = dadosOS.serial;
-    if (document.getElementById('p_quilometragem')) document.getElementById('p_quilometragem').textContent = dadosOS.quilometragem;
-    if (document.getElementById('p_defeito')) document.getElementById('p_defeito').textContent = dadosOS.defeito;
-    if (document.getElementById('p_laudo')) document.getElementById('p_laudo').textContent = dadosOS.laudo;
-    if (document.getElementById('p_data')) document.getElementById('p_data').textContent = dadosOS.data;
-
-    // Correção do loop da lista (Limpado e fechado corretamente)
-    const pLista = document.getElementById('p_lista');
-    if (pLista) {
-        pLista.innerHTML = '';
-        itensServico.forEach(li => {
-            const txtServico = li.innerText.replace(/[\n\r]+/g, ' ').replace('Excluir', '').trim();
-            const novoLi = document.createElement('li');
-            novoLi.textContent = txtServico;
-            pLista.appendChild(novoLi);
-        });
-    }
-
-    const listaTexto = listaItensFinais.join(', ');
-    enviarParaSheetMonkey(dadosOS, listaTexto);
-
-    const printArea = document.getElementById('print-area');
-    if (!printArea) {
-        alert('Erro: O elemento com ID "print-area" não foi encontrado no HTML.');
-        return;
-    }
-
-    const tituloOriginal = document.title;
-    const clienteLimpo = dadosOS.cliente.replace(/[/\\?%*:|"<>]/g, '-');
-    document.title = `OS_${dadosOS.numero}_${clienteLimpo}`;
-
-    printArea.style.display = 'block';
-    document.body.classList.add('modo-impressao-os');
-
-    setTimeout(() => {
-        window.print();
-        document.title = tituloOriginal;
-        document.body.classList.remove('modo-impressao-os');
-        printArea.style.display = 'none';
-        incrementarNumeroOS();
-        limparCamposFormulario();
-    }, 250);
-}
-
-// ==========================================
-// 5. LIMPAR FORMULÁRIO
-// ==========================================
-function limparFormulario() {
-    if (confirm('Tem certeza que deseja limpar todo o formulário?')) {
-        limparCamposFormulario();
-    }
-}
-
-function limparCamposFormulario() {
-    const numeroAtual = localStorage.getItem('proximo_numero_os');
-    document.getElementById('os-form').reset();
-    listaServicos.innerHTML = '';
-    document.getElementById('f_numero').value = numeroAtual;
-}
-
-// ==========================================
-// 6. CONFIGURAÇÃO INICIAL
-// ==========================================
-document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('login-screen').style.display = 'flex';
-    document.getElementById('main-content').style.display = 'none';
-    inicializarNumeroOS();
-});*/
