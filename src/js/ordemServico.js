@@ -134,7 +134,7 @@ if (btnAdicionar && selectItem) {
         const itemSelecionado = selectItem.value;
         const quantidadeInput = document.getElementById('quantidade');
         const valorInput = document.getElementById('valor');
-        const ladoSelect = document.getElementById('lado-selecionado');
+        const ladoSelect = document.getElementById('ladoSelecionado');
         const ladoValor = ladoSelect ? ladoSelect.value : '';
 
         // 1. Validações básicas de preenchimento
