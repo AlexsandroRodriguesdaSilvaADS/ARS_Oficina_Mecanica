@@ -262,12 +262,12 @@ li {
 }
 
 .form-group label {
-    display: block;
+    display: flex;
     font-size: 11px;
     font-weight: bold;
     color: var(--primary-color);
     text-transform: uppercase;
-    margin-bottom: 3px;
+    align-items: center;
 }
 
 /* Header */
@@ -630,7 +630,7 @@ iframe.ativo {
     .signatures {
         margin-top: 60px;
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         page-break-inside: avoid;
     }
 

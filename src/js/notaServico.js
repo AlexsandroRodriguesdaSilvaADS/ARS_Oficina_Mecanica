@@ -375,70 +375,8 @@ function dispararImpressaoDupla() {
     const numeroAtualOriginal = numeroNotaStr.replace('#', '');
     localStorage.setItem('ultimo_numero_nota', numeroAtualOriginal);
 
-
-
-
-
-    function enviarParaPlanilha(dadosNota) {
-        // COLE AQUI A URL ATUALIZADA DO SEU APPS SCRIPT
-        const URL_WEBHOOK = "https://script.google.com/macros/s/AKfycbwt7i6MK_mykNOPSCcHNZXx1kIEU3hcUXnu1Pa-29dADmfWi_bRv_NrsMJP0i-VfaUO/exec";
-
-        fetch(URL_WEBHOOK, {
-            method: "POST",
-            mode: "no-cors", // Mantém desativado para o navegador não travar a página
-            redirect: "follow", // OBRIGATÓRIO para o Apps Script aceitar requisições externas
-            headers: {
-                "Content-Type": "text/plain;charset=utf-8" // Impede que o navegador faça o bloqueio "Pre-flight"
-            },
-            body: JSON.stringify(dadosNota)
-        })
-            .then(() => {
-                alert(`Nota #${dadosNota.numero} enviada para a Planilha com sucesso!`);
-            })
-            .catch(erro => {
-                console.error("Erro ao salvar dados:", erro);
-                alert("Houve um erro na comunicação.");
-            });
-    }
-
-
-
-
     // Dispara a visualização de impressão/salvamento nativa
     window.print();
-
-
-
-    // =========================================================
-    // ESTRUTURA OS DADOS EM FORMATO DE TABELA/OBJETO PARA A PLANILHA
-    // =========================================================
-
-    // Converte a lista de serviços em um texto corrido separado por quebras de linha para caber em uma célula
-    let listaItensTexto = servicosAdicionados.map(item => {
-        return `${item.nome} (x${item.qtd}) - R$ ${item.total.toFixed(2)}`;
-    }).join("\n");
-
-    // Descobre o operador ativo no momento da emissão
-    const operadorAtual = sessionStorage.getItem('usuario_ativo') || "NÃO IDENTIFICADO";
-
-    const dadosParaPlanilha = {
-        numero: numeroNotaStr.replace('#', ''),
-        data: dataNotaStr,
-        usuario: operadorAtual,
-        cliente: nomeCliente,
-        telefone: document.getElementById('f_cliente_tel')?.value || 'Não Informado', // Se preferir salvar o ID do cliente nesta coluna
-        veiculo: modVeiculo,
-        placa: placaVeiculo.toUpperCase(),
-        quilometragem: kmVeiculo,
-        formaPagamento: formaPagamentoSelect ? formaPagamentoSelect.options[formaPagamentoSelect.selectedIndex].text : 'Não Informada',
-        itens: listaItensTexto,
-        total: totalGeralInput ? totalGeralInput.value : 'R$ 0,00'
-    };
-
-    // Envia o registro estruturado para o Google Sheets
-    enviarParaPlanilha(dadosParaPlanilha);
-
-
 
     // Gera o próximo número automaticamente para a próxima venda
     definirProximoNumeroNota();
