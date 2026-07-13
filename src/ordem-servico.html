@@ -52,7 +52,7 @@
 
             <button class="btn-logout" onclick="logout()">Sair</button>
 
-            <form id="os-form">
+            <form method="post" action="" id="os-form">
                 <div class="form-section cabec">
                     <div class="form-grid-1">
                         <div class="form-group-1">
@@ -119,13 +119,11 @@
                 <div class="form-section">
                     <label class="form-title">3. Detalhes Técnicos</label>
                     <div class="form-grid">
-
                         <div class="form-group full-width">
                             <label for="f_defeito">Defeito Relatado / Solicitação*</label>
                             <textarea type="text" name="defeito" id="f_defeito" required
                                 placeholder="Descreva o problema trazido pelo cliente..."></textarea>
                         </div>
-
                         <div class="form-group full-width">
                             <label for="f_laudo">Laudo Técnico / Previsão*</label>
                             <textarea type="text" name="laudo" id="f_laudo"
@@ -136,7 +134,6 @@
 
                 <div class="form-section">
                     <label class="form-title">4. Serviços e Produtos</label>
-
                     <div class="form-group flex-wrap">
                         <div class="form-grupo">
                             <label class="services" for="item-selecionado">Selecione o Serviço ou Produto</label>
@@ -215,46 +212,38 @@
                                 </optgroup>
                             </select>
                         </div>
-
                         <div class="form-grupo">
                             <label class="services" for="item-selecionado">Lado</label>
-                            <select type="text" name="item" id="ladoSelecionado">
+                            <select type="text" name="lado" id="ladoSelecionado">
                                 <option value="">Opção...</option>
                                 <option value="LD" data-valor="">LD</option>
                                 <option value="LE" data-valor="">LE</option>
                                 <option value="LD / LE" data-valor="">LD / LE</option>
                             </select>
                         </div>
-
                         <div class="form-grupo">
-                            <label class="services" for="quantidade">Qtd</label>
-                            <input type="number" id="quantidade" min="1" value="1" style="width: 60px;" required>
+                            <label class="services" for="quantidade">Qntd</label>
+                            <input type="number" name="qntd" id="quantidade" min="1" value="1" required style="width: 60px;">
                         </div>
-
                         <div class="form-grupo">
                             <label class="services" for="valor">Valor Unitário (R$)</label>
-                            <input type="number" id="valor" step="0.10" min="10.00" placeholder="Valor mínimo R$10,00"
+                            <input type="number" name="unitario" id="valor" step="10.0" min="10.00" placeholder="Valor mínimo R$10,00"
                                 required>
                         </div>
-
                         <div class="form-grupo">
                             <label class="services" for="formaPagamento">Forma de pagamento</label>
-                            <select id="formaPagamento">
+                            <select name="formaPagamento" id="formaPagamento">
                                 <option value="cartao">Cartão</option>
                                 <option value="dinheiro">Dinheiro</option>
                                 <option value="pix">Pix</option>
                             </select>
                         </div>
-
                         <div class="form-grupo">
                             <label class="services" for="desconto">Desconto (%)</label>
-                            <input type="number" id="desconto" min="5" max="10" disabled />
+                            <input type="number" name="desconto" id="desconto" min="5" max="10" disabled />
                         </div>
-
                         <button type="button" class="btn-adicionar" id="btnAdicionar">Adicionar Serviço</button>
-                        
                     </div>
-
                     <div class="form-group full-width">
                         <div class="lista-container">
                             <h3>Serviços Realizados</h3>
@@ -263,11 +252,10 @@
 
                             <div class="total-container">
                                 <label for="totalGeral">Soma Total:</label>
-                                <input type="text" id="totalGeral" readonly value="R$ 0,00">
+                                <input type="text" name="totalGeral" id="totalGeral" readonly value="R$ 0,00">
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="btn-group">

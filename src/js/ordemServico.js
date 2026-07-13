@@ -222,8 +222,6 @@ if (btnAdicionar && selectItem) {
         quantidadeInput.value = '1';
         if (valorInput) valorInput.value = '';
     });
-
-
 }
 
 // ==========================================
@@ -310,154 +308,32 @@ function configurarBotoesRemover() {
     });
 }
 
-const enviarParaSheetMonkey = (dadosOS, itens) => {
-    // 1. Busca o texto do total geral da Ordem de Serviço
-    const textoTotal = document.getElementById('valor-total-os')?.innerText || 'R$ 0,00';
-
-    // 2. Formata o array de itens/serviços em um texto limpo e legível para a célula da planilha
-    // Se o array estiver vazio, gera um texto padrão
-    const itensFormatadosTexto = Array.isArray(itens) && itens.length > 0
-        ? itens.map((item, index) => {
-            const detalheLado = item.lado ? ` | Lado: ${item.lado}` : '';
-            const detalheDesconto = item.desconto > 0 ? ` | Desc: ${item.desconto}%` : '';
-            const detalheUsuario = item.usuario ? ` | Por: ${item.usuario}` : '';
-
-            return `${index + 1}. [${item.qtd}x] ${item.nome}${detalheLado} (Unit: R$ ${parseFloat(item.valorOriginal).toFixed(2)}${detalheDesconto}) -> Subtotal: R$ ${parseFloat(item.total).toFixed(2)}${detalheUsuario}`;
-        }).join('\n') // Quebra uma linha para cada item adicionado
-        : 'Nenhum item ou serviço adicionado.';
-
-    // 3. Monta o objeto final mapeando as propriedades para a sua Sheet
-    const dadosParaEnviar = {
-        Numero_OS: dadosOS.numero,
-        Status: dadosOS.status,
-        Cliente: dadosOS.cliente,
-        Documento: dadosOS.documento,
-        Telefone: dadosOS.telefone,
-        Email: dadosOS.email,
-        Veiculo: dadosOS.objeto,
-        Modelo: dadosOS.modelo,
-        Placa: dadosOS.serial,
-        Quilometragem: dadosOS.quilometragem,
-        Defeito: dadosOS.defeito,
-        Laudo: dadosOS.laudo,
-        Data: dadosOS.data,
-        Itens_Adicionados: itensFormatadosTexto, // Agora envia o texto estruturado com Lado, Qtd e Desconto
-        Valor_Total: textoTotal
-    };
-
-    // 4. Envio para o Sheet Monkey via Fetch API
-    fetch('https://api.sheetmonkey.io/form/YysUFctamTP45zycCGFKA', {
-        method: 'POST', // Padronizado em maiúsculo por boa prática
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dadosParaEnviar),
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Erro na requisição: ${response.statusText}`);
-            }
-            console.log('Dados salvos na planilha com sucesso!');
-        })
-        .catch(err => console.error('Erro ao salvar na planilha:', err));
-}
-
 // ==========================================
-// 3. GERENCIAMENTO DA LISTA DE SERVIÇOS E PRODUTOS
-// ==========================================
-/*const btnAdicionar = document.getElementById('btnAdicionar');
-const selectItem = document.getElementById('item-selecionado');
-const listaServicos = document.getElementById('listaServicos');
-
-if (btnAdicionar && selectItem && listaServicos) {
-    btnAdicionar.addEventListener('click', () => {
-        const itemSelecionado = selectItem.value;
-
-        if (!itemSelecionado) {
-            alert('Por favor, selecione um serviço ou produto válido.');
-            return;
-        }
-
-        const itensAtuais = Array.from(listaServicos.querySelectorAll('li')).map(li => li.dataset.value);
-        if (itensAtuais.includes(itemSelecionado)) {
-            alert('Este item já foi adicionado.');
-            return;
-        }
-
-        const opcaoSelecionada = selectItem.options[selectItem.selectedIndex];
-        const optgroupPai = opcaoSelecionada.parentNode;
-        const tipoGrupo = optgroupPai.tagName === 'OPTGROUP' ? optgroupPai.label : '';
-
-        let icone = 'fas fa-wrench';
-        if (tipoGrupo.toLowerCase().includes('produto')) {
-            icone = 'fas fa-box';
-        }
-
-        const li = document.createElement('li');
-        li.dataset.value = itemSelecionado;
-        li.innerHTML = `
-            <span>
-                <i class="${icone}" style="margin-right: 8px; color: #1a365d;"></i>
-                ${itemSelecionado}
-            </span>
-            <button type="button" class="btn-remove-item" style="background:none; border:none; color:#e53e3e; cursor:pointer;" title="Remover">
-                <i class="fas fa-trash-alt"></i>
-            </button>
-        `;
-
-        li.querySelector('.btn-remove-item').addEventListener('click', () => li.remove());
-        listaServicos.appendChild(li);
-        selectItem.value = "";
-    });
-}
-
-const enviarParaSheetMonkey = (dadosOS, itens) => {
-    const dadosParaEnviar = {
-        Numero_OS: dadosOS.numero,
-        Status: dadosOS.status,
-        Cliente: dadosOS.cliente,
-        Documento: dadosOS.documento,
-        Telefone: dadosOS.telefone,
-        Email: dadosOS.email,
-        Veiculo: dadosOS.objeto,
-        Modelo: dadosOS.modelo,
-        Placa: dadosOS.serial,
-        Quilometragem: dadosOS.quilometragem,
-        Defeito: dadosOS.defeito,
-        Laudo: dadosOS.laudo,
-        Data: dadosOS.data,
-        Itens_Adicionados: itens
-    };
-
-    fetch('https://api.sheetmonkey.io/form/YysUFctamTP45zycCGFKA', {
-        method: 'post',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dadosParaEnviar),
-    })
-    .then(() => console.log('Dados salvos na planilha com sucesso!'))
-    .catch(err => console.error('Erro ao salvar na planilha:', err));
-}*/
-
-// ==========================================
-// 4. PROCESSAR DADOS E ABRIR TELA DE IMPRESSÃO
+// 5. PROCESSAR DADOS E ABRIR TELA DE IMPRESSÃO
 // ==========================================
 function gerarOS(event) {
-    event.preventDefault();
+    // Evita erro caso a função seja chamada sem o parâmetro event no HTML
+    if (event && typeof event.preventDefault === 'function') {
+        event.preventDefault();
+    }
 
-    if (!listaServicos) return;
-    const itensServico = listaServicos.querySelectorAll('li');
-    if (itensServico.length === 0) {
+    // CORREÇÃO: Usa 'listaServicosUl' que foi a variável declarada globalmente no seu código
+    if (!listaServicosUl) {
+        alert('Erro interno: O elemento da lista de serviços não foi mapeado corretamente.');
+        return;
+    }
+    
+    const itensServico = listaServicosUl.querySelectorAll('li');
+    
+    // Verifica se a lista está vazia ou contém apenas o aviso de lista vazia
+    if (itensServico.length === 0 || (itensServico.length === 1 && itensServico[0].classList.contains('lista-vazia'))) {
         alert('Adicione pelo menos um serviço antes de gerar a Ordem de Serviço.');
         return;
     }
 
     const camposObrigatorios = [
         'f_numero', 'f_status', 'f_cliente', 'f_telefone',
-        'f_objeto', 'f_modelo', 'f_serial', 'f_quilometragem', 'f_defeito', 'f_laudo', '',
+        'f_objeto', 'f_modelo', 'f_serial', 'f_quilometragem', 'f_defeito', 'f_laudo',
     ];
 
     for (const id of camposObrigatorios) {
@@ -489,15 +365,18 @@ function gerarOS(event) {
         data: new Date().toLocaleDateString('pt-BR')
     };
 
+    // Salva no histórico local do navegador
     const historicoOS = JSON.parse(localStorage.getItem('historico_ordens_locais')) || {};
+    
+    // Formata os textos para o histórico local
     const listaItensFinais = Array.from(itensServico).map(li => {
-        return li.innerText.replace(/[\n\r]+/g, ' ').replace('Excluir', '').trim();
+        return li.innerText.replace(/[\n\r]+/g, ' ').replace('Remover item', '').replace('Excluir', '').trim();
     });
 
     historicoOS[dadosOS.numero] = { ...dadosOS, itens: listaItensFinais };
     localStorage.setItem('historico_ordens_locais', JSON.stringify(historicoOS));
 
-    // Atualização dos elementos da tela de impressão com checagem de existência
+    // Preenche os elementos visuais da tela de impressão
     const preencherTexto = (id, texto) => {
         const el = document.getElementById(id);
         if (el) el.textContent = texto;
@@ -521,15 +400,15 @@ function gerarOS(event) {
     if (pLista) {
         pLista.innerHTML = '';
         itensServico.forEach(li => {
-            const txtServico = li.innerText.replace(/[\n\r]+/g, ' ').replace('Excluir', '').trim();
+            const txtServico = li.innerText.replace(/[\n\r]+/g, ' ').replace('Remover item', '').replace('Excluir', '').trim();
             const novoLi = document.createElement('li');
             novoLi.textContent = txtServico;
             pLista.appendChild(novoLi);
         });
     }
 
-    const listaTexto = listaItensFinais.join(', ');
-    enviarParaSheetMonkey(dadosOS, listaTexto);
+    // CORREÇÃO: Envia o array estruturado original (servicosAdicionados) em vez de apenas texto convertido
+    enviarParaSheetMonkey(dadosOS, servicosAdicionados);
 
     const printArea = document.getElementById('print-area');
     if (!printArea) {
@@ -554,8 +433,55 @@ function gerarOS(event) {
     }, 250);
 }
 
+// CORREÇÃO: Função do Sheet Monkey reativada e sincronizada com o seu array global
+function enviarParaSheetMonkey(dadosOS, itens) {
+    const textoTotal = document.getElementById('valor-total-os')?.innerText || 'R$ 0,00';
+
+    const itensFormatadosTexto = Array.isArray(itens) && itens.length > 0
+        ? itens.map((item, index) => {
+            const detalheLado = item.lado ? ` | Lado: ${item.lado}` : '';
+            const detalheDesconto = item.desconto > 0 ? ` | Desc: ${item.desconto}%` : '';
+            const detalheUsuario = item.usuario ? ` | Por: ${item.usuario}` : '';
+
+            return `${index + 1}. [${item.qtd}x] ${item.nome}${detalheLado} (Unit: R$ ${parseFloat(item.valorOriginal).toFixed(2)}${detalheDesconto}) -> Subtotal: R$ ${parseFloat(item.total).toFixed(2)}${detalheUsuario}`;
+        }).join('\n')
+        : 'Nenhum item ou serviço adicionado.';
+
+    const dadosParaEnviar = {
+        Numero_OS: dadosOS.numero,
+        Status: dadosOS.status,
+        Cliente: dadosOS.cliente,
+        Documento: dadosOS.documento,
+        Telefone: dadosOS.telefone,
+        Email: dadosOS.email,
+        Veiculo: dadosOS.objeto,
+        Modelo: dadosOS.modelo,
+        Placa: dadosOS.serial,
+        Quilometragem: dadosOS.quilometragem,
+        Defeito: dadosOS.defeito,
+        Laudo: dadosOS.laudo,
+        Data: dadosOS.data,
+        Itens_Adicionados: itensFormatadosTexto, 
+        Valor_Total: textoTotal
+    };
+
+    fetch('https://api.sheetmonkey.io/form/YysUFctamTP45zycCGFKA', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dadosParaEnviar),
+    })
+    .then(response => {
+        if (!response.ok) throw new Error(`Erro: ${response.statusText}`);
+        console.log('Dados salvos na planilha com sucesso!');
+    })
+    .catch(err => console.error('Erro ao salvar na planilha:', err));
+}
+
 // ==========================================
-// 5. LIMPAR FORMULÁRIO
+// 6. LIMPAR FORMULÁRIO
 // ==========================================
 function limparFormulario() {
     if (confirm('Tem certeza que deseja limpar todo o formulário?')) {
@@ -567,7 +493,14 @@ function limparCamposFormulario() {
     const numeroAtual = localStorage.getItem('proximo_numero_os');
     const form = document.getElementById('os-form');
     if (form) form.reset();
-    if (listaServicos) listaServicos.innerHTML = '';
+    
+    // CORREÇÃO: Alterado de listaServicos para listaServicosUl para manter coerência
+    if (listaServicosUl) {
+        listaServicosUl.innerHTML = '';
+    }
+
+    // CORREÇÃO: Esvazia também o array de controle para a próxima OS vir vazia
+    servicosAdicionados = [];
 
     // Zera o texto do totalizador ao limpar tudo
     const elementoTotal = document.getElementById('valor-total-os');
@@ -576,16 +509,6 @@ function limparCamposFormulario() {
     const fNumero = document.getElementById('f_numero');
     if (fNumero) fNumero.value = numeroAtual;
 }
-
-/*function limparCamposFormulario() {
-    const numeroAtual = localStorage.getItem('proximo_numero_os');
-    const form = document.getElementById('os-form');
-    if (form) form.reset();
-    if (listaServicos) listaServicos.innerHTML = '';
-    
-    const fNumero = document.getElementById('f_numero');
-    if (fNumero) fNumero.value = numeroAtual;
-}*/
 
 // ==========================================
 // 6. CONFIGURAÇÃO INICIAL
@@ -604,4 +527,25 @@ document.addEventListener('DOMContentLoaded', () => {
     if (usuarioSalvo && elementoNome) {
         elementoNome.innerText = usuarioSalvo;
     }
+});
+
+
+const script_do_google = 'https://script.google.com/macros/s/AKfycby_NMAhlUh5NEU6j6ADXpwkH9aut6j6pHYQm61IyvW9Nsq10aOsuaGZHGln5Le8egrK/exec';
+const dados_do_formulario = document.forms['os-form'];
+
+dados_do_formulario.addEventListener('submit', function (e) {
+    e.preventDefault();
+    
+    fetch(script_do_google, { 
+        method: 'POST',
+        mode: 'no-cors',
+        body: new FormData(dados_do_formulario) 
+    })
+    .then(response => {
+        alert('Dados enviados com sucesso!'); 
+        dados_do_formulario.reset();
+    })
+    .catch(error => {
+        console.error('Erro no envio dos dados', error);
+    });
 });

@@ -279,7 +279,7 @@ textarea {
     padding-top: 20px;
 }
 
-.lista-container span {
+.item-info {
     text-transform: uppercase;
 }
 
@@ -469,6 +469,11 @@ iframe.ativo {
         margin: 0 !important;
         max-width: 100% !important;
         background: transparent !important;
+    }
+
+    .total-container {
+        display: flex !important;
+        visibility: visible !important;
     }
 
     .container #user {
