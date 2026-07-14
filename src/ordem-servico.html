@@ -223,15 +223,14 @@
                         </div>
                         <div class="form-grupo">
                             <label class="services" for="quantidade">Qntd</label>
-                            <input type="number" name="qntd" id="quantidade" min="1" value="1" required
-                                style="width: 60px;">
+                            <input type="number" name="qntd" id="quantidade" min="1" value="1" required>
                         </div>
                         <div class="form-grupo">
                             <label class="services" for="valor">Valor Unitário (R$)</label>
                             <input type="number" name="unitario" id="valor" step="10.0" min="10.00"
                                 placeholder="Valor mínimo R$10,00" required>
                         </div>
-                        <div class="form-grupo">
+                        <!--<div class="form-grupo">
                             <label class="services" for="formaPagamento">Forma de pagamento</label>
                             <select name="formaPagamento" id="formaPagamento">
                                 <option value="cartao">Cartão</option>
@@ -242,12 +241,12 @@
                         <div class="form-grupo">
                             <label class="services" for="desconto">Desconto (%)</label>
                             <input type="number" name="desconto" id="desconto" min="5" max="10" disabled />
-                        </div>
-                        <button type="button" class="btn-adicionar" id="btnAdicionar">Adicionar Serviço</button>
+                        </div>-->
+                        <button type="button" class="btn-adicionar" id="btnAdicionar">Adicionar</button>
                     </div>
                     <div class="form-group">
                         <div class="lista-container">
-                            <h3>Serviços Realizados</h3>
+                            <!--<h3>Serviços Realizados</h3>-->
                             <ul id="listaServicos">
                             </ul>
 
@@ -255,9 +254,6 @@
                                 <label for="totalGeral">Soma Total:</label>
                                 <input type="text" name="totalGeral" id="totalGeral" readonly value="R$ 0,00">
                             </div>
-
-                            <!-- Adicionamos este span que será usado na impressão -->
-                            <span id="totalGeralPrint" class="somente-impressao">R$ 0,00</span>
                         </div>
                     </div>
                 </div>
@@ -421,15 +417,7 @@
 
                     <h3>Serviço a ser Realizado</h3>
 
-                    <div class="print-block" style="border: 1px solid #ddd;
-                    padding: 6px 10px;
-                    font-size: 12px;
-                    min-height: 40px;
-                    background: #fafafa !important;
-                    -webkit-print-color-adjust: exact;
-                    print-color-adjust: exact;
-                    white-space: pre-wrap;
-                    text-transform: uppercase;">
+                    <div class="print-block">
 
                         <ul id="p_lista"></ul>
 
@@ -453,7 +441,6 @@
                     padding-top: 4px;
                     font-size: 11px;">Responsável Técnico</div>
                 </div>
-
             </div>
 
         </div>

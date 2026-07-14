@@ -253,15 +253,16 @@ function atualizarInterfaceServicos() {
         totalAcumuladoOS += item.total;
 
         // Monta o conteúdo interno da LI usando os dados do objeto
+        // ${item.desconto > 0 ? `<small class="txt-desconto">-${item.desconto}%</small>` : ''}
+        //<span class="item-detalhes"> (${item.qtd}x - R$ ${item.valorComDesconto.toFixed(2)}) ${item.desconto > 0 ? `-${item.desconto}%` : ''} </span>
+
         li.innerHTML = `
             <div class="item-info">
                 <i class="${item.icone}"></i> 
                 <strong>${item.nome}</strong>
-                <span class="item-detalhes">
-                    (${item.qtd}x - R$ ${item.valorComDesconto.toFixed(2)})
-                    ${item.desconto > 0 ? `<small class="txt-desconto">-${item.desconto}%</small>` : ''}
-                </span>
+                <span class="item-detalhes">( ${item.qtd}x - R$ ${item.valorComDesconto.toFixed(2)})</span>
             </div>
+
             <div class="item-valores">
                 <span class="item-subtotal">R$ ${item.total.toFixed(2)}</span>
                 <button type="button" class="btn-remover-item" data-id="${item.id}" title="Remover item">
@@ -279,17 +280,6 @@ function atualizarInterfaceServicos() {
     if (totalGeralInput) {
         totalGeralInput.value = totalFormatado;
     }
-
-
-
-    // NOVA LINHA: Alimenta o span de impressão
-    const totalGeralPrint = document.getElementById('totalGeralPrint');
-    if (totalGeralPrint) {
-        totalGeralPrint.innerText = totalFormatado;
-    }
-
-
-
 
     // Alimenta também a tag onde a função da planilha busca o total geral
     const labelTotalOS = document.getElementById('valor-total-os');
@@ -408,16 +398,41 @@ function gerarOS(event) {
 
     const pLista = document.getElementById('p_lista');
     if (pLista) {
-        pLista.innerHTML = '';
+        pLista.innerHTML = ''; // Limpa a lista de impressão anterior
+
         itensServico.forEach(li => {
-            const txtServico = li.innerText.replace(/[\n\r]+/g, ' ').replace('Remover item', '').replace('Excluir', '').trim();
-            const novoLi = document.createElement('li');
-            novoLi.textContent = txtServico;
+            // Clona a LI com todas as suas divs internas, classes e valores intactos
+            const novoLi = li.cloneNode(true);
+
+            // Remove o botão de lixeira do clone para ele não correr o risco de aparecer no papel
+            const btnRemover = novoLi.querySelector('.btn-remover-item');
+            if (btnRemover) {
+                btnRemover.remove();
+            }
+
+            // Adiciona a estrutura perfeita dentro da lista de impressão
             pLista.appendChild(novoLi);
         });
+
+        // 2. Busca e insere o container de total original logo após a lista
+        const totalOriginal = document.querySelector('.total-container');
+        if (totalOriginal) {
+            // Remove qualquer totalizador antigo que possa ter ficado da impressão anterior
+            const totalAntigoNoPrint = pLista.parentElement.querySelector('.total-container-print');
+            if (totalAntigoNoPrint) totalAntigoNoPrint.remove();
+
+            // Clona o container de totalização
+            const totalClonado = totalOriginal.cloneNode(true);
+
+            // Adiciona uma classe específica para estilizar apenas na impressão
+            totalClonado.classList.add('total-container-print');
+
+            // Insere o total clonado logo após a lista de itens (pLista)
+            pLista.after(totalClonado);
+        }
     }
 
-    // CORREÇÃO: Envia o array estruturado original (servicosAdicionados) em vez de apenas texto convertido
+    // Envia o array estruturado original (servicosAdicionados) em vez de apenas texto convertido
     enviarParaSheetMonkey(dadosOS, servicosAdicionados);
 
     const printArea = document.getElementById('print-area');
