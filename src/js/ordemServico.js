@@ -202,7 +202,6 @@ if (btnAdicionar && selectItem) {
             valorComDesconto: valorUnitarioComDesconto,
             desconto: descontoPorcentagem,
             total: subtotalFinal,
-            // Puxa o usuário ativo se houver controle de login no seu app
             usuario: (typeof usuarioLogado !== 'undefined' ? usuarioLogado : null) || sessionStorage.getItem('usuario_ativo') || "NÃO IDENTIFICADO"
         };
 
@@ -530,7 +529,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-const script_do_google = 'https://script.google.com/macros/s/AKfycby_NMAhlUh5NEU6j6ADXpwkH9aut6j6pHYQm61IyvW9Nsq10aOsuaGZHGln5Le8egrK/exec';
+/*const script_do_google = 'https://script.google.com/macros/s/AKfycby_NMAhlUh5NEU6j6ADXpwkH9aut6j6pHYQm61IyvW9Nsq10aOsuaGZHGln5Le8egrK/exec';
 const dados_do_formulario = document.forms['os-form'];
 
 dados_do_formulario.addEventListener('submit', function (e) {
@@ -548,4 +547,4 @@ dados_do_formulario.addEventListener('submit', function (e) {
     .catch(error => {
         console.error('Erro no envio dos dados', error);
     });
-});
+});*/
