@@ -88,7 +88,7 @@
                         </div>
                         <div class="form-group">
                             <label for="documento">CPF / CNPJ</label>
-                            <input type="text" id="f_cliente_id">
+                            <input type="text" id="f_cliente_id" placeholder="111.222.333-44">
                         </div>
                     </div>
 
@@ -100,7 +100,7 @@
                         </div>
                         <div class="form-group">
                             <label for="placa">Placa*</label>
-                            <input type="text" id="f_veiculo_placa" required>
+                            <input type="text" id="f_veiculo_placa" placeholder="ABC1234" required>
                         </div>
                         <div class="form-group">
                             <label for="quilometragem">Quilometragem atual (KM)*</label>
@@ -200,12 +200,12 @@
 
                     <div class="form-grupo">
                         <label class="services" for="quantidade">Qtd</label>
-                        <input type="number" id="quantidade" min="1" value="1" style="width: 60px;" required>
+                        <input type="number" id="quantidade" min="1" max="20" value="1" style="width: 60px;" required>
                     </div>
 
                     <div class="form-grupo">
                         <label class="services" for="valor">Valor Unitário (R$)</label>
-                        <input type="number" id="valor" step="0.10" min="10.00" placeholder="Valor mínimo R$10,00"
+                        <input type="number" id="valor" step="10.00" min="10.00" placeholder="Mínimo R$10,00"
                             required>
                     </div>
 
@@ -238,7 +238,6 @@
                         </div>
                     </div>
                 </div>
-
             </form>
 
             <div class="no-print-zone">
@@ -290,7 +289,7 @@
                     <div class="print-section">
                         <h3>Cláusulas e Condições da Garantia</h3>
                         <div class="print-block">
-                            <p>1. A <strong>ARS Oficina Mecânica</strong> assegura ao cliente acima identificado
+                            <p>1. A <strong>ARS Mecânico Automotivo</strong> assegura ao cliente acima identificado
                                 garantia legal de <strong>90 (noventa) dias</strong> sobre os serviços executados
                                 nesta Ordem de Serviço, contados a partir da data de emissão deste termo.</p>
                             <p>2. A garantia abrange exclusivamente defeitos decorrentes da mão de obra aplicada.</p>

@@ -146,6 +146,10 @@ textarea {
     transition: border-color 0.2s;
 }
 
+input[type="number"] {
+    text-align: right;
+}
+
 #item-selecionado {
     width: 300px;
 }
@@ -156,12 +160,6 @@ textarea:focus {
     outline: none;
     border-color: var(--focus-color);
     background-color: #fff;
-}
-
-.form-group {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
 }
 
 .flex-wrap {
@@ -258,6 +256,8 @@ li {
 }
 
 .form-group {
+    display: flex;
+    gap: 15px;
     margin-bottom: 10px;
 }
 
@@ -322,9 +322,15 @@ li {
     text-align: right;
 }
 
-input#f_nota_ref {
-    font-size: 20px;
+input#f_nota_ref,
+#f_nota_num,
+#f_nota_data {
+    font-size: 16px;
     width: 200px;
+}
+
+input[type=text] {
+    width: 100%;
 }
 
 label#ordem {
@@ -356,58 +362,18 @@ label#ordem {
     padding-bottom: 5px;
 }
 
+.box .form-group {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
 .text-center {
     text-align: center;
 }
 
 .text-right {
     text-align: right;
-}
-
-/* Totais e Pagamento */
-.footer-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-top: 20px;
-}
-
-.payment-info {
-    width: 45%;
-}
-
-.totals {
-    width: 45%;
-}
-
-.total-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6px 0;
-    font-size: 14px;
-}
-
-.total-row input {
-    width: 120px;
-    text-align: right;
-    font-weight: bold;
-}
-
-.total-row.final {
-    font-size: 18px;
-    font-weight: bold;
-    color: var(--primary-color);
-    border-top: 2px solid var(--primary-color);
-    margin-top: 5px;
-    padding-top: 10px;
-}
-
-.total-row.final input {
-    font-size: 18px;
-    color: var(--primary-color);
-    border: none;
-    background: transparent;
 }
 
 /* Zona de Ações (Botões) */
@@ -519,9 +485,17 @@ iframe.ativo {
         border: none !important;
     }
 
+    label#ordem {
+        font-size: 12px !important;
+    }
+
     .box {
         border: 1px solid #ddd;
         background-color: #fff !important;
+    }
+
+    .box .form-group {
+        flex-direction: row !important;
     }
 
     th {
@@ -530,7 +504,6 @@ iframe.ativo {
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
     }
-
 
     /* Esqueleto Oculto do Termo de Garantia na Tela Comercial */
     #print-termo-garantia {

@@ -260,7 +260,7 @@ function atualizarInterfaceServicos() {
             <div class="item-info">
                 <i class="${item.icone}"></i> 
                 <strong>${item.nome}</strong>
-                <span class="item-detalhes">( ${item.qtd}x - R$ ${item.valorComDesconto.toFixed(2)})</span>
+                <span class="item-detalhes">(${item.qtd}x - R$ ${item.valorComDesconto.toFixed(2)})</span>
             </div>
 
             <div class="item-valores">
