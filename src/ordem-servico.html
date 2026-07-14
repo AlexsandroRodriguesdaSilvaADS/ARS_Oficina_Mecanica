@@ -223,12 +223,13 @@
                         </div>
                         <div class="form-grupo">
                             <label class="services" for="quantidade">Qntd</label>
-                            <input type="number" name="qntd" id="quantidade" min="1" value="1" required style="width: 60px;">
+                            <input type="number" name="qntd" id="quantidade" min="1" value="1" required
+                                style="width: 60px;">
                         </div>
                         <div class="form-grupo">
                             <label class="services" for="valor">Valor Unitário (R$)</label>
-                            <input type="number" name="unitario" id="valor" step="10.0" min="10.00" placeholder="Valor mínimo R$10,00"
-                                required>
+                            <input type="number" name="unitario" id="valor" step="10.0" min="10.00"
+                                placeholder="Valor mínimo R$10,00" required>
                         </div>
                         <div class="form-grupo">
                             <label class="services" for="formaPagamento">Forma de pagamento</label>
@@ -244,7 +245,7 @@
                         </div>
                         <button type="button" class="btn-adicionar" id="btnAdicionar">Adicionar Serviço</button>
                     </div>
-                    <div class="form-group full-width">
+                    <div class="form-group">
                         <div class="lista-container">
                             <h3>Serviços Realizados</h3>
                             <ul id="listaServicos">
@@ -254,6 +255,9 @@
                                 <label for="totalGeral">Soma Total:</label>
                                 <input type="text" name="totalGeral" id="totalGeral" readonly value="R$ 0,00">
                             </div>
+
+                            <!-- Adicionamos este span que será usado na impressão -->
+                            <span id="totalGeralPrint" class="somente-impressao">R$ 0,00</span>
                         </div>
                     </div>
                 </div>

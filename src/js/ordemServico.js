@@ -213,6 +213,7 @@ if (btnAdicionar && selectItem) {
         } else {
             console.error("A função atualizarInterfaceServicos() não foi implementada ainda.");
         }*/
+
         atualizarInterfaceServicos();
 
         // 7. Reseta os campos do formulário para o próximo item
@@ -275,10 +276,20 @@ function atualizarInterfaceServicos() {
 
     // 4. Atualiza os campos de preço total na tela
     const totalFormatado = `R$ ${totalAcumuladoOS.toFixed(2).replace('.', ',')}`;
-
     if (totalGeralInput) {
         totalGeralInput.value = totalFormatado;
     }
+
+
+
+    // NOVA LINHA: Alimenta o span de impressão
+    const totalGeralPrint = document.getElementById('totalGeralPrint');
+    if (totalGeralPrint) {
+        totalGeralPrint.innerText = totalFormatado;
+    }
+
+
+
 
     // Alimenta também a tag onde a função da planilha busca o total geral
     const labelTotalOS = document.getElementById('valor-total-os');
@@ -321,9 +332,9 @@ function gerarOS(event) {
         alert('Erro interno: O elemento da lista de serviços não foi mapeado corretamente.');
         return;
     }
-    
+
     const itensServico = listaServicosUl.querySelectorAll('li');
-    
+
     // Verifica se a lista está vazia ou contém apenas o aviso de lista vazia
     if (itensServico.length === 0 || (itensServico.length === 1 && itensServico[0].classList.contains('lista-vazia'))) {
         alert('Adicione pelo menos um serviço antes de gerar a Ordem de Serviço.');
@@ -366,7 +377,7 @@ function gerarOS(event) {
 
     // Salva no histórico local do navegador
     const historicoOS = JSON.parse(localStorage.getItem('historico_ordens_locais')) || {};
-    
+
     // Formata os textos para o histórico local
     const listaItensFinais = Array.from(itensServico).map(li => {
         return li.innerText.replace(/[\n\r]+/g, ' ').replace('Remover item', '').replace('Excluir', '').trim();
@@ -460,7 +471,7 @@ function enviarParaSheetMonkey(dadosOS, itens) {
         Defeito: dadosOS.defeito,
         Laudo: dadosOS.laudo,
         Data: dadosOS.data,
-        Itens_Adicionados: itensFormatadosTexto, 
+        Itens_Adicionados: itensFormatadosTexto,
         Valor_Total: textoTotal
     };
 
@@ -472,11 +483,11 @@ function enviarParaSheetMonkey(dadosOS, itens) {
         },
         body: JSON.stringify(dadosParaEnviar),
     })
-    .then(response => {
-        if (!response.ok) throw new Error(`Erro: ${response.statusText}`);
-        console.log('Dados salvos na planilha com sucesso!');
-    })
-    .catch(err => console.error('Erro ao salvar na planilha:', err));
+        .then(response => {
+            if (!response.ok) throw new Error(`Erro: ${response.statusText}`);
+            console.log('Dados salvos na planilha com sucesso!');
+        })
+        .catch(err => console.error('Erro ao salvar na planilha:', err));
 }
 
 // ==========================================
@@ -492,7 +503,7 @@ function limparCamposFormulario() {
     const numeroAtual = localStorage.getItem('proximo_numero_os');
     const form = document.getElementById('os-form');
     if (form) form.reset();
-    
+
     // CORREÇÃO: Alterado de listaServicos para listaServicosUl para manter coerência
     if (listaServicosUl) {
         listaServicosUl.innerHTML = '';

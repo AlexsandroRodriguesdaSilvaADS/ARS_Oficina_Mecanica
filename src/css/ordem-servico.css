@@ -417,8 +417,46 @@ iframe.ativo {
     display: none;
 }
 
+.somente-impressao {
+    display: none;
+}
+
 /* REGRAS DE IMPRESSÃO */
 @media print {
+
+    /* 1. Força a cor preta em todos os textos para garantir leitura 
+    body {
+        background: transparent !important;
+    }*/
+
+    /* 2. Garante que os subtotais das li's fiquem visíveis e pretos */
+    .item-valores,
+    .item-subtotal,
+    .item-valores span {
+        display: block !important;
+        color: #000 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    /* 3. Garante que o container do total e seus inputs/labels apareçam */
+    .total-container,
+    .total-container label,
+    .total-container input,
+    #totalGeral {
+        display: block !important;
+        color: #000 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        border: none !important;
+        /* Remove bordas de input na impressão */
+        background: none !important;
+    }
+
+
+
+
+
     @page {
         size: A4;
         margin: 10mm;
@@ -427,7 +465,8 @@ iframe.ativo {
 
     html,
     body {
-        background: #ffffff !important;
+/*      background: #ffffff !important;*/
+        background: transparent !important;
         color: #000000 !important;
         padding: 0 !important;
         margin: 0 !important;
@@ -471,8 +510,32 @@ iframe.ativo {
         background: transparent !important;
     }
 
-    .total-container {
-        display: flex !important;
+
+
+
+    /* Esconde o input para não imprimir a "caixinha" de formulário */
+    .total-container input#totalGeral {
+        display: none !important;
+    }
+
+    /* Mostra o span com o valor formatado como texto comum */
+    .somente-impressao {
+        display: inline-block !important;
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+
+    /* Opcional: Esconde os botões de lixeira/remover na impressão */
+    .btn-remover-item {
+        display: none !important;
+    }
+
+
+
+
+
+    .list-container {
+        display: block !important;
         visibility: visible !important;
     }
 
@@ -593,6 +656,7 @@ iframe.ativo {
 
     /* Ajuste específico para as LIs não perderem a formatação de lista */
     #listaServicos li {
+        background-color: red;
         display: list-item !important;
         margin-bottom: 8px;
         font-size: 14px;
