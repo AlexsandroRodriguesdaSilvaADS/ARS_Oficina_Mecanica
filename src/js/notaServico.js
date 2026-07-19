@@ -22,6 +22,7 @@ function autenticar(event) {
         document.getElementById('main-content').style.display = 'block';
 
         const nomeFormatado = user.toUpperCase();
+        usuarioLogado = nomeFormatado;
 
         // 1. Salva na sessão para as funções de serviços usarem
         sessionStorage.setItem('usuario_ativo', nomeFormatado);
@@ -177,7 +178,9 @@ if (btnAdicionar && selectItem) {
         const nomeCompletoItem = ladoValor ? `${itemSelecionado} (${ladoValor})` : itemSelecionado;
 
         // 2. Evita duplicados na lista (Varrendo o array correto)
-        const itemExistente = servicosAdicionados.find(item => item.nome === itemSelecionado);
+        //const itemExistente = servicosAdicionados.find(item => item.nome === itemSelecionado);
+        // CORREÇÃO: Compara com a string contendo o lado montado corretamente
+        const itemExistente = servicosAdicionados.find(item => item.nome === nomeCompletoItem);
         if (itemExistente) {
             alert(`O item "${itemSelecionado}" já foi adicionado à lista.`);
             return;
@@ -432,38 +435,23 @@ function puxarDadosDaOS() {
         if (document.getElementById('f_veiculo_placa')) document.getElementById('f_veiculo_placa').value = osEncontrada.serial || '';
         if (document.getElementById('f_veiculo_quilometragem')) document.getElementById('f_veiculo_quilometragem').value = osEncontrada.quilometragem || '';
 
-
-        /*// CORREÇÃO: Aguarda a automação do sistema gerar o ID f_veiculo_quilometragem na tela
-        setTimeout(() => {
-            const campoKM = document.getElementById('f_veiculo_quilometragem');
-            if (campoKM) {
-                campoKM.value = osEncontrada.quilometragem || '';
-            } else {
-                console.error("Mesmo aguardando, o campo f_veiculo_quilometragem não foi achado.");
-            }
-        }, 150);*/
-
         // Limpa a lista atual de serviços da nota para colocar os da OS
         servicosAdicionados = [];
 
         // Trata os itens enviados pela OS para não quebrar os cálculos da nota
         if (osEncontrada.itens && Array.isArray(osEncontrada.itens)) {
-            osEncontrada.itens.forEach((nomeItem, index) => {
-                let icone = 'fas fa-wrench';
-                if (nomeItem.toLowerCase().includes('produto') || nomeItem.toLowerCase().includes('peça')) {
-                    icone = 'fas fa-box';
-                }
-
-                /*servicosAdicionados.push({
+            osEncontrada.itens.forEach((itemOS, index) => {
+                servicosAdicionados.push({
                     id: Date.now() + index,
-                    nome: nomeItem,
-                    icone: icone,
-                    qtd: 1,                 // Define quantidade padrão como 1
-                    valorOriginal: 10,      // Define o valor mínimo exigido pelo seu código (R$ 10,00)
-                    valorComDesconto: 10,
-                    desconto: 0,
-                    total: 10               // Evita que o cálculo resulte em NaN
-                });*/
+                    nome: itemOS.nome,
+                    lado: itemOS.lado || '',
+                    icone: itemOS.icone || 'fas fa-wrench',
+                    qtd: parseInt(itemOS.qtd, 10) || 1,
+                    valorOriginal: parseFloat(itemOS.valorOriginal) || 0,
+                    valorComDesconto: parseFloat(itemOS.valorComDesconto) || 0,
+                    desconto: parseFloat(itemOS.desconto) || 0,
+                    total: parseFloat(itemOS.total) || 0
+                });
             });
         }
 

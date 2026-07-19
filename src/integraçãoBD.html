@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BD</title>
+</head>
+
+<body>
+    <p>
+        1. Modificar a Função de Envio (gerarOS / enviarParaNeon)
+        Atualmente, o seu código chama enviarParaSheetMonkey. Você deve substituí-la (ou complementá-la) por uma função
+        que envie os dados estruturados em JSON relacional para o seu backend Node.js que conecta ao Neon.
+
+        Substitua a chamada do Sheet Monkey por esta função enviarParaNeon:
+    </p>
+    <p>
+        // Substitua a chamada antiga por esta no final da sua função gerarOS:
+        enviarParaNeon(dadosOS, servicosAdicionados);
+
+        function enviarParaNeon(dadosOS, itens) {
+        // Estrutura o JSON exatamente como o banco de dados espera (Tabela Pai + Tabela Filha)
+        const dadosParaEnviar = {
+        numero_os: parseInt(dadosOS.numero, 10),
+        status: dadosOS.status,
+        cliente: {
+        nome: dadosOS.cliente,
+        documento: dadosOS.documento,
+        telefone: dadosOS.telefone,
+        email: dadosOS.email
+        },
+        veiculo: {
+        nome: dadosOS.objeto, // mapeado do campo f_objeto
+        modelo: dadosOS.modelo,
+        placa: dadosOS.serial,
+        quilometragem: dadosOS.quilometragem
+        },
+        detalhes: {
+        defeito: dadosOS.defeito,
+        laudo: dadosOS.laudo
+        },
+        // Envia o array de objetos puro para a tabela itens_ordem_servico
+        itens: itens.map(item => ({
+        item: item.nome,
+        lado: item.lado || null,
+        quantidade: item.qtd,
+        valor_unitario: item.valorComDesconto
+        })),
+        // Converte "R$ 150,00" para o formato numérico 150.00
+        totalGeral: parseFloat(
+        (document.getElementById('totalGeral')?.value || "0")
+        .replace('R$', '')
+        .replace(/\./g, '')
+        .replace(',', '.')
+        .trim()
+        )
+        };
+
+        // Altere para a URL oficial do seu backend quando fizer o deploy
+        fetch('http://localhost:3000/api/ordem-servico', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dadosParaEnviar),
+        })
+        .then(response => {
+        if (!response.ok) throw new Error('Erro ao salvar no banco de dados.');
+        return response.json();
+        })
+        .then(data => {
+        console.log('Dados salvos no Neon com sucesso!', data);
+        })
+        .catch(err => {
+        console.error('Erro ao conectar com o servidor Neon:', err);
+        alert('A OS foi impressa, mas não pôde ser salva no banco de dados.');
+        });
+        }
+    </p>
+
+    <p>
+        1. Criar a Função de Envio (enviarNotaParaNeon)
+        Adicione esta nova função ao seu arquivo JavaScript. Ela será responsável por enviar o payload estruturado
+        contendo a Nota e seus itens para a API conectada ao banco Neon:
+    </p>
+    <p>
+        function enviarNotaParaNeon(dadosNota, itens) {
+        const dadosParaEnviar = {
+        numero_nota: dadosNota.numero,
+        data_emissao: document.getElementById('f_nota_data')?.value || new Date().toISOString().split('T')[0],
+        os_referencia: dadosNota.os_ref ? parseInt(dadosNota.os_ref, 10) : null,
+        usuario_ativo: sessionStorage.getItem('usuario_ativo') || "NÃO IDENTIFICADO",
+        cliente: {
+        nome: dadosNota.cliente,
+        telefone: dadosNota.telefone,
+        documento: dadosNota.documento
+        },
+        veiculo: {
+        modelo: dadosNota.modelo,
+        placa: dadosNota.placa,
+        quilometragem: dadosNota.quilometragem
+        },
+        forma_pagamento: document.getElementById('formaPagamento')?.value || 'cartao',
+        desconto: document.getElementById('desconto')?.disabled ? 0 :
+        parseInt(document.getElementById('desconto')?.value || 0, 10),
+
+        // Envia a lista pura de itens para a tabela 'itens_nota_servico'
+        itens: itens.map(item => ({
+        item: item.nome,
+        lado: item.lado || null,
+        quantidade: item.qtd,
+        valor_unitario: item.valorComDesconto
+        })),
+
+        // Converte a string "R$ 150,00" para o decimal 150.00
+        totalGeral: parseFloat(
+        (document.getElementById('totalGeral')?.value || "0")
+        .replace('R$', '')
+        .replace(/\./g, '')
+        .replace(',', '.')
+        .trim()
+        )
+        };
+
+        fetch('http://localhost:3000/api/nota-servico', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dadosParaEnviar),
+        })
+        .then(response => {
+        if (!response.ok) throw new Error('Erro ao salvar nota no banco de dados.');
+        return response.json();
+        })
+        .then(data => console.log('Nota salva com sucesso no Neon!', data))
+        .catch(err => {
+        console.error('Erro ao conectar com o servidor Neon:', err);
+        alert('A nota foi impressa, mas não pôde ser guardada no banco de dados.');
+        });
+        }
+    </p>
+
+    <p>
+        2. Chamar a Função de Envio dentro de dispararImpressaoDupla()
+        Vá até a função dispararImpressaoDupla(), localize o final dela (logo antes ou depois de window.print()) e
+        adicione a captura dos dados e a chamada do Neon.
+
+        Modifique o final da função dispararImpressaoDupla para ficar assim:
+    </p>
+    <p>
+        // ... [Manter o código existente acima de dispararImpressaoDupla] ...
+
+        // Novo objeto mapeado para o banco de dados
+        const dadosNota = {
+        numero: numeroNotaStr,
+        os_ref: document.getElementById('f_nota_ref')?.value || null,
+        cliente: nomeCliente,
+        documento: document.getElementById('f_cliente_id')?.value || 'Não Informado',
+        telefone: telCliente,
+        modelo: modVeiculo,
+        placa: placaVeiculo,
+        quilometragem: kmVeiculo
+        };
+
+        // Chamada enviando os dados brutos e o array estruturado para o Neon
+        enviarNotaParaNeon(dadosNota, servicosAdicionados);
+
+        // Salva o número sequencial no LocalStorage para controle interno
+        const numeroAtualOriginal = numeroNotaStr.replace('#', '');
+        localStorage.setItem('ultimo_numero_nota', numeroAtualOriginal);
+
+        // Dispara a visualização de impressão/salvamento nativa
+        window.print();
+
+        // Gera o próximo número automaticamente para a próxima venda
+        definirProximoNumeroNota();
+        }
+    </p>
+
+    <p>
+        1. Modelagem do Banco de Dados (PostgreSQL no Neon)
+        Execute os seguintes comandos SQL no painel de controle do seu Neon (SQL Editor) para criar as tabelas:
+    </p>
+    <p>
+        -- TABELA 1: Ordens de Serviço (Primeiro Formulário)
+        CREATE TABLE ordens_servico (
+        id SERIAL PRIMARY KEY,
+        numero_os INT UNIQUE NOT NULL,
+        status VARCHAR(50) NOT NULL,
+        cliente_nome VARCHAR(255) NOT NULL,
+        cliente_documento VARCHAR(50),
+        cliente_telefone VARCHAR(50) NOT NULL,
+        cliente_email VARCHAR(255),
+        veiculo_nome VARCHAR(255) NOT NULL,
+        veiculo_modelo VARCHAR(255) NOT NULL,
+        veiculo_placa VARCHAR(50) NOT NULL,
+        veiculo_quilometragem VARCHAR(50) NOT NULL,
+        defeito_relatado TEXT NOT NULL,
+        laudo_tecnico TEXT,
+        total_geral NUMERIC(10, 2) NOT NULL,
+        criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+
+        -- TABELA 2: Itens da Ordem de Serviço (Relação 1 para Muitos)
+        CREATE TABLE itens_ordem_servico (
+        id SERIAL PRIMARY KEY,
+        os_id INT REFERENCES ordens_servico(id) ON DELETE CASCADE,
+        item VARCHAR(255) NOT NULL,
+        lado VARCHAR(50),
+        quantidade INT NOT NULL,
+        valor_unitario NUMERIC(10, 2) NOT NULL
+        );
+
+        -- TABELA 3: Notas de Serviço (Segundo Formulário)
+        CREATE TABLE notas_servico (
+        id SERIAL PRIMARY KEY,
+        numero_nota VARCHAR(50) UNIQUE NOT NULL,
+        data_emissao DATE NOT NULL,
+        os_referencia INT, -- Se referenciar a tabela ordens_servico
+        usuario_ativo VARCHAR(255),
+        cliente_nome VARCHAR(255) NOT NULL,
+        cliente_telefone VARCHAR(50) NOT NULL,
+        cliente_documento VARCHAR(50),
+        veiculo_modelo VARCHAR(255) NOT NULL,
+        veiculo_placa VARCHAR(50) NOT NULL,
+        veiculo_quilometragem VARCHAR(50) NOT NULL,
+        forma_pagamento VARCHAR(50),
+        desconto INT,
+        total_geral NUMERIC(10, 2) NOT NULL,
+        criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+
+        -- TABELA 4: Itens da Nota de Serviço
+        CREATE TABLE itens_nota_servico (
+        id SERIAL PRIMARY KEY,
+        nota_id INT REFERENCES notas_servico(id) ON DELETE CASCADE,
+        item VARCHAR(255) NOT NULL,
+        lado VARCHAR(50),
+        quantidade INT NOT NULL,
+        valor_unitario NUMERIC(10, 2) NOT NULL
+        );
+    </p>
+
+    <p>
+        2. Capturando a Lista Dinâmica no Front-end (JavaScript)
+        Como os itens são adicionados dinamicamente em uma tag ul, o HTML puro não os envia por padrão em um submit
+        comum. Você precisará de uma função JavaScript para varrer a
+        lista acumulada na tela, montar um objeto JSON e disparar para o seu servidor.
+
+        Abaixo, um exemplo de como estruturar o envio do Primeiro Formulário (OS):
+    </p>
+    <p>
+        // Exemplo para o primeiro formulário
+        async function enviarFormularioOS(event) {
+        event.preventDefault(); // Impede o recarregamento da página
+
+        // 1. Pegar os itens acumulados no seu array/lista dinamicamente
+        // (Ajuste essa parte conforme a lógica que você usa no 'btnAdicionar')
+        const listaItens = [];
+        document.querySelectorAll('#listaServicos li').forEach(li => {
+        listaItens.push({
+        item: li.dataset.item, // ideal guardar os dados em atributos data-* ao adicionar na lista
+        lado: li.dataset.lado,
+        quantidade: parseInt(li.dataset.qtd),
+        valor_unitario: parseFloat(li.dataset.valor)
+        });
+        });
+
+        // 2. Montar o objeto completo
+        const dadosOS = {
+        numero_os: document.getElementById('f_numero').value,
+        status: document.getElementById('f_status').value,
+        cliente: {
+        nome: document.getElementById('f_cliente').value,
+        documento: document.getElementById('f_documento').value,
+        telefone: document.getElementById('f_telefone').value,
+        email: document.getElementById('f_email').value,
+        },
+        veiculo: {
+        nome: document.getElementById('f_objeto').value,
+        modelo: document.getElementById('f_modelo').value,
+        placa: document.getElementById('f_serial').value,
+        quilometragem: document.getElementById('f_quilometragem').value,
+        },
+        detalhes: {
+        defeito: document.getElementById('f_defeito').value,
+        laudo: document.getElementById('f_laudo').value,
+        },
+        itens: listaItens,
+        totalGeral: parseFloat(document.getElementById('totalGeral').value.replace('R$', '').replace('.',
+        '').replace(',', '.').trim())
+        };
+
+        // 3. Enviar para a sua API no Backend
+        try {
+        const response = await fetch('http://localhost:3000/api/ordem-servico', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dadosOS)
+        });
+
+        if (response.ok) {
+        alert('Ordem de serviço salva com sucesso no Neon!');
+        } else {
+        alert('Erro ao salvar os dados.');
+        }
+        } catch (error) {
+        console.error("Erro na requisição:", error);
+        }
+        }
+    </p>
+
+    <p>
+        3. Backend (Node.js + Express + pg para conectar ao Neon)
+        No seu servidor backend, instale o driver do PostgreSQL (npm install pg express cors). Lembre-se de pegar a
+        Connection String no painel do Neon.
+
+        Aqui está um exemplo de rota configurada para receber o JSON enviado acima, abrir uma Transaction no banco
+        de dados e salvar tudo de uma vez (a OS e seus respectivos itens):
+    </p>
+    <p>
+        const express = require('express');
+        const { Pool } = require('pg');
+        const cors = require('cors');
+
+        const app = express();
+        app.use(express.json());
+        app.use(cors());
+
+        // Substitua pela sua string de conexão fornecida pelo Neon
+        const connectionString =
+        'postgresql://usuario:senha@ep-projeto-neon.us-east-2.aws.neon.tech/neondb?sslmode=require';
+
+        const pool = new Pool({
+        connectionString: connectionString,
+        });
+
+        // Rota para salvar a Ordem de Serviço
+        app.post('/api/ordem-servico', async (req, res) => {
+        const data = req.body;
+
+        // Inicia uma transação para garantir que se o item falhar, a OS não seja criada pela metade
+        const client = await pool.connect();
+
+        try {
+        await client.query('BEGIN');
+
+        // 1. Inserir na tabela pai (ordens_servico)
+        const queryOS = `
+        INSERT INTO ordens_servico
+        (numero_os, status, cliente_nome, cliente_documento, cliente_telefone, cliente_email, veiculo_nome,
+        veiculo_modelo, veiculo_placa, veiculo_quilometragem, defeito_relatado, laudo_tecnico, total_geral)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+        RETURNING id;
+        `;
+
+        const valoresOS = [
+        data.numero_os, data.status, data.cliente.nome, data.cliente.documento,
+        data.cliente.telefone, data.cliente.email, data.veiculo.nome, data.veiculo.modelo,
+        data.veiculo.placa, data.veiculo.quilometragem, data.detalhes.defeito, data.detalhes.laudo, data.totalGeral
+        ];
+
+        const resultadoOS = await client.query(queryOS, valoresOS);
+        const osIdGenerated = resultadoOS.rows[0].id; // Pega o ID gerado pelo banco
+
+        // 2. Inserir os itens na tabela filha (itens_ordem_servico) loopando o array recebido
+        const queryItem = `
+        INSERT INTO itens_ordem_servico (os_id, item, lado, quantidade, valor_unitario)
+        VALUES ($1, $2, $3, $4, $5);
+        `;
+
+        for (const item of data.itens) {
+        await client.query(queryItem, [osIdGenerated, item.item, item.lado, item.quantidade, item.valor_unitario]);
+        }
+
+        // Se tudo deu certo, confirma no banco
+        await client.query('COMMIT');
+        res.status(201).json({ message: 'Ordem de serviço registrada com sucesso!', os_id: osIdGenerated });
+
+        } catch (error) {
+        // Desfaz qualquer alteração se houver erro
+        await client.query('ROLLBACK');
+        console.error(error);
+        res.status(500).json({ error: 'Falha ao salvar no banco de dados.' });
+        } finally {
+        client.release();
+        }
+        });
+
+        app.listen(3000, () => console.log('Servidor rodando na porta 3000'));
+    </p>
+    <p>
+        📌 Dica sobre Segurança: O Neon exige conexões criptografadas. Por isso, certifique-se de manter o
+        ?sslmode=require no final da sua string de conexão do PostgreSQL. Para o segundo formulário (Nota de
+        Serviço), a lógica será exatamente a mesma, mudando apenas os campos mapeados e apontando para as tabelas
+        notas_servico e itens_nota_servico.
+    </p>
+</body>
+
+</html>

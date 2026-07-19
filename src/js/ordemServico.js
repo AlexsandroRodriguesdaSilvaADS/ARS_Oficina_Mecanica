@@ -45,6 +45,7 @@ function autenticar(event) {
         document.getElementById('main-content').style.display = 'block';
 
         const nomeFormatado = user.toUpperCase();
+        usuarioLogado = nomeFormatado;
 
         // 1. Salva na sessão para as funções de serviços usarem
         sessionStorage.setItem('usuario_ativo', nomeFormatado);
@@ -159,12 +160,25 @@ if (btnAdicionar && selectItem) {
         // Exemplo: "Amortecedor dianteiro (LD)" ou "Pastilhas de freios (LD / LE)"
         const nomeCompletoItem = ladoValor ? `${itemSelecionado} (${ladoValor})` : itemSelecionado;
 
+
+
+
+        // CORREÇÃO: Procure pelo nome completo que já possui o lado incluso
+        const itemExistente = servicosAdicionados.find(item => item.nome === nomeCompletoItem);
+        if (itemExistente) {
+            alert(`O item "${nomeCompletoItem}" já foi adicionado à lista.`);
+            return;
+        }
+
         // 2. Evita duplicados idênticos na lista (Varre pelo nome completo + lado montado)
-        const itemExistente = servicosAdicionados.find(item => item.nome === itemSelecionado); //nomeCompletoItem
+        /*const itemExistente = servicosAdicionados.find(item => item.nome === itemSelecionado); //nomeCompletoItem
         if (itemExistente) {
             alert(`O item "${itemSelecionado}" já foi adicionado à lista.`);
             return;
-        }
+        }*/
+
+
+
 
         // 3. Identifica se é Serviço ou Produto/Peça pelo optgroup para definir o ícone
         const opcaoSelecionada = selectItem.options[selectItem.selectedIndex];
@@ -369,9 +383,22 @@ function gerarOS(event) {
     const historicoOS = JSON.parse(localStorage.getItem('historico_ordens_locais')) || {};
 
     // Formata os textos para o histórico local
-    const listaItensFinais = Array.from(itensServico).map(li => {
+    /*const listaItensFinais = Array.from(itensServico).map(li => {
         return li.innerText.replace(/[\n\r]+/g, ' ').replace('Remover item', '').replace('Excluir', '').trim();
-    });
+    });*/
+
+    // CORREÇÃO:
+    const listaItensFinais = servicosAdicionados.map(item => ({
+        nome: item.nome,
+        lado: item.lado,
+        icone: item.icone,
+        qtd: item.qtd,
+        valorOriginal: item.valorOriginal,
+        valorComDesconto: item.valorComDesconto,
+        desconto: item.desconto,
+        total: item.total
+    }));
+    
 
     historicoOS[dadosOS.numero] = { ...dadosOS, itens: listaItensFinais };
     localStorage.setItem('historico_ordens_locais', JSON.stringify(historicoOS));
