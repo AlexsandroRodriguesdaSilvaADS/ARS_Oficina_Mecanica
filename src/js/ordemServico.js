@@ -383,11 +383,6 @@ function gerarOS(event) {
     const historicoOS = JSON.parse(localStorage.getItem('historico_ordens_locais')) || {};
 
     // Formata os textos para o histórico local
-    /*const listaItensFinais = Array.from(itensServico).map(li => {
-        return li.innerText.replace(/[\n\r]+/g, ' ').replace('Remover item', '').replace('Excluir', '').trim();
-    });*/
-
-    // CORREÇÃO:
     const listaItensFinais = servicosAdicionados.map(item => ({
         nome: item.nome,
         lado: item.lado,
@@ -398,7 +393,7 @@ function gerarOS(event) {
         desconto: item.desconto,
         total: item.total
     }));
-    
+
 
     historicoOS[dadosOS.numero] = { ...dadosOS, itens: listaItensFinais };
     localStorage.setItem('historico_ordens_locais', JSON.stringify(historicoOS));
