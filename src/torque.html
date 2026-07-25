@@ -103,11 +103,36 @@
         }
 
         .brand-section {
+            display: none;
             background: #ffffff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             margin-bottom: 40px;
+        }
+
+        /* Estilo do menu suspenso */
+        .filter-container {
+            margin-bottom: 25px;
+        }
+
+        .filter-container select {
+            padding: 10px 15px;
+            margin-left: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            cursor: pointer;
+        }
+
+        .filter-container label {
+            color: #2c5282;
+            background-color: #ebf8ff;
+            padding: 10px 15px;
+            border-left: 5px solid #3182ce;
+            border-radius: 4px;
+            margin-top: 40px;
         }
     </style>
 </head>
@@ -115,10 +140,26 @@
 <body>
     <h1>Tabela de Torque de Suspensão</h1>
 
-    <div id="honda" class="brand-section">
+    <div class="filter-container">
+        <label for="brandSelect"><strong>
+                Selecione a Linha de Veículos:
+            </strong> </label>
+        <select id="brandSelect" onchange="filterBrand()">
+            <option value="">-- Selecione uma montadora --</option>
+            <option value="honda">HONDA</option>
+            <option value="toyota">TOYOTA</option>
+            <option value="fiat">FIAT</option>
+            <option value="volkswagen">VOLKSWAGEN</option>
+            <option value="chevrolet">CHEVROLET</option>
+            <option value="ford">FORD</option>
+            <option value="hyundai">HYUNDAI</option>
+        </select>
+    </div>.filter-container
+
+    <div id="honda" class="brand-section" style="display: block;">
         <h2>LINHA HONDA</h2>
 
-        <h3>1.1 Suspensão Dianteira (Padrão McPherson - Todos os Modelos)</h3>
+        <h3>1. Suspensão Dianteira (Padrão McPherson - Todos os Modelos)</h3>
         <table>
             <thead>
                 <tr>
@@ -192,7 +233,7 @@
             </tbody>
         </table>
 
-        <h3>1.2 Suspensão Traseira — Eixo de Torção (Fit, City, HR-V, WR-V)</h3>
+        <h3>2. Suspensão Traseira — Eixo de Torção (Fit, City, HR-V, WR-V)</h3>
         <table>
             <thead>
                 <tr>
@@ -230,7 +271,7 @@
             </tbody>
         </table>
 
-        <h3>1.3 Suspensão Traseira — Multilink / Independente (Civic G8/G9/G10, CR-V, Accord)</h3>
+        <h3>3. Suspensão Traseira — Multilink / Independente (Civic G8/G9/G10, CR-V, Accord)</h3>
         <table>
             <thead>
                 <tr>
@@ -268,7 +309,7 @@
             </tbody>
         </table>
 
-        <h3>1.4 Parafusos de Roda (Honda)</h3>
+        <h3>4. Parafusos de Roda (Honda)</h3>
         <table>
             <thead>
                 <tr>
@@ -285,12 +326,22 @@
                 </tr>
             </tbody>
         </table>
+        <div class="note-box">
+            <h4>⚠️ 5. Recomendações Críticas de Montagem</h4>
+            <ul>
+                <li><strong>Carga Estática:</strong> Os parafusos que passam por buchas de borracha jamás devem ser
+                    apertados com o veículo suspenso no elevador. O torque final deve ser aplicado com o peso do veículo
+                    apoiado no chão.</li>
+                <li><strong>Travas de Segurança:</strong> Substitua sempre contrapinos, cupilhas e porcas autotravantes
+                    (parlock) desgastadas por componentes novos.</li>
+            </ul>
+        </div>
     </div>
 
     <div id="toyota" class="brand-section">
         <h2>LINHA TOYOTA</h2>
 
-        <h3>2.1 Suspensão Dianteira — Linha Leve & SUVs Médios (Corolla, Yaris, Etios, Corolla Cross, RAV4)</h3>
+        <h3>1. Suspensão Dianteira — Linha Leve & SUVs Médios (Corolla, Yaris, Etios, Corolla Cross, RAV4)</h3>
         <table>
             <thead>
                 <tr>
@@ -364,7 +415,7 @@
             </tbody>
         </table>
 
-        <h3>2.2 Suspensão Traseira — Eixo de Torção (Etios, Yaris, Corolla até G10, Corolla Cross)</h3>
+        <h3>2. Suspensão Traseira — Eixo de Torção (Etios, Yaris, Corolla até G10, Corolla Cross)</h3>
         <table>
             <thead>
                 <tr>
@@ -402,7 +453,7 @@
             </tbody>
         </table>
 
-        <h3>2.3 Suspensão Traseira — Independente / Multilink (Corolla G11/G12, RAV4)</h3>
+        <h3>3. Suspensão Traseira — Independente / Multilink (Corolla G11/G12, RAV4)</h3>
         <table>
             <thead>
                 <tr>
@@ -440,7 +491,7 @@
             </tbody>
         </table>
 
-        <h3>2.4 Suspensão — Hilux & SW4 (Chassi e Carga)</h3>
+        <h3>4. Suspensão — Hilux & SW4 (Chassi e Carga)</h3>
         <table>
             <thead>
                 <tr>
@@ -490,7 +541,7 @@
             </tbody>
         </table>
 
-        <h3>2.5 Parafusos de Roda (Toyota)</h3>
+        <h3>5. Parafusos de Roda (Toyota)</h3>
         <table>
             <thead>
                 <tr>
@@ -512,24 +563,22 @@
                 </tr>
             </tbody>
         </table>
-    </div>
-
-    <div class="note-box">
-        <h4>⚠️ Recomendações Críticas de Montagem</h4>
-        <ul>
-            <li><strong>Carga Estática:</strong> Os parafusos que passam por buchas de borracha (bandejas dianteiras,
-                eixos traseiros de torção e braços oscilantes) <strong>jamais devem ser apertados com o veículo suspenso
-                    no elevador</strong>. O torque final deve ser aplicado com o peso do veículo apoiado no chão (ou com
-                apoio hidráulico simulando a altura de rodagem).</li>
-            <li><strong>Travas de Segurança:</strong> Substitua sempre contrapinos, cupilhas e porcas autotravantes
-                (parlock) desgastadas por componentes novos.</li>
-        </ul>
+        <div class="note-box">
+            <h4>⚠️ 6. Recomendações Críticas de Montagem</h4>
+            <ul>
+                <li><strong>Carga Estática:</strong> Os parafusos das buchas de borracha jamais devem ser apertados com
+                    o veículo suspenso no elevador. O torque final deve ser aplicado com o peso do veículo apoiado no
+                    chão.</li>
+                <li><strong>Travas de Segurança:</strong> Substitua sempre contrapinos, cupilhas e porcas autotravantes
+                    desgastadas por componentes novos.</li>
+            </ul>
+        </div>
     </div>
 
     <div id="fiat" class="brand-section">
         <h2>LINHA FIAT</h2>
 
-        <h2>1. Suspensão Dianteira — Linha Leve & SUVs (Uno, Palio, Mobi, Argo, Cronos, Pulse, Fastback, Strada)</h2>
+        <h3>1. Suspensão Dianteira — Linha Leve & SUVs (Uno, Palio, Mobi, Argo, Cronos, Pulse, Fastback, Strada)</h3>
         <table>
             <thead>
                 <tr>
@@ -609,7 +658,7 @@
             </tbody>
         </table>
 
-        <h2>2. Suspensão Traseira — Eixo de Torção (Passeio, SUVs e Strada)</h2>
+        <h3>2. Suspensão Traseira — Eixo de Torção (Passeio, SUVs e Strada)</h3>
         <table>
             <thead>
                 <tr>
@@ -659,7 +708,7 @@
             </tbody>
         </table>
 
-        <h2>3. Linha Utilitários & Comerciais (Toro, Ducato, Titano)</h2>
+        <h3>3. Linha Utilitários & Comerciais (Toro, Ducato, Titano)</h3>
         <table>
             <thead>
                 <tr>
@@ -709,7 +758,7 @@
             </tbody>
         </table>
 
-        <h2>4. Parafusos de Roda (Linha Fiat)</h2>
+        <h3>4. Parafusos de Roda (Linha Fiat)</h3>
         <table>
             <thead>
                 <tr>
@@ -736,25 +785,23 @@
                 </tr>
             </tbody>
         </table>
-    </div>
-
-    <div class="note-box">
-        <h4>5. Recomendações Críticas de Oficina</h4>
-        <ul>
-            <li><strong>Aperto das Buchas (Posição de Rodagem):</strong> Os parafusos das buchas de borracha da bandeja
-                dianteira e do eixo traseiro devem ser torqueados impreterivelmente com o peso do veículo apoiado no
-                chão. Torquear com as rodas penduradas no elevador provoca torção excessiva e rasga a borracha
-                prematuramente.</li>
-            <li><strong>Parafusos de Passagem do Pivô:</strong> Na linha Fiat, o pivô dianteiro é retido por um parafuso
-                passante na manga de eixo. Certifique-se de usar parafuso de classe de resistência adequada (8.8 ou
-                superior) e apertar dentro do torque especificado para não espanar a rosca do alojamento.</li>
-        </ul>
+        <div class="note-box">
+            <h4>⚠️ 5. Recomendações Críticas de Oficina</h4>
+            <ul>
+                <li><strong>Aperto das Buchas (Posição de Rodagem):</strong> Os parafusos das buchas de borracha da
+                    bandeja dianteira e do eixo traseiro devem ser torqueados impreterivelmente com o peso do veículo
+                    apoiado no chão.</li>
+                <li><strong>Parafusos de Passagem do Pivô:</strong> Na linha Fiat, o pivô dianteiro é retido por um
+                    parafuso passante na manga de eixo. Certifique-se de usar parafuso de classe de resistência adequada
+                    (8.8 ou superior).</li>
+            </ul>
+        </div>
     </div>
 
     <div id="volkswagen" class="brand-section">
         <h2>LINHA VOLKSWAGEN</h2>
 
-        <h2>1. Suspensão Dianteira (Padrão McPherson — Gol, Fox, Polo, Virtus, Nivus, T-Cross, Jetta, Taos)</h2>
+        <h3>1. Suspensão Dianteira (Padrão McPherson — Gol, Fox, Polo, Virtus, Nivus, T-Cross, Jetta, Taos)</h3>
         <table>
             <thead>
                 <tr>
@@ -834,7 +881,7 @@
             </tbody>
         </table>
 
-        <h2>2. Suspensão Traseira — Eixo de Torção (Gol, Fox, Polo, Virtus, Nivus, T-Cross, Saveiro)</h2>
+        <h3>2. Suspensão Traseira — Eixo de Torção (Gol, Fox, Polo, Virtus, Nivus, T-Cross, Saveiro)</h3>
         <table>
             <thead>
                 <tr>
@@ -872,7 +919,7 @@
             </tbody>
         </table>
 
-        <h2>3. Suspensão Traseira — Multilink / Independente (Golf TSI/GTI, Jetta GLI, Taos 4Motion, Tiguan)</h2>
+        <h3>3. Suspensão Traseira — Multilink / Independente (Golf TSI/GTI, Jetta GLI, Taos 4Motion, Tiguan)</h3>
         <table>
             <thead>
                 <tr>
@@ -893,114 +940,16 @@
                     <td>Amortecedor — Fixação Inferior</td>
                     <td>90 N.m + 90°</td>
                     <td>9,2 kgfm + 90°</td>
-                    <td>Na manga de eixo traseira</td>
-                </tr>
-                <tr>
-                    <td>Braço Transversal Inferior à Manga de Eixo</td>
-                    <td>90 N.m + 90°</td>
-                    <td>9,2 kgfm + 90°</td>
-                    <td>Apertar na posição de rodagem</td>
-                </tr>
-                <tr>
-                    <td>Braço de Convergência (Excêntrico de Alinhamento)</td>
-                    <td>95 N.m</td>
-                    <td>9,7 kgfm</td>
-                    <td>Parafuso de ajuste de convergência/camber</td>
-                </tr>
-                <tr>
-                    <td>Bieleta Traseira à Barra e Braço</td>
-                    <td>45 N.m</td>
-                    <td>4,6 kgfm</td>
-                    <td>Fixação do pivô da bieleta</td>
+                    <td>Fixação na manga traseira</td>
                 </tr>
             </tbody>
         </table>
-
-        <h2>4. Linha Comercial & Utilitários (Amarok)</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Componente</th>
-                    <th>Torque (N.m / Angular)</th>
-                    <th>Torque (kgfm Aprox.)</th>
-                    <th>Observações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Amortecedor Dianteiro à Bandeja Inferior</td>
-                    <td>150 N.m + 90°</td>
-                    <td>15,3 kgfm + 90°</td>
-                    <td>Parafuso passante inferior da torre</td>
-                </tr>
-                <tr>
-                    <td>Bandeja Superior Dianteira ao Chassi</td>
-                    <td>130 N.m + 90°</td>
-                    <td>13,2 kgfm + 90°</td>
-                    <td>Apertar com o peso do veículo apoiado</td>
-                </tr>
-                <tr>
-                    <td>Grampos em "U" do Feixe de Molas Traseiro</td>
-                    <td>160 N.m</td>
-                    <td>16,3 kgfm</td>
-                    <td>Apertar em cruz de forma progressiva</td>
-                </tr>
-                <tr>
-                    <td>Jumelo do Feixe de Molas ao Chassi</td>
-                    <td>120 N.m</td>
-                    <td>12,2 kgfm</td>
-                    <td>Fixação do olhal traseiro</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h2>5. Parafusos de Roda (Padrão Volkswagen)</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Modelos / Plataformas</th>
-                    <th>Torque (N.m)</th>
-                    <th>Torque (kgfm)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Gol, Voyage, Saveiro, Fox, CrossFox, SpaceFox (Furação 4x100)</td>
-                    <td>110 N.m</td>
-                    <td>11,2 kgfm</td>
-                </tr>
-                <tr>
-                    <td>Polo, Virtus, Nivus, T-Cross, Taos, Jetta, Golf, Tiguan (Furação 5x100 / 5x112)</td>
-                    <td>120 N.m</td>
-                    <td>12,2 kgfm</td>
-                </tr>
-                <tr>
-                    <td>Amarok (Rodas de Aço e Liga Leve)</td>
-                    <td>180 N.m</td>
-                    <td>18,3 kgfm</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="note-box">
-        <h4>6. Padrões Técnicos Críticos do Grupo VAG (Volkswagen)</h4>
-        <ul>
-            <li><strong>Parafusos de Torque Angular (TTY - Yield Bolts):</strong> A Volkswagen utiliza amplamente
-                parafusos de deformação plástica na suspensão. Parafusos que possuem especificação de torque nominal
-                + ângulo (ex: <i>70 N.m + 90°</i>) sofrem estiramento e <strong>devem ser substituídos por
-                    novos</strong> a cada desmontagem.</li>
-            <li><strong>Posição de Peso Vazio (Leergewichtslage):</strong> As buchas elásticas (bandejas dianteiras,
-                braços do multilink e eixo traseiro de torção) só podem receber o aperto final quando a suspensão
-                estiver na posição de rodagem (rodas apoiadas no chão ou macaco hidráulico tensionando o cubo na
-                altura de trabalho). Torquear no elevador reduz a vida útil da bucha em até 80%.</li>
-        </ul>
     </div>
 
     <div id="chevrolet" class="brand-section">
         <h2>LINHA CHEVROLET</h2>
 
-        <h2>1. Suspensão Dianteira (Celta, Corsa, Classic, Prisma, Agile, Astra, Vectra, Zafira)</h2>
+        <h3>1. Suspensão Dianteira (Celta, Corsa, Classic, Prisma, Agile, Astra, Vectra, Zafira)</h3>
         <table>
             <thead>
                 <tr>
@@ -1062,7 +1011,7 @@
             </tbody>
         </table>
 
-        <h2>2. Suspensão Dianteira (Onix, Onix Plus, Tracker, Spin, Cobalt, Cruze)</h2>
+        <h3>2. Suspensão Dianteira (Onix, Onix Plus, Tracker, Spin, Cobalt, Cruze)</h3>
         <table>
             <thead>
                 <tr>
@@ -1118,7 +1067,7 @@
             </tbody>
         </table>
 
-        <h2>3. Suspensão Traseira — Eixo de Torção (Onix, Spin, Cobalt, Cruze, Tracker)</h2>
+        <h3>3. Suspensão Traseira — Eixo de Torção (Onix, Spin, Cobalt, Cruze, Tracker)</h3>
         <table>
             <thead>
                 <tr>
@@ -1156,7 +1105,7 @@
             </tbody>
         </table>
 
-        <h2>4. Linha Camionetes & Utilitários (S10, Trailblazer, Montana Antiga/Nova)</h2>
+        <h3>4. Linha Camionetes & Utilitários (S10, Trailblazer, Montana Antiga/Nova)</h3>
         <table>
             <thead>
                 <tr>
@@ -1194,7 +1143,7 @@
             </tbody>
         </table>
 
-        <h2>5. Parafusos e Porcas de Roda (Linha Chevrolet)</h2>
+        <h3>5. Parafusos e Porcas de Roda (Linha Chevrolet)</h3>
         <table>
             <thead>
                 <tr>
@@ -1221,25 +1170,24 @@
                 </tr>
             </tbody>
         </table>
-    </div>
-
-    <div class="note-box">
-        <h4>6. Recomendações Críticas da Rede Chevrolet (GM)</h4>
-        <ul>
-            <li><strong>Parafusos com Torque Angular:</strong> A Chevrolet adota a especificação de aperto elástico
-                (Nominal N.m + Ângulo em Graus) em quase todas as fixações de suspensão da linha atual. Parafusos
-                submetidos a esse tipo de torque sofrem deformação controlada e recomendam-se ser trocados a cada
-                manutenção preventiva.</li>
-            <li><strong>Aperto Neutro das Buchas:</strong> As buchas da bandeja dianteira e do eixo de torção
-                traseiro contêm borracha vulcanizada. O aperto final só deve ser dado quando a suspensão estiver sob
-                a carga do peso do veículo (apoiada nos pneus ou em cavaletes sob os cubos).</li>
-        </ul>
+        <div class="note-box">
+            <h4>⚠️ 6. Recomendações Críticas da Rede Chevrolet (GM)</h4>
+            <ul>
+                <li><strong>Parafusos com Torque Angular:</strong> A Chevrolet adota a especificação de aperto elástico
+                    (Nominal N.m + Ângulo em Graus) em quase todas as fixações de suspensão da linha atual. Parafusos
+                    submetidos a esse tipo de torque sofrem deformação controlada e recomendam-se ser trocados a cada
+                    manutenção preventiva.</li>
+                <li><strong>Aperto Neutro das Buchas:</strong> As buchas da bandeja dianteira e do eixo de torção
+                    traseiro contêm borracha vulcanizada. O aperto final só deve ser dado quando a suspensão estiver sob
+                    a carga do peso do veículo (apoiada nos pneus ou em cavaletes sob os cubos).</li>
+            </ul>
+        </div>
     </div>
 
     <div id="ford" class="brand-section">
         <h2>LINHA FORD</h2>
 
-        <h2>1. Suspensão Dianteira (Ka, Fiesta, Ecosport, Focus, Fusion)</h2>
+        <h3>1. Suspensão Dianteira (Ka, Fiesta, Ecosport, Focus, Fusion)</h3>
         <table>
             <thead>
                 <tr>
@@ -1313,7 +1261,7 @@
             </tbody>
         </table>
 
-        <h2>2. Suspensão Traseira — Eixo de Torção (Ka, Fiesta, Ecosport)</h2>
+        <h3>2. Suspensão Traseira — Eixo de Torção (Ka, Fiesta, Ecosport)</h3>
         <table>
             <thead>
                 <tr>
@@ -1351,7 +1299,7 @@
             </tbody>
         </table>
 
-        <h2>3. Suspensão Traseira — Multilink / Control Blade (Focus, Fusion, Maverick, Territory)</h2>
+        <h3>3. Suspensão Traseira — Multilink / Control Blade (Focus, Fusion, Maverick, Territory)</h3>
         <table>
             <thead>
                 <tr>
@@ -1401,7 +1349,7 @@
             </tbody>
         </table>
 
-        <h2>4. Linha Camionetes & Utilitários (Ranger, Transit, Bronco Sport)</h2>
+        <h3>4. Linha Camionetes & Utilitários (Ranger, Transit, Bronco Sport)</h3>
         <table>
             <thead>
                 <tr>
@@ -1445,7 +1393,7 @@
             </tbody>
         </table>
 
-        <h2>5. Parafusos e Porcas de Roda (Linha Ford)</h2>
+        <h3>5. Parafusos e Porcas de Roda (Linha Ford)</h3>
         <table>
             <thead>
                 <tr>
@@ -1472,25 +1420,24 @@
                 </tr>
             </tbody>
         </table>
-    </div>
-
-    <div class="note-box">
-        <h4>6. Recomendações Críticas do Padrão de Engenharia Ford</h4>
-        <ul>
-            <li><strong>Fixadores de Torque Angular:</strong> Diversas fixações das plataformas Ford (como B2E, C1,
-                CD4 e T6) utilizam parafusos submetidos à deformação elástica (torque nominal + ângulo). A Ford
-                recomenda a substituição de parafusos da bandeja, cubo e pivôs a cada intervenção técnica.</li>
-            <li><strong>Montagem da Suspensão em Posição Neutra:</strong> As buchas vulcanizadas das balanças
-                dianteiras e da suspensão traseira (especialmente o sistema <i>Control Blade</i>) devem
-                obrigatoriamente ser apertadas com a suspensão na altura de trabalho (peso do veículo apoiado no
-                chão ou simulado com macaco hidráulico), evitando pré-carga e rasgo prematuro das buchas.</li>
-        </ul>
+        <div class="note-box">
+            <h4>⚠️ 6. Recomendações Críticas do Padrão de Engenharia Ford</h4>
+            <ul>
+                <li><strong>Fixadores de Torque Angular:</strong> Diversas fixações das plataformas Ford (como B2E, C1,
+                    CD4 e T6) utilizam parafusos submetidos à deformação elástica (torque nominal + ângulo). A Ford
+                    recomenda a substituição de parafusos da bandeja, cubo e pivôs a cada intervenção técnica.</li>
+                <li><strong>Montagem da Suspensão em Posição Neutra:</strong> As buchas vulcanizadas das balanças
+                    dianteiras e da suspensão traseira (especialmente o sistema <i>Control Blade</i>) devem
+                    obrigatoriamente ser apertadas com a suspensão na altura de trabalho (peso do veículo apoiado no
+                    chão ou simulado com macaco hidráulico), evitando pré-carga e rasgo prematuro das buchas.</li>
+            </ul>
+        </div>
     </div>
 
     <div id="hyundai" class="brand-section">
         <h2>LINHA HYUNDAI</h2>
 
-        <h2>1. Suspensão Dianteira (HB20, HB20S, Creta, i30, Elantra, Tucson, IX35, Santa Fe)</h2>
+        <h3>1. Suspensão Dianteira (HB20, HB20S, Creta, i30, Elantra, Tucson, IX35, Santa Fe)</h3>
         <table>
             <thead>
                 <tr>
@@ -1564,7 +1511,7 @@
             </tbody>
         </table>
 
-        <h2>2. Suspensão Traseira — Eixo de Torção (HB20, HB20S, Creta, i30)</h2>
+        <h3>2. Suspensão Traseira — Eixo de Torção (HB20, HB20S, Creta, i30)</h3>
         <table>
             <thead>
                 <tr>
@@ -1602,7 +1549,7 @@
             </tbody>
         </table>
 
-        <h2>3. Suspensão Traseira — Multilink (IX35, Tucson, Santa Fe, Elantra, Azera)</h2>
+        <h3>3. Suspensão Traseira — Multilink (IX35, Tucson, Santa Fe, Elantra, Azera)</h3>
         <table>
             <thead>
                 <tr>
@@ -1652,7 +1599,7 @@
             </tbody>
         </table>
 
-        <h2>4. Linha Comercial & Utilitários (HR, H100)</h2>
+        <h3>4. Linha Comercial & Utilitários (HR, H100)</h3>
         <table>
             <thead>
                 <tr>
@@ -1690,7 +1637,7 @@
             </tbody>
         </table>
 
-        <h2>5. Porcas de Roda (Linha Hyundai)</h2>
+        <h3>5. Porcas de Roda (Linha Hyundai)</h3>
         <table>
             <thead>
                 <tr>
@@ -1717,27 +1664,48 @@
                 </tr>
             </tbody>
         </table>
+        <div class="note-box">
+            <h4>⚠️ 6. Recomendações Críticas do Padrão Técnico Hyundai / Kia</h4>
+            <ul>
+                <li><strong>Montagem em Carga Neutra:</strong> O aperto das buchas de borracha da suspensão (balança
+                    dianteira, eixo traseiro de torção e braços do multilink) deve ser feito obrigatoriamente com o
+                    veículo apoiado sobre as rodas ou com o macaco de transmissão simulando a altura de rodagem.
+                    Torquear com a suspensão suspensa provocará torção permanente e rompimento prematuro da borracha.
+                </li>
+                <li><strong>Trava da Porca de Homocinética:</strong> A porca da ponta de eixo da maioria dos veículos
+                    Hyundai possui colarinho para amassamento na fenda do eixo. É imprescindível realizar o amassamento
+                    correto após aplicar o torque nominal especificado.</li>
+            </ul>
+        </div>
     </div>
 
-    <div class="note-box">
-        <h4>6. Recomendações Críticas do Padrão Técnico Hyundai / Kia</h4>
-        <ul>
-            <li><strong>Montagem em Carga Neutra:</strong> O aperto das buchas de borracha da suspensão (balança
-                dianteira, eixo traseiro de torção e braços do multilink) deve ser feito obrigatoriamente com o
-                veículo apoiado sobre as rodas ou com o macaco de transmissão simulando a altura de rodagem.
-                Torquear com a suspensão suspensa provocará torção permanente e rompimento prematuro da borracha.
-            </li>
-            <li><strong>Trava da Porca de Homocinética:</strong> A porca da ponta de eixo da maioria dos veículos
-                Hyundai possui colarinho para amassamento na fenda do eixo. É imprescindível realizar o amassamento
-                correto após aplicar o torque nominal especificado.</li>
-        </ul>
-    </div>
+    <script>
+        function filterBrand() {
+            // Obtém o valor selecionado no dropdown
+            var selectedBrand = document.getElementById("brandSelect").value;
+
+            // Obtém todas as seções de montadoras
+            var sections = document.getElementsByClassName("brand-section");
+
+            // Oculta todas as seções
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].style.display = "none";
+            }
+
+            // Exibe apenas a seção selecionada (se houver uma selecionada)
+            if (selectedBrand !== "") {
+                var targetSection = document.getElementById(selectedBrand);
+                if (targetSection) {
+                    targetSection.style.display = "block";
+                }
+            }
+        }
+    </script>
 
     <footer class="footer">
         <h2>Fonte: Gemini <br>
             Data da pesquisa 24/07/2026</h2>
     </footer>
-
 </body>
 
 </html>
