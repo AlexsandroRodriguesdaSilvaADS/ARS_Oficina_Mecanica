@@ -60,7 +60,7 @@
 @media (max-width: 768px) {
 
     .cabecalho .menu .botao,
-    .cabecalho .menu .os {
+    .cabecalho .menu .botoes {
         font-size: 14px;
         color: #fff;
         padding: 10px;
@@ -173,7 +173,7 @@
     }
 
     .cabecalho .menu-section.on .menu .botao,
-    .cabecalho .menu-section.on .menu .os {
+    .cabecalho .menu-section.on .menu .botoes {
         font-size: 18px;
         line-height: 10px;
         display: flex;
@@ -183,7 +183,7 @@
         transition-duration: 0.5s;
     }
 
-     .cabecalho .menu-section.on .menu .os {
+     .cabecalho .menu-section.on .menu .botoes.none {
         display: none;
     }
 }

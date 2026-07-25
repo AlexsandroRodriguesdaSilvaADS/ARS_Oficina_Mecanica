@@ -55,7 +55,7 @@ header {
 }
 
 .cabecalho .menu .botao,
-.cabecalho .menu .os {
+.cabecalho .menu .botoes {
 	font-family: "Raleway", sans-serif;
 	font-size: 18px;
 	color: #F8F9FA;
@@ -67,7 +67,7 @@ header {
 }
 
 .cabecalho .menu .botao:hover,
-.cabecalho .menu .os:hover {
+.cabecalho .menu .botoes:hover {
 	color: #F8F9FA;
 	background-color: #2C6693;
 	font-weight: bold;
