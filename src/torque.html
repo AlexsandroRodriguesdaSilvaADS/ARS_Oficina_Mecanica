@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tabela de Torques de Suspensão - Seleção por Filtro</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -30,6 +31,7 @@
                     <option value="">-- Escolha a Montadora --</option>
                     <option value="honda">HONDA</option>
                     <option value="toyota">TOYOTA</option>
+                    <option value="nissan">NISSAN</option>
                     <option value="fiat">FIAT</option>
                     <option value="volkswagen">VOLKSWAGEN</option>
                     <option value="chevrolet">CHEVROLET</option>
@@ -140,6 +142,49 @@
                 "Parafusos de Roda": [
                     { name: "Etios, Yaris, Corolla, Corolla Cross, RAV4", nm: "103 - 110 N.m", kgfm: "10,5 - 11,2 kgfm", obs: "Aperto em cruz" },
                     { name: "Hilux e SW4 (Rodas de Liga / Aço)", nm: "120 - 135 N.m", kgfm: "12,2 - 13,8 kgfm", obs: "Aperto em cruz" }
+                ]
+            },
+            nissan: {
+                "Suspensão Dianteira — Linha Leve & Compactos (March, Versa, Kicks, Tiida, Livina)": [
+                    { name: "Porca da Haste do Amortecedor (topo)", nm: "60 - 70 N.m", kgfm: "6,1 - 7,1 kgfm", obs: "Fixação da haste no coxim superior (usar chave Allen/Hex para segurar)" },
+                    { name: "Porcas do Coxim/Torre à Carroceria", nm: "20 - 25 N.m", kgfm: "2,0 - 2,5 kgfm", obs: "Porcas de fixação da torre na caixa de roda (M8)" },
+                    { name: "Parafusos do Amortecedor à Manga de Eixo", nm: "100 - 120 N.m", kgfm: "10,2 - 12,2 kgfm", obs: "Par de parafusos passantes M12 da parte inferior da torre" },
+                    { name: "Terminal de Direção à Manga de Eixo", nm: "35 - 45 N.m", kgfm: "3,6 - 4,6 kgfm", obs: "Utilizar porca autotravante nova ou contrapino quando aplicável" },
+                    { name: "Pivô Inferior à Manga de Eixo", nm: "50 - 60 N.m", kgfm: "5,1 - 6,1 kgfm", obs: "Parafuso/porca de aperto da trava do pino do pivô" },
+                    { name: "Pivô Inferior à Bandeja (Balança)", nm: "60 - 70 N.m", kgfm: "6,1 - 7,1 kgfm", obs: "Nos modelos onde o pivô é parafusado/substituível" },
+                    { name: "Bucha Frontal da Bandeja (Horizontal)", nm: "90 - 105 N.m", kgfm: "9,2 - 10,7 kgfm", obs: "OBRIGATÓRIO: Torquear com o veículo apoiado no chão (peso neutro)", highlight: true },
+                    { name: "Bucha Traseira da Bandeja (Mancal Vertical)", nm: "110 - 125 N.m", kgfm: "11,2 - 12,7 kgfm", obs: "Parafuso vertical do mancal no subframe (posição neutra)", highlight: true },
+                    { name: "Bieleta da Barra Estabilizadora", nm: "40 - 50 N.m", kgfm: "4,1 - 5,1 kgfm", obs: "Fixação na torre e na barra (segurar o pino interno)" },
+                    { name: "Abraçadeira da Barra Estabilizadora ao Subframe", nm: "35 - 45 N.m", kgfm: "3,6 - 4,6 kgfm", obs: "Fixação dos mancais e buchas centrais" },
+                    { name: "Porca Central do Eixo / Homocinética (Cubo)", nm: "120 - 135 N.m", kgfm: "12,2 - 13,8 kgfm", obs: "Apertar no torque correto para não danificar o rolamento" }
+                ],
+                "Suspensão Traseira — Eixo de Torção (March, Versa, Kicks, Tiida, Livina)": [
+                    { name: "Amortecedor Traseiro — Fixação Superior", nm: "55 - 65 N.m", kgfm: "5,6 - 6,6 kgfm", obs: "Fixação do olhal/haste na estrutura interna do veículo" },
+                    { name: "Amortecedor Traseiro — Fixação Inferior", nm: "85 - 100 N.m", kgfm: "8,7 - 10,2 kgfm", obs: "Parafuso de fixação da base do amortecedor no eixo" },
+                    { name: "Bucha Principal do Eixo Traseiro à Carroceria", nm: "100 - 115 N.m", kgfm: "10,2 - 11,7 kgfm", obs: "OBRIGATÓRIO: Torquear somente com o peso do veículo no chão", highlight: true },
+                    { name: "Porca Central do Cubo de Roda Traseiro", nm: "175 - 200 N.m", kgfm: "17,8 - 20,4 kgfm", obs: "Porca de retenção do conjunto do rolamento blindado" }
+                ],
+                "Suspensão Dianteira & Traseira — Sedans Médios (Sentra)": [
+                    { name: "Sentra: Amortecedor Dianteiro à Manga de Eixo", nm: "115 - 130 N.m", kgfm: "11,7 - 13,3 kgfm", obs: "Parafusos reforçados da torre dianteira" },
+                    { name: "Sentra: Coxim Dianteiro Superior à Carroceria", nm: "25 - 30 N.m", kgfm: "2,5 - 3,0 kgfm", obs: "Porcas superiores da torre" },
+                    { name: "Sentra: Buchas da Bandeja Dianteira ao Quadro", nm: "110 N.m", kgfm: "11,2 kgfm", obs: "Apertar na altura de rodagem do veículo", highlight: true },
+                    { name: "Sentra: Amortecedor Traseiro (Inferior / Superior)", nm: "80 - 90 N.m", kgfm: "8,2 - 9,2 kgfm", obs: "Fixação dos pontos superior e inferior" },
+                    { name: "Sentra Multilink: Braços de Controle Traseiros", nm: "90 - 105 N.m", kgfm: "9,2 - 10,7 kgfm", obs: "Modelos com suspensão traseira independente" }
+                ],
+                "Linha Picapes & Utilitários — Nissan Frontier (D22 / D40 / D23)": [
+                    { name: "Bandeja Superior Dianteira ao Chassi", nm: "120 - 140 N.m", kgfm: "12,2 - 14,3 kgfm", obs: "Eixo e buchas do braço superior (altura nominal)", highlight: true },
+                    { name: "Pivô Superior à Manga de Eixo", nm: "90 - 110 N.m", kgfm: "9,2 - 11,2 kgfm", obs: "Porca do pino cônico do pivô superior" },
+                    { name: "Bandeja Inferior Dianteira ao Chassi", nm: "150 - 180 N.m", kgfm: "15,3 - 18,3 kgfm", obs: "Parafusos excêntricos de ajuste de alinhamento" },
+                    { name: "Pivô Inferior à Manga de Eixo", nm: "120 - 140 N.m", kgfm: "12,2 - 14,3 kgfm", obs: "Porca castelo / autotravante reforçada" },
+                    { name: "Amortecedor Dianteiro — Fixação Inferior", nm: "110 N.m", kgfm: "11,2 kgfm", obs: "Parafuso da base do amortecedor/mola na bandeja" },
+                    { name: "Grampos em \"U\" do Feixe de Molas Traseiro", nm: "130 - 150 N.m", kgfm: "13,3 - 15,3 kgfm", obs: "Apertar em cruz e em etapas progressivas" },
+                    { name: "Algemas / Jumelos do Feixe Traseiro", nm: "90 - 100 N.m", kgfm: "9,2 - 10,2 kgfm", obs: "Fixações das buchas do feixe" },
+                    { name: "Frontier Multilink: Braços Traseiros (5-Link)", nm: "130 - 150 N.m", kgfm: "13,3 - 15,3 kgfm", obs: "Versões com mola helicoidal traseira (D23 Nova Frontier)", highlight: true }
+                ],
+                "Parafusos e Porcas de Roda (Linha Nissan)": [
+                    { name: "March, Versa, Kicks, Tiida, Livina (Porcas/Parafusos M12)", nm: "105 - 115 N.m", kgfm: "10,7 - 11,7 kgfm", obs: "Aperto cruzado / sequencial" },
+                    { name: "Sentra (Porcas M12)", nm: "108 - 118 N.m", kgfm: "11,0 - 12,0 kgfm", obs: "Aperto cruzado em 2 etapas" },
+                    { name: "Frontier (Todas as Gerações - Porcas M12 / M14)", nm: "130 - 150 N.m", kgfm: "13,3 - 15,3 kgfm", obs: "Aperto cruzado (Rodas de Liga Leve e Aço)" }
                 ]
             },
             fiat: {
@@ -392,6 +437,42 @@
             }
         }
     </script>
+
+    <footer>
+        <h4>Fones de dados</h4>
+        <div>
+            <ul>
+                <li>
+                    1. Manuais de Serviço e Reparação dos Fabricantes (OEM) <br>
+                    Nissan ESM (Electronic Service Manual): Literatura oficial da fábrica para concessionárias e
+                    reparadores (abrangendo plataformas como Nissan B-Platform para March/Versa/Kicks e a plataforma D23 da
+                    Frontier). <br>
+                    Manuais de Oficina Honda, Toyota, Fiat, VW, GM e Ford: Documentação oficial de fábrica de cada
+                    montadora que especifica a tabela de torque e a ordem de aperto das fixações do chassi.
+                </li>
+                <li>
+                    2. Manual de Reparação e Dados Técnicos de Concessionária <br>
+                    Normas ISO e DIN de Fixação Automotiva: Padrões industriais que regem os torques aplicados por
+                    diâmetro e passo de rosca (ex: parafusos M8, M10, M12, M14 e M16 com classe de resistência 8.8, 10.9 e 12.9).<br>
+                    Procedimentos de Aperto Angular e Carga Nominal: Especificações de torque seguidas do método TTY
+                    (Torque-to-Yield) — onde há a necessidade de torque + ângulo — e a exigência do aperto na "altura de
+                    rodagem" (carro apoiado no chão), especificada pelos engenheiros de chassis das marcas.
+                </li>
+                <li>
+                    3. Bibliotecas Técnicas Especializadas no Mercado Brasileiro <br>
+                    Sistemas de Informação Técnica Automotiva: Catálogos e softwares de consulta amplamente adotados por
+                    oficinas mecânicas no Brasil para verificação de torques e esquemas de suspensão. <br>
+                    Tabelas de Torque de Fabricantes de Componentes da Suspensão: Dados fornecidos por fabricantes da
+                    linha de montagem e reposição (como Monroe, Nakata, Cofap, Lemförder, Sampel e Axios).
+                </li>
+                <li>
+                    Observação prática de oficina: A variação em faixa (ex: 100 - 120 N.m) nos dados reflete pequenas
+                    variações entre anos/modelos de uma mesma plataforma e a tolerância aceita pelos torquímetros de estalo
+                    convencionais usados na manutenção.
+                </li>
+            </ul>
+        </div>
+    </footer>
 </body>
 
 </html>

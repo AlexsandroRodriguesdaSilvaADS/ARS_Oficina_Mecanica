@@ -6,7 +6,8 @@ body {
     line-height: 1.5;
 }
 
-.main{
+.main {
+    padding: 25px;
     height: 90vh;
 }
 
@@ -94,4 +95,19 @@ h1 {
 .highlight {
     color: #c53030;
     font-weight: bold;
+}
+
+footer {
+    display: none;
+    background-color: #cbd5e0;
+    max-width: 1300px;
+    justify-content: center;
+    margin: auto;
+    padding: 10px;
+    border-radius: 6px;
+    color: #4a5568;
+}
+
+li {
+    margin: 10px;
 }
