@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tabela de Torques de Suspensão - Honda e Toyota</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.14.0/devicon.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/estilos.css" />
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 20px;
+            background-color: #f8f9fa;
+            color: #333333;
+            line-height: 1.5;
+        }
+
+        h1 {
+            color: #1a365d;
+            background-color: #e2e8f0;
+            text-align: center;
+            text-transform: uppercase;
+            padding: 30px;
+            border-radius: 6px;
+            border-bottom: 3px solid #2b6cb0;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #2c5282;
+            background-color: #ebf8ff;
+            padding: 10px 15px;
+            border-left: 5px solid #3182ce;
+            border-radius: 4px;
+            margin-top: 40px;
+        }
+
+        h3 {
+            color: #2d3748;
+            margin-top: 25px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0 30px 0;
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            background-color: #2b6cb0;
+            color: #ffffff;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
+        }
+
+        tr:hover {
+            background-color: #f7fafc;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #c53030;
+        }
+
+        .note-box {
+            background-color: #fffaf0;
+            border-left: 4px solid #dd6b20;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .note-box h4 {
+            margin: 0 0 8px 0;
+            color: #c05621;
+        }
+
+        .brand-section {
+            display: none;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+
+        /* Estilo do menu suspenso */
+        .filter-container {
+            margin-bottom: 25px;
+        }
+
+        .filter-container select {
+            padding: 10px 15px;
+            margin-left: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            cursor: pointer;
+        }
+
+        .filter-container label {
+            color: #2c5282;
+            background-color: #ebf8ff;
+            padding: 10px 15px;
+            border-left: 5px solid #3182ce;
+            border-radius: 4px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Tabela de Torque de Suspensão</h1>
+
+    <div class="filter-container">
+        <label for="brandSelect"><strong>
+                Selecione a Linha de Veículos:
+            </strong> </label>
+        <select id="brandSelect" onchange="filterBrand()">
+            <option value="honda">HONDA</option>
+            <option value="toyota">TOYOTA</option>
+            <option value="fiat">FIAT</option>
+            <option value="volkswagen">VOLKSWAGEN</option>
+            <option value="chevrolet">CHEVROLET</option>
+            <option value="ford">FORD</option>
+            <option value="hyundai">HYUNDAI</option>
+        </select>
+    </div>
+
+    <div id="honda" class="brand-section" style="display: block;">
+        <h2>LINHA HONDA</h2>
+
+        <h3>1. Suspensão Dianteira (Padrão McPherson - Todos os Modelos)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m)</th>
+                    <th>Torque (kgfm)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Porca da Haste do Amortecedor (topo)</td>
+                    <td>44 - 54 N.m</td>
+                    <td>4,5 - 5,5 kgfm</td>
+                    <td>Fixação superior na torre</td>
+                </tr>
+                <tr>
+                    <td>Parafusos do Coxim / Suporte do Amortecedor</td>
+                    <td>59 N.m</td>
+                    <td>6,0 kgfm</td>
+                    <td>Porcas de fixação da torre na carroceria</td>
+                </tr>
+                <tr>
+                    <td>Parafusos da Manga de Eixo ao Amortecedor</td>
+                    <td>157 N.m</td>
+                    <td>16,0 kgfm</td>
+                    <td>Fixação inferior da torre (2 parafusos)</td>
+                </tr>
+                <tr>
+                    <td>Terminal de Direção à Manga de Eixo</td>
+                    <td>44 - 49 N.m</td>
+                    <td>4,5 - 5,0 kgfm</td>
+                    <td>Usar contrapino novo quando aplicável</td>
+                </tr>
+                <tr>
+                    <td>Pivô da Bandeja / Balança à Manga</td>
+                    <td>49 - 55 N.m</td>
+                    <td>5,0 - 5,6 kgfm</td>
+                    <td>Castanha / Porca do pivô inferior</td>
+                </tr>
+                <tr>
+                    <td>Bucha Frontal da Bandeja (Bucha menor)</td>
+                    <td>93 N.m</td>
+                    <td>9,5 kgfm</td>
+                    <td class="highlight">Apertar com o carro no chão (peso)</td>
+                </tr>
+                <tr>
+                    <td>Bucha Traseira da Bandeja (Bucha vertical/maior)</td>
+                    <td>115 N.m</td>
+                    <td>11,7 kgfm</td>
+                    <td class="highlight">Apertar com o carro no chão (peso)</td>
+                </tr>
+                <tr>
+                    <td>Bieleta da Barra Estabilizadora</td>
+                    <td>29 - 39 N.m</td>
+                    <td>3,0 - 4,0 kgfm</td>
+                    <td>Usar chave Allen para segurar o pino</td>
+                </tr>
+                <tr>
+                    <td>Braçadeira da Barra Estabilizadora</td>
+                    <td>39 N.m</td>
+                    <td>4,0 kgfm</td>
+                    <td>Fixação das buchas centrais no subframe</td>
+                </tr>
+                <tr>
+                    <td>Porca da Homocinética (Eixo Central)</td>
+                    <td>245 N.m</td>
+                    <td>25,0 kgfm</td>
+                    <td>Requer amassamento da trava da porca</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m)</th>
+                    <th>Torque (kgfm)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Porca da Haste do Amortecedor (topo)</td>
+                    <td>44 - 54 N.m</td>
+                    <td>4,5 - 5,5 kgfm</td>
+                    <td>Fixação superior na torre</td>
+                </tr>
+                <tr>
+                    <td>Parafusos do Coxim / Suporte do Amortecedor</td>
+                    <td>59 N.m</td>
+                    <td>6,0 kgfm</td>
+                    <td>Porcas de fixação da torre na carroceria</td>
+                </tr>
+                <tr>
+                    <td>Parafusos da Manga de Eixo ao Amortecedor</td>
+                    <td>157 N.m</td>
+                    <td>16,0 kgfm</td>
+                    <td>Fixação inferior da torre (2 parafusos)</td>
+                </tr>
+                <tr>
+                    <td>Terminal de Direção à Manga de Eixo</td>
+                    <td>44 - 49 N.m</td>
+                    <td>4,5 - 5,0 kgfm</td>
+                    <td>Usar contrapino novo quando aplicável</td>
+                </tr>
+                <tr>
+                    <td>Pivô da Bandeja / Balança à Manga</td>
+                    <td>49 - 55 N.m</td>
+                    <td>5,0 - 5,6 kgfm</td>
+                    <td>Castanha / Porca do pivô inferior</td>
+                </tr>
+                <tr>
+                    <td>Bucha Frontal da Bandeja (Bucha menor)</td>
+                    <td>93 N.m</td>
+                    <td>9,5 kgfm</td>
+                    <td class="highlight">Apertar com o carro no chão (peso)</td>
+                </tr>
+                <tr>
+                    <td>Bucha Traseira da Bandeja (Bucha vertical/maior)</td>
+                    <td>115 N.m</td>
+                    <td>11,7 kgfm</td>
+                    <td class="highlight">Apertar com o carro no chão (peso)</td>
+                </tr>
+                <tr>
+                    <td>Bieleta da Barra Estabilizadora</td>
+                    <td>29 - 39 N.m</td>
+                    <td>3,0 - 4,0 kgfm</td>
+                    <td>Usar chave Allen para segurar o pino</td>
+                </tr>
+                <tr>
+                    <td>Braçadeira da Barra Estabilizadora</td>
+                    <td>39 N.m</td>
+                    <td>4,0 kgfm</td>
+                    <td>Fixação das buchas centrais no subframe</td>
+                </tr>
+                <tr>
+                    <td>Porca da Homocinética (Eixo Central)</td>
+                    <td>245 N.m</td>
+                    <td>25,0 kgfm</td>
+                    <td>Requer amassamento da trava da porca</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>2. Suspensão Traseira — Eixo de Torção (Fit, City, HR-V, WR-V)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m)</th>
+                    <th>Torque (kgfm)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Parafuso Superior do Amortecedor</td>
+                    <td>29 N.m</td>
+                    <td>3,0 kgfm</td>
+                    <td>Fixação no interior da caixa de roda</td>
+                </tr>
+                <tr>
+                    <td>Parafuso Inferior do Amortecedor</td>
+                    <td>64 N.m</td>
+                    <td>6,5 kgfm</td>
+                    <td>Fixação no eixo</td>
+                </tr>
+                <tr>
+                    <td>Bucha do Eixo Traseiro à Carroceria</td>
+                    <td>93 - 108 N.m</td>
+                    <td>9,5 - 11,0 kgfm</td>
+                    <td class="highlight">Torquear com a suspensão carregada</td>
+                </tr>
+                <tr>
+                    <td>Cubo de Roda Traseiro</td>
+                    <td>162 N.m</td>
+                    <td>16,5 kgfm</td>
+                    <td>Porca central do rolamento</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>3. Suspensão Traseira — Multilink / Independente (Civic G8/G9/G10, CR-V, Accord)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m)</th>
+                    <th>Torque (kgfm)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Amortecedor - Fixação Superior</td>
+                    <td>59 N.m</td>
+                    <td>6,0 kgfm</td>
+                    <td>Torre / Coxim</td>
+                </tr>
+                <tr>
+                    <td>Amortecedor - Fixação Inferior</td>
+                    <td>64 - 74 N.m</td>
+                    <td>6,5 - 7,5 kgfm</td>
+                    <td>Na manga/braço traseiro</td>
+                </tr>
+                <tr>
+                    <td>Braços de Controle Traseiros (Superiores/Inferiores)</td>
+                    <td>59 - 83 N.m</td>
+                    <td>6,0 - 8,5 kgfm</td>
+                    <td>Varia conforme o braço/alinhador</td>
+                </tr>
+                <tr>
+                    <td>Bieleta Traseira</td>
+                    <td>29 - 39 N.m</td>
+                    <td>3,0 - 4,0 kgfm</td>
+                    <td>Requer trava/chave auxiliar</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>4. Parafusos de Roda (Honda)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Aplicação</th>
+                    <th>Torque (N.m)</th>
+                    <th>Torque (kgfm)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Todos os modelos Honda de passeio e SUVs</td>
+                    <td>108 - 118 N.m</td>
+                    <td>11,0 - 12,0 kgfm</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="note-box">
+            <h4>⚠️ 5. Recomendações Críticas de Montagem</h4>
+            <ul>
+                <li><strong>Carga Estática:</strong> Os parafusos que passam por buchas de borracha jamás devem ser
+                    apertados com o veículo suspenso no elevador. O torque final deve ser aplicado com o peso do veículo
+                    apoiado no chão.</li>
+                <li><strong>Travas de Segurança:</strong> Substitua sempre contrapinos, cupilhas e porcas autotravantes
+                    (parlock) desgastadas por componentes novos.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="toyota" class="brand-section">
+        <h2>LINHA TOYOTA</h2>
+
+        <h3>1. Suspensão Dianteira — Linha Leve & SUVs Médios (Corolla, Yaris, Etios, Corolla Cross, RAV4)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m)</th>
+                    <th>Torque (kgfm)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Amortecedor à Manga de Eixo</td>
+                    <td>120 - 240 N.m</td>
+                    <td>12,2 - 24,5 kgfm</td>
+                    <td>Depende do parafuso (M14 x120 N.m / M16 x240 N.m)</td>
+                </tr>
+                <tr>
+                    <td>Porca da Haste do Amortecedor (topo)</td>
+                    <td>60 N.m</td>
+                    <td>6,1 kgfm</td>
+                    <td>Apertar com o coxim retido/bancada</td>
+                </tr>
+                <tr>
+                    <td>Porcas do Coxim/Torre à Carroceria</td>
+                    <td>40 - 50 N.m</td>
+                    <td>4,1 - 5,1 kgfm</td>
+                    <td>Fixação superior</td>
+                </tr>
+                <tr>
+                    <td>Terminal de Direção à Manga</td>
+                    <td>49 - 50 N.m</td>
+                    <td>5,0 - 5,1 kgfm</td>
+                    <td>Com trava/contrapino quando aplicável</td>
+                </tr>
+                <tr>
+                    <td>Pivô Inferior à Manga de Eixo</td>
+                    <td>100 N.m</td>
+                    <td>10,2 kgfm</td>
+                    <td>Porca principal do pino cônico</td>
+                </tr>
+                <tr>
+                    <td>Pivô Inferior à Bandeja (Balança)</td>
+                    <td>89 N.m</td>
+                    <td>9,0 kgfm</td>
+                    <td>Conjunto de 3 parafusos/porcas</td>
+                </tr>
+                <tr>
+                    <td>Buchas da Bandeja Dianteira</td>
+                    <td>137 N.m</td>
+                    <td>14,0 kgfm</td>
+                    <td class="highlight">Apertar com o veículo apoiado no chão</td>
+                </tr>
+                <tr>
+                    <td>Bieleta da Barra Estabilizadora</td>
+                    <td>50 - 60 N.m</td>
+                    <td>5,1 - 6,1 kgfm</td>
+                    <td>Fixação no amortecedor e na barra</td>
+                </tr>
+                <tr>
+                    <td>Abraçadeira da Barra Estabilizadora</td>
+                    <td>50 N.m</td>
+                    <td>5,1 kgfm</td>
+                    <td>Fixação das buchas no subframe</td>
+                </tr>
+                <tr>
+                    <td>Porca da Homocinética (Eixo Dianteiro)</td>
+                    <td>216 - 230 N.m</td>
+                    <td>22,0 - 23,5 kgfm</td>
+                    <td>Requer amassar a aba de travamento</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>2. Suspensão Traseira — Eixo de Torção (Etios, Yaris, Corolla até G10, Corolla Cross)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m)</th>
+                    <th>Torque (kgfm)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Amortecedor - Fixação Superior</td>
+                    <td>60 N.m</td>
+                    <td>6,1 kgfm</td>
+                    <td>Suporte superior na caixa de roda</td>
+                </tr>
+                <tr>
+                    <td>Amortecedor - Fixação Inferior</td>
+                    <td>80 - 90 N.m</td>
+                    <td>8,2 - 9,2 kgfm</td>
+                    <td>Parafuso de fixação no eixo</td>
+                </tr>
+                <tr>
+                    <td>Bucha Principal do Eixo Traseiro</td>
+                    <td>137 N.m</td>
+                    <td>14,0 kgfm</td>
+                    <td class="highlight">Torquear somente com a suspensão carregada</td>
+                </tr>
+                <tr>
+                    <td>Cubo de Roda Traseiro (Rolamento)</td>
+                    <td>85 N.m</td>
+                    <td>8,7 kgfm</td>
+                    <td>Parafusos de fixação do conjunto de cubo</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>3. Suspensão Traseira — Independente / Multilink (Corolla G11/G12, RAV4)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m)</th>
+                    <th>Torque (kgfm)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Amortecedor - Superior</td>
+                    <td>60 N.m</td>
+                    <td>6,1 kgfm</td>
+                    <td>Fixação da torre</td>
+                </tr>
+                <tr>
+                    <td>Amortecedor - Inferior</td>
+                    <td>90 N.m</td>
+                    <td>9,2 kgfm</td>
+                    <td>Fixação na manga traseira</td>
+                </tr>
+                <tr>
+                    <td>Braços Transversais / Links de Controle</td>
+                    <td>90 - 100 N.m</td>
+                    <td>9,2 - 10,2 kgfm</td>
+                    <td class="highlight">Apertar em posição de neutro/carga</td>
+                </tr>
+                <tr>
+                    <td>Bieleta Traseira</td>
+                    <td>40 - 50 N.m</td>
+                    <td>4,1 - 5,1 kgfm</td>
+                    <td>Fixação na barra estabilizadora</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>4. Suspensão — Hilux & SW4 (Chassi e Carga)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m)</th>
+                    <th>Torque (kgfm)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Bandeja Superior Dianteira (Pivot Central)</td>
+                    <td>115 N.m</td>
+                    <td>11,7 kgfm</td>
+                    <td>Eixo de fixação do braço superior</td>
+                </tr>
+                <tr>
+                    <td>Pivô Superior à Manga de Eixo</td>
+                    <td>110 N.m</td>
+                    <td>11,2 kgfm</td>
+                    <td>Porca castelo com contrapino</td>
+                </tr>
+                <tr>
+                    <td>Bandeja Inferior Dianteira ao Chassi</td>
+                    <td>210 N.m</td>
+                    <td>21,4 kgfm</td>
+                    <td>Parafusos excêntricos de alinhamento</td>
+                </tr>
+                <tr>
+                    <td>Pivô Inferior à Manga de Eixo</td>
+                    <td>160 N.m</td>
+                    <td>16,3 kgfm</td>
+                    <td>Fixação reforçada off-road</td>
+                </tr>
+                <tr>
+                    <td>Grampos em "U" do Feixe de Molas Traseiro (Hilux)</td>
+                    <td>130 - 145 N.m</td>
+                    <td>13,3 - 14,8 kgfm</td>
+                    <td>Apertar em cruz de forma progressiva</td>
+                </tr>
+                <tr>
+                    <td>Algemas / Jumelos do Feixe Traseiro</td>
+                    <td>90 - 95 N.m</td>
+                    <td>9,2 - 9,7 kgfm</td>
+                    <td>Buchas de borracha/PU</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>5. Parafusos de Roda (Toyota)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Linha de Veículos</th>
+                    <th>Torque (N.m)</th>
+                    <th>Torque (kgfm)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Etios, Yaris, Corolla, Corolla Cross, RAV4</td>
+                    <td>103 - 110 N.m</td>
+                    <td>10,5 - 11,2 kgfm</td>
+                </tr>
+                <tr>
+                    <td>Hilux e SW4 (Rodas de Liga / Aço)</td>
+                    <td>120 - 135 N.m</td>
+                    <td>12,2 - 13,8 kgfm</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h4>⚠️ 6. Recomendações Críticas de Montagem</h4>
+            <ul>
+                <li><strong>Carga Estática:</strong> Os parafusos das buchas de borracha jamais devem ser apertados com
+                    o veículo suspenso no elevador. O torque final deve ser aplicado com o peso do veículo apoiado no
+                    chão.</li>
+                <li><strong>Travas de Segurança:</strong> Substitua sempre contrapinos, cupilhas e porcas autotravantes
+                    desgastadas por componentes novos.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="fiat" class="brand-section">
+        <h2>LINHA FIAT</h2>
+
+        <h3>1. Suspensão Dianteira — Linha Leve & SUVs (Uno, Palio, Mobi, Argo, Cronos, Pulse, Fastback, Strada)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m)</th>
+                    <th>Torque (kgfm)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Porca da Haste do Amortecedor (topo)</td>
+                    <td>50 N.m</td>
+                    <td>5,1 kgfm</td>
+                    <td>Fixação superior do prato/haste</td>
+                </tr>
+                <tr>
+                    <td>Coxim Superior do Amortecedor à Carroceria</td>
+                    <td>25 - 30 N.m</td>
+                    <td>2,5 - 3,0 kgfm</td>
+                    <td>Porcas de fixação da torre na caixa de roda</td>
+                </tr>
+                <tr>
+                    <td>Parafusos do Amortecedor à Manga de Eixo</td>
+                    <td>75 - 90 N.m</td>
+                    <td>7,6 - 9,2 kgfm</td>
+                    <td>Par de parafusos inferiores da torre (M12)</td>
+                </tr>
+                <tr>
+                    <td>Pivô Inferior à Manga de Eixo</td>
+                    <td>50 - 60 N.m</td>
+                    <td>5,1 - 6,1 kgfm</td>
+                    <td>Parafuso passante de trava do pino do pivô</td>
+                </tr>
+                <tr>
+                    <td>Pivô Inferior à Bandeja (Balança)</td>
+                    <td>30 N.m</td>
+                    <td>3,0 kgfm</td>
+                    <td>Nos modelos com pivô parafusado/removível</td>
+                </tr>
+                <tr>
+                    <td>Bucha Frontal da Bandeja (Horizontal)</td>
+                    <td>90 - 100 N.m</td>
+                    <td>9,2 - 10,2 kgfm</td>
+                    <td>Apertar com o veículo apoiado no chão</td>
+                </tr>
+                <tr>
+                    <td>Bucha Traseira da Bandeja (Vertical)</td>
+                    <td>110 - 120 N.m</td>
+                    <td>11,2 - 12,2 kgfm</td>
+                    <td>Apertar com o veículo apoiado no chão</td>
+                </tr>
+                <tr>
+                    <td>Terminal de Direção à Manga de Eixo</td>
+                    <td>40 - 50 N.m</td>
+                    <td>4,1 - 5,1 kgfm</td>
+                    <td>Porca de fixação do terminal</td>
+                </tr>
+                <tr>
+                    <td>Bieleta da Barra Estabilizadora</td>
+                    <td>30 - 40 N.m</td>
+                    <td>3,0 - 4,1 kgfm</td>
+                    <td>Fixação no amortecedor e na barra</td>
+                </tr>
+                <tr>
+                    <td>Abraçadeira da Barra Estabilizadora ao Subframe</td>
+                    <td>25 - 30 N.m</td>
+                    <td>2,5 - 3,0 kgfm</td>
+                    <td>Fixação das buchas centrais</td>
+                </tr>
+                <tr>
+                    <td>Porca da Homocinética (Eixo Central)</td>
+                    <td>220 - 240 N.m</td>
+                    <td>22,4 - 24,5 kgfm</td>
+                    <td>Porca do cubo (travar aba ou aplicar torque)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>2. Suspensão Traseira — Eixo de Torção (Passeio, SUVs e Strada)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m)</th>
+                    <th>Torque (kgfm)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Amortecedor Traseiro — Fixação Superior</td>
+                    <td>60 - 70 N.m</td>
+                    <td>6,1 - 7,1 kgfm</td>
+                    <td>Fixação na caixa de roda / carroceria</td>
+                </tr>
+                <tr>
+                    <td>Amortecedor Traseiro — Fixação Inferior</td>
+                    <td>70 - 80 N.m</td>
+                    <td>7,1 - 8,2 kgfm</td>
+                    <td>Fixação no suporte do eixo traseiro</td>
+                </tr>
+                <tr>
+                    <td>Bucha Principal do Eixo Traseiro ao Suporte/Carroceria</td>
+                    <td>100 - 110 N.m</td>
+                    <td>10,2 - 11,2 kgfm</td>
+                    <td>Torquear somente com o veículo apoiado no chão</td>
+                </tr>
+                <tr>
+                    <td>Porca Central do Cubo de Roda Traseiro</td>
+                    <td>210 N.m</td>
+                    <td>21,4 kgfm</td>
+                    <td>Porca do rolamento blindado</td>
+                </tr>
+                <tr>
+                    <td>Grampos em "U" do Feixe de Molas (Strada e Fiorino)</td>
+                    <td>80 - 90 N.m</td>
+                    <td>8,2 - 9,2 kgfm</td>
+                    <td>Apertar de forma progressiva e em cruz</td>
+                </tr>
+                <tr>
+                    <td>Algemas / Jumelos do Feixe de Molas</td>
+                    <td>60 - 70 N.m</td>
+                    <td>6,1 - 7,1 kgfm</td>
+                    <td>Fixação com buchas de borracha</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>3. Linha Utilitários & Comerciais (Toro, Ducato, Titano)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Modelo / Componente</th>
+                    <th>Torque (N.m)</th>
+                    <th>Torque (kgfm)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Toro:</strong> Amortecedor Dianteiro à Manga</td>
+                    <td>110 N.m</td>
+                    <td>11,2 kgfm</td>
+                    <td>Fixação inferior da torre</td>
+                </tr>
+                <tr>
+                    <td><strong>Toro:</strong> Bandeja Dianteira ao Chassi/Subframe</td>
+                    <td>130 N.m</td>
+                    <td>13,2 kgfm</td>
+                    <td>Parafusos da balança dianteira</td>
+                </tr>
+                <tr>
+                    <td><strong>Toro:</strong> Braços Traseiros Multilink (Links)</td>
+                    <td>90 - 100 N.m</td>
+                    <td>9,2 - 10,2 kgfm</td>
+                    <td>Torquear na altura de rodagem</td>
+                </tr>
+                <tr>
+                    <td><strong>Ducato:</strong> Amortecedor Dianteiro à Manga</td>
+                    <td>180 N.m</td>
+                    <td>18,3 kgfm</td>
+                    <td>Parafusos M16 reforçados</td>
+                </tr>
+                <tr>
+                    <td><strong>Ducato:</strong> Pivô da Bandeja Dianteira</td>
+                    <td>110 N.m</td>
+                    <td>11,2 kgfm</td>
+                    <td>Carga pesada comercial</td>
+                </tr>
+                <tr>
+                    <td><strong>Titano:</strong> Grampos em "U" do Feixe Traseiro</td>
+                    <td>140 N.m</td>
+                    <td>14,2 kgfm</td>
+                    <td>Eixo rígido de tração traseira</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>4. Parafusos de Roda (Linha Fiat)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Linha de Veículos</th>
+                    <th>Torque (N.m)</th>
+                    <th>Torque (kgfm)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mobi, Uno, Palio, Siena, Grand Siena, Argo, Cronos, Strada</td>
+                    <td>90 - 100 N.m</td>
+                    <td>9,2 - 10,2 kgfm</td>
+                </tr>
+                <tr>
+                    <td>Pulse, Fastback, Toro (Plataforma Small Wide / MLA)</td>
+                    <td>120 N.m</td>
+                    <td>12,2 kgfm</td>
+                </tr>
+                <tr>
+                    <td>Ducato e Titano (Rodas Carga/Aço e Liga)</td>
+                    <td>160 - 180 N.m</td>
+                    <td>16,3 - 18,3 kgfm</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="note-box">
+            <h4>⚠️ 5. Recomendações Críticas de Oficina</h4>
+            <ul>
+                <li><strong>Aperto das Buchas (Posição de Rodagem):</strong> Os parafusos das buchas de borracha da
+                    bandeja dianteira e do eixo traseiro devem ser torqueados impreterivelmente com o peso do veículo
+                    apoiado no chão.</li>
+                <li><strong>Parafusos de Passagem do Pivô:</strong> Na linha Fiat, o pivô dianteiro é retido por um
+                    parafuso passante na manga de eixo. Certifique-se de usar parafuso de classe de resistência adequada
+                    (8.8 ou superior).</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="volkswagen" class="brand-section">
+        <h2>LINHA VOLKSWAGEN</h2>
+
+        <h3>1. Suspensão Dianteira (Padrão McPherson — Gol, Fox, Polo, Virtus, Nivus, T-Cross, Jetta, Taos)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m / Torque Angular)</th>
+                    <th>Torque (kgfm Aprox.)</th>
+                    <th>Observações / Procedimento VAG</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Porca da Haste do Amortecedor (topo)</td>
+                    <td>60 N.m</td>
+                    <td>6,1 kgfm</td>
+                    <td>Fixação superior do conjunto mola/amortecedor</td>
+                </tr>
+                <tr>
+                    <td>Coxim Superior à Carroceria</td>
+                    <td>15 N.m + 90°</td>
+                    <td>1,5 kgfm + 90°</td>
+                    <td>Parafusos M8 (Substituir parafusos)</td>
+                </tr>
+                <tr>
+                    <td>Abraçadeira do Amortecedor à Manga de Eixo</td>
+                    <td>60 N.m + 90°</td>
+                    <td>6,1 kgfm + 90°</td>
+                    <td>Parafuso passante de fixação inferior da torre</td>
+                </tr>
+                <tr>
+                    <td>Pivô Inferior à Bandeja (Balança)</td>
+                    <td>40 N.m + 45° (ou 100 N.m)</td>
+                    <td>4,1 kgfm + 45°</td>
+                    <td>Porcas triplas de fixação do pivô na chapa</td>
+                </tr>
+                <tr>
+                    <td>Pivô Inferior à Manga de Eixo</td>
+                    <td>50 N.m + 45°</td>
+                    <td>5,1 kgfm + 45°</td>
+                    <td>Porca de fixação do pino cônico</td>
+                </tr>
+                <tr>
+                    <td>Bucha Frontal da Bandeja (Horizontal)</td>
+                    <td>70 N.m + 90°</td>
+                    <td>7,1 kgfm + 90°</td>
+                    <td>Torquear em Posição de Peso Vazio (no chão)</td>
+                </tr>
+                <tr>
+                    <td>Bucha Traseira da Bandeja (Console/Mancal)</td>
+                    <td>70 N.m + 90° / 50 N.m + 90°</td>
+                    <td>5,1 a 7,1 kgfm + 90°</td>
+                    <td>Varia conforme plataforma (PQ24/25 ou MQB)</td>
+                </tr>
+                <tr>
+                    <td>Terminal de Direção à Manga de Eixo</td>
+                    <td>20 N.m + 90° (ou 40 N.m)</td>
+                    <td>2,0 kgfm + 90°</td>
+                    <td>Usar porca autotravante nova</td>
+                </tr>
+                <tr>
+                    <td>Bieleta à Torre do Amortecedor / Barra</td>
+                    <td>65 N.m</td>
+                    <td>6,6 kgfm</td>
+                    <td>Segurar o pino central com chave Torx/XZD</td>
+                </tr>
+                <tr>
+                    <td>Abraçadeira da Barra Estabilizadora ao Quadro</td>
+                    <td>20 N.m + 90°</td>
+                    <td>2,0 kgfm + 90°</td>
+                    <td>Fixação dos mancais no subframe</td>
+                </tr>
+                <tr>
+                    <td>Parafuso do Central do Eixo / Homocinética</td>
+                    <td>200 N.m + 180° (Sextavado) <br> 70 N.m + 90° (12 Pontas)</td>
+                    <td>20,4 kgfm + 180° <br> 7,1 kgfm + 90°</td>
+                    <td>Substituir sempre o parafuso do cubo</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>2. Suspensão Traseira — Eixo de Torção (Gol, Fox, Polo, Virtus, Nivus, T-Cross, Saveiro)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m / Angular)</th>
+                    <th>Torque (kgfm Aprox.)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Amortecedor Traseiro — Superior (Coxim)</td>
+                    <td>50 N.m + 45°</td>
+                    <td>5,1 kgfm + 45°</td>
+                    <td>Fixação na caixa de roda</td>
+                </tr>
+                <tr>
+                    <td>Amortecedor Traseiro — Inferior</td>
+                    <td>40 N.m + 90° (ou 90 N.m)</td>
+                    <td>4,1 kgfm + 90°</td>
+                    <td>Fixação no suporte do eixo rígido/torção</td>
+                </tr>
+                <tr>
+                    <td>Bucha do Eixo Traseiro aos Suportes do Chassi</td>
+                    <td>90 N.m + 90°</td>
+                    <td>9,2 kgfm + 90°</td>
+                    <td><strong>OBRIGATÓRIO:</strong> Torquear na Posição de Carga/Chão</td>
+                </tr>
+                <tr>
+                    <td>Porca da Ponta de Eixo / Cubo Traseiro</td>
+                    <td>175 N.m + 180° (ou 200 N.m)</td>
+                    <td>17,8 a 20,4 kgfm</td>
+                    <td>Porca de retenção do rolamento blindado</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>3. Suspensão Traseira — Multilink / Independente (Golf TSI/GTI, Jetta GLI, Taos 4Motion, Tiguan)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m / Angular)</th>
+                    <th>Torque (kgfm Aprox.)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Amortecedor — Fixação Superior</td>
+                    <td>50 N.m + 45°</td>
+                    <td>5,1 kgfm + 45°</td>
+                    <td>Coxim superior</td>
+                </tr>
+                <tr>
+                    <td>Amortecedor — Fixação Inferior</td>
+                    <td>90 N.m + 90°</td>
+                    <td>9,2 kgfm + 90°</td>
+                    <td>Fixação na manga traseira</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="chevrolet" class="brand-section">
+        <h2>LINHA CHEVROLET</h2>
+
+        <h3>1. Suspensão Dianteira (Celta, Corsa, Classic, Prisma, Agile, Astra, Vectra, Zafira)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m / Angular)</th>
+                    <th>Torque (kgfm Aprox.)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Porca da Haste do Amortecedor (topo)</td>
+                    <td>55 N.m</td>
+                    <td>5,6 kgfm</td>
+                    <td>Fixação da haste no coxim superior</td>
+                </tr>
+                <tr>
+                    <td>Coxim Superior à Carroceria</td>
+                    <td>25 N.m</td>
+                    <td>2,5 kgfm</td>
+                    <td>Parafusos da caixa de roda</td>
+                </tr>
+                <tr>
+                    <td>Parafusos do Amortecedor à Manga de Eixo</td>
+                    <td>95 N.m + 45° a 60°</td>
+                    <td>9,7 kgfm + Ângulo</td>
+                    <td>Par de parafusos M12 da torre inferior</td>
+                </tr>
+                <tr>
+                    <td>Pivô Inferior à Manga de Eixo</td>
+                    <td>50 N.m + 60° (ou 70 N.m)</td>
+                    <td>5,1 a 7,1 kgfm</td>
+                    <td>Parafuso/porca do pino do pivô</td>
+                </tr>
+                <tr>
+                    <td>Bandeja / Balança ao Subframe (Buchas)</td>
+                    <td>90 N.m + 45° a 60°</td>
+                    <td>9,2 kgfm + Ângulo</td>
+                    <td>Torquear na altura de rodagem (no chão)</td>
+                </tr>
+                <tr>
+                    <td>Terminal de Direção à Manga de Eixo</td>
+                    <td>35 N.m + 45° (ou 60 N.m)</td>
+                    <td>3,6 a 6,1 kgfm</td>
+                    <td>Usar porca autotravante nova</td>
+                </tr>
+                <tr>
+                    <td>Bieleta da Barra Estabilizadora</td>
+                    <td>20 N.m - 30 N.m</td>
+                    <td>2,0 - 3,0 kgfm</td>
+                    <td>Fixação na barra/amortecedor</td>
+                </tr>
+                <tr>
+                    <td>Porca do Central do Eixo / Homocinética</td>
+                    <td>230 N.m + 45° (ou 100 N.m + 90°)</td>
+                    <td>Varia conforme ano/modelo</td>
+                    <td>Amassar/travar a aba da porca</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>2. Suspensão Dianteira (Onix, Onix Plus, Tracker, Spin, Cobalt, Cruze)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m / Angular)</th>
+                    <th>Torque (kgfm Aprox.)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Porca da Haste do Amortecedor (topo)</td>
+                    <td>70 N.m</td>
+                    <td>7,1 kgfm</td>
+                    <td>Fixação do coxim/prato superior</td>
+                </tr>
+                <tr>
+                    <td>Parafusos da Torre à Manga de Eixo</td>
+                    <td>90 N.m + 60° a 75°</td>
+                    <td>9,2 kgfm + Ângulo</td>
+                    <td>Substituir parafusos de deformação</td>
+                </tr>
+                <tr>
+                    <td>Pivô Inferior à Manga de Eixo</td>
+                    <td>60 N.m + 30°</td>
+                    <td>6,1 kgfm + 30°</td>
+                    <td>Parafuso passante de retenção</td>
+                </tr>
+                <tr>
+                    <td>Bucha Frontal da Bandeja (Horizontal)</td>
+                    <td>70 N.m + 75°</td>
+                    <td>7,1 kgfm + 75°</td>
+                    <td>Apertar na posição de rodagem</td>
+                </tr>
+                <tr>
+                    <td>Bucha Traseira da Bandeja (Vertical)</td>
+                    <td>90 N.m + 75°</td>
+                    <td>9,2 kgfm + 75°</td>
+                    <td>Apertar na posição de rodagem</td>
+                </tr>
+                <tr>
+                    <td>Bieleta da Barra Estabilizadora</td>
+                    <td>65 N.m</td>
+                    <td>6,6 kgfm</td>
+                    <td>Segurar o pino central com chave hexagonal/Torx</td>
+                </tr>
+                <tr>
+                    <td>Porca Central da Homocinética (Cubo)</td>
+                    <td>150 N.m + 45° / 250 N.m</td>
+                    <td>15,3 a 25,5 kgfm</td>
+                    <td>Verifique modelo (Onix/Cruze)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>3. Suspensão Traseira — Eixo de Torção (Onix, Spin, Cobalt, Cruze, Tracker)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m / Angular)</th>
+                    <th>Torque (kgfm Aprox.)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Amortecedor Traseiro — Fixação Superior</td>
+                    <td>55 N.m + 30° (ou 60 N.m)</td>
+                    <td>5,6 a 6,1 kgfm</td>
+                    <td>Fixação na caixa de roda/suporte</td>
+                </tr>
+                <tr>
+                    <td>Amortecedor Traseiro — Fixação Inferior</td>
+                    <td>70 N.m + 45° (ou 90 N.m)</td>
+                    <td>7,1 a 9,2 kgfm</td>
+                    <td>Fixação na estrutura do eixo traseiro</td>
+                </tr>
+                <tr>
+                    <td>Bucha do Eixo Traseiro à Carroceria</td>
+                    <td>90 N.m + 60°</td>
+                    <td>9,2 kgfm + 60°</td>
+                    <td><strong>OBRIGATÓRIO:</strong> Torquear com o peso no chão</td>
+                </tr>
+                <tr>
+                    <td>Porca do Cubo de Roda Traseiro</td>
+                    <td>190 N.m - 210 N.m</td>
+                    <td>19,3 - 21,4 kgfm</td>
+                    <td>Retenção do conjunto do rolamento</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>4. Linha Camionetes & Utilitários (S10, Trailblazer, Montana Antiga/Nova)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Modelo / Componente</th>
+                    <th>Torque (N.m / Angular)</th>
+                    <th>Torque (kgfm Aprox.)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>S10/Trailblazer:</strong> Amortecedor Dianteiro Inferior</td>
+                    <td>110 N.m</td>
+                    <td>11,2 kgfm</td>
+                    <td>Parafuso de fixação da torre na bandeja</td>
+                </tr>
+                <tr>
+                    <td><strong>S10/Trailblazer:</strong> Bandeja Superior (Pivô e Chassi)</td>
+                    <td>120 N.m + 45°</td>
+                    <td>12,2 kgfm + Ângulo</td>
+                    <td>Apertar na posição de rodagem</td>
+                </tr>
+                <tr>
+                    <td><strong>S10/Trailblazer:</strong> Grampos em "U" do Feixe Traseiro</td>
+                    <td>150 N.m - 170 N.m</td>
+                    <td>15,3 - 17,3 kgfm</td>
+                    <td>Apertar em cruz de forma progressiva</td>
+                </tr>
+                <tr>
+                    <td><strong>Montana (Nova):</strong> Eixo Traseiro ao Chassi</td>
+                    <td>90 N.m + 60°</td>
+                    <td>9,2 kgfm + 60°</td>
+                    <td>Plataforma GEM (Onix/Tracker)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>5. Parafusos e Porcas de Roda (Linha Chevrolet)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Linha / Plataforma</th>
+                    <th>Torque (N.m)</th>
+                    <th>Torque (kgfm)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Celta, Corsa, Classic, Agile, Prisma antigo, Astra, Vectra (4x100 / 5x110)</td>
+                    <td>110 N.m</td>
+                    <td>11,2 kgfm</td>
+                </tr>
+                <tr>
+                    <td>Onix, Onix Plus, Spin, Cobalt, Tracker, Cruze, Montana (Plataforma GSV / GEM)</td>
+                    <td>140 N.m</td>
+                    <td>14,2 kgfm</td>
+                </tr>
+                <tr>
+                    <td>S10 e Trailblazer (Porcas 6 Furos)</td>
+                    <td>190 N.m</td>
+                    <td>19,3 kgfm</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="note-box">
+            <h4>⚠️ 6. Recomendações Críticas da Rede Chevrolet (GM)</h4>
+            <ul>
+                <li><strong>Parafusos com Torque Angular:</strong> A Chevrolet adota a especificação de aperto elástico
+                    (Nominal N.m + Ângulo em Graus) em quase todas as fixações de suspensão da linha atual. Parafusos
+                    submetidos a esse tipo de torque sofrem deformação controlada e recomendam-se ser trocados a cada
+                    manutenção preventiva.</li>
+                <li><strong>Aperto Neutro das Buchas:</strong> As buchas da bandeja dianteira e do eixo de torção
+                    traseiro contêm borracha vulcanizada. O aperto final só deve ser dado quando a suspensão estiver sob
+                    a carga do peso do veículo (apoiada nos pneus ou em cavaletes sob os cubos).</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="ford" class="brand-section">
+        <h2>LINHA FORD</h2>
+
+        <h3>1. Suspensão Dianteira (Ka, Fiesta, Ecosport, Focus, Fusion)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m / Angular)</th>
+                    <th>Torque (kgfm Aprox.)</th>
+                    <th>Observações / Procedimento Ford</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Porca da Haste do Amortecedor (topo)</td>
+                    <td>48 N.m - 55 N.m</td>
+                    <td>4,9 a 5,6 kgfm</td>
+                    <td>Fixação do coxim superior da torre</td>
+                </tr>
+                <tr>
+                    <td>Coxim Superior à Carroceria</td>
+                    <td>25 N.m - 35 N.m</td>
+                    <td>2,5 a 3,6 kgfm</td>
+                    <td>Parafusos M8 da caixa de roda</td>
+                </tr>
+                <tr>
+                    <td>Abraçadeira / Parafuso da Torre à Manga de Eixo</td>
+                    <td>90 N.m + 90° (ou 110 N.m)</td>
+                    <td>11,2 kgfm + Ângulo</td>
+                    <td>Parafuso passante de travamento inferior</td>
+                </tr>
+                <tr>
+                    <td>Pivô Inferior à Manga de Eixo</td>
+                    <td>50 N.m - 60 N.m</td>
+                    <td>5,1 a 6,1 kgfm</td>
+                    <td>Parafuso passante de fixação do pino do pivô</td>
+                </tr>
+                <tr>
+                    <td>Pivô Inferior à Bandeja (se removível)</td>
+                    <td>70 N.m - 90 N.m</td>
+                    <td>7,1 a 9,2 kgfm</td>
+                    <td>Parafusos/porcas de fixação da chapa do pivô</td>
+                </tr>
+                <tr>
+                    <td>Bucha Frontal da Bandeja ao Subframe</td>
+                    <td>90 N.m + 90°</td>
+                    <td>9,2 kgfm + 90°</td>
+                    <td><strong>Apertar na posição de rodagem</strong></td>
+                </tr>
+                <tr>
+                    <td>Bucha Traseira da Bandeja (Mancal)</td>
+                    <td>110 N.m - 130 N.m</td>
+                    <td>11,2 a 13,2 kgfm</td>
+                    <td>Parafuso vertical de fixação da bucha traseira</td>
+                </tr>
+                <tr>
+                    <td>Terminal de Direção à Manga de Eixo</td>
+                    <td>40 N.m - 50 N.m</td>
+                    <td>4,1 a 5,1 kgfm</td>
+                    <td>Utilizar porca autotravante nova</td>
+                </tr>
+                <tr>
+                    <td>Bieleta da Barra Estabilizadora</td>
+                    <td>48 N.m - 55 N.m</td>
+                    <td>4,9 a 5,6 kgfm</td>
+                    <td>Travar pino interno com chave Allen/Torx</td>
+                </tr>
+                <tr>
+                    <td>Porca Central do Eixo / Homocinética</td>
+                    <td>230 N.m - 290 N.m (ou 45 N.m + 90°)</td>
+                    <td>23,4 a 29,5 kgfm</td>
+                    <td>Depende do modelo/ano (Ka vs Focus/Fusion)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>2. Suspensão Traseira — Eixo de Torção (Ka, Fiesta, Ecosport)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m / Angular)</th>
+                    <th>Torque (kgfm Aprox.)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Amortecedor Traseiro — Superior (Coxim)</td>
+                    <td>25 N.m - 30 N.m</td>
+                    <td>2,5 a 3,0 kgfm</td>
+                    <td>Fixação do coxim na caixa de roda</td>
+                </tr>
+                <tr>
+                    <td>Amortecedor Traseiro — Inferior</td>
+                    <td>80 N.m - 115 N.m</td>
+                    <td>8,1 a 11,7 kgfm</td>
+                    <td>Parafuso de apoio no eixo de torção</td>
+                </tr>
+                <tr>
+                    <td>Bucha do Eixo Traseiro ao Chassi / Suporte</td>
+                    <td>90 N.m + 60° (ou 115 N.m)</td>
+                    <td>11,7 kgfm</td>
+                    <td><strong>OBRIGATÓRIO:</strong> Apertar com o veículo no chão</td>
+                </tr>
+                <tr>
+                    <td>Porca da Ponta de Eixo / Rolamento Traseiro</td>
+                    <td>235 N.m - 250 N.m</td>
+                    <td>24,0 a 25,5 kgfm</td>
+                    <td>Porca de retenção do cubo traseiro</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>3. Suspensão Traseira — Multilink / Control Blade (Focus, Fusion, Maverick, Territory)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m / Angular)</th>
+                    <th>Torque (kgfm Aprox.)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Amortecedor Traseiro — Fixação Superior</td>
+                    <td>45 N.m - 55 N.m</td>
+                    <td>4,6 a 5,6 kgfm</td>
+                    <td>Fixação na estrutura traseira</td>
+                </tr>
+                <tr>
+                    <td>Amortecedor Traseiro — Fixação Inferior</td>
+                    <td>110 N.m - 120 N.m</td>
+                    <td>11,2 a 12,2 kgfm</td>
+                    <td>Fixação no braço inferior de suspensão</td>
+                </tr>
+                <tr>
+                    <td>Braço Longitudinal (Control Blade) ao Chassi</td>
+                    <td>115 N.m + 90°</td>
+                    <td>11,7 kgfm + 90°</td>
+                    <td>Apertar na altura nominal do veículo</td>
+                </tr>
+                <tr>
+                    <td>Braços Transversais (Superiores e Inferiores)</td>
+                    <td>85 N.m - 110 N.m</td>
+                    <td>8,6 a 11,2 kgfm</td>
+                    <td>Fixações na manga traseira e subframe</td>
+                </tr>
+                <tr>
+                    <td>Parafuso Excêntrico (Ajuste de Convergência/Camber)</td>
+                    <td>115 N.m</td>
+                    <td>11,7 kgfm</td>
+                    <td>Torquear após regulagem de geometria</td>
+                </tr>
+                <tr>
+                    <td>Bieleta Traseira à Barra e Braço</td>
+                    <td>48 N.m</td>
+                    <td>4,9 kgfm</td>
+                    <td>Fixação do pino da bieleta</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>4. Linha Camionetes & Utilitários (Ranger, Transit, Bronco Sport)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Modelo / Componente</th>
+                    <th>Torque (N.m / Angular)</th>
+                    <th>Torque (kgfm Aprox.)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Ranger:</strong> Amortecedor Dianteiro Inferior</td>
+                    <td>90 N.m + 45°</td>
+                    <td>9,2 kgfm + Ângulo</td>
+                    <td>Fixação da torre na bandeja inferior</td>
+                </tr>
+                <tr>
+                    <td><strong>Ranger:</strong> Bandeja Superior ao Chassi</td>
+                    <td>120 N.m + 90°</td>
+                    <td>12,2 kgfm + 90°</td>
+                    <td>Torquear em posição neutra de carga</td>
+                </tr>
+                <tr>
+                    <td><strong>Ranger:</strong> Bandeja Inferior ao Chassi</td>
+                    <td>175 N.m + 90°</td>
+                    <td>17,8 kgfm + 90°</td>
+                    <td>Parafusos principais do subframe</td>
+                </tr>
+                <tr>
+                    <td><strong>Ranger:</strong> Grampos em "U" do Feixe Traseiro</td>
+                    <td>120 N.m - 145 N.m</td>
+                    <td>12,2 a 14,8 kgfm</td>
+                    <td>Apertar em cruz em duas etapas</td>
+                </tr>
+                <tr>
+                    <td><strong>Transit:</strong> Parafuso Inferior da Torre Dianteira</td>
+                    <td>180 N.m</td>
+                    <td>18,3 kgfm</td>
+                    <td>Fixação reforçada para veículos de carga</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>5. Parafusos e Porcas de Roda (Linha Ford)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Linha / Modelo</th>
+                    <th>Torque (N.m)</th>
+                    <th>Torque (kgfm)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ka, Fiesta, Ecosport, Focus (Porcas de Roda M12)</td>
+                    <td>130 N.m</td>
+                    <td>13,2 kgfm</td>
+                </tr>
+                <tr>
+                    <td>Fusion, Territory, Bronco Sport, Maverick (Porcas M14 / 5 Furos)</td>
+                    <td>135 N.m - 140 N.m</td>
+                    <td>13,8 a 14,2 kgfm</td>
+                </tr>
+                <tr>
+                    <td>Ranger e Transit (Porcas M14 / 6 Furos e Rodas Reforçadas)</td>
+                    <td>180 N.m - 200 N.m</td>
+                    <td>18,3 a 20,4 kgfm</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h4>⚠️ 6. Recomendações Críticas do Padrão de Engenharia Ford</h4>
+            <ul>
+                <li><strong>Fixadores de Torque Angular:</strong> Diversas fixações das plataformas Ford (como B2E, C1,
+                    CD4 e T6) utilizam parafusos submetidos à deformação elástica (torque nominal + ângulo). A Ford
+                    recomenda a substituição de parafusos da bandeja, cubo e pivôs a cada intervenção técnica.</li>
+                <li><strong>Montagem da Suspensão em Posição Neutra:</strong> As buchas vulcanizadas das balanças
+                    dianteiras e da suspensão traseira (especialmente o sistema <i>Control Blade</i>) devem
+                    obrigatoriamente ser apertadas com a suspensão na altura de trabalho (peso do veículo apoiado no
+                    chão ou simulado com macaco hidráulico), evitando pré-carga e rasgo prematuro das buchas.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="hyundai" class="brand-section">
+        <h2>LINHA HYUNDAI</h2>
+
+        <h3>1. Suspensão Dianteira (HB20, HB20S, Creta, i30, Elantra, Tucson, IX35, Santa Fe)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m / Angular)</th>
+                    <th>Torque (kgfm Aprox.)</th>
+                    <th>Observações / Procedimento Hyundai</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Porca da Haste do Amortecedor (topo)</td>
+                    <td>50 N.m - 70 N.m</td>
+                    <td>5,1 a 7,1 kgfm</td>
+                    <td>Fixação do coxim superior da torre</td>
+                </tr>
+                <tr>
+                    <td>Porcas do Coxim Superior à Carroceria</td>
+                    <td>45 N.m - 60 N.m</td>
+                    <td>4,6 a 6,1 kgfm</td>
+                    <td>Fixação na caixa de roda (3 porcas M10)</td>
+                </tr>
+                <tr>
+                    <td>Parafusos da Torre à Manga de Eixo</td>
+                    <td>100 N.m - 120 N.m (ou 140 N.m - 160 N.m)</td>
+                    <td>10,2 a 16,3 kgfm</td>
+                    <td>Par M12/M14 passante (variação HB20 vs SUVs)</td>
+                </tr>
+                <tr>
+                    <td>Pivô Inferior à Manga de Eixo</td>
+                    <td>80 N.m - 100 N.m</td>
+                    <td>8,2 a 10,2 kgfm</td>
+                    <td>Parafuso passante da trava do pino cônico</td>
+                </tr>
+                <tr>
+                    <td>Pivô Inferior à Bandeja (Balança)</td>
+                    <td>100 N.m - 120 N.m</td>
+                    <td>10,2 a 12,2 kgfm</td>
+                    <td>Porcas/parafusos de fixação da base do pivô</td>
+                </tr>
+                <tr>
+                    <td>Bucha Frontal da Bandeja (G do Subframe)</td>
+                    <td>130 N.m - 150 N.m</td>
+                    <td>13,3 a 15,3 kgfm</td>
+                    <td><strong>Apertar na posição de altura nominal</strong></td>
+                </tr>
+                <tr>
+                    <td>Bucha Traseira da Bandeja (Mancal Vertical)</td>
+                    <td>130 N.m - 150 N.m</td>
+                    <td>13,3 a 15,3 kgfm</td>
+                    <td>Fixação vertical do parafuso da bucha traseira</td>
+                </tr>
+                <tr>
+                    <td>Terminal de Direção à Manga de Eixo</td>
+                    <td>35 N.m - 45 N.m</td>
+                    <td>3,6 a 4,6 kgfm</td>
+                    <td>Utilizar contrapino novo quando aplicável</td>
+                </tr>
+                <tr>
+                    <td>Bieleta da Barra Estabilizadora</td>
+                    <td>35 N.m - 45 N.m</td>
+                    <td>3,6 a 4,6 kgfm</td>
+                    <td>Segurar o pino interno com chave de boca/Allen</td>
+                </tr>
+                <tr>
+                    <td>Porca Central do Eixo / Homocinética (Cubo)</td>
+                    <td>200 N.m - 280 N.m</td>
+                    <td>20,4 a 28,5 kgfm</td>
+                    <td>Travar/frenar com punção após aperto final</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>2. Suspensão Traseira — Eixo de Torção (HB20, HB20S, Creta, i30)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m / Angular)</th>
+                    <th>Torque (kgfm Aprox.)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Amortecedor Traseiro — Fixação Superior</td>
+                    <td>50 N.m - 65 N.m</td>
+                    <td>5,1 a 6,6 kgfm</td>
+                    <td>Fixação da haste/coxim na caixa de roda</td>
+                </tr>
+                <tr>
+                    <td>Amortecedor Traseiro — Fixação Inferior</td>
+                    <td>100 N.m - 120 N.m</td>
+                    <td>10,2 a 12,2 kgfm</td>
+                    <td>Fixação do olhal no eixo de torção</td>
+                </tr>
+                <tr>
+                    <td>Bucha do Eixo Traseiro ao Chassi / Suporte</td>
+                    <td>100 N.m - 120 N.m</td>
+                    <td>10,2 a 12,2 kgfm</td>
+                    <td><strong>OBRIGATÓRIO:</strong> Apertar com o peso no chão</td>
+                </tr>
+                <tr>
+                    <td>Porca da Ponta de Eixo / Rolamento do Cubo</td>
+                    <td>200 N.m - 260 N.m</td>
+                    <td>20,4 a 26,5 kgfm</td>
+                    <td>Porca do cubo de roda traseiro blindado</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>3. Suspensão Traseira — Multilink (IX35, Tucson, Santa Fe, Elantra, Azera)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Componente / Parafuso</th>
+                    <th>Torque (N.m / Angular)</th>
+                    <th>Torque (kgfm Aprox.)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Amortecedor Traseiro — Fixação Superior</td>
+                    <td>50 N.m - 70 N.m</td>
+                    <td>5,1 a 7,1 kgfm</td>
+                    <td>Parafusos superiores do coxim</td>
+                </tr>
+                <tr>
+                    <td>Amortecedor Traseiro — Fixação Inferior</td>
+                    <td>100 N.m - 120 N.m</td>
+                    <td>10,2 a 12,2 kgfm</td>
+                    <td>Fixação na manga de eixo traseira</td>
+                </tr>
+                <tr>
+                    <td>Braço Inferior da Mola / Tração ao Subframe</td>
+                    <td>140 N.m - 160 N.m</td>
+                    <td>14,3 a 16,3 kgfm</td>
+                    <td>Torquear na posição neutra de carga</td>
+                </tr>
+                <tr>
+                    <td>Braço Superior da Suspensão Multilink</td>
+                    <td>100 N.m - 120 N.m</td>
+                    <td>10,2 a 12,2 kgfm</td>
+                    <td>Fixações na manga e subframe</td>
+                </tr>
+                <tr>
+                    <td>Parafuso Excêntrico (Ajuste de Convergência/Camber)</td>
+                    <td>100 N.m - 120 N.m</td>
+                    <td>10,2 a 12,2 kgfm</td>
+                    <td>Torquear após alinhamento geométrico</td>
+                </tr>
+                <tr>
+                    <td>Bieleta Traseira à Barra e Braço</td>
+                    <td>40 N.m - 50 N.m</td>
+                    <td>4,1 a 5,1 kgfm</td>
+                    <td>Fixação do pino esférico da bieleta</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>4. Linha Comercial & Utilitários (HR, H100)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Modelo / Componente</th>
+                    <th>Torque (N.m / Angular)</th>
+                    <th>Torque (kgfm Aprox.)</th>
+                    <th>Observações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>HR:</strong> Amortecedor Dianteiro Inferior</td>
+                    <td>80 N.m - 100 N.m</td>
+                    <td>8,2 a 10,2 kgfm</td>
+                    <td>Fixação do olhal do amortecedor</td>
+                </tr>
+                <tr>
+                    <td><strong>HR:</strong> Bandeja Superior ao Chassi</td>
+                    <td>120 N.m - 140 N.m</td>
+                    <td>12,2 a 14,3 kgfm</td>
+                    <td>Eixo do pivô/bandeja superior</td>
+                </tr>
+                <tr>
+                    <td><strong>HR:</strong> Bandeja Inferior / Barra de Torção</td>
+                    <td>140 N.m - 160 N.m</td>
+                    <td>14,3 a 16,3 kgfm</td>
+                    <td>Ajuste e fixação da barra de torção</td>
+                </tr>
+                <tr>
+                    <td><strong>HR:</strong> Grampos em "U" do Feixe Traseiro</td>
+                    <td>170 N.m - 190 N.m</td>
+                    <td>17,3 a 19,4 kgfm</td>
+                    <td>Apertar em cruz e em fases progressivas</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>5. Porcas de Roda (Linha Hyundai)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Linha / Modelo</th>
+                    <th>Torque (N.m)</th>
+                    <th>Torque (kgfm)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>HB20, HB20S, i30, Veloster, Elantra (Porcas M12 x 1,5)</td>
+                    <td>110 N.m - 120 N.m</td>
+                    <td>11,2 a 12,2 kgfm</td>
+                </tr>
+                <tr>
+                    <td>Creta, Tucson, IX35, Santa Fe, Azera (Rodas de Liga Leve)</td>
+                    <td>110 N.m - 130 N.m</td>
+                    <td>11,2 a 13,2 kgfm</td>
+                </tr>
+                <tr>
+                    <td>Hyundai HR (Rodas Utilitário / Feixe Traseiro)</td>
+                    <td>150 N.m - 180 N.m</td>
+                    <td>15,3 a 18,3 kgfm</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="note-box">
+            <h4>⚠️ 6. Recomendações Críticas do Padrão Técnico Hyundai / Kia</h4>
+            <ul>
+                <li><strong>Montagem em Carga Neutra:</strong> O aperto das buchas de borracha da suspensão (balança
+                    dianteira, eixo traseiro de torção e braços do multilink) deve ser feito obrigatoriamente com o
+                    veículo apoiado sobre as rodas ou com o macaco de transmissão simulando a altura de rodagem.
+                    Torquear com a suspensão suspensa provocará torção permanente e rompimento prematuro da borracha.
+                </li>
+                <li><strong>Trava da Porca de Homocinética:</strong> A porca da ponta de eixo da maioria dos veículos
+                    Hyundai possui colarinho para amassamento na fenda do eixo. É imprescindível realizar o amassamento
+                    correto após aplicar o torque nominal especificado.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function filterBrand() {
+            // Obtém o valor selecionado no dropdown
+            var selectedBrand = document.getElementById("brandSelect").value;
+
+            // Obtém todas as seções de montadoras
+            var sections = document.getElementsByClassName("brand-section");
+
+            // Oculta todas as seções
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].style.display = "none";
+            }
+
+            // Exibe apenas a seção selecionada (se houver uma selecionada)
+            if (selectedBrand !== "") {
+                var targetSection = document.getElementById(selectedBrand);
+                if (targetSection) {
+                    targetSection.style.display = "block";
+                }
+            }
+        }
+    </script>
+
+    <footer class="footer">
+        <h2>Fonte: Gemini <br>
+            Data da pesquisa 24/07/2026</h2>
+    </footer>
+</body>
+
+</html>

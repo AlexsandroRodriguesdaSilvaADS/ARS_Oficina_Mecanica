@@ -183,7 +183,7 @@
         transition-duration: 0.5s;
     }
 
-     .cabecalho .menu-section.on .menu .botoes.none {
+    .cabecalho .menu-section.on .menu .botoes.none {
         display: none;
     }
 }
@@ -483,6 +483,152 @@
         width: 70px;
         height: 50px;
     }
+
+
+    /* TÍTULO PRINCIPAL */
+    h1#main {
+        font-size: 35px;
+        color: #5d1f1a;
+        text-align: center;
+        margin: 10px 0 16px 0;
+        font-weight: 700;
+        line-height: 1.2;
+    }
+
+    /* CONTAINER DOS FILTROS */
+    .filter-container {
+        width: 100%;
+        max-width: 500px;
+        background: #ffffff;
+        padding: 16px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        margin-bottom: 16px;
+    }
+
+    /* GRUPOS DE INPUT/SELECT */
+    .filter-group {
+        margin-bottom: 14px;
+    }
+
+    .filter-group:last-child {
+        margin-bottom: 0;
+    }
+
+    /* RÓTULOS (LABELS) */
+    .filter-group label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #4a5568;
+        margin-bottom: 6px;
+    }
+
+    /* SELECTS FORMATADOS PARA TOQUE */
+    .filter-group select {
+        width: 100%;
+        padding: 12px 36px 12px 12px;
+        /* Garante que a seta SVG não sobreponha o texto */
+        font-size: 0.95rem;
+        color: #2d3748;
+        background-color: #f8fafc;
+        border: 1.5px solid #cbd5e0;
+        border-radius: 8px;
+        outline: none;
+        transition: all 0.2s ease-in-out;
+
+        /* Remove a seta padrão do navegador */
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+
+        /* Seta customizada SVG */
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%4a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 16px;
+
+        /* Previne zoom automático indesejado no iOS Safari */
+        font-size: 16px;
+    }
+
+    .filter-group select:focus {
+        border-color: #3182ce;
+        background-color: #ffffff;
+        box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
+    }
+
+    .filter-group select:disabled {
+        background-color: #edf2f7;
+        color: #a0aec0;
+        border-color: #e2e8f0;
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+
+    /* CARD DE RESULTADOS */
+    .result-card {
+        width: 100%;
+        max-width: 500px;
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        border-top: 4px solid #3182ce;
+        /* Alterado para topo em telas menores */
+    }
+
+    .result-card h2 {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #edf2f7;
+        word-break: break-word;
+    }
+
+    /* ITENS DO RESULTADO */
+    .result-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px dashed #e2e8f0;
+    }
+
+    .result-item:last-of-type {
+        border-bottom: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        margin-top: 8px;
+    }
+
+    .result-label {
+        font-size: 0.85rem;
+        color: #718096;
+        font-weight: 500;
+    }
+
+    /* VALORES DE TORQUE EM DESTAQUE */
+    .result-value {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #2b6cb0;
+        background-color: #ebf8ff;
+        padding: 4px 10px;
+        border-radius: 6px;
+    }
+
+    #resObs {
+        font-size: 0.88rem;
+        color: #2d3748;
+        line-height: 1.4;
+        background: #f7fafc;
+        padding: 10px;
+        border-radius: 6px;
+        width: 100%;
+    }
+
 }
 
 @media (max-width: 320px) {
