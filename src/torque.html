@@ -19,55 +19,57 @@
 </head>
 
 <body>
-    <h1>Consulta de Torque de Suspensão</h1>
+    <div class="main">
+        <h1>Consulta de Torque de Suspensão</h1>
 
-    <div class="filter-container">
-        <!-- Select 1: Seleção de Montadora -->
-        <div class="filter-group">
-            <label for="brandSelect">1. Selecione a Montadora:</label>
-            <select id="brandSelect" onchange="updateSubsystems()">
-                <option value="">-- Escolha a Montadora --</option>
-                <option value="honda">HONDA</option>
-                <option value="toyota">TOYOTA</option>
-                <option value="fiat">FIAT</option>
-                <option value="volkswagen">VOLKSWAGEN</option>
-                <option value="chevrolet">CHEVROLET</option>
-                <option value="ford">FORD</option>
-                <option value="hyundai">HYUNDAI</option>
-            </select>
+        <div class="filter-container">
+            <!-- Select 1: Seleção de Montadora -->
+            <div class="filter-group">
+                <label for="brandSelect">1. Selecione a Montadora:</label>
+                <select id="brandSelect" onchange="updateSubsystems()">
+                    <option value="">-- Escolha a Montadora --</option>
+                    <option value="honda">HONDA</option>
+                    <option value="toyota">TOYOTA</option>
+                    <option value="fiat">FIAT</option>
+                    <option value="volkswagen">VOLKSWAGEN</option>
+                    <option value="chevrolet">CHEVROLET</option>
+                    <option value="ford">FORD</option>
+                    <option value="hyundai">HYUNDAI</option>
+                </select>
+            </div>
+
+            <!-- Select 2: Seleção de Subsistema -->
+            <div class="filter-group">
+                <label for="systemSelect">2. Selecione o Conjunto/Eixo:</label>
+                <select id="systemSelect" onchange="updateComponents()" disabled>
+                    <option value="">-- Selecione a Montadora Primeiro --</option>
+                </select>
+            </div>
+
+            <!-- Select 3: Seleção de Componente Específico -->
+            <div class="filter-group">
+                <label for="componentSelect">3. Selecione o Componente / Parafuso:</label>
+                <select id="componentSelect" onchange="showTorqueDetails()" disabled>
+                    <option value="">-- Selecione o Conjunto Primeiro --</option>
+                </select>
+            </div>
         </div>
 
-        <!-- Select 2: Seleção de Subsistema -->
-        <div class="filter-group">
-            <label for="systemSelect">2. Selecione o Conjunto/Eixo:</label>
-            <select id="systemSelect" onchange="updateComponents()" disabled>
-                <option value="">-- Selecione a Montadora Primeiro --</option>
-            </select>
-        </div>
-
-        <!-- Select 3: Seleção de Componente Específico -->
-        <div class="filter-group">
-            <label for="componentSelect">3. Selecione o Componente / Parafuso:</label>
-            <select id="componentSelect" onchange="showTorqueDetails()" disabled>
-                <option value="">-- Selecione o Conjunto Primeiro --</option>
-            </select>
-        </div>
-    </div>
-
-    <!-- Painel para Exibição dos Detalhes Selecionados -->
-    <div id="resultCard" class="result-card">
-        <h2 id="resTitle" style="margin-top:0; color:#2c5282;">-</h2>
-        <div class="result-item">
-            <span class="result-label">Torque (N.m):</span>
-            <span id="resNm" class="result-value">-</span>
-        </div>
-        <div class="result-item">
-            <span class="result-label">Torque (kgfm):</span>
-            <span id="resKgfm" class="result-value">-</span>
-        </div>
-        <div class="result-item">
-            <span class="result-label">Observações / Procedimento:</span>
-            <span id="resObs">-</span>
+        <!-- Painel para Exibição dos Detalhes Selecionados -->
+        <div id="resultCard" class="result-card">
+            <h2 id="resTitle" style="margin-top:0; color:#2c5282;">-</h2>
+            <div class="result-item">
+                <span class="result-label">Torque (N.m):</span>
+                <span id="resNm" class="result-value">-</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Torque (kgfm):</span>
+                <span id="resKgfm" class="result-value">-</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Observações / Procedimento:</span>
+                <span id="resObs">-</span>
+            </div>
         </div>
     </div>
 
