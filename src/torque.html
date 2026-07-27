@@ -37,6 +37,11 @@
                     <option value="chevrolet">CHEVROLET</option>
                     <option value="ford">FORD</option>
                     <option value="hyundai">HYUNDAI</option>
+                    <option value="bmw">BMW</option>
+                    <option value="mercedes">MERCEDES</option>
+                    <option value="audi">AUDI</option>
+                    <option value="volvo">VOLVO</option>
+                    <option value="byd">BYD</option>
                 </select>
             </div>
 
@@ -364,7 +369,130 @@
                     { name: "Creta, Tucson, IX35, Santa Fe, Azera (Rodas de Liga Leve)", nm: "110 N.m - 130 N.m", kgfm: "11,2 a 13,2 kgfm", obs: "Aperto em cruz" },
                     { name: "Hyundai HR (Rodas Utilitário / Feixe Traseiro)", nm: "150 N.m - 180 N.m", kgfm: "15,3 a 18,3 kgfm", obs: "Aperto em cruz" }
                 ]
-            }
+            },
+            bmw: {
+                "Suspensão Dianteira — Duplo Articulado / McPherson (Série 3, X1, X3, X5)": [
+                    { name: "Porca da Haste do Amortecedor (topo)", nm: "64 N.m", kgfm: "6,5 kgfm", obs: "Requer chave de travamento central interna" },
+                    { name: "Parafusos do Coxim / Torre à Carroceria", nm: "34 N.m + 90°", kgfm: "3,5 kgfm + 90°", obs: "Substituir parafusos de alumínio/torque angular", highlight: true },
+                    { name: "Manga de Eixo ao Amortecedor (Abraçadeira)", nm: "81 N.m", kgfm: "8,3 kgfm", obs: "Parafuso de aperto do tubo do amortecedor" },
+                    { name: "Braço de Tensão / Tirante Frontal ao Subframe", nm: "100 N.m + 90°", kgfm: "10,2 kgfm + 90°", obs: "Apertar obrigatoriamente com o peso do veículo no chão", highlight: true },
+                    { name: "Braço de Controle Inferior ao Subframe", nm: "100 N.m + 90°", kgfm: "10,2 kgfm + 90°", obs: "Apertar na posição de trabalho (peso nas rodas)", highlight: true },
+                    { name: "Pivôs dos Braços Inferiores à Manga de Eixo", nm: "175 N.m", kgfm: "17,8 kgfm", obs: "Porca cônica do pivô de alta carga" },
+                    { name: "Terminal de Direção à Manga de Eixo", nm: "165 N.m", kgfm: "16,8 kgfm", obs: "Porca cônica auto-travante (não reutilizar)" },
+                    { name: "Bieleta da Barra Estabilizadora", nm: "56 N.m", kgfm: "5,7 kgfm", obs: "Fixação no suporte da torre do amortecedor" },
+                    { name: "Porca do Eixo Homocinético Central", nm: "210 N.m + 90°", kgfm: "21,4 kgfm + 90°", obs: "Porca estriada de alto torque (Tração Traseira / xDrive)" }
+                ],
+                "Suspensão Traseira — Multilink 5-Arms (Série 1, Série 3, X1, X3, X5)": [
+                    { name: "Amortecedor - Fixação Superior (Coxim)", nm: "28 N.m", kgfm: "2,9 kgfm", obs: "Fixação da torre/suporte na carroceria" },
+                    { name: "Amortecedor - Fixação Inferior (Braço)", nm: "100 N.m + 90°", kgfm: "10,2 kgfm + 90°", obs: "Parafuso passante na manga/braço inferior" },
+                    { name: "Braço de Controle Camber (Excentricidade)", nm: "165 N.m", kgfm: "16,8 kgfm", obs: "Parafuso excêntrico de alinhamento traseiro", highlight: true },
+                    { name: "Braço de Convergência (Toe Link)", nm: "100 N.m + 90°", kgfm: "10,2 kgfm + 90°", obs: "Apertar com a suspensão na altura de rodagem" },
+                    { name: "Bieleta Traseira", nm: "56 N.m", kgfm: "5,7 kgfm", obs: "Fixação no braço inferior e barra estabilizadora" },
+                    { name: "Cubo / Rolamento de Roda Traseiro", nm: "250 N.m + 90°", kgfm: "25,5 kgfm + 90°", obs: "Parafuso estriado central da homocinética" }
+                ],
+                "Parafusos de Roda": [
+                    { name: "Parafusos M14x1,25 (G20, F30, F48, X3, X5)", nm: "140 N.m", kgfm: "14,3 kgfm", obs: "Aperto sequencial cruzado com assentamento cônico/esférico" }
+                ]
+            },
+            mercedes: {
+                "Suspensão Dianteira — Four-Link / MacPherson (Classe A, C180, C200, GLA, GLC)": [
+                    { name: "Porca da Haste do Amortecedor (topo)", nm: "60 N.m", kgfm: "6,1 kgfm", obs: "Chave especial de contenção da haste" },
+                    { name: "Parafusos do Coxim / Torre à Carroceria", nm: "35 N.m + 60°", kgfm: "3,6 kgfm + 60°", obs: "Substituir porcas/parafusos autotravantes" },
+                    { name: "Manga de Eixo ao Amortecedor", nm: "120 N.m + 90°", kgfm: "12,2 kgfm + 90°", obs: "Fixação inferior da torre (2 parafusos passantes)" },
+                    { name: "Braço de Carga / Transversal ao Subframe", nm: "80 N.m + 120°", kgfm: "8,2 kgfm + 120°", obs: "Torquear obrigatoriamente no chão (peso do carro)", highlight: true },
+                    { name: "Braço Guia / Tirante Diagonal ao Subframe", nm: "80 N.m + 120°", kgfm: "8,2 kgfm + 120°", obs: "Torquear obrigatoriamente no chão (peso do carro)", highlight: true },
+                    { name: "Pivôs dos Braços Inferiores à Manga de Eixo", nm: "110 N.m", kgfm: "11,2 kgfm", obs: "Fixação cônica da manga dianteira" },
+                    { name: "Terminal de Direção à Manga de Eixo", nm: "50 N.m + 60°", kgfm: "5,1 kgfm + 60°", obs: "Utilizar porca autotravante nova" },
+                    { name: "Bieleta da Barra Estabilizadora", nm: "45 N.m + 45°", kgfm: "4,6 kgfm + 45°", obs: "Trava hexagonal interna no pino da bieleta" },
+                    { name: "Porca / Parafuso Central do Eixo (Homocinética)", nm: "160 N.m + 90°", kgfm: "16,3 kgfm + 90°", obs: "Parafuso estriado de torque angular" }
+                ],
+                "Suspensão Traseira — Multilink 5-Links (Classe C, E, GLA, GLC)": [
+                    { name: "Amortecedor - Fixação Superior", nm: "55 N.m", kgfm: "5,6 kgfm", obs: "Coxim superior interno no chassi" },
+                    { name: "Amortecedor - Fixação Inferior", nm: "70 N.m + 90°", kgfm: "7,1 kgfm + 90°", obs: "Fixação na manga de roda traseira" },
+                    { name: "Braço Inferior da Mola (Manga / Subframe)", nm: "70 N.m + 90°", kgfm: "7,1 kgfm + 90°", obs: "Apertar com suspensão pré-carregada na posição de rodagem", highlight: true },
+                    { name: "Tirante de Convergência (Ajuste Camber/Toe)", nm: "60 N.m + 90°", kgfm: "6,1 kgfm + 90°", obs: "Parafuso excêntrico de alinhamento", highlight: true },
+                    { name: "Bieleta Traseira", nm: "35 N.m + 45°", kgfm: "3,6 kgfm + 45°", obs: "Fixação da barra estabilizadora traseira" }
+                ],
+                "Parafusos de Roda": [
+                    { name: "Parafusos M14x1,5 (Classe C W205/W206, GLA, GLC)", nm: "130 - 150 N.m", kgfm: "13,3 - 15,3 kgfm", obs: "Assentamento esférico M14 (Aperto em cruz)" },
+                    { name: "Parafusos M12x1,5 (Classe A/C antigos — W204)", nm: "110 - 130 N.m", kgfm: "11,2 - 13,3 kgfm", obs: "Modelos com rosca M12" }
+                ]
+            },
+            audi: {
+                "Suspensão Dianteira — McPherson / Five-Link (A3, A4, A5, Q3, Q5)": [
+                    { name: "Porca da Haste do Amortecedor (topo)", nm: "60 N.m", kgfm: "6,1 kgfm", obs: "Requer contra-chave para travar a haste central" },
+                    { name: "Parafusos do Coxim / Suporte da Torre à Carroceria", nm: "50 N.m + 90°", kgfm: "5,1 kgfm + 90°", obs: "Parafusos elásticos; substituir na desmontagem", highlight: true },
+                    { name: "Parafuso da Manga de Eixo ao Amortecedor", nm: "70 N.m + 90°", kgfm: "7,1 kgfm + 90°", obs: "Aperto da abraçadeira do amortecedor na manga" },
+                    { name: "Braço de Controle Inferior ao Subchassi (Buchas)", nm: "70 N.m + 180°", kgfm: "7,1 kgfm + 180°", obs: "Apertar obrigatoriamente com o peso do veículo no chão", highlight: true },
+                    { name: "Pivô do Braço Inferior à Manga de Eixo", nm: "60 N.m", kgfm: "6,1 kgfm", obs: "Fixação da porca ou parafusos inferiores da placa do pivô" },
+                    { name: "Braços Superiores à Manga de Eixo (Multilink A4/A5/Q5)", nm: "40 N.m", kgfm: "4,1 kgfm", obs: "Parafuso transversal mestre da manga superior" },
+                    { name: "Terminal de Direção à Manga de Eixo", nm: "65 N.m", kgfm: "6,6 kgfm", obs: "Não reutilizar porcas autotravantes" },
+                    { name: "Bieleta da Barra Estabilizadora", nm: "55 N.m + 90°", kgfm: "5,6 N.m + 90°", obs: "Fixação na barra e no suporte do amortecedor/braço" },
+                    { name: "Parafuso Central do Eixo Homocinético (M16)", nm: "200 N.m + 180°", kgfm: "20,4 kgfm + 180°", obs: "Alto torque angular (trocar parafuso estriado)" }
+                ],
+                "Suspensão Traseira — Multilink Four-Link / Trapezoidal (A3, A4, Q3, Q5)": [
+                    { name: "Amortecedor - Fixação Superior (Coxim)", nm: "50 N.m + 45°", kgfm: "5,1 kgfm + 45°", obs: "Fixação do suporte do coxim no chassi" },
+                    { name: "Amortecedor - Fixação Inferior", nm: "90 N.m + 90°", kgfm: "9,2 kgfm + 90°", obs: "Fixação no braço inferior da mola / manga" },
+                    { name: "Parafuso Excêntrico de Alinhamento (Camber/Toe)", nm: "95 N.m", kgfm: "9,7 kgfm", obs: "Marcar posição da arruela antes de soltar", highlight: true },
+                    { name: "Braços Guia e Transversais Traseiros ao Subframe", nm: "70 N.m + 180°", kgfm: "7,1 kgfm + 180°", obs: "Torquear na posição de trabalho (altura de rodagem)", highlight: true },
+                    { name: "Bieleta Traseira", nm: "45 N.m", kgfm: "4,6 kgfm", obs: "Fixação da barra estabilizadora traseira" }
+                ],
+                "Parafusos de Roda": [
+                    { name: "Todos os modelos Audi (M14x1,5)", nm: "120 - 140 N.m", kgfm: "12,2 - 14,3 kgfm", obs: "Aperto sequencial cruzado (assentamento esférico)" }
+                ]
+            },
+            volvo: {
+                "Suspensão Dianteira — McPherson / Double Wishbone (XC40, C40, XC60, XC90, S60)": [
+                    { name: "Porca da Haste do Amortecedor (topo)", nm: "50 N.m", kgfm: "5,1 kgfm", obs: "Travar a haste com chave Allen/Torx interna" },
+                    { name: "Parafusos do Coxim / Suporte da Torre", nm: "30 N.m + 90°", kgfm: "3,1 kgfm + 90°", obs: "Fixação da torre na estrutura superior" },
+                    { name: "Parafusos da Manga de Eixo ao Amortecedor", nm: "105 N.m + 90°", kgfm: "10,7 kgfm + 90°", obs: "Fixação inferior do tubo do amortecedor (2 parafusos)" },
+                    { name: "Braço de Controle Inferior ao Subchassi (Bucha Frontal)", nm: "140 N.m + 90°", kgfm: "14,3 kgfm + 90°", obs: "Apertar com o veículo totalmente apoiado no chão", highlight: true },
+                    { name: "Braço de Controle Inferior ao Subchassi (Bucha Traseira)", nm: "80 N.m + 90°", kgfm: "8,2 kgfm + 90°", obs: "Torquear com a suspensão em posição de carga", highlight: true },
+                    { name: "Pivô da Bandeja à Manga de Eixo", nm: "100 N.m", kgfm: "10,2 kgfm", obs: "Fixação cônica do pino do pivô" },
+                    { name: "Terminal de Direção à Manga de Eixo", nm: "80 N.m", kgfm: "8,2 kgfm", obs: "Utilizar porca de trava de segurança nova" },
+                    { name: "Bieleta da Barra Estabilizadora", nm: "50 N.m", kgfm: "5,1 kgfm", obs: "Fixação da bieleta dianteira" },
+                    { name: "Parafuso Central da Homocinética (Eixo)", nm: "35 N.m + 90°", kgfm: "3,6 kgfm + 90°", obs: "Parafuso central com vedante elástico" }
+                ],
+                "Suspensão Traseira — Integral Link / Mola Transversal de Composto (XC60, XC90, S60)": [
+                    { name: "Amortecedor - Fixação Superior", nm: "60 N.m", kgfm: "6,1 kgfm", obs: "Fixação da torre do coxim traseiro" },
+                    { name: "Amortecedor - Fixação Inferior (Braço)", nm: "120 N.m", kgfm: "12,2 kgfm", obs: "Fixação na manga de roda traseira" },
+                    { name: "Braços de Controle / Convergência (Toe Link)", nm: "80 N.m + 90°", kgfm: "8,2 kgfm + 90°", obs: "Parafusos excêntricos de alinhamento", highlight: true },
+                    { name: "Suportes da Mola Transversal de Composto (SPA)", nm: "50 N.m + 60°", kgfm: "5,1 kgfm + 60°", obs: "Ajuste do feixe de mola transversal traseiro" },
+                    { name: "Bieleta Traseira", nm: "45 N.m", kgfm: "4,6 kgfm", obs: "Fixação na barra estabilizadora traseira" }
+                ],
+                "Parafusos de Roda": [
+                    { name: "Modelos com Parafusos M14 (XC40, C40, XC60, XC90)", nm: "140 N.m", kgfm: "14,3 kgfm", obs: "Aperto sequencial em cruz (assentamento cônico)" }
+                ]
+            },
+            byd: {
+                "Suspensão Dianteira (McPherson)": [
+                    { name: "Porca da Haste do Amortecedor (topo)", nm: "60 - 70 N.m", kgfm: "6,1 - 7,1 kgfm", obs: "Fixação superior na torre com chave de trava" },
+                    { name: "Parafusos do Coxim / Suporte do Amortecedor", nm: "35 - 45 N.m", kgfm: "3,6 - 4,6 kgfm", obs: "Fixação da torre na carroceria (substituir porcas autotravantes)" },
+                    { name: "Parafusos da Manga de Eixo ao Amortecedor", nm: "110 - 130 N.m", kgfm: "11,2 - 13,3 kgfm", obs: "Fixação inferior da torre (2 parafusos de alta resistência)" },
+                    { name: "Terminal de Direção à Manga de Eixo", nm: "45 - 55 N.m", kgfm: "4,6 - 5,6 kgfm", obs: "Não reutilizar porcas autotravantes gastas" },
+                    { name: "Pivô da Bandeja / Balança à Manga", nm: "60 - 75 N.m", kgfm: "6,1 - 7,6 kgfm", obs: "Fixação do pino cônico do pivô inferior" },
+                    { name: "Bucha Frontal da Bandeja (Subchassi)", nm: "90 - 110 N.m", kgfm: "9,2 - 11,2 kgfm", obs: "Apertar obrigatoriamente com o carro no chão (peso)", highlight: true },
+                    { name: "Bucha Traseira da Bandeja (Subchassi)", nm: "100 - 120 N.m", kgfm: "10,2 - 12,2 kgfm", obs: "Apertar obrigatoriamente com o carro no chão (peso)", highlight: true },
+                    { name: "Bieleta da Barra Estabilizadora", nm: "40 - 50 N.m", kgfm: "4,1 - 5,1 kgfm", obs: "Travar o pino com chave Allen/Sextavado interno" },
+                    { name: "Braçadeira da Barra Estabilizadora", nm: "45 - 55 N.m", kgfm: "4,6 - 5,6 kgfm", obs: "Fixação dos mancais de borracha no subframe" },
+                    { name: "Porca da Homocinética (Eixo Central)", nm: "250 - 270 N.m", kgfm: "25,5 - 27,5 kgfm", obs: "Aperto de alto torque com trava de amassamento/cupilha" }
+                ],
+                "Suspensão Traseira — Eixo de Torção (Dolphin, Dolphin Mini, Song Pro)": [
+                    { name: "Parafuso Superior do Amortecedor", nm: "50 - 60 N.m", kgfm: "5,1 - 6,1 kgfm", obs: "Fixação no suporte da caixa de roda" },
+                    { name: "Parafuso Inferior do Amortecedor", nm: "90 - 110 N.m", kgfm: "9,2 - 11,2 kgfm", obs: "Fixação da base no eixo de torção" },
+                    { name: "Bucha do Eixo Traseiro à Carroceria", nm: "100 - 120 N.m", kgfm: "10,2 - 12,2 kgfm", obs: "Torquear com a suspensão carregada no chão", highlight: true },
+                    { name: "Cubo de Roda Traseiro", nm: "170 - 190 N.m", kgfm: "17,3 - 19,4 kgfm", obs: "Porca central do rolamento integrado" }
+                ],
+                "Suspensão Traseira — Multilink / Independente (Song Plus, Yuan Plus, Seal, Tan)": [
+                    { name: "Amortecedor - Fixação Superior", nm: "55 - 65 N.m", kgfm: "5,6 - 6,6 kgfm", obs: "Suporte do coxim traseiro na carroceria" },
+                    { name: "Amortecedor - Fixação Inferior", nm: "90 - 110 N.m", kgfm: "9,2 - 11,2 kgfm", obs: "Fixação na manga de roda ou braço inferior" },
+                    { name: "Braços de Controle / Convergência (Links)", nm: "80 - 100 N.m", kgfm: "8,2 - 10,2 kgfm", obs: "Ajuste de alinhamento; torquear na posição de trabalho", highlight: true },
+                    { name: "Bieleta Traseira", nm: "35 - 45 N.m", kgfm: "3,6 - 4,6 kgfm", obs: "Fixação no braço ou na barra estabilizadora" }
+                ],
+                "Parafusos de Roda": [
+                    { name: "Todos os modelos BYD (Dolphin, Song, Yuan, Seal, Tan)", nm: "110 - 120 N.m", kgfm: "11,2 - 12,2 kgfm", obs: "Aperto sequencial em cruz (4 ou 5 furos)" }
+                ]
+            },
         };
 
         function updateSubsystems() {
@@ -445,7 +573,8 @@
                 <li>
                     1. Manuais de Serviço e Reparação dos Fabricantes (OEM) <br>
                     Nissan ESM (Electronic Service Manual): Literatura oficial da fábrica para concessionárias e
-                    reparadores (abrangendo plataformas como Nissan B-Platform para March/Versa/Kicks e a plataforma D23 da
+                    reparadores (abrangendo plataformas como Nissan B-Platform para March/Versa/Kicks e a plataforma D23
+                    da
                     Frontier). <br>
                     Manuais de Oficina Honda, Toyota, Fiat, VW, GM e Ford: Documentação oficial de fábrica de cada
                     montadora que especifica a tabela de torque e a ordem de aperto das fixações do chassi.
@@ -453,7 +582,8 @@
                 <li>
                     2. Manual de Reparação e Dados Técnicos de Concessionária <br>
                     Normas ISO e DIN de Fixação Automotiva: Padrões industriais que regem os torques aplicados por
-                    diâmetro e passo de rosca (ex: parafusos M8, M10, M12, M14 e M16 com classe de resistência 8.8, 10.9 e 12.9).<br>
+                    diâmetro e passo de rosca (ex: parafusos M8, M10, M12, M14 e M16 com classe de resistência 8.8, 10.9
+                    e 12.9).<br>
                     Procedimentos de Aperto Angular e Carga Nominal: Especificações de torque seguidas do método TTY
                     (Torque-to-Yield) — onde há a necessidade de torque + ângulo — e a exigência do aperto na "altura de
                     rodagem" (carro apoiado no chão), especificada pelos engenheiros de chassis das marcas.
@@ -467,7 +597,8 @@
                 </li>
                 <li>
                     Observação prática de oficina: A variação em faixa (ex: 100 - 120 N.m) nos dados reflete pequenas
-                    variações entre anos/modelos de uma mesma plataforma e a tolerância aceita pelos torquímetros de estalo
+                    variações entre anos/modelos de uma mesma plataforma e a tolerância aceita pelos torquímetros de
+                    estalo
                     convencionais usados na manutenção.
                 </li>
             </ul>
