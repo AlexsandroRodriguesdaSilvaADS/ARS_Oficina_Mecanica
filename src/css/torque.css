@@ -19,7 +19,6 @@ h1 {
     text-transform: uppercase;
     padding: 20px;
     border-radius: 6px;
-    border-bottom: 3px solid #2b6cb0;
     margin: 25px auto;
 }
 
@@ -64,7 +63,6 @@ h1 {
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     display: none;
-    border-left: 5px solid #3182ce;
     margin: auto;
 }
 
