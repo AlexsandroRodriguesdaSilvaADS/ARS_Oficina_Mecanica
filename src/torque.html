@@ -24,7 +24,6 @@
         <h1>Consulta de Torque de Suspensão</h1>
 
         <div class="filter-container">
-            <!-- Select 1: Seleção de Montadora -->
             <div class="filter-group">
                 <label for="brandSelect">1. Selecione a Montadora:</label>
                 <select id="brandSelect" onchange="updateSubsystems()">
@@ -45,7 +44,6 @@
                 </select>
             </div>
 
-            <!-- Select 2: Seleção de Subsistema -->
             <div class="filter-group">
                 <label for="systemSelect">2. Selecione o Conjunto/Eixo:</label>
                 <select id="systemSelect" onchange="updateComponents()" disabled>
@@ -53,7 +51,6 @@
                 </select>
             </div>
 
-            <!-- Select 3: Seleção de Componente Específico -->
             <div class="filter-group">
                 <label for="componentSelect">3. Selecione o Componente / Parafuso:</label>
                 <select id="componentSelect" onchange="showTorqueDetails()" disabled>
@@ -62,7 +59,6 @@
             </div>
         </div>
 
-        <!-- Painel para Exibição dos Detalhes Selecionados -->
         <div id="resultCard" class="result-card">
             <h2 id="resTitle" style="margin-top:0; color:#2c5282;">-</h2>
             <div class="result-item">
