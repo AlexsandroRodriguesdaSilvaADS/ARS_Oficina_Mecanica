@@ -4,15 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tabela de Torques de Suspensão - Seleção por Filtro</title>
+    <title>Tabela de Torques Técnicos de Fábrica</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.14.0/devicon.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Raleway:wght@400;600&display=swap"
-        rel="stylesheet" />
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/estilos.css" />
     <link rel="stylesheet" href="./css/torque.css" />
@@ -21,7 +14,7 @@
 
 <body>
     <div class="main">
-        <h1>Consulta de Torque Técnico</h1>
+        <h1>Consulta de Torque</h1>
 
         <div class="filter-container">
             <!-- 1. Montadora -->
@@ -29,19 +22,14 @@
                 <label for="brandSelect">1. Selecione a Montadora:</label>
                 <select id="brandSelect" onchange="updateVehicles()">
                     <option value="">-- Escolha a Montadora --</option>
-                    <option value="honda">HONDA</option>
-                    <option value="toyota">TOYOTA</option>
-                    <option value="nissan">NISSAN</option>
-                    <option value="fiat">FIAT</option>
-                    <option value="volkswagen">VOLKSWAGEN</option>
                     <option value="chevrolet">CHEVROLET</option>
-                    <option value="ford">FORD</option>
+                    <option value="fiat">FIAT</option>
+                    <option value="toyota">TOYOTA</option>
+                    <option value="volkswagen">VOLKSWAGEN</option>
+                    <!--<option value="ford">FORD</option>
+                    <option value="honda">HONDA</option>
                     <option value="hyundai">HYUNDAI</option>
-                    <option value="bmw">BMW</option>
-                    <option value="mercedes">MERCEDES</option>
-                    <option value="audi">AUDI</option>
-                    <option value="volvo">VOLVO</option>
-                    <option value="byd">BYD</option>
+                    <option value="renault">RENAULT</option>-->
                 </select>
             </div>
 
@@ -74,177 +62,424 @@
         <div id="resultCard" class="result-card" style="display: none;">
             <h2 id="resTitle" style="margin-top:0; color:#2c5282;">-</h2>
             <div class="result-item">
-                <span class="result-label">Torque:</span>
+                <span class="result-label">Torque (Nm):</span>
                 <span id="resNm" class="result-value">-</span>
             </div>
             <div class="result-item">
-                <span class="result-label">Torque:</span>
+                <span class="result-label">Torque (Kgfm):</span>
                 <span id="resKgfm" class="result-value">-</span>
             </div>
             <div class="result-item">
-                <span class="result-label">Observações / Procedimento:</span>
+                <span class="result-label">Observações / Procedimento de Fábrica:</span>
                 <span id="resObs">-</span>
             </div>
         </div>
     </div>
 
     <script>
-        // Banco de Sistemas e Componentes
-        const systemsData = {
+        // 1. CHEVROLET - Plataforma Corsa / Celta / Classic / Prisma antigo (Motor Família 1)
+        const gm_fam1 = {
+            embreagem: {
+                label: "Embreagem e Acoplamento",
+                components: {
+                    plato: { name: "Platô no Volante", nm: "15 Nm", kgfm: "1.5 Kgfm", obs: "Aperto cruzado e progressivo." },
+                    volante_motor: { name: "Volante no Virabrequim", nm: "35 Nm + 30° + 15°", kgfm: "3.6 Kgfm + ang.", obs: "Usar trava química de fábrica." },
+                    cambio_motor: { name: "Caixa de Câmbio no Bloco (M10)", nm: "60 Nm", kgfm: "6.1 Kgfm", obs: "Parafusos perimetrais." }
+                }
+            },
             susp_diant: {
                 label: "Suspensão Dianteira",
                 components: {
-                    pivo: { name: "Pivô da Bandeja / Balança", nm: "55 Nm", kgfm: "5.6 Kgfm", obs: "Apertar com o veículo apoiado no chão (posição de trabalho)." },
-                    bieleta: { name: "Bieleta da Barra Estabilizadora", nm: "40 Nm", kgfm: "4.1 Kgfm", obs: "Travar o pino allen/sextavado interno durante o torque." },
-                    terminal_direcao: { name: "Terminal de Direção", nm: "45 Nm", kgfm: "4.6 Kgfm", obs: "Substituir a porca autofrenante se removida." },
-                    amortecedor_inf: { name: "Amortecedor - Parafuso Inferior (Manga)", nm: "90 Nm + 45°", kgfm: "9.2 Kgfm + 45°", obs: "Respeitar a sequência de torque angular." },
-                    amortecedor_sup: { name: "Torre do Amortecedor - Fixação Superior", nm: "45 Nm", kgfm: "4.6 Kgfm", obs: "Aperto junto à chapa do cofre do motor." }
+                    pivo: { name: "Pivô na Manga de Eixo", nm: "50 Nm", kgfm: "5.1 Kgfm", obs: "Porca autofrenante." },
+                    pivo_base: { name: "Fixação do Pivô na Bandeja", nm: "55 Nm", kgfm: "5.6 Kgfm", obs: "Parafusos de base." },
+                    amortecedor_inf: { name: "Amortecedor Inferior (Manga)", nm: "80 Nm + 45°", kgfm: "8.2 Kgfm + ang.", obs: "Substituir parafusos." },
+                    amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "20 Nm", kgfm: "2.0 Kgfm", obs: "Porca superior no cofre." }
                 }
             },
             susp_tras: {
                 label: "Suspensão Traseira",
                 components: {
-                    amortecedor_inf: { name: "Parafuso Inferior do Amortecedor", nm: "70 Nm", kgfm: "7.1 Kgfm", obs: "Apertar com o peso do veículo na suspensão." },
-                    amortecedor_sup: { name: "Fixação Superior do Amortecedor", nm: "45 Nm", kgfm: "4.6 Kgfm", obs: "Não reutilizar porcas danificadas." },
-                    bucha_eixo: { name: "Bucha do Eixo Traseiro", nm: "90 Nm", kgfm: "9.2 Kgfm", obs: "Aperto obrigatório na altura normal de rodagem." }
+                    amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "70 Nm", kgfm: "7.1 Kgfm", obs: "Fixação no eixo." },
+                    amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "20 Nm", kgfm: "2.0 Kgfm", obs: "Fixação no coxim." }
+                }
+            },
+            direcao: {
+                label: "Direção e Articulações",
+                components: {
+                    terminal_direcao: { name: "Terminal de Direção", nm: "35 Nm", kgfm: "3.6 Kgfm", obs: "Substituir cupilha se houver." },
+                    axial_direcao: { name: "Articulação Axial", nm: "80 Nm", kgfm: "8.2 Kgfm", obs: "Rosca na caixa de direção." }
+                }
+            },
+            freios: {
+                label: "Sistema de Freios",
+                components: {
+                    pinca_suporte: { name: "Suporte da Pinça (Cavalete)", nm: "95 Nm", kgfm: "9.7 Kgfm", obs: "Parafuso M12." },
+                    pinca_deslizante: { name: "Pinos Deslizantes da Pinça", nm: "28 Nm", kgfm: "2.9 Kgfm", obs: "Manter limpo e lubrificado." }
                 }
             },
             transmissao: {
-                label: "Transmissão, Embreagem e Transmissão Final",
+                label: "Transmissão e Rodas",
                 components: {
-                    homocinetica: { name: "Porca da Junta Homocinética (Cubo de Roda)", nm: "210 Nm", kgfm: "21.4 Kgfm", obs: "Travar a borda da porca no entalhe do eixo/fuso." },
-                    plato: { name: "Parafusos do Platô de Embreagem", nm: "25 Nm", kgfm: "2.5 Kgfm", obs: "Apertar em cruz/diagonais progressivamente para não empenar o platô." },
-                    volante_motor: { name: "Parafusos do Volante do Motor", nm: "60 Nm + 90°", kgfm: "6.1 Kgfm + 90°", obs: "Aplicar trava química de alta resistência e trocar parafusos." },
-                    atuador_hidraulico: { name: "Parafusos do Atuador Hidráulico (Concêntrico)", nm: "10 Nm", kgfm: "1.0 Kgfm", obs: "Apertar com cuidado para não danificar a carcaça de alumínio/plástico." },
-                    garfo_embreagem: { name: "Pivô / Suporte do Garfo de Embreagem", nm: "35 Nm", kgfm: "3.5 Kgfm", obs: "Aplicar graxa sintética nos pontos de articulação." },
-                    caixa_cambio: { name: "Parafusos de Fixação do Câmbio ao Motor", nm: "75 Nm", kgfm: "7.6 Kgfm", obs: "Garantir o perfeito encaixe nos guias do bloco." },
-                    coxim_cambio: { name: "Coxim do Câmbio / Suporte Superior", nm: "60 Nm + 45°", kgfm: "6.1 Kgfm + 45°", obs: "Verificar a integridade do calço vulcanizado." }
+                    porca_homocinetica: { name: "Porca do Semieixo", nm: "100 Nm + Amassar aba", kgfm: "10.2 Kgfm", obs: "Puncionar a aba de travamento." },
+                    parafuso_roda: { name: "Parafusos de Roda", nm: "110 Nm", kgfm: "11.2 Kgfm", obs: "Rosca M12x1.5. Aperto cruzado." }
+                }
+            }
+        };
+
+        // 2. CHEVROLET - Plataforma GEM / GSV (Onix, Prisma Novo, Spin, Tracker Turbo, Cruze)
+        const gm_gsv = {
+            embreagem: {
+                label: "Embreagem e Acoplamento",
+                components: {
+                    plato: { name: "Platô no Volante", nm: "15 Nm + 45°", kgfm: "1.5 Kgfm + ang.", obs: "Substituir parafusos." },
+                    volante_motor: { name: "Volante no Virabrequim", nm: "60 Nm + 30° + 15°", kgfm: "6.1 Kgfm + ang.", obs: "Substituir parafusos (expansão)." },
+                    atuador_hidraulico: { name: "Atuador Concentrico (CSC)", nm: "10 Nm", kgfm: "1.0 Kgfm", obs: "Aperto uniforme." },
+                    cambio_motor: { name: "Caixa de Câmbio no Bloco", nm: "60 Nm", kgfm: "6.1 Kgfm", obs: "Parafusos perimetrais M10." }
                 }
             },
-            freios_rodas: {
-                label: "Freios e Rodas",
+            susp_diant: {
+                label: "Suspensão Dianteira",
                 components: {
-                    parafuso_roda: { name: "Parafusos / Porcas de Roda", nm: "120 Nm", kgfm: "12.2 Kgfm", obs: "Apertar em cruz/estrela. Nunca aplicar graxa ou óleo nas roscas das porcas/parafusos." },
-                    pinca_suporte: { name: "Suporte da Pinça de Freio (Cavalete)", nm: "100 Nm", kgfm: "10.2 Kgfm", obs: "Aplicar trava química de média densidade (Trava Rosca)." },
-                    pinca_deslizante: { name: "Pinos Deslizantes da Pinça de Freio", nm: "30 Nm", kgfm: "3.0 Kgfm", obs: "Lubrificar pinos com graxa de silicone própria para freio." }
+                    pivo: { name: "Pivô na Manga de Eixo", nm: "30 Nm + 60°", kgfm: "3.1 Kgfm + ang.", obs: "Porca do pino cônico." },
+                    pivo_base: { name: "Fixação do Pivô na Bandeja", nm: "50 Nm + 60°", kgfm: "5.1 Kgfm + ang.", obs: "Parafusos inferiores da base." },
+                    bieleta: { name: "Bieleta da Barra Estabilizadora", nm: "65 Nm", kgfm: "6.6 Kgfm", obs: "Travar o pino interno." },
+                    amortecedor_inf: { name: "Amortecedor Inferior (Manga)", nm: "90 Nm + 45°", kgfm: "9.2 Kgfm + ang.", obs: "Aperto angular exigido por fábrica." },
+                    amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "25 Nm", kgfm: "2.5 Kgfm", obs: "Fixação no cofre." }
+                }
+            },
+            susp_tras: {
+                label: "Suspensão Traseira",
+                components: {
+                    amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "70 Nm + 45°", kgfm: "7.1 Kgfm + ang.", obs: "No eixo de torção." },
+                    amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "55 Nm", kgfm: "5.6 Kgfm", obs: "Coxim superior." }
+                }
+            },
+            direcao: {
+                label: "Direção e Articulações",
+                components: {
+                    terminal_direcao: { name: "Terminal de Direção", nm: "35 Nm + 45°", kgfm: "3.6 Kgfm + ang.", obs: "Porca autofrenante." },
+                    axial_direcao: { name: "Articulação Axial", nm: "75 Nm", kgfm: "7.6 Kgfm", obs: "Rosca na caixa." }
+                }
+            },
+            freios: {
+                label: "Sistema de Freios",
+                components: {
+                    pinca_suporte: { name: "Suporte da Pinça (Cavalete)", nm: "100 Nm", kgfm: "10.2 Kgfm", obs: "Trava química média." },
+                    pinca_deslizante: { name: "Pinos Deslizantes da Pinça", nm: "28 Nm", kgfm: "2.9 Kgfm", obs: "Pinos guia." }
+                }
+            },
+            transmissao: {
+                label: "Transmissão e Rodas",
+                components: {
+                    porca_homocinetica: { name: "Porca do Semieixo", nm: "230 Nm", kgfm: "23.5 Kgfm", obs: "Substituir a porca travante." },
+                    parafuso_roda: { name: "Porcas de Roda", nm: "140 Nm", kgfm: "14.3 Kgfm", obs: "Torque elevado especificado pela GM." }
                 }
             }
         };
 
-        // Lista de Veículos por Montadora
-        const vehiclesByBrand = {
-            honda: ["Accord", "City", "Civic", "CR-V", "Fit", "HR-V", "WR-V", "ZR-V"],
-            toyota: ["Bandeirante", "Camry", "Corolla", "Corolla Cross", "Corolla Fielder", "Etios", "Hilux", "Prius", "RAV4", "SW4", "Yaris"],
-            nissan: ["Frontier", "Kicks", "Livina / Grand Livina", "March", "Sentra", "Tiida", "Versa / V-Drive", "X-Trail"],
-            fiat: ["500", "Argo", "Bravo", "Cronos", "Doblò", "Ducato", "Fastback", "Fiorino", "Freemont", "Grand Siena", "Idea", "Linea", "Marea", "Mobi", "Palio", "Pulse", "Punto", "Siena", "Stilo", "Strada", "Toro", "Uno / Mille"],
-            volkswagen: ["Amarok", "Bora", "Fox / CrossFox / SpaceFox", "Fusca / New Beetle", "Gol", "Golf", "Jetta", "Kombi", "Nivus", "Parati", "Passat", "Polo", "Santana", "Saveiro", "Taos", "T-Cross", "Tiguan", "Up!", "Virtus", "Voyage"],
-            chevrolet: ["Agile", "Astra", "Blazer", "Camaro", "Captiva", "Celta", "Chevette", "Cobalt", "Corsa", "Cruze", "Equinox", "Kadett", "Meriva", "Montana", "Omega", "Onix / Onix Plus", "Opala", "Prisma", "S10", "Spin", "Tracker", "Vectra", "Zafira"],
-            ford: ["Courier", "EcoSport", "Edge", "Escort", "F-1000", "F-250", "Fiesta / New Fiesta", "Focus", "Fusion", "Ka / Ka+", "Maverick", "Mustang", "Ranger", "Territory / Bronco"],
-            hyundai: ["Azera", "Creta", "Elantra", "HB20 / HB20S", "HR", "i30", "ix35", "Santa Fe", "Sonata", "Tucson", "Veloster", "Veracruz"],
-            bmw: ["Série 1", "Série 2", "Série 3", "Série 4", "Série 5", "X1", "X2", "X3", "X4", "X5", "X6", "Z4"],
-            mercedes: ["Classe A", "Classe B", "Classe C", "Classe E", "CLA", "GLA", "GLB", "GLC", "GLE", "Sprinter"],
-            audi: ["A1", "A3", "A4", "A5", "A6", "Q3", "Q5", "Q7", "TT", "e-tron"],
-            volvo: ["C30", "C40", "EX30", "S60", "S90", "V40", "V60", "XC40", "XC60", "XC90"],
-            byd: ["Dolphin / Dolphin Mini", "Song Plus / Song Pro", "Seal", "Yuan Plus", "King DM-i", "Tan EV", "Han EV", "Shark"]
+        // 3. FIAT - Plataforma Compacta (Palio, Siena, Uno, Strada, Argo, Cronos, Mobi)
+        const fiat_compacts = {
+            embreagem: {
+                label: "Embreagem e Acoplamento",
+                components: {
+                    plato: { name: "Platô no Volante", nm: "25 Nm", kgfm: "2.5 Kgfm", obs: "Aperto cruzado gradativo." },
+                    volante_motor: { name: "Volante no Virabrequim", nm: "83 Nm", kgfm: "8.5 Kgfm", obs: "Aperto em estrela. Usar trava química." },
+                    atuador_hidraulico: { name: "Atuador/Cilindro Auxiliar", nm: "10 Nm", kgfm: "1.0 Kgfm", obs: "Fixação na caixa." },
+                    cambio_motor: { name: "Caixa de Câmbio no Bloco", nm: "70 Nm", kgfm: "7.1 Kgfm", obs: "Parafusos perimetrais M10/M12." }
+                }
+            },
+            susp_diant: {
+                label: "Suspensão Dianteira",
+                components: {
+                    pivo: { name: "Pivô na Manga de Eixo", nm: "60 Nm", kgfm: "6.1 Kgfm", obs: "Porca autotravante M12." },
+                    pivo_base: { name: "Fixação do Pivô na Bandeja", nm: "56 Nm", kgfm: "5.7 Kgfm", obs: "Parafusos M10 na base do pivô." },
+                    bieleta: { name: "Bieleta da Barra Estabilizadora", nm: "41 Nm", kgfm: "4.2 Kgfm", obs: "Travar encaixe sextavado." },
+                    amortecedor_inf: { name: "Amortecedor Inferior (Manga)", nm: "75 Nm + 45°", kgfm: "7.6 Kgfm + ang.", obs: "Dois parafusos passantes da coluna." },
+                    amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "45 Nm", kgfm: "4.6 Kgfm", obs: "Porcas no cofre." }
+                }
+            },
+            susp_tras: {
+                label: "Suspensão Traseira",
+                components: {
+                    amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "60 Nm", kgfm: "6.1 Kgfm", obs: "Parafuso no eixo de torção." },
+                    amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "40 Nm", kgfm: "4.1 Kgfm", obs: "Coxim superior na carroceria." },
+                    bucha_eixo: { name: "Bucha do Eixo Traseiro", nm: "90 Nm", kgfm: "9.2 Kgfm", obs: "Apertar com veículo apoiado no chão." }
+                }
+            },
+            direcao: {
+                label: "Direção e Articulações",
+                components: {
+                    terminal_direcao: { name: "Terminal de Direção", nm: "40 Nm", kgfm: "4.1 Kgfm", obs: "Porca M10/M12." },
+                    axial_direcao: { name: "Articulação Axial", nm: "70 Nm", kgfm: "7.1 Kgfm", obs: "Rosca na caixa de direção." }
+                }
+            },
+            freios: {
+                label: "Sistema de Freios",
+                components: {
+                    pinca_suporte: { name: "Suporte da Pinça (Cavalete)", nm: "100 Nm", kgfm: "10.2 Kgfm", obs: "Trava química de média torque." },
+                    pinca_deslizante: { name: "Pinos Deslizantes da Pinça", nm: "27 Nm", kgfm: "2.8 Kgfm", obs: "Chave fina de apoio." }
+                }
+            },
+            transmissao: {
+                label: "Transmissão e Rodas",
+                components: {
+                    porca_homocinetica: { name: "Porca do Semieixo", nm: "240 Nm", kgfm: "24.5 Kgfm", obs: "Puncionar aba de trava." },
+                    parafuso_roda: { name: "Parafusos de Roda", nm: "98 Nm", kgfm: "10.0 Kgfm", obs: "Rosca M12x1.25. Não lubrificar." }
+                }
+            }
         };
 
-        // Passo 1 -> Passo 2: Atualiza a lista de Veículos
+        // 4. VOLKSWAGEN - Plataforma PQ24 / PQ25 / MQB (Gol, Voyage, Fox, Polo, Virtus, Nivus, T-Cross, Saveiro)
+        const vw_pq_mqb = {
+            embreagem: {
+                label: "Embreagem e Acoplamento",
+                components: {
+                    plato: { name: "Platô no Volante", nm: "20 Nm", kgfm: "2.0 Kgfm", obs: "Aperto cruzado gradativo." },
+                    volante_motor: { name: "Volante no Virabrequim", nm: "60 Nm + 90°", kgfm: "6.1 Kgfm + ang.", obs: "Substituir parafusos de expansão." },
+                    atuador_hidraulico: { name: "Atuador/Cilindro Escravo", nm: "12 Nm", kgfm: "1.2 Kgfm", obs: "Parafusos do atuador concêntrico." },
+                    cambio_motor: { name: "Caixa de Câmbio no Bloco", nm: "80 Nm", kgfm: "8.2 Kgfm", obs: "Parafusos M12." }
+                }
+            },
+            susp_diant: {
+                label: "Suspensão Dianteira",
+                components: {
+                    pivo: { name: "Pivô na Manga de Eixo", nm: "50 Nm", kgfm: "5.1 Kgfm", obs: "Porca do pino cônico." },
+                    pivo_base: { name: "Fixação do Pivô na Bandeja (3 Porcas)", nm: "40 Nm + 45°", kgfm: "4.1 Kgfm + ang.", obs: "Porcas de uso único." },
+                    bieleta: { name: "Bieleta da Barra Estabilizadora", nm: "40 Nm", kgfm: "4.1 Kgfm", obs: "Segurar encaixe allen/torx." },
+                    amortecedor_inf: { name: "Amortecedor Inferior (Braçadeira)", nm: "60 Nm + 90°", kgfm: "6.1 Kgfm + ang.", obs: "Parafuso e porca de expansão." },
+                    amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "60 Nm", kgfm: "6.1 Kgfm", obs: "Haste superior." }
+                }
+            },
+            susp_tras: {
+                label: "Suspensão Traseira",
+                components: {
+                    amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "40 Nm + 90°", kgfm: "4.1 Kgfm + ang.", obs: "Parafuso passante no eixo." },
+                    amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "50 Nm + 45°", kgfm: "5.1 Kgfm + ang.", obs: "Coxim superior na caixa de roda." }
+                }
+            },
+            direcao: {
+                label: "Direção e Articulações",
+                components: {
+                    terminal_direcao: { name: "Terminal de Direção", nm: "20 Nm + 90°", kgfm: "2.0 Kgfm + ang.", obs: "Padrão de aperto angular VW." },
+                    axial_direcao: { name: "Articulação Axial", nm: "80 Nm", kgfm: "8.2 Kgfm", obs: "Braço interno na caixa." }
+                }
+            },
+            freios: {
+                label: "Sistema de Freios",
+                components: {
+                    pinca_suporte: { name: "Suporte da Pinça (Cavalete)", nm: "120 Nm", kgfm: "12.2 Kgfm", obs: "Parafusos Allen ou XZN." },
+                    pinca_deslizante: { name: "Pinos Deslizantes da Pinça", nm: "30 Nm", kgfm: "3.1 Kgfm", obs: "Guia deslizante." }
+                }
+            },
+            transmissao: {
+                label: "Transmissão e Rodas",
+                components: {
+                    porca_homocinetica: { name: "Parafuso Central do Semieixo", nm: "200 Nm + 180°", kgfm: "20.4 Kgfm + ang.", obs: "Parafuso estriado de uso único." },
+                    parafuso_roda: { name: "Parafusos de Roda", nm: "120 Nm", kgfm: "12.2 Kgfm", obs: "Rosca M12x1.5 / M14x1.5." }
+                }
+            }
+        };
+
+        // 5. TOYOTA - Plataforma Médio / Compacto (Etios, Yaris, Corolla, Corolla Cross)
+        const toyota_platform = {
+            embreagem: {
+                label: "Embreagem e Acoplamento",
+                components: {
+                    plato: { name: "Platô no Volante", nm: "19 Nm", kgfm: "1.9 Kgfm", obs: "Aperto cruzado gradativo." },
+                    volante_motor: { name: "Volante no Virabrequim", nm: "88 Nm", kgfm: "9.0 Kgfm", obs: "Aplicar trava química média nas roscas." },
+                    cambio_motor: { name: "Caixa de Câmbio no Bloco", nm: "64 Nm", kgfm: "6.5 Kgfm", obs: "Parafusos M10." }
+                }
+            },
+            susp_diant: {
+                label: "Suspensão Dianteira",
+                components: {
+                    pivo: { name: "Pivô na Manga de Eixo", nm: "75 Nm", kgfm: "7.6 Kgfm", obs: "Porca do pino cônico." },
+                    pivo_base: { name: "Fixação do Pivô na Bandeja", nm: "89 Nm", kgfm: "9.1 Kgfm", obs: "Porcas e parafusos da base." },
+                    bieleta: { name: "Bieleta da Barra Estabilizadora", nm: "74 Nm", kgfm: "7.5 Kgfm", obs: "Travar o pino sextavado." },
+                    amortecedor_inf: { name: "Amortecedor Inferior (Manga)", nm: "153 Nm", kgfm: "15.6 Kgfm", obs: "Aperto firme nos parafusos duplos." },
+                    amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "50 Nm", kgfm: "5.1 Kgfm", obs: "3 porcas da torre." }
+                }
+            },
+            susp_tras: {
+                label: "Suspensão Traseira",
+                components: {
+                    amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "70 Nm", kgfm: "7.1 Kgfm", obs: "Fixação inferior na bucha." },
+                    amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "80 Nm", kgfm: "8.2 Kgfm", obs: "Suporte na estrutura." }
+                }
+            },
+            direcao: {
+                label: "Direção e Articulações",
+                components: {
+                    terminal_direcao: { name: "Terminal de Direção", nm: "49 Nm", kgfm: "5.0 Kgfm", obs: "Porca com cupilha / autofrenante." },
+                    axial_direcao: { name: "Articulação Axial", nm: "83 Nm", kgfm: "8.5 Kgfm", obs: "Braço na caixa de direção." }
+                }
+            },
+            freios: {
+                label: "Sistema de Freios",
+                components: {
+                    pinca_suporte: { name: "Suporte da Pinça (Cavalete)", nm: "107 Nm", kgfm: "10.9 Kgfm", obs: "Parafusos de fixação do suporte." },
+                    pinca_deslizante: { name: "Pinos Deslizantes da Pinça", nm: "34 Nm", kgfm: "3.5 Kgfm", obs: "Pinos guia flutuantes." }
+                }
+            },
+            transmissao: {
+                label: "Transmissão e Rodas",
+                components: {
+                    porca_homocinetica: { name: "Porca do Semieixo", nm: "216 Nm", kgfm: "22.0 Kgfm", obs: "Puncionar a aba de travamento." },
+                    parafuso_roda: { name: "Porcas de Roda", nm: "103 Nm", kgfm: "10.5 Kgfm", obs: "Rosca M12x1.5." }
+                }
+            }
+        };
+
+        // MAPA COMPLETO DE VEÍCULOS APONTANDO PARA AS PLATAFORMAS
+        const vehiclesDatabase = {
+            chevrolet: {
+                "Celta": gm_fam1,
+                "Corsa / Classic": gm_fam1,
+                "Prisma (Até 2012)": gm_fam1,
+                "Cruze": gm_gsv,
+                "Onix / Onix Plus (2020+)": gm_gsv,
+                "Onix / Prisma (2013-2019)": gm_gsv,
+                "Spin": gm_gsv,
+                "Tracker (2020+)": gm_gsv
+            },
+            fiat: {
+                "Argo": fiat_compacts,
+                "Cronos": fiat_compacts,
+                "Mobi": fiat_compacts,
+                "Palio / Siena / Grand Siena": fiat_compacts,
+                "Punto": fiat_compacts,
+                "Strada": fiat_compacts,
+                "Uno Fire / Evo": fiat_compacts
+            },
+            volkswagen: {
+                "Fox / CrossFox": vw_pq_mqb,
+                "Gol G5 / G6 / G7 / G8": vw_pq_mqb,
+                "Nivus": vw_pq_mqb,
+                "Polo (2018+)": vw_pq_mqb,
+                "Saveiro G5+": vw_pq_mqb,
+                "T-Cross": vw_pq_mqb,
+                "Up!": vw_pq_mqb,
+                "Virtus": vw_pq_mqb,
+                "Voyage G5+": vw_pq_mqb
+            },
+            toyota: {
+                "Corolla (2015-2019)": toyota_platform,
+                "Corolla (2020+)": toyota_platform,
+                "Corolla Cross": toyota_platform,
+                "Etios": toyota_platform,
+                "Yaris": toyota_platform
+            }
+        };
+
+        // LÓGICA DE INTERFACE E SELEÇÃO
         function updateVehicles() {
-            const brand = document.getElementById('brandSelect').value;
-            const vehicleSelect = document.getElementById('vehicleSelect');
-            const systemSelect = document.getElementById('systemSelect');
-            const componentSelect = document.getElementById('componentSelect');
+            const brand = document.getElementById("brandSelect").value;
+            const vehicleSelect = document.getElementById("vehicleSelect");
+            const systemSelect = document.getElementById("systemSelect");
+            const componentSelect = document.getElementById("componentSelect");
 
-            vehicleSelect.innerHTML = '<option value="">-- Selecione o Veículo --</option>';
-            systemSelect.innerHTML = '<option value="">-- Selecione o Veículo Primeiro --</option>';
-            componentSelect.innerHTML = '<option value="">-- Selecione o Conjunto Primeiro --</option>';
+            resetSelect(vehicleSelect, "-- Selecione o Veículo --");
+            resetSelect(systemSelect, "-- Selecione o Veículo Primeiro --");
+            resetSelect(componentSelect, "-- Selecione o Conjunto Primeiro --");
+            hideResultCard();
 
-            systemSelect.disabled = true;
-            componentSelect.disabled = true;
-            document.getElementById('resultCard').style.display = 'none';
-
-            if (brand && vehiclesByBrand[brand]) {
-                vehiclesByBrand[brand].sort().forEach(vehicle => {
-                    let opt = document.createElement('option');
-                    opt.value = vehicle;
-                    opt.textContent = vehicle;
-                    vehicleSelect.appendChild(opt);
-                });
-                vehicleSelect.disabled = false;
-            } else {
+            if (!brand || !vehiclesDatabase[brand]) {
                 vehicleSelect.disabled = true;
-                vehicleSelect.innerHTML = '<option value="">-- Selecione a Montadora Primeiro --</option>';
+                return;
             }
+
+            vehicleSelect.disabled = false;
+            const vehicles = Object.keys(vehiclesDatabase[brand]);
+
+            vehicles.forEach(model => {
+                let opt = document.createElement("option");
+                opt.value = model;
+                opt.textContent = model;
+                vehicleSelect.appendChild(opt);
+            });
         }
 
-        // Passo 2 -> Passo 3: Atualiza os Sistemas/Conjuntos
         function updateSystems() {
-            const vehicle = document.getElementById('vehicleSelect').value;
-            const systemSelect = document.getElementById('systemSelect');
-            const componentSelect = document.getElementById('componentSelect');
+            const brand = document.getElementById("brandSelect").value;
+            const model = document.getElementById("vehicleSelect").value;
+            const systemSelect = document.getElementById("systemSelect");
+            const componentSelect = document.getElementById("componentSelect");
 
-            systemSelect.innerHTML = '<option value="">-- Selecione o Conjunto/Sistema --</option>';
-            componentSelect.innerHTML = '<option value="">-- Selecione o Conjunto Primeiro --</option>';
+            resetSelect(systemSelect, "-- Selecione o Conjunto/Sistema --");
+            resetSelect(componentSelect, "-- Selecione o Conjunto Primeiro --");
+            hideResultCard();
 
-            componentSelect.disabled = true;
-            document.getElementById('resultCard').style.display = 'none';
-
-            if (vehicle) {
-                for (let key in systemsData) {
-                    let opt = document.createElement('option');
-                    opt.value = key;
-                    opt.textContent = systemsData[key].label;
-                    systemSelect.appendChild(opt);
-                }
-                systemSelect.disabled = false;
-            } else {
+            if (!model) {
                 systemSelect.disabled = true;
+                return;
+            }
+
+            systemSelect.disabled = false;
+            const systems = vehiclesDatabase[brand][model];
+
+            for (let sysKey in systems) {
+                let opt = document.createElement("option");
+                opt.value = sysKey;
+                opt.textContent = systems[sysKey].label;
+                systemSelect.appendChild(opt);
             }
         }
 
-        // Passo 3 -> Passo 4: Atualiza os Componentes / Parafusos
         function updateComponents() {
-            const systemKey = document.getElementById('systemSelect').value;
-            const componentSelect = document.getElementById('componentSelect');
+            const brand = document.getElementById("brandSelect").value;
+            const model = document.getElementById("vehicleSelect").value;
+            const sysKey = document.getElementById("systemSelect").value;
+            const componentSelect = document.getElementById("componentSelect");
 
-            componentSelect.innerHTML = '<option value="">-- Selecione o Componente / Parafuso --</option>';
-            document.getElementById('resultCard').style.display = 'none';
+            resetSelect(componentSelect, "-- Selecione o Componente --");
+            hideResultCard();
 
-            if (systemKey && systemsData[systemKey]) {
-                const components = systemsData[systemKey].components;
-                for (let key in components) {
-                    let opt = document.createElement('option');
-                    opt.value = key;
-                    opt.textContent = components[key].name;
-                    componentSelect.appendChild(opt);
-                }
-                componentSelect.disabled = false;
-            } else {
+            if (!sysKey) {
                 componentSelect.disabled = true;
+                return;
+            }
+
+            componentSelect.disabled = false;
+            const components = vehiclesDatabase[brand][model][sysKey].components;
+
+            for (let compKey in components) {
+                let opt = document.createElement("option");
+                opt.value = compKey;
+                opt.textContent = components[compKey].name;
+                componentSelect.appendChild(opt);
             }
         }
 
-        // Passo 4: Exibe o Resultado do Torque
         function showTorqueDetails() {
-            const vehicle = document.getElementById('vehicleSelect').value;
-            const systemKey = document.getElementById('systemSelect').value;
-            const componentKey = document.getElementById('componentSelect').value;
-            const resultCard = document.getElementById('resultCard');
+            const brand = document.getElementById("brandSelect").value;
+            const model = document.getElementById("vehicleSelect").value;
+            const sysKey = document.getElementById("systemSelect").value;
+            const compKey = document.getElementById("componentSelect").value;
 
-            if (vehicle && systemKey && componentKey) {
-                const item = systemsData[systemKey].components[componentKey];
-
-                document.getElementById('resTitle').textContent = `${vehicle} - ${item.name}`;
-                document.getElementById('resNm').textContent = item.nm;
-                document.getElementById('resKgfm').textContent = item.kgfm;
-                document.getElementById('resObs').textContent = item.obs;
-
-                resultCard.style.display = 'block';
-            } else {
-                resultCard.style.display = 'none';
+            if (!compKey) {
+                hideResultCard();
+                return;
             }
+
+            const comp = vehiclesDatabase[brand][model][sysKey].components[compKey];
+
+            document.getElementById("resTitle").textContent = `${model} - ${comp.name}`;
+            document.getElementById("resNm").textContent = comp.nm;
+            document.getElementById("resKgfm").textContent = comp.kgfm;
+            document.getElementById("resObs").textContent = comp.obs || "Nenhuma observação informada.";
+
+            document.getElementById("resultCard").style.display = "block";
+        }
+
+        function resetSelect(selectElem, defaultText) {
+            selectElem.innerHTML = `<option value="">${defaultText}</option>`;
+            selectElem.disabled = true;
+        }
+
+        function hideResultCard() {
+            document.getElementById("resultCard").style.display = "none";
         }
     </script>
-
-
 </body>
+
+</html>

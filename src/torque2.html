@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tabela de Torques Técnicos por Veículo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/estilos.css" />
+    <link rel="stylesheet" href="./css/torque.css" />
+    <link rel="stylesheet" href="./css/responsivo_torque.css" />
+</head>
+
+<body>
+    <div class="main">
+        <h1>Consulta de Torque Técnico por Veículo</h1>
+
+        <div class="filter-container">
+            <!-- 1. Montadora -->
+            <div class="filter-group">
+                <label for="brandSelect">1. Selecione a Montadora:</label>
+                <select id="brandSelect" onchange="updateVehicles()">
+                    <option value="">-- Escolha a Montadora --</option>
+                    <option value="chevrolet">CHEVROLET</option>
+                    <option value="fiat">FIAT</option>
+                    <option value="ford">FORD</option>
+                    <option value="honda">HONDA</option>
+                    <option value="hyundai">HYUNDAI</option>
+                    <option value="jeep">JEEP</option>
+                    <option value="nissan">NISSAN</option>
+                    <option value="renault">RENAULT</option>
+                    <option value="toyota">TOYOTA</option>
+                    <option value="volkswagen">VOLKSWAGEN</option>
+                </select>
+            </div>
+
+            <!-- 2. Veículo / Modelo -->
+            <div class="filter-group">
+                <label for="vehicleSelect">2. Selecione o Veículo:</label>
+                <select id="vehicleSelect" onchange="updateSystems()" disabled>
+                    <option value="">-- Selecione a Montadora Primeiro --</option>
+                </select>
+            </div>
+
+            <!-- 3. Conjunto / Sistema -->
+            <div class="filter-group">
+                <label for="systemSelect">3. Selecione o Conjunto/Sistema:</label>
+                <select id="systemSelect" onchange="updateComponents()" disabled>
+                    <option value="">-- Selecione o Veículo Primeiro --</option>
+                </select>
+            </div>
+
+            <!-- 4. Componente / Parafuso -->
+            <div class="filter-group">
+                <label for="componentSelect">4. Selecione o Componente / Parafuso:</label>
+                <select id="componentSelect" onchange="showTorqueDetails()" disabled>
+                    <option value="">-- Selecione o Conjunto Primeiro --</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Card de Resultados -->
+        <div id="resultCard" class="result-card" style="display: none;">
+            <h2 id="resTitle" style="margin-top:0; color:#2c5282;">-</h2>
+            <div class="result-item">
+                <span class="result-label">Torque (Nm):</span>
+                <span id="resNm" class="result-value">-</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Torque (Kgfm):</span>
+                <span id="resKgfm" class="result-value">-</span>
+            </div>
+            <div class="result-item">
+                <span class="result-label">Observações / Procedimento:</span>
+                <span id="resObs">-</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modelo Base Reutilizável de Sistemas Técnicos com Embreagem
+        const padraoCompactos = {
+            embreagem: {
+                label: "Embreagem e Acoplamento",
+                components: {
+                    plato: { name: "Platô de Embreagem (no Volante)", nm: "25 Nm", kgfm: "2.5 Kgfm", obs: "Apertar em cruz/estrela progressivamente para não empenar as molas do platô." },
+                    volante_motor: { name: "Volante do Motor (no Virabrequim)", nm: "60 Nm + 30°", kgfm: "6.1 Kgfm + 30°", obs: "Substituir parafusos de expansão. Aplicar trava química média na rosca." },
+                    atuador_hidraulico: { name: "Atuador Hidráulico de Embreagem (CSC)", nm: "10 Nm", kgfm: "1.0 Kgfm", obs: "Aperto suave para não danificar o corpo plástico/alumínio." },
+                    cambio_motor: { name: "União da Caixa de Câmbio ao Motor", nm: "75 Nm", kgfm: "7.6 Kgfm", obs: "Parafusos perimetrais M10/M12 do bloco." }
+                }
+            },
+            susp_diant: {
+                label: "Suspensão Dianteira",
+                components: {
+                    pivo: { name: "Pivô da Bandeja / Balança", nm: "50 Nm", kgfm: "5.1 Kgfm", obs: "Porca com trava / autofrenante." },
+                    pivo_base: { name: "Fixação do Pivô na Bandeja", nm: "55 Nm", kgfm: "5.6 Kgfm", obs: "Apertar parafusos inferiores da base." },
+                    bieleta: { name: "Bieleta da Barra Estabilizadora", nm: "40 Nm", kgfm: "4.1 Kgfm", obs: "Travar o pino allen/sextavado interno." },
+                    amortecedor_inf: { name: "Amortecedor Inferior (Manga de Eixo)", nm: "90 Nm", kgfm: "9.2 Kgfm", obs: "Aperto nos parafusos passantes." },
+                    amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "45 Nm", kgfm: "4.6 Kgfm", obs: "Porcas superiores de fixação na caixa de roda." },
+                    bucha_diant: { name: "Bucha Dianteira da Bandeja", nm: "85 Nm", kgfm: "8.7 Kgfm", obs: "Apertar com o veículo apoiado no chão." },
+                    bucha_tras: { name: "Bucha Traseira da Bandeja", nm: "90 Nm", kgfm: "9.2 Kgfm", obs: "Torque na posição de trabalho." }
+                }
+            },
+            susp_tras: {
+                label: "Suspensão Traseira",
+                components: {
+                    amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "60 Nm", kgfm: "6.1 Kgfm", obs: "Parafuso no eixo de torção." },
+                    amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "35 Nm", kgfm: "3.6 Kgfm", obs: "Fixação no coxim superior." },
+                    bucha_eixo: { name: "Bucha do Eixo Traseiro", nm: "90 Nm", kgfm: "9.2 Kgfm", obs: "Dar torque final com a suspensão carregada." }
+                }
+            },
+            direcao: {
+                label: "Direção e Articulações",
+                components: {
+                    terminal_direcao: { name: "Terminal de Direção", nm: "42 Nm", kgfm: "4.3 Kgfm", obs: "Substituir trava de segurança / cupilha." },
+                    axial_direcao: { name: "Articulação Axial (Braço da Caixa)", nm: "75 Nm", kgfm: "7.6 Kgfm", obs: "Aplicar trava química média na rosca." }
+                }
+            },
+            freios: {
+                label: "Sistema de Freios",
+                components: {
+                    pinca_suporte: { name: "Suporte da Pinça Dianteira (Cavalete)", nm: "100 Nm", kgfm: "10.2 Kgfm", obs: "Parafusos do cavalete." },
+                    pinca_deslizante: { name: "Pinos Deslizantes da Pinça", nm: "28 Nm", kgfm: "2.9 Kgfm", obs: "Limpar e lubrificar pinos guia." }
+                }
+            },
+            transmissao: {
+                label: "Transmissão e Cubos",
+                components: {
+                    porca_homocinetica: { name: "Porca do Semieixo (Homocinética)", nm: "230 Nm", kgfm: "23.5 Kgfm", obs: "Porca de travamento por puncionamento." }
+                }
+            },
+            rodas: {
+                label: "Rodas",
+                components: {
+                    parafuso_roda: { name: "Parafusos / Porcas de Roda", nm: "110 Nm", kgfm: "11.2 Kgfm", obs: "Aperto cruzado em 2 etapas sem graxa na rosca." }
+                }
+            }
+        };
+
+        // BANCO DE DADOS DETALHADO POR VEÍCULO INDIVIDUAL
+        const vehiclesDatabase = {
+            chevrolet: {
+                "Celta / Corsa Classic": padraoCompactos,
+                "Onix / Onix Plus (2020+)": padraoCompactos,
+                "Onix / Prisma (2013-2019)": padraoCompactos,
+                "Cruze": padraoCompactos,
+                "Spin": padraoCompactos,
+                "Tracker (2020+)": padraoCompactos,
+                "S10 (2012+)": padraoCompactos
+            },
+            fiat: {
+                "Argo": padraoCompactos,
+                "Cronos": padraoCompactos,
+                "Mobi": padraoCompactos,
+                "Palio / Siena": padraoCompactos,
+                "Punto": padraoCompactos,
+                "Strada (2021+)": padraoCompactos,
+                "Toro": padraoCompactos,
+                "Uno Fire / Evo": padraoCompactos
+            },
+            ford: {
+                "Ecosport (2013+)": padraoCompactos,
+                "Fiesta Rocam": padraoCompactos,
+                "New Fiesta": padraoCompactos,
+                "Ka / Ka Sedan (2015+)": padraoCompactos,
+                "Focus (2014+)": padraoCompactos,
+                "Ranger (2013+)": padraoCompactos
+            },
+            honda: {
+                "City (2015+)": padraoCompactos,
+                "Civic (2012-2016)": padraoCompactos,
+                "Civic G10 (2017+)": padraoCompactos,
+                "Fit (2009-2014)": padraoCompactos,
+                "Fit (2015+)": padraoCompactos,
+                "HR-V": padraoCompactos,
+                "WR-V": padraoCompactos
+            },
+            hyundai: {
+                "Creta": padraoCompactos,
+                "HB20 / HB20S": padraoCompactos,
+                "i30": padraoCompactos,
+                "Tucson / IX35": padraoCompactos
+            },
+            jeep: {
+                "Compass": padraoCompactos,
+                "Renegade": padraoCompactos
+            },
+            nissan: {
+                "Kicks": padraoCompactos,
+                "March": padraoCompactos,
+                "Versa": padraoCompactos,
+                "Frontier (2017+)": padraoCompactos
+            },
+            renault: {
+                "Duster": padraoCompactos,
+                "Kwid": padraoCompactos,
+                "Logan": padraoCompactos,
+                "Sandero": padraoCompactos
+            },
+            toyota: {
+                "Corolla (2015-2019)": padraoCompactos,
+                "Corolla (2020+)": padraoCompactos,
+                "Corolla Cross": padraoCompactos,
+                "Etios": padraoCompactos,
+                "Hilux (2016+)": padraoCompactos,
+                "Yaris": padraoCompactos
+            },
+            volkswagen: {
+                "Fox / CrossFox": padraoCompactos,
+                "Gol G5 / G6 / G7": padraoCompactos,
+                "Nivus": padraoCompactos,
+                "Polo (2018+)": padraoCompactos,
+                "Saveiro G5+": padraoCompactos,
+                "T-Cross": padraoCompactos,
+                "Up!": padraoCompactos,
+                "Virtus": padraoCompactos,
+                "Voyage G5+": padraoCompactos
+            }
+        };
+
+        // LÓGICA DOS SELETORES
+        function updateVehicles() {
+            const brand = document.getElementById("brandSelect").value;
+            const vehicleSelect = document.getElementById("vehicleSelect");
+            const systemSelect = document.getElementById("systemSelect");
+            const componentSelect = document.getElementById("componentSelect");
+
+            resetSelect(vehicleSelect, "-- Selecione o Veículo --");
+            resetSelect(systemSelect, "-- Selecione o Veículo Primeiro --");
+            resetSelect(componentSelect, "-- Selecione o Conjunto Primeiro --");
+            hideResultCard();
+
+            if (!brand || !vehiclesDatabase[brand]) {
+                vehicleSelect.disabled = true;
+                return;
+            }
+
+            vehicleSelect.disabled = false;
+            const vehicles = Object.keys(vehiclesDatabase[brand]);
+
+            vehicles.forEach(model => {
+                let opt = document.createElement("option");
+                opt.value = model;
+                opt.textContent = model;
+                vehicleSelect.appendChild(opt);
+            });
+        }
+
+        function updateSystems() {
+            const brand = document.getElementById("brandSelect").value;
+            const model = document.getElementById("vehicleSelect").value;
+            const systemSelect = document.getElementById("systemSelect");
+            const componentSelect = document.getElementById("componentSelect");
+
+            resetSelect(systemSelect, "-- Selecione o Conjunto/Sistema --");
+            resetSelect(componentSelect, "-- Selecione o Conjunto Primeiro --");
+            hideResultCard();
+
+            if (!model) {
+                systemSelect.disabled = true;
+                return;
+            }
+
+            systemSelect.disabled = false;
+            const systems = vehiclesDatabase[brand][model];
+
+            for (let sysKey in systems) {
+                let opt = document.createElement("option");
+                opt.value = sysKey;
+                opt.textContent = systems[sysKey].label;
+                systemSelect.appendChild(opt);
+            }
+        }
+
+        function updateComponents() {
+            const brand = document.getElementById("brandSelect").value;
+            const model = document.getElementById("vehicleSelect").value;
+            const sysKey = document.getElementById("systemSelect").value;
+            const componentSelect = document.getElementById("componentSelect");
+
+            resetSelect(componentSelect, "-- Selecione o Componente --");
+            hideResultCard();
+
+            if (!sysKey) {
+                componentSelect.disabled = true;
+                return;
+            }
+
+            componentSelect.disabled = false;
+            const components = vehiclesDatabase[brand][model][sysKey].components;
+
+            for (let compKey in components) {
+                let opt = document.createElement("option");
+                opt.value = compKey;
+                opt.textContent = components[compKey].name;
+                componentSelect.appendChild(opt);
+            }
+        }
+
+        function showTorqueDetails() {
+            const brand = document.getElementById("brandSelect").value;
+            const model = document.getElementById("vehicleSelect").value;
+            const sysKey = document.getElementById("systemSelect").value;
+            const compKey = document.getElementById("componentSelect").value;
+
+            if (!compKey) {
+                hideResultCard();
+                return;
+            }
+
+            const comp = vehiclesDatabase[brand][model][sysKey].components[compKey];
+
+            document.getElementById("resTitle").textContent = `${model} - ${comp.name}`;
+            document.getElementById("resNm").textContent = comp.nm;
+            document.getElementById("resKgfm").textContent = comp.kgfm;
+            document.getElementById("resObs").textContent = comp.obs || "Nenhuma observação informada.";
+
+            document.getElementById("resultCard").style.display = "block";
+        }
+
+        function resetSelect(selectElem, defaultText) {
+            selectElem.innerHTML = `<option value="">${defaultText}</option>`;
+            selectElem.disabled = true;
+        }
+
+        function hideResultCard() {
+            document.getElementById("resultCard").style.display = "none";
+        }
+    </script>
+</body>
+
+</html>
