@@ -17,7 +17,6 @@
         <h1>Consulta de Torque</h1>
 
         <div class="filter-container">
-            <!-- 1. Montadora -->
             <div class="filter-group">
                 <label for="brandSelect">1. Selecione a Montadora:</label>
                 <select id="brandSelect" onchange="updateVehicles()">
@@ -35,7 +34,6 @@
                 </select>
             </div>
 
-            <!-- 2. Veículo / Modelo -->
             <div class="filter-group">
                 <label for="vehicleSelect">2. Selecione o Veículo:</label>
                 <select id="vehicleSelect" onchange="updateSystems()" disabled>
@@ -43,7 +41,6 @@
                 </select>
             </div>
 
-            <!-- 3. Conjunto / Sistema -->
             <div class="filter-group">
                 <label for="systemSelect">3. Selecione o Conjunto/Sistema:</label>
                 <select id="systemSelect" onchange="updateComponents()" disabled>
@@ -51,7 +48,6 @@
                 </select>
             </div>
 
-            <!-- 4. Componente / Parafuso -->
             <div class="filter-group">
                 <label for="componentSelect">4. Selecione o Componente / Parafuso:</label>
                 <select id="componentSelect" onchange="showTorqueDetails()" disabled>
@@ -60,7 +56,6 @@
             </div>
         </div>
 
-        <!-- Card de Resultados -->
         <div id="resultCard" class="result-card" style="display: none;">
             <h2 id="resTitle" style="margin-top:0; color:#2c5282;">-</h2>
             <div class="result-item">
