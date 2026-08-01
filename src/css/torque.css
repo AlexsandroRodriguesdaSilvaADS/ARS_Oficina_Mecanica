@@ -54,6 +54,7 @@ h1 {
     background-color: #f8fafc;
     cursor: pointer;
     width: 100%;
+    text-transform: uppercase;
 }
 
 .result-card {
