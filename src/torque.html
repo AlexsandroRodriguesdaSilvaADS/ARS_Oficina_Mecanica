@@ -256,6 +256,18 @@
                     amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "60 Nm", kgfm: "6.1 Kgfm", obs: "Haste superior." }
                 }
             },
+            susp_tras_multilink: {
+                label: "Suspensão Traseira Multi-link",
+                components: {
+                    braco_transversal_sup: { name: "Braço Transversal Superior", nm: "90 Nm + 90°", kgfm: "9.2 Kgfm + 90°", obs: "Parafuso elástico. Apertar na altura da marcha." },
+                    braco_transversal_inf: { name: "Braço Transversal Inferior (Mola)", nm: "90 Nm + 90°", kgfm: "9.2 Kgfm + 90°", obs: "Contém o parafuso excêntrico de Caster/Camber." },
+                    tirante_convergencia: { name: "Tirante de Convergência Traseiro", nm: "90 Nm + 90°", kgfm: "9.2 Kgfm + 90°", obs: "Ajuste de convergência traseira." },
+                    pivo_manga_tras: { name: "Pivô/Manga Traseira", nm: "130 Nm + 90°", kgfm: "13.2 Kgfm + 90°", obs: "Fixação do cubo/manga traseira." },
+                    bieleta_tras: { name: "Bieleta Traseira", nm: "45 Nm", kgfm: "4.6 Kgfm", obs: "Barra estabilizadora traseira." },
+                    amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "180 Nm", kgfm: "18.3 Kgfm", obs: "Fixação no braço transversal." },
+                    amort_tras_sup: { name: "Amortecedor Traseiro Superior (Coxim)", nm: "50 Nm + 45°", kgfm: "5.1 Kgfm + 45°", obs: "Suporte do coxim na caixa de roda." }
+                }
+            },
             susp_tras: {
                 label: "Suspensão Traseira",
                 components: {
@@ -305,6 +317,18 @@
                     bieleta: { name: "Bieleta da Barra Estabilizadora", nm: "74 Nm", kgfm: "7.5 Kgfm", obs: "Travar o pino sextavado." },
                     amortecedor_inf: { name: "Amortecedor Inferior (Manga)", nm: "153 Nm", kgfm: "15.6 Kgfm", obs: "Aperto firme nos parafusos duplos." },
                     amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "50 Nm", kgfm: "5.1 Kgfm", obs: "3 porcas da torre." }
+                }
+            },
+            susp_tras_multilink: {
+                label: "Suspensão Traseira Multi-link / Double Wishbone (Corolla 2020+, Rav4)",
+                components: {
+                    braco_superior: { name: "Braço Superior Traseiro", nm: "100 Nm", kgfm: "10.2 Kgfm", obs: "Fixação no subchassi traseiro." },
+                    braco_inferior_no1: { name: "Braço Inferior Nº 1 (Ajuste Camber)", nm: "100 Nm", kgfm: "10.2 Kgfm", obs: "Parafuso excêntrico de regulagem." },
+                    braco_inferior_no2: { name: "Braço Inferior Nº 2 (Convergência)", nm: "100 Nm", kgfm: "10.2 Kgfm", obs: "Parafuso de convergência traseira." },
+                    manga_tras: { name: "Manga de Eixo Traseira", nm: "115 Nm", kgfm: "11.7 Kgfm", obs: "Fixação nos braços independentes." },
+                    bieleta_tras: { name: "Bieleta Traseira", nm: "70 Nm", kgfm: "7.1 Kgfm", obs: "Fixação na barra estabilizadora." },
+                    amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "100 Nm", kgfm: "10.2 Kgfm", obs: "Fixação na manga/braço." },
+                    amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "80 Nm", kgfm: "8.2 Kgfm", obs: "Porcas superiores do coxim." }
                 }
             },
             susp_tras: {
@@ -409,11 +433,16 @@
                     amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "59 Nm", kgfm: "6.0 Kgfm", obs: "3 porcas da torre." }
                 }
             },
-            susp_tras: {
-                label: "Suspensão Traseira",
+            susp_tras_multilink: {
+                label: "Suspensão Traseira Multi-link",
                 components: {
-                    amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "69 Nm", kgfm: "7.0 Kgfm", obs: "Braço inferior da suspensão." },
-                    amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "59 Nm", kgfm: "6.0 Kgfm", obs: "Suporte da carroceria." }
+                    braco_superior: { name: "Braço Superior no Subchassi/Manga", nm: "108 Nm", kgfm: "11.0 Kgfm", obs: "Apertar em posição de trabalho (no chão)." },
+                    braco_inferior: { name: "Braço Inferior da Mola no Subchassi", nm: "78 Nm", kgfm: "8.0 Kgfm", obs: "Suporte da mola helicoidal traseira." },
+                    braco_convergencia: { name: "Braço de Control Arm / Convergência", nm: "59 Nm", kgfm: "6.0 Kgfm", obs: "Parafuso excêntrico de alinhamento." },
+                    manga_eixo_tras: { name: "Manga de Eixo Traseira (Chassí/Braços)", nm: "108 Nm", kgfm: "11.0 Kgfm", obs: "Fixação dos braços articulados." },
+                    bieleta_tras: { name: "Bieleta Traseira", nm: "39 Nm", kgfm: "4.0 Kgfm", obs: "Fixação na barra estabilizadora traseira." },
+                    amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "69 Nm", kgfm: "7.0 Kgfm", obs: "Fixação na manga/braço inferior." },
+                    amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "67 Nm", kgfm: "6.8 Kgfm", obs: "Fixação da torre/coxim na caixa de roda." }
                 }
             },
             direcao: {
@@ -764,6 +793,18 @@
                     amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "25 Nm", kgfm: "2.5 Kgfm", obs: "3 parafusos da torre." }
                 }
             },
+            susp_tras_multilink: {
+                label: "Suspensão Traseira Multi-link (Control Blade = Focus)",
+                components: {
+                    braco_superior_cambragem: { name: "Braço Superior (Gravata/Cambragem)", nm: "85 Nm", kgfm: "8.7 Kgfm", obs: "Braço superior em formato de osso/gravata." },
+                    braco_inferior_mola: { name: "Braço Inferior da Mola", nm: "115 Nm", kgfm: "11.7 Kgfm", obs: "Braço inferior principal do conjunto." },
+                    braco_convergencia: { name: "Braço de Regulagem (Convergência)", nm: "85 Nm", kgfm: "8.7 Kgfm", obs: "Parafuso excêntrico de convergência." },
+                    faquinha_facao_tras: { name: "Facão Traseiro (Buchas no Chassi)", nm: "110 Nm", kgfm: "11.2 Kgfm", obs: "Bucha grande do braço longitudinal (facão)." },
+                    bieleta_tras: { name: "Bieleta Traseira", nm: "48 Nm", kgfm: "4.9 Kgfm", obs: "Barra estabilizadora." },
+                    amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "115 Nm", kgfm: "11.7 Kgfm", obs: "Fixação no braço inferior." },
+                    amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "25 Nm", kgfm: "2.5 Kgfm", obs: "Parafusos do coxim na carroceria." }
+                }
+            },
             susp_tras: {
                 label: "Suspensão Traseira",
                 components: {
@@ -864,6 +905,18 @@
                     bieleta: { name: "Bieleta da Barra Estabilizadora", nm: "45 Nm", kgfm: "4.6 Kgfm", obs: "Travar o pino sextavado." },
                     amortecedor_inf: { name: "Amortecedor Inferior (Manga)", nm: "140 Nm", kgfm: "14.3 Kgfm", obs: "Parafusos duplos passantes." },
                     amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "45 Nm", kgfm: "4.6 Kgfm", obs: "Porca superior da torre." }
+                }
+            },
+            susp_tras_multilink: {
+                label: "Suspensão Traseira Multi-link",
+                components: {
+                    braco_superior: { name: "Braço Superior Traseiro", nm: "110 Nm", kgfm: "11.2 Kgfm", obs: "Fixação superior do conjunto." },
+                    braco_inferior: { name: "Braço Inferior da Mola", nm: "120 Nm", kgfm: "12.2 Kgfm", obs: "Braço de sustentação da mola." },
+                    braco_convergencia: { name: "Haste de Regulagem de Convergência", nm: "110 Nm", kgfm: "11.2 Kgfm", obs: "Ajuste de alinhamento traseiro." },
+                    bucha_facao_tras: { name: "Bucha do Braço Longitudinal (Facão)", nm: "130 Nm", kgfm: "13.2 Kgfm", obs: "Fixação no chassi." },
+                    bieleta_tras: { name: "Bieleta Traseira", nm: "50 Nm", kgfm: "5.1 Kgfm", obs: "Barra estabilizadora traseira." },
+                    amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "110 Nm", kgfm: "11.2 Kgfm", obs: "Fixação na manga/manga de eixo." },
+                    amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "65 Nm", kgfm: "6.6 Kgfm", obs: "Porcas superiores da torre." }
                 }
             },
             susp_tras: {
