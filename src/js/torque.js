@@ -100,7 +100,7 @@ const gm_gsv = {
     }
 };
 
-// FIAT - Plataforma Compacta (Palio, Siena, Uno, Strada, Argo, Cronos, Mobi)
+// FIAT - Plataforma Compacta (Palio, Siena, Uno, Strada, Argo, Cronos, Mobi, Pulse, Fastback)
 const fiat_compacts = {
     embreagem: {
         label: "Embreagem e Acoplamento",
@@ -147,7 +147,60 @@ const fiat_compacts = {
     transmissao: {
         label: "Transmissão e Rodas",
         components: {
-            porca_homocinetica: { name: "Porca do Semieixo", nm: "240 Nm", kgfm: "24.5 Kgfm", obs: "Puncionar aba de trava." },
+            porca_homocinetica: { name: "Porca do Semieixo", nm: "230 Nm", kgfm: "24.5 Kgfm", obs: "Puncionar aba de trava." },
+            parafuso_roda: { name: "Parafusos de Roda", nm: "98 Nm", kgfm: "10.0 Kgfm", obs: "Rosca M12x1.25. Não lubrificar." }
+        }
+    }
+};
+
+// JEEP / STELLANTIS - Plataforma Small Wide (Renegade, Compass, Toro)
+const jeep_small_wide = {
+    embreagem: {
+        label: "Embreagem e Acoplamento",
+        components: {
+            plato: { name: "Platô no Volante", nm: "28 Nm", kgfm: "2.9 Kgfm", obs: "Aperto cruzado gradativo." },
+            volante_motor: { name: "Volante no Virabrequim", nm: "160 Nm", kgfm: "16.3 Kgfm", obs: "Aperto em estrela. Parafusos estruturais de alta resistência." },
+            atuador_hidraulico: { name: "Atuador/Cilindro Auxiliar", nm: "10 Nm", kgfm: "1.0 Kgfm", obs: "Fixação na caixa de câmbio." },
+            cambio_motor: { name: "Caixa de Câmbio no Bloco", nm: "80 Nm", kgfm: "8.2 Kgfm", obs: "Parafusos perimetrais M12 estruturais." }
+        }
+    },
+    susp_diant: {
+        label: "Suspensão Dianteira",
+        components: {
+            pivo: { name: "Pivô na Manga de Eixo", nm: "60 Nm", kgfm: "6.1 Kgfm", obs: "Porca autotravante M12." },
+            pivo_base: { name: "Fixação do Pivô na Bandeja", nm: "65 Nm", kgfm: "6.6 Kgfm", obs: "Parafusos M10 reforçados." },
+            bandeja_bucha: { name: "Buchas da Bandeja no Subchassi", nm: "120 Nm", kgfm: "12.2 Kgfm", obs: "Aperto final com o veículo no chão." },
+            bieleta: { name: "Bieleta da Barra Estabilizadora", nm: "45 Nm", kgfm: "4.6 Kgfm", obs: "Travar encaixe sextavado/torx." },
+            amortecedor_inf: { name: "Amortecedor Inferior (Manga)", nm: "90 Nm + 60°", kgfm: "9.2 Kgfm + ang.", obs: "Parafusos passantes M14 de alta carga." },
+            amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "45 Nm", kgfm: "4.6 Kgfm", obs: "Porcas no cofre." }
+        }
+    },
+    susp_tras: {
+        label: "Suspensão Traseira (Independente Multilink)",
+        components: {
+            amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "90 Nm", kgfm: "9.2 Kgfm", obs: "Fixação na manga de eixo traseira." },
+            amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "45 Nm", kgfm: "4.6 Kgfm", obs: "Coxim superior na carroceria." },
+            bracos_multilink: { name: "Tirantes / Braços Transversais", nm: "110 Nm", kgfm: "11.2 Kgfm", obs: "Apertar na altura de trabalho (veículo no chão)." }
+        }
+    },
+    direcao: {
+        label: "Direção e Articulações",
+        components: {
+            terminal_direcao: { name: "Terminal de Direção", nm: "40 Nm", kgfm: "4.1 Kgfm", obs: "Porca M12 autotravante." },
+            axial_direcao: { name: "Articulação Axial", nm: "80 Nm", kgfm: "8.2 Kgfm", obs: "Rosca na caixa de direção reforçada." }
+        }
+    },
+    freios: {
+        label: "Sistema de Freios",
+        components: {
+            pinca_suporte: { name: "Suporte da Pinça (Cavalete)", nm: "110 Nm", kgfm: "11.2 Kgfm", obs: "Trava química de médio torque nas roscas." },
+            pinca_deslizante: { name: "Pinos Deslizantes da Pinça", nm: "30 Nm", kgfm: "3.1 Kgfm", obs: "Chave fina de apoio." }
+        }
+    },
+    transmissao: {
+        label: "Transmissão e Rodas",
+        components: {
+            porca_homocinetica: { name: "Porca do Semieixo", nm: "280 Nm", kgfm: "28.5 Kgfm", obs: "Exige torquímetro de alta capacidade ou multiplicador de torque." },
             parafuso_roda: { name: "Parafusos de Roda", nm: "98 Nm", kgfm: "10.0 Kgfm", obs: "Rosca M12x1.25. Não lubrificar." }
         }
     }
@@ -938,7 +991,14 @@ const vehiclesDatabase = {
         "Palio / Siena / Grand Siena": fiat_compacts,
         "Punto": fiat_compacts,
         "Strada": fiat_compacts,
-        "Uno Fire / Evo": fiat_compacts
+        "Uno Fire / Evo": fiat_compacts,
+        "Pulse": fiat_compacts,
+        "Fastback": fiat_compacts,
+        "Toro": jeep_small_wide
+    },
+    jeep: {
+        "Renegade": jeep_small_wide,
+        "Compass": jeep_small_wide
     },
     volkswagen: {
         "Fox / CrossFox": vw_pq_mqb,
