@@ -11,15 +11,22 @@ body {
     height: 90vh;
 }
 
+.header {
+    display: flex;
+}
+
+.logo {
+    position: relative;
+    width: 135px;
+}
+
 h1 {
-    max-width: 1300px;
+    width: 100%;
     color: #1a365d;
-    background-color: #e2e8f0;
     text-align: center;
     text-transform: uppercase;
-    padding: 20px;
     border-radius: 6px;
-    margin: 25px auto;
+    margin: 30px auto;
 }
 
 .filter-container {
@@ -43,14 +50,14 @@ h1 {
 
 .filter-group label {
     font-weight: 600;
-    color: #2c5282;
+    color: #1a365d;
 }
 
 .filter-group select {
     padding: 12px;
     font-size: 15px;
     border-radius: 5px;
-    border: 1px solid #cbd5e0;
+    border: 1px solid #1a365d;
     background-color: #f8fafc;
     cursor: pointer;
     width: 100%;

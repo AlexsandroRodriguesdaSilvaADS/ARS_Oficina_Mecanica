@@ -42,7 +42,7 @@ const gm_fam1 = {
     transmissao: {
         label: "Transmissão e Rodas",
         components: {
-            porca_homocinetica: { name: "Porca do Semieixo", nm: "100 Nm + Amassar aba", kgfm: "10.2 Kgfm", obs: "Puncionar a aba de travamento." },
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "100 Nm + Amassar aba", kgfm: "10.2 Kgfm", obs: "Puncionar a aba de travamento." },
             parafuso_roda: { name: "Parafusos de Roda", nm: "110 Nm", kgfm: "11.2 Kgfm", obs: "Rosca M12x1.5. Aperto cruzado." }
         }
     }
@@ -94,7 +94,7 @@ const gm_gsv = {
     transmissao: {
         label: "Transmissão e Rodas",
         components: {
-            porca_homocinetica: { name: "Porca do Semieixo", nm: "230 Nm", kgfm: "23.5 Kgfm", obs: "Substituir a porca travante." },
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "230 Nm", kgfm: "23.5 Kgfm", obs: "Substituir a porca travante." },
             parafuso_roda: { name: "Porcas de Roda", nm: "140 Nm", kgfm: "14.3 Kgfm", obs: "Torque elevado especificado pela GM." }
         }
     }
@@ -147,7 +147,7 @@ const fiat_compacts = {
     transmissao: {
         label: "Transmissão e Rodas",
         components: {
-            porca_homocinetica: { name: "Porca do Semieixo", nm: "230 Nm", kgfm: "24.5 Kgfm", obs: "Puncionar aba de trava." },
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "230 Nm", kgfm: "24.5 Kgfm", obs: "Puncionar aba de trava." },
             parafuso_roda: { name: "Parafusos de Roda", nm: "98 Nm", kgfm: "10.0 Kgfm", obs: "Rosca M12x1.25. Não lubrificar." }
         }
     }
@@ -200,7 +200,7 @@ const jeep_small_wide = {
     transmissao: {
         label: "Transmissão e Rodas",
         components: {
-            porca_homocinetica: { name: "Porca do Semieixo", nm: "280 Nm", kgfm: "28.5 Kgfm", obs: "Exige torquímetro de alta capacidade ou multiplicador de torque." },
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "280 Nm", kgfm: "28.5 Kgfm", obs: "Exige torquímetro de alta capacidade ou multiplicador de torque." },
             parafuso_roda: { name: "Parafusos de Roda", nm: "98 Nm", kgfm: "10.0 Kgfm", obs: "Rosca M12x1.25. Não lubrificar." }
         }
     }
@@ -264,7 +264,7 @@ const vw_pq_mqb = {
     transmissao: {
         label: "Transmissão e Rodas",
         components: {
-            porca_homocinetica: { name: "Parafuso Central do Semieixo", nm: "200 Nm + 180°", kgfm: "20.4 Kgfm + ang.", obs: "Parafuso estriado de uso único." },
+            porca_homocinetica: { name: "Parafuso Central da junta homocinética", nm: "200 Nm + 180°", kgfm: "20.4 Kgfm + ang.", obs: "Parafuso estriado de uso único." },
             parafuso_roda: { name: "Parafusos de Roda", nm: "120 Nm", kgfm: "12.2 Kgfm", obs: "Rosca M12x1.5 / M14x1.5." }
         }
     }
@@ -327,7 +327,7 @@ const toyota_platform = {
     transmissao: {
         label: "Transmissão e Rodas",
         components: {
-            porca_homocinetica: { name: "Porca do Semieixo", nm: "216 Nm", kgfm: "22.0 Kgfm", obs: "Puncionar a aba de travamento." },
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "216 Nm", kgfm: "22.0 Kgfm", obs: "Puncionar a aba de travamento." },
             parafuso_roda: { name: "Porcas de Roda", nm: "103 Nm", kgfm: "10.5 Kgfm", obs: "Rosca M12x1.5." }
         }
     }
@@ -378,7 +378,7 @@ const honda_compact_platform = {
     transmissao: {
         label: "Transmissão e Rodas",
         components: {
-            porca_homocinetica: { name: "Porca do Semieixo", nm: "181 Nm", kgfm: "18.5 Kgfm", obs: "Puncionar a aba de travamento." },
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "181 Nm", kgfm: "18.5 Kgfm", obs: "Puncionar a aba de travamento." },
             parafuso_roda: { name: "Porcas de Roda", nm: "108 Nm", kgfm: "11.0 Kgfm", obs: "Rosca M12x1.5 (Aperto cruzado)." }
         }
     }
@@ -434,7 +434,7 @@ const honda_civic_platform = {
     transmissao: {
         label: "Transmissão e Rodas",
         components: {
-            porca_homocinetica: { name: "Porca do Semieixo", nm: "245 Nm", kgfm: "25.0 Kgfm", obs: "Aperto pesado + puncionar trava." },
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "245 Nm", kgfm: "25.0 Kgfm", obs: "Aperto pesado + puncionar trava." },
             parafuso_roda: { name: "Porcas de Roda", nm: "108 Nm", kgfm: "11.0 Kgfm", obs: "Rosca M12x1.5." }
         }
     }
@@ -484,7 +484,7 @@ const nissan_compact_platform = {
     transmissao: {
         label: "Transmissão e Rodas",
         components: {
-            porca_homocinetica: { name: "Porca do Semieixo", nm: "215 Nm", kgfm: "21.9 Kgfm", obs: "Porca de alto torque / travamento." },
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "215 Nm", kgfm: "21.9 Kgfm", obs: "Porca de alto torque / travamento." },
             parafuso_roda: { name: "Porcas de Roda", nm: "108 Nm", kgfm: "11.0 Kgfm", obs: "Rosca M12x1.25." }
         }
     }
@@ -534,7 +534,7 @@ const nissan_sentra_platform = {
     transmissao: {
         label: "Transmissão e Rodas",
         components: {
-            porca_homocinetica: { name: "Porca do Semieixo", nm: "240 Nm", kgfm: "24.5 Kgfm", obs: "Porca de alto torque com cupilha." },
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "240 Nm", kgfm: "24.5 Kgfm", obs: "Porca de alto torque com cupilha." },
             parafuso_roda: { name: "Porcas de Roda", nm: "108 Nm", kgfm: "11.0 Kgfm", obs: "Rosca M12x1.25." }
         }
     }
@@ -585,7 +585,7 @@ const renault_compact_platform = {
     transmissao: {
         label: "Transmissão e Rodas",
         components: {
-            porca_homocinetica: { name: "Porca do Semieixo", nm: "280 Nm", kgfm: "28.5 Kgfm", obs: "Alto torque / Porca encravável." },
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "280 Nm", kgfm: "28.5 Kgfm", obs: "Alto torque / Porca encravável." },
             parafuso_roda: { name: "Parafusos de Roda", nm: "105 Nm", kgfm: "10.7 Kgfm", obs: "Rosca M12x1.5." }
         }
     }
@@ -636,7 +636,7 @@ const renault_kwid_platform = {
     transmissao: {
         label: "Transmissão e Rodas",
         components: {
-            porca_homocinetica: { name: "Porca do Semieixo", nm: "210 Nm", kgfm: "21.4 Kgfm", obs: "Porca de travamento." },
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "210 Nm", kgfm: "21.4 Kgfm", obs: "Porca de travamento." },
             parafuso_roda: { name: "Parafusos de Roda", nm: "90 Nm", kgfm: "9.2 Kgfm", obs: "Rodas de 3 furos (Kwid)." }
         }
     }
@@ -687,7 +687,7 @@ const renault_duster_kardian_platform = {
     transmissao: {
         label: "Transmissão e Rodas",
         components: {
-            porca_homocinetica: { name: "Porca do Semieixo", nm: "280 Nm", kgfm: "28.5 Kgfm", obs: "Alto torque central." },
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "280 Nm", kgfm: "28.5 Kgfm", obs: "Alto torque central." },
             parafuso_roda: { name: "Parafusos de Roda", nm: "110 Nm", kgfm: "11.2 Kgfm", obs: "Rosca M12x1.5." }
         }
     }
@@ -738,7 +738,7 @@ const peugeot_platform = {
     transmissao: {
         label: "Transmissão e Rodas",
         components: {
-            porca_homocinetica: { name: "Porca do Semieixo", nm: "245 Nm", kgfm: "25.0 Kgfm", obs: "Porca castelo ou travável." },
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "245 Nm", kgfm: "25.0 Kgfm", obs: "Porca castelo ou travável." },
             parafuso_roda: { name: "Parafusos de Roda", nm: "100 Nm", kgfm: "10.2 Kgfm", obs: "Rosca M12x1.25." }
         }
     }
@@ -801,7 +801,7 @@ const ford_zetec_sigma_platform = {
     transmissao: {
         label: "Transmissão e Rodas",
         components: {
-            porca_homocinetica: { name: "Porca do Semieixo", nm: "235 Nm", kgfm: "24.0 Kgfm", obs: "Porca cônica do manguito." },
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "235 Nm", kgfm: "24.0 Kgfm", obs: "Porca cônica do manguito." },
             parafuso_roda: { name: "Porcas de Roda", nm: "103 Nm", kgfm: "10.5 Kgfm", obs: "Rosca M12x1.5." }
         }
     }
@@ -852,7 +852,7 @@ const ford_dragon_tivct_platform = {
     transmissao: {
         label: "Transmissão e Rodas",
         components: {
-            porca_homocinetica: { name: "Porca do Semieixo", nm: "255 Nm", kgfm: "26.0 Kgfm", obs: "Alto torque central." },
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "255 Nm", kgfm: "26.0 Kgfm", obs: "Alto torque central." },
             parafuso_roda: { name: "Porcas de Roda", nm: "135 Nm", kgfm: "13.8 Kgfm", obs: "Rosca M12x1.5 (Porcas de liga/aço)." }
         }
     }
@@ -915,7 +915,7 @@ const hyundai_kappa_platform = {
     transmissao: {
         label: "Transmissão e Rodas",
         components: {
-            porca_homocinetica: { name: "Porca do Semieixo", nm: "235 Nm", kgfm: "24.0 Kgfm", obs: "Porca de alto torque com cupilha/trava." },
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "235 Nm", kgfm: "24.0 Kgfm", obs: "Porca de alto torque com cupilha/trava." },
             parafuso_roda: { name: "Porcas de Roda", nm: "108 Nm", kgfm: "11.0 Kgfm", obs: "Rosca M12x1.5." }
         }
     }
@@ -966,7 +966,7 @@ const hyundai_gamma_nu_platform = {
     transmissao: {
         label: "Transmissão e Rodas",
         components: {
-            porca_homocinetica: { name: "Porca do Semieixo", nm: "250 Nm", kgfm: "25.5 Kgfm", obs: "Aperto pesado + trava/cupilha." },
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "250 Nm", kgfm: "25.5 Kgfm", obs: "Aperto pesado + trava/cupilha." },
             parafuso_roda: { name: "Porcas de Roda", nm: "110 Nm", kgfm: "11.2 Kgfm", obs: "Rosca M12x1.5." }
         }
     }
