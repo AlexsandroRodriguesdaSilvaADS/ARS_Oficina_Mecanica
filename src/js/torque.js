@@ -153,6 +153,114 @@ const fiat_compacts = {
     }
 };
 
+// FIAT - Plataforma Scudo
+const fiat_scudo_platform = {
+    embreagem: {
+        label: "Embreagem e Acoplamento",
+        components: {
+            plato: { name: "Platô no Volante", nm: "20 Nm", kgfm: "2.0 Kgfm", obs: "Aperto cruzado em etapas." },
+            volante_motor: { name: "Volante Bi-massa / Rígido", nm: "30 Nm + 90°", kgfm: "3.0 Kgfm + 90°", obs: "Substituir parafusos e aplicar trava química." },
+            cambio_motor: { name: "Caixa de Câmbio no Bloco", nm: "60 Nm", kgfm: "6.1 Kgfm", obs: "Parafusos M10 de fixação da caixa." }
+        }
+    },
+    susp_diant: {
+        label: "Suspensão Dianteira (Pseudo McPherson / EMP2)",
+        components: {
+            pivo: { name: "Pivô na Manga de Eixo", nm: "75 Nm", kgfm: "7.6 Kgfm", obs: "Pino cônico na manga de eixo." },
+            pivo_base: { name: "Fixação do Pivô na Bandeja", nm: "90 Nm", kgfm: "9.2 Kgfm", obs: "Parafusos inferiores de fixação na base." },
+            bandeja_bucha: { name: "Buchas da Bandeja no Subchassi", nm: "120 Nm", kgfm: "12.2 Kgfm", obs: "Apertar na posição de altura de rodagem." },
+            bieleta: { name: "Bieleta da Barra Estabilizadora", nm: "60 Nm", kgfm: "6.1 Kgfm", obs: "Travar o pino sextavado interno." },
+            amortecedor_inf: { name: "Amortecedor Inferior (Manga)", nm: "110 Nm + 45°", kgfm: "11.2 Kgfm + 45°", obs: "Parafusos passantes na manga de eixo." },
+            amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "65 Nm", kgfm: "6.6 Kgfm", obs: "Porcas de fixação no copo da carroceria." }
+        }
+    },
+    susp_tras: {
+        label: "Suspensão Traseira (Braços Triangulares / Torção)",
+        components: {
+            eixo_tras_bucha: { name: "Buchas do Braço/Eixo Traseiro", nm: "130 Nm", kgfm: "13.3 Kgfm", obs: "Apertar com o veículo apoiado no chão." },
+            amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "110 Nm", kgfm: "11.2 Kgfm", obs: "Fixação no suporte do eixo." },
+            amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "90 Nm", kgfm: "9.2 Kgfm", obs: "Fixação superior na estrutura." },
+            bieleta_tras: { name: "Estabilizador Traseiro", nm: "55 Nm", kgfm: "5.6 Kgfm", obs: "Parafusos de fixação da barra." }
+        }
+    },
+    direcao: {
+        label: "Direção e Articulações",
+        components: {
+            terminal_direcao: { name: "Terminal de Direção", nm: "55 Nm", kgfm: "5.6 Kgfm", obs: "Porca com travamento automático." },
+            axial_direcao: { name: "Articulação Axial", nm: "85 Nm", kgfm: "8.7 Kgfm", obs: "Rosca na caixa de direção eletro-hidráulica." }
+        }
+    },
+    freios: {
+        label: "Sistema de Freios",
+        components: {
+            pinca_suporte: { name: "Suporte da Pinça Dianteira", nm: "150 Nm", kgfm: "15.3 Kgfm", obs: "Parafusos reforçados do cavalete." },
+            pinca_suporte_tras: { name: "Suporte da Pinça Traseira", nm: "105 Nm", kgfm: "10.7 Kgfm", obs: "Cavalete do freio a disco traseiro." },
+            pinca_deslizante: { name: "Pinos Deslizantes (Guia)", nm: "35 Nm", kgfm: "3.6 Kgfm", obs: "Pinos guia flutuantes." }
+        }
+    },
+    transmissao: {
+        label: "Transmissão e Rodas",
+        components: {
+            porca_homocinetica: { name: "Porca do Semieixo / Homocinética", nm: "320 Nm", kgfm: "32.6 Kgfm", obs: "Porca sextavada alta de alto torque (travar aba)." },
+            parafuso_roda: { name: "Parafusos de Roda", nm: "160 Nm", kgfm: "16.3 Kgfm", obs: "Rosca M14x1.5 (Aperto elevado por ser veículo comercial)." }
+        }
+    }
+};
+
+ // FIAT - Plataforma Ducato
+const fiat_ducato_platform = {
+    embreagem: {
+        label: "Embreagem e Acoplamento",
+        components: {
+            plato: { name: "Platô no Volante", nm: "28 Nm", kgfm: "2.9 Kgfm", obs: "Aperto cruzado em etapas." },
+            volante_motor: { name: "Volante no Virabrequim", nm: "160 Nm", kgfm: "16.3 Kgfm", obs: "Substituir parafusos M12 e aplicar trava química." },
+            cambio_motor: { name: "Caixa de Câmbio no Bloco", nm: "75 Nm", kgfm: "7.6 Kgfm", obs: "Parafusos reforçados da carcaça do câmbio." }
+        }
+    },
+    susp_diant: {
+        label: "Suspensão Dianteira (McPherson Heavy Duty)",
+        components: {
+            pivo: { name: "Pivô na Manga de Eixo", nm: "105 Nm", kgfm: "10.7 Kgfm", obs: "Pino cônico reforçado." },
+            pivo_base: { name: "Fixação do Pivô na Bandeja", nm: "110 Nm", kgfm: "11.2 Kgfm", obs: "Parafusos de fixação da base do pivô." },
+            bandeja_bucha: { name: "Buchas da Bandeja no Subchassi", nm: "180 Nm", kgfm: "18.3 Kgfm", obs: "Apertar na posição de altura de rodagem (chão)." },
+            bieleta: { name: "Bieleta da Barra Estabilizadora", nm: "68 Nm", kgfm: "6.9 Kgfm", obs: "Fixação na haste da barra/amortecedor." },
+            amortecedor_inf: { name: "Amortecedor Inferior (Manga)", nm: "175 Nm", kgfm: "17.8 Kgfm", obs: "Parafusos passantes M16 da manga de eixo." },
+            amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "80 Nm", kgfm: "8.2 Kgfm", obs: "Porcas de fixação no copo da carroceria." }
+        }
+    },
+    susp_tras: {
+        label: "Suspensão Traseira (Eixo Rígido Tubular / Feixe de Molas)",
+        components: {
+            grampo_feixe: { name: "Grampos em U do Feixe de Molas", nm: "160 Nm", kgfm: "16.3 Kgfm", obs: "Reapertar em cruz de forma progressiva e uniforme." },
+            jumelo: { name: "Porcas do Jumelo / Algema", nm: "140 Nm", kgfm: "14.3 Kgfm", obs: "Apertar obrigatoriamente com o veículo apoiado no chão." },
+            amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "145 Nm", kgfm: "14.8 Kgfm", obs: "Fixação inferior no suporte do eixo." },
+            amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "145 Nm", kgfm: "14.8 Kgfm", obs: "Fixação no chassi/suporte superior." }
+        }
+    },
+    direcao: {
+        label: "Direção e Articulações",
+        components: {
+            terminal_direcao: { name: "Terminal de Direção", nm: "70 Nm", kgfm: "7.1 Kgfm", obs: "Porca cônica auto-frenante." },
+            axial_direcao: { name: "Articulação Axial", nm: "95 Nm", kgfm: "9.7 Kgfm", obs: "Rosca na caixa de direção hidráulica." }
+        }
+    },
+    freios: {
+        label: "Sistema de Freios",
+        components: {
+            pinca_suporte: { name: "Suporte da Pinça Dianteira", nm: "210 Nm", kgfm: "21.4 Kgfm", obs: "Parafusos pesados M16 do cavalete." },
+            pinca_suporte_tras: { name: "Suporte da Pinça Traseira", nm: "160 Nm", kgfm: "16.3 Kgfm", obs: "Cavalete do freio a disco traseiro." },
+            pinca_deslizante: { name: "Pinos Deslizantes (Guia)", nm: "35 Nm", kgfm: "3.6 Kgfm", obs: "Pinos flutuantes da pinça." }
+        }
+    },
+    transmissao: {
+        label: "Transmissão e Rodas",
+        components: {
+            porca_homocinetica: { name: "Porca do Semieixo / Homocinética", nm: "450 Nm", kgfm: "45.9 Kgfm", obs: "Aperto pesado M33 (puncionar a aba de travamento)." },
+            parafuso_roda: { name: "Parafusos de Roda", nm: "180 Nm", kgfm: "18.3 Kgfm", obs: "Rosca M16x1.5 (Aperto de alta carga por eixos heavy duty)." }
+        }
+    }
+};
+
 // JEEP / STELLANTIS - Plataforma Small Wide (Renegade, Compass, Toro)
 const jeep_small_wide = {
     embreagem: {
@@ -802,7 +910,7 @@ const renault_duster_kardian_platform = {
     }
 };
 
-// PEUGEOT (208, 2008, Partner) Motores EC5 1.6 16v / TU5JP4 / EB2 1.2 / T200 1.0 Turbo Stellantis (Peugeot 208, 2008, Partner)
+// PEUGEOT (208, 2008, Partner) Motores EC5 1.6 16v / TU5JP4 / EB2 1.2 / T200 1.0 Turbo Stellantis
 const peugeot_platform = {
     embreagem: {
         label: "Embreagem e Acoplamento",
@@ -849,6 +957,60 @@ const peugeot_platform = {
         components: {
             porca_homocinetica: { name: "Porca da junta homocinética", nm: "245 Nm", kgfm: "25.0 Kgfm", obs: "Porca castelo ou travável." },
             parafuso_roda: { name: "Parafusos de Roda", nm: "100 Nm", kgfm: "10.2 Kgfm", obs: "Rosca M12x1.25." }
+        }
+    }
+};
+
+// PEUGEOT - Plataforma Expert
+const peugeot_expert_platform = {
+    embreagem: {
+        label: "Embreagem e Acoplamento",
+        components: {
+            plato: { name: "Platô no Volante", nm: "20 Nm", kgfm: "2.0 Kgfm", obs: "Aperto cruzado em etapas." },
+            volante_motor: { name: "Volante Bi-massa / Rígido", nm: "30 Nm + 90°", kgfm: "3.0 Kgfm + 90°", obs: "Substituir parafusos e aplicar trava química." },
+            cambio_motor: { name: "Caixa de Câmbio no Bloco", nm: "60 Nm", kgfm: "6.1 Kgfm", obs: "Parafusos M10 de fixação da caixa." }
+        }
+    },
+    susp_diant: {
+        label: "Suspensão Dianteira (McPherson Refr.)",
+        components: {
+            pivo: { name: "Pivô na Manga de Eixo", nm: "75 Nm", kgfm: "7.6 Kgfm", obs: "Pino cônico na manga de eixo." },
+            pivo_base: { name: "Fixação do Pivô na Bandeja", nm: "90 Nm", kgfm: "9.2 Kgfm", obs: "Parafusos inferiores de fixação na base." },
+            bandeja_bucha: { name: "Buchas da Bandeja no Subchassi", nm: "120 Nm", kgfm: "12.2 Kgfm", obs: "Apertar com o veículo apoiado no chão." },
+            bieleta: { name: "Bieleta da Barra Estabilizadora", nm: "60 Nm", kgfm: "6.1 Kgfm", obs: "Travar o pino sextavado interno." },
+            amortecedor_inf: { name: "Amortecedor Inferior (Manga)", nm: "110 Nm + 45°", kgfm: "11.2 Kgfm + 45°", obs: "Parafusos passantes na manga de eixo." },
+            amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "65 Nm", kgfm: "6.6 Kgfm", obs: "Porcas de fixação no copo da carroceria." }
+        }
+    },
+    susp_tras: {
+        label: "Suspensão Traseira (Eixo de Torção de Carga)",
+        components: {
+            eixo_tras_bucha: { name: "Buchas do Eixo Traseiro", nm: "130 Nm", kgfm: "13.3 Kgfm", obs: "Apertar na posição de altura de rodagem." },
+            amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "110 Nm", kgfm: "11.2 Kgfm", obs: "Fixação no suporte do eixo." },
+            amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "90 Nm", kgfm: "9.2 Kgfm", obs: "Fixação superior na estrutura." },
+            bieleta_tras: { name: "Estabilizador Traseiro (Se houver)", nm: "55 Nm", kgfm: "5.6 Kgfm", obs: "Parafusos do atuador de carga." }
+        }
+    },
+    direcao: {
+        label: "Direção e Articulações",
+        components: {
+            terminal_direcao: { name: "Terminal de Direção", nm: "55 Nm", kgfm: "5.6 Kgfm", obs: "Porca com travamento automático." },
+            axial_direcao: { name: "Articulação Axial", nm: "85 Nm", kgfm: "8.7 Kgfm", obs: "Rosca na caixa de direção eletro-hidráulica/elétrica." }
+        }
+    },
+    freios: {
+        label: "Sistema de Freios",
+        components: {
+            pinca_suporte: { name: "Suporte da Pinça Dianteira", nm: "150 Nm", kgfm: "15.3 Kgfm", obs: "Parafusos reforçados da ponteira." },
+            pinca_suporte_tras: { name: "Suporte da Pinça Traseira", nm: "105 Nm", kgfm: "10.7 Kgfm", obs: "Cavalete do freio a disco traseiro." },
+            pinca_deslizante: { name: "Pinos Deslizantes (Guia)", nm: "35 Nm", kgfm: "3.6 Kgfm", obs: "Pinos deslizantes com graxa sintética." }
+        }
+    },
+    transmissao: {
+        label: "Transmissão e Rodas",
+        components: {
+            porca_homocinetica: { name: "Porca do Semieixo / Homocinética", nm: "320 Nm", kgfm: "32.6 Kgfm", obs: "Porca sextavada alta de alto torque (travar aba)." },
+            parafuso_roda: { name: "Parafusos de Roda", nm: "160 Nm", kgfm: "16.3 Kgfm", obs: "Rosca M14x1.5 (Aperto elevado por ser veículo comercial)." }
         }
     }
 };
@@ -1102,7 +1264,9 @@ const vehiclesDatabase = {
         "Uno Fire / Evo": fiat_compacts,
         "Pulse": fiat_compacts,
         "Fastback": fiat_compacts,
-        "Toro": jeep_small_wide
+        "Toro": jeep_small_wide,
+        "Scudo": fiat_scudo_platform,
+        "Ducato": fiat_ducato_platform
     },
     jeep: {
         "Renegade": jeep_small_wide,
@@ -1157,7 +1321,8 @@ const vehiclesDatabase = {
     peugeot: {
         "208": peugeot_platform,
         "2008": peugeot_platform,
-        "Partner": peugeot_platform
+        "Partner": peugeot_platform,
+        "Expert": peugeot_expert_platform
     },
     ford: {
         "Ka": ford_zetec_sigma_platform,
