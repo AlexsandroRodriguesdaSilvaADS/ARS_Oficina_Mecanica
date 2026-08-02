@@ -975,8 +975,7 @@ const hyundai_gamma_nu_platform = {
 // MAPA COMPLETO DE VEÍCULOS APONTANDO PARA AS PLATAFORMAS
 const vehiclesDatabase = {
     chevrolet: {
-        "Celta": gm_fam1,
-        "Corsa / Classic": gm_fam1,
+        "Celta / Corsa / Classic": gm_fam1,
         "Prisma (Até 2012)": gm_fam1,
         "Cruze": gm_gsv,
         "Onix / Onix Plus (2020+)": gm_gsv,
