@@ -333,6 +333,115 @@ const toyota_platform = {
     }
 };
 
+// TOYOTA - Plataforma Hilux
+const hilux_platform = {
+    embreagem: {
+        label: "Embreagem e Acoplamento",
+        components: {
+            plato: { name: "Platô no Volante", nm: "19 Nm", kgfm: "1.9 Kgfm", obs: "Aperto cruzado gradativo." },
+            volante_motor: { name: "Volante no Virabrequim", nm: "88 Nm", kgfm: "9.0 Kgfm", obs: "Aperto em cruz com trava química nas roscas." },
+            cambio_motor: { name: "Caixa de Câmbio no Bloco", nm: "72 Nm", kgfm: "7.3 Kgfm", obs: "Parafusos principais da caixa." }
+        }
+    },
+    susp_diant: {
+        label: "Suspensão Dianteira (Braço Duplo / Duplo A)",
+        components: {
+            pivo: { name: "Pivô na Manga de Eixo", nm: "123 Nm", kgfm: "12.5 Kgfm", obs: "Pivô inferior na manga de eixo." },
+            pivo_base: { name: "Fixação do Pivô na Bandeja", nm: "142 Nm", kgfm: "14.5 Kgfm", obs: "Parafusos de sustentação da base." },
+            bandeja_bucha: { name: "Buchas da Bandeja Inferior", nm: "185 Nm", kgfm: "18.9 Kgfm", obs: "Torque nos parafusos excêntricos de alinhamento." },
+            bieleta: { name: "Bieleta da Barra Estabilizadora", nm: "70 Nm", kgfm: "7.1 Kgfm", obs: "Fixação no braço/barra." },
+            amortecedor_inf: { name: "Amortecedor Inferior (Olhal)", nm: "135 Nm", kgfm: "13.8 Kgfm", obs: "Parafuso passante do amortecedor." },
+            amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "50 Nm", kgfm: "5.1 Kgfm", obs: "Porcas de fixação da torre." }
+        }
+    },
+    susp_tras: {
+        label: "Suspensão Traseira (Eixo Rígido / Feixe de Molas)",
+        components: {
+            grampo_feixe: { name: "Grampos em U do Feixe de Molas", nm: "120 Nm", kgfm: "12.2 Kgfm", obs: "Reapertar em cruz de forma uniforme." },
+            jumelo: { name: "Porcas do Jumelo", nm: "90 Nm", kgfm: "9.2 Kgfm", obs: "Apertar com o veículo apoiado no chão." },
+            amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "98 Nm", kgfm: "10.0 Kgfm", obs: "Fixação inferior no suporte do eixo." },
+            amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "98 Nm", kgfm: "10.0 Kgfm", obs: "Fixação no chassi." }
+        }
+    },
+    direcao: {
+        label: "Direção e Articulações",
+        components: {
+            terminal_direcao: { name: "Terminal de Direção", nm: "88 Nm", kgfm: "9.0 Kgfm", obs: "Porca na manga com trava/cupilha." },
+            axial_direcao: { name: "Articulação Axial", nm: "93 Nm", kgfm: "9.5 Kgfm", obs: "Rosca interna na caixa de direção." }
+        }
+    },
+    freios: {
+        label: "Sistema de Freios",
+        components: {
+            pinca_suporte: { name: "Suporte da Pinça (Cavalete)", nm: "123 Nm", kgfm: "12.5 Kgfm", obs: "Fixação do cavalete na manga de eixo." },
+            pinca_deslizante: { name: "Pinos Deslizantes da Pinça", nm: "34 Nm", kgfm: "3.5 Kgfm", obs: "Pinos guia flutuantes." }
+        }
+    },
+    transmissao: {
+        label: "Transmissão e Rodas",
+        components: {
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "274 Nm", kgfm: "28.0 Kgfm", obs: "Travar a aba da porca após aplicar o torque." },
+            parafuso_roda: { name: "Porcas de Roda", nm: "112 Nm", kgfm: "11.4 Kgfm", obs: "Rosca M12x1.5 (rodas de liga leve)." }
+        }
+    }
+};
+
+// TOYOTA - Plataforma RAV4
+const rav4_platform = {
+    embreagem: {
+        label: "Embreagem e Acoplamento",
+        components: {
+            plato: { name: "Platô no Volante", nm: "19 Nm", kgfm: "1.9 Kgfm", obs: "Aperto cruzado gradativo." },
+            volante_motor: { name: "Volante no Virabrequim", nm: "88 Nm", kgfm: "9.0 Kgfm", obs: "Aplicar trava química média nas roscas." },
+            cambio_motor: { name: "Caixa de Câmbio no Bloco", nm: "64 Nm", kgfm: "6.5 Kgfm", obs: "Parafusos M10." }
+        }
+    },
+    susp_diant: {
+        label: "Suspensão Dianteira",
+        components: {
+            pivo: { name: "Pivô na Manga de Eixo", nm: "75 Nm", kgfm: "7.6 Kgfm", obs: "Porca do pino cônico." },
+            pivo_base: { name: "Fixação do Pivô na Bandeja", nm: "89 Nm", kgfm: "9.1 Kgfm", obs: "Porcas e parafusos da base." },
+            bandeja_bucha: { name: "Buchas da Bandeja no Subchassi", nm: "137 Tras e 88 Dian Nm", kgfm: "14.0 Tras e 9.0 Dian Kgfm", obs: "Parafuso passante da bucha traseira (137 Nm) e bucha dianteira (88 Nm)." },
+            bieleta: { name: "Bieleta da Barra Estabilizadora", nm: "74 Nm", kgfm: "7.5 Kgfm", obs: "Travar o pino sextavado." },
+            amortecedor_inf: { name: "Amortecedor Inferior (Manga)", nm: "153 Nm", kgfm: "15.6 Kgfm", obs: "Aperto firme nos parafusos duplos." },
+            amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "50 Nm", kgfm: "5.1 Kgfm", obs: "3 porcas da torre." }
+        }
+    },
+    susp_tras_multilink: {
+        label: "Suspensão Traseira Multi-link / Double Wishbone (RAV4)",
+        components: {
+            braco_superior: { name: "Braço Superior Traseiro", nm: "100 Nm", kgfm: "10.2 Kgfm", obs: "Fixação no subchassi traseiro." },
+            braco_inferior_no1: { name: "Braço Inferior Nº 1 (Ajuste Camber)", nm: "100 Nm", kgfm: "10.2 Kgfm", obs: "Parafuso excêntrico de regulagem." },
+            braco_inferior_no2: { name: "Braço Inferior Nº 2 (Convergência)", nm: "100 Nm", kgfm: "10.2 Kgfm", obs: "Parafuso de convergência traseira." },
+            manga_tras: { name: "Manga de Eixo Traseira", nm: "115 Nm", kgfm: "11.7 Kgfm", obs: "Fixação nos braços independentes." },
+            bieleta_tras: { name: "Bieleta Traseira", nm: "70 Nm", kgfm: "7.1 Kgfm", obs: "Fixação na barra estabilizadora." },
+            amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "100 Nm", kgfm: "10.2 Kgfm", obs: "Fixação na manga/braço." },
+            amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "80 Nm", kgfm: "8.2 Kgfm", obs: "Porcas superiores do coxim." }
+        }
+    },
+    direcao: {
+        label: "Direção e Articulações",
+        components: {
+            terminal_direcao: { name: "Terminal de Direção", nm: "49 Nm", kgfm: "5.0 Kgfm", obs: "Porca com cupilha / autofrenante." },
+            axial_direcao: { name: "Articulação Axial", nm: "83 Nm", kgfm: "8.5 Kgfm", obs: "Braço na caixa de direção." }
+        }
+    },
+    freios: {
+        label: "Sistema de Freios",
+        components: {
+            pinca_suporte: { name: "Suporte da Pinça (Cavalete)", nm: "107 Nm", kgfm: "10.9 Kgfm", obs: "Parafusos de fixação do suporte." },
+            pinca_deslizante: { name: "Pinos Deslizantes da Pinça", nm: "34 Nm", kgfm: "3.5 Kgfm", obs: "Pinos guia flutuantes." }
+        }
+    },
+    transmissao: {
+        label: "Transmissão e Rodas",
+        components: {
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "216 Nm", kgfm: "22.0 Kgfm", obs: "Puncionar a aba de travamento." },
+            parafuso_roda: { name: "Porcas de Roda", nm: "103 Nm", kgfm: "10.5 Kgfm", obs: "Rosca M12x1.5." }
+        }
+    }
+};
+
 // HONDA (Linha Fit/City/HR-V/WR-V e Civic) Motores 1.4 / 1.5 L13A, L15A, L15Z (Fit, City, HR-V, WR-V)
 const honda_compact_platform = {
     embreagem: {
@@ -1015,7 +1124,9 @@ const vehiclesDatabase = {
         "Corolla (2020+)": toyota_platform,
         "Corolla Cross": toyota_platform,
         "Etios": toyota_platform,
-        "Yaris": toyota_platform
+        "Yaris": toyota_platform,
+        "Hilux": hilux_platform,
+        "RAV4": rav4_platform
     },
     honda: {
         "Fit": honda_compact_platform,
