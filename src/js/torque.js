@@ -207,7 +207,7 @@ const fiat_scudo_platform = {
     }
 };
 
- // FIAT - Plataforma Ducato
+// FIAT - Plataforma Ducato
 const fiat_ducato_platform = {
     embreagem: {
         label: "Embreagem e Acoplamento",
@@ -378,8 +378,59 @@ const vw_pq_mqb = {
     }
 };
 
-// TOYOTA - Plataforma Médio / Compacto (Etios, Yaris, Corolla, Corolla Cross)
+// TOYOTA - Plataforma Médio / Compacto (Etios, Yaris, Corolla 2020-)
 const toyota_platform = {
+    embreagem: {
+        label: "Embreagem e Acoplamento",
+        components: {
+            plato: { name: "Platô no Volante", nm: "19 Nm", kgfm: "1.9 Kgfm", obs: "Aperto cruzado gradativo." },
+            volante_motor: { name: "Volante no Virabrequim", nm: "88 Nm", kgfm: "9.0 Kgfm", obs: "Aplicar trava química média nas roscas." },
+            cambio_motor: { name: "Caixa de Câmbio no Bloco", nm: "64 Nm", kgfm: "6.5 Kgfm", obs: "Parafusos M10." }
+        }
+    },
+    susp_diant: {
+        label: "Suspensão Dianteira",
+        components: {
+            pivo: { name: "Pivô na Manga de Eixo", nm: "75 Nm", kgfm: "7.6 Kgfm", obs: "Porca do pino cônico." },
+            pivo_base: { name: "Fixação do Pivô na Bandeja", nm: "89 Nm", kgfm: "9.1 Kgfm", obs: "Porcas e parafusos da base." },
+            bandeja_bucha: { name: "Buchas da Bandeja no Subchassi", nm: "137 Tras e 88 Dian Nm", kgfm: "14.0 Tras e 9.0 Dian Kgfm", obs: "Parafuso passante da bucha traseira (137 Nm) e bucha dianteira (88 Nm)." },
+            bieleta: { name: "Bieleta da Barra Estabilizadora", nm: "74 Nm", kgfm: "7.5 Kgfm", obs: "Travar o pino sextavado." },
+            amortecedor_inf: { name: "Amortecedor Inferior (Manga)", nm: "153 Nm", kgfm: "15.6 Kgfm", obs: "Aperto firme nos parafusos duplos." },
+            amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "50 Nm", kgfm: "5.1 Kgfm", obs: "3 porcas da torre." }
+        }
+    },
+    susp_tras: {
+        label: "Suspensão Traseira",
+        components: {
+            amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "70 Nm", kgfm: "7.1 Kgfm", obs: "Fixação inferior na bucha." },
+            amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "80 Nm", kgfm: "8.2 Kgfm", obs: "Suporte na estrutura." }
+        }
+    },
+    direcao: {
+        label: "Direção e Articulações",
+        components: {
+            terminal_direcao: { name: "Terminal de Direção", nm: "49 Nm", kgfm: "5.0 Kgfm", obs: "Porca com cupilha / autofrenante." },
+            axial_direcao: { name: "Articulação Axial", nm: "83 Nm", kgfm: "8.5 Kgfm", obs: "Braço na caixa de direção." }
+        }
+    },
+    freios: {
+        label: "Sistema de Freios",
+        components: {
+            pinca_suporte: { name: "Suporte da Pinça (Cavalete)", nm: "107 Nm", kgfm: "10.9 Kgfm", obs: "Parafusos de fixação do suporte." },
+            pinca_deslizante: { name: "Pinos Deslizantes da Pinça", nm: "34 Nm", kgfm: "3.5 Kgfm", obs: "Pinos guia flutuantes." }
+        }
+    },
+    transmissao: {
+        label: "Transmissão e Rodas",
+        components: {
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "216 Nm", kgfm: "22.0 Kgfm", obs: "Puncionar a aba de travamento." },
+            parafuso_roda: { name: "Porcas de Roda", nm: "103 Nm", kgfm: "10.5 Kgfm", obs: "Rosca M12x1.5." }
+        }
+    }
+};
+
+// TOYOTA - Plataforma Multilink / Compacto (Corolla 2020+, Corolla Cross, RAV4)
+const toyota_platform_multilink = {
     embreagem: {
         label: "Embreagem e Acoplamento",
         components: {
@@ -409,13 +460,6 @@ const toyota_platform = {
             bieleta_tras: { name: "Bieleta Traseira", nm: "70 Nm", kgfm: "7.1 Kgfm", obs: "Fixação na barra estabilizadora." },
             amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "100 Nm", kgfm: "10.2 Kgfm", obs: "Fixação na manga/braço." },
             amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "80 Nm", kgfm: "8.2 Kgfm", obs: "Porcas superiores do coxim." }
-        }
-    },
-    susp_tras: {
-        label: "Suspensão Traseira",
-        components: {
-            amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "70 Nm", kgfm: "7.1 Kgfm", obs: "Fixação inferior na bucha." },
-            amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "80 Nm", kgfm: "8.2 Kgfm", obs: "Suporte na estrutura." }
         }
     },
     direcao: {
@@ -495,7 +539,7 @@ const hilux_platform = {
 };
 
 // TOYOTA - Plataforma RAV4
-const rav4_platform = {
+/*const rav4_platform = {
     embreagem: {
         label: "Embreagem e Acoplamento",
         components: {
@@ -548,7 +592,7 @@ const rav4_platform = {
             parafuso_roda: { name: "Porcas de Roda", nm: "103 Nm", kgfm: "10.5 Kgfm", obs: "Rosca M12x1.5." }
         }
     }
-};
+};*/
 
 // HONDA (Linha Fit/City/HR-V/WR-V e Civic) Motores 1.4 / 1.5 L13A, L15A, L15Z (Fit, City, HR-V, WR-V)
 const honda_compact_platform = {
@@ -612,7 +656,7 @@ const honda_civic_platform = {
         }
     },
     susp_diant: {
-        label: "Suspensão Dianteira",
+        label: "Suspensão Dianteira Multilink",
         components: {
             pivo: { name: "Pivô na Manga de Eixo", nm: "59 Nm", kgfm: "6.0 Kgfm", obs: "Porca do pino cônico." },
             pivo_base: { name: "Fixação do Pivô na Bandeja", nm: "83 Nm", kgfm: "8.5 Kgfm", obs: "Fixação com parafusos e porcas." },
@@ -728,10 +772,16 @@ const nissan_sentra_platform = {
         }
     },
     susp_tras: {
-        label: "Suspensão Traseira",
+        label: "Suspensão Traseira (Multilink)",
         components: {
-            amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "110 Nm", kgfm: "11.2 Kgfm", obs: "Fixação inferior na estrutura do eixo." },
-            amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "65 Nm", kgfm: "6.6 Kgfm", obs: "Fixação na caixa de roda." }
+            amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "110 Nm", kgfm: "11.2 Kgfm", obs: "Fixação no braço/manga de eixo." },
+            amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "65 Nm", kgfm: "6.6 Kgfm", obs: "Fixação na caixa de roda." },
+            braco_inferior: { name: "Braço Inferior de Controle", nm: "105 Nm", kgfm: "10.7 Kgfm", obs: "Parafuso do braço no subchassi." },
+            braco_superior: { name: "Braço Superior (Câmber)", nm: "85 Nm", kgfm: "8.7 Kgfm", obs: "Fixação do braço na manga de eixo." },
+            braco_toe: { name: "Braço de Convergência (Toe Link)", nm: "90 Nm", kgfm: "9.2 Kgfm", obs: "Parafuso excêntrico de alinhamento." },
+            biela_estabilizadora: { name: "Biela da Barra Estabilizadora", nm: "55 Nm", kgfm: "5.6 Kgfm", obs: "Fixação da biela no braço/manga." },
+            subchassi_tras: {name: "Parafusos do Agregado / Subchassi", nm: "125 Nm", kgfm: "12.7 Kgfm", obs: "Parafusos principais de fixação do quadro traseiro no chassi."
+            }
         }
     },
     direcao: {
@@ -1015,8 +1065,59 @@ const peugeot_expert_platform = {
     }
 };
 
-// FORD (Ka, Fiesta, Courier, Focus) Motores Zetec Rocam 1.0/1.6 e Sigma 1.5/1.6 (Ka Antigo, Fiesta, Courier, Focus G2/G3)
+// FORD (Ka, Fiesta, Courier) Motores Zetec Rocam 1.0/1.6 e Sigma 1.5/1.6 (Ka Antigo, Fiesta, Courier)
 const ford_zetec_sigma_platform = {
+    embreagem: {
+        label: "Embreagem e Acoplamento",
+        components: {
+            plato: { name: "Platô no Volante", nm: "29 Nm", kgfm: "3.0 Kgfm", obs: "Aperto cruzado gradativo." },
+            volante_motor: { name: "Volante no Virabrequim", nm: "112 Nm", kgfm: "11.4 Kgfm", obs: "Substituir parafusos (Zetec/Sigma)." },
+            cambio_motor: { name: "Caixa de Câmbio no Bloco", nm: "44 Nm", kgfm: "4.5 Kgfm", obs: "Caixa IB5." }
+        }
+    },
+    susp_diant: {
+        label: "Suspensão Dianteira",
+        components: {
+            pivo: { name: "Pivô na Manga de Eixo", nm: "50 Nm", kgfm: "5.1 Kgfm", obs: "Parafuso transversal de aperto." },
+            pivo_base: { name: "Fixação do Pivô na Bandeja", nm: "60 Nm", kgfm: "6.1 Kgfm", obs: "Pivô rebitado ou parafusado." },
+            bandeja_bucha: { name: "Buchas da Bandeja no Subchassi", nm: "115 Nm", kgfm: "11.7 Kgfm", obs: "Parafusos M12 das buchas do braço." },
+            bieleta: { name: "Bieleta da Barra Estabilizadora", nm: "48 Nm", kgfm: "4.9 Kgfm", obs: "Porca autofrenante." },
+            amortecedor_inf: { name: "Amortecedor Inferior (Manga)", nm: "90 Nm", kgfm: "9.2 Kgfm", obs: "Abraçadeira da manga de eixo." },
+            amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "25 Nm", kgfm: "2.5 Kgfm", obs: "3 parafusos da torre." }
+        }
+    },
+    susp_tras: {
+        label: "Suspensão Traseira",
+        components: {
+            amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "115 Nm", kgfm: "11.7 Kgfm", obs: "Fixação no eixo de torção." },
+            amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "25 Nm", kgfm: "2.5 Kgfm", obs: "Fixação superior." }
+        }
+    },
+    direcao: {
+        label: "Direção e Articulações",
+        components: {
+            terminal_direcao: { name: "Terminal de Direção", nm: "37 Nm", kgfm: "3.8 Kgfm", obs: "Porca na manga de eixo." },
+            axial_direcao: { name: "Articulação Axial", nm: "75 Nm", kgfm: "7.6 Kgfm", obs: "Rosca na caixa de direção." }
+        }
+    },
+    freios: {
+        label: "Sistema de Freios",
+        components: {
+            pinca_suporte: { name: "Suporte da Pinça (Cavalete)", nm: "120 Nm", kgfm: "12.2 Kgfm", obs: "Parafusos do cavalete." },
+            pinca_deslizante: { name: "Pinos Deslizantes da Pinça", nm: "28 Nm", kgfm: "2.9 Kgfm", obs: "Pinos Allen H7." }
+        }
+    },
+    transmissao: {
+        label: "Transmissão e Rodas",
+        components: {
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "235 Nm", kgfm: "24.0 Kgfm", obs: "Porca cônica do manguito." },
+            parafuso_roda: { name: "Porcas de Roda", nm: "103 Nm", kgfm: "10.5 Kgfm", obs: "Rosca M12x1.5." }
+        }
+    }
+};
+
+// FORD  Motores Zetec Rocam 1.0/1.6 e Sigma 1.5/1.6 (Focus G2/G3)
+const ford_zetec_sigma_platform_multilink = {
     embreagem: {
         label: "Embreagem e Acoplamento",
         components: {
@@ -1046,13 +1147,6 @@ const ford_zetec_sigma_platform = {
             bieleta_tras: { name: "Bieleta Traseira", nm: "48 Nm", kgfm: "4.9 Kgfm", obs: "Barra estabilizadora." },
             amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "115 Nm", kgfm: "11.7 Kgfm", obs: "Fixação no braço inferior." },
             amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "25 Nm", kgfm: "2.5 Kgfm", obs: "Parafusos do coxim na carroceria." }
-        }
-    },
-    susp_tras: {
-        label: "Suspensão Traseira",
-        components: {
-            amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "115 Nm", kgfm: "11.7 Kgfm", obs: "Fixação no eixo de torção." },
-            amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "25 Nm", kgfm: "2.5 Kgfm", obs: "Fixação superior." }
         }
     },
     direcao: {
@@ -1129,7 +1223,7 @@ const ford_dragon_tivct_platform = {
     }
 };
 
-// HYUNDAI (HB20, Creta e i30) Motores Kappa 1.0 (1.0 12V Aspirado e 1.0 TGDI Turbo) - HB20 (G1/G2) e Creta 1.0T
+// HYUNDAI (HB20, Creta) Motores Kappa 1.0 (1.0 12V Aspirado e 1.0 TGDI Turbo) - HB20 (G1/G2) e Creta 1.0T
 const hyundai_kappa_platform = {
     embreagem: {
         label: "Embreagem e Acoplamento",
@@ -1192,7 +1286,7 @@ const hyundai_kappa_platform = {
     }
 };
 
-// HYUNDAI (HB20 1.6, Creta 1.6/2.0, i30 (G1/G2)) Motores Gamma / Nu / Beta (1.6 16V, 2.0 16V)
+// HYUNDAI (HB20 1.6, Creta 1.6/2.0) Motores Gamma / Nu / Beta (1.6 16V, 2.0 16V)
 const hyundai_gamma_nu_platform = {
     embreagem: {
         label: "Embreagem e Acoplamento",
@@ -1243,6 +1337,62 @@ const hyundai_gamma_nu_platform = {
     }
 };
 
+// HYUNDAI (i30) Motores Kappa 2.0
+const hyundai_i30_platform = {
+    embreagem: {
+        label: "Embreagem e Acoplamento",
+        components: {
+            plato: { name: "Platô no Volante", nm: "22 Nm", kgfm: "2.2 Kgfm", obs: "Aperto cruzado em etapas." },
+            volante_motor: { name: "Volante no Virabrequim", nm: "75 Nm", kgfm: "7.6 Kgfm", obs: "Aplicar trava química média nas roscas." },
+            cambio_motor: { name: "Caixa de Câmbio no Bloco", nm: "50 Nm", kgfm: "5.1 Kgfm", obs: "Parafusos do bloco e flange." }
+        }
+    },
+    susp_diant: {
+        label: "Suspensão Dianteira",
+        components: {
+            pivo: { name: "Pivô na Manga de Eixo", nm: "60 Nm", kgfm: "6.1 Kgfm", obs: "Porca com cupilha ou autotrava." },
+            pivo_base: { name: "Fixação do Pivô na Bandeja", nm: "90 Nm", kgfm: "9.2 Kgfm", obs: "Parafusos de fixação na base." },
+            bandeja_bucha: { name: "Buchas da Bandeja no Subchassi", nm: "130 Nm", kgfm: "13.2 Kgfm", obs: "Parafusos das buchas dianteira e traseira." },
+            bieleta: { name: "Bieleta da Barra Estabilizadora", nm: "45 Nm", kgfm: "4.6 Kgfm", obs: "Travar o pino sextavado." },
+            amortecedor_inf: { name: "Amortecedor Inferior (Manga)", nm: "140 Nm", kgfm: "14.3 Kgfm", obs: "Parafusos duplos passantes." },
+            amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "45 Nm", kgfm: "4.6 Kgfm", obs: "Porca superior da torre." }
+        }
+    },
+    susp_tras_multilink: {
+        label: "Suspensão Traseira Multi-link",
+        components: {
+            braco_superior: { name: "Braço Superior Traseiro", nm: "110 Nm", kgfm: "11.2 Kgfm", obs: "Fixação superior do conjunto." },
+            braco_inferior: { name: "Braço Inferior da Mola", nm: "120 Nm", kgfm: "12.2 Kgfm", obs: "Braço de sustentação da mola." },
+            braco_convergencia: { name: "Haste de Regulagem de Convergência", nm: "110 Nm", kgfm: "11.2 Kgfm", obs: "Ajuste de alinhamento traseiro." },
+            bucha_facao_tras: { name: "Bucha do Braço Longitudinal (Facão)", nm: "130 Nm", kgfm: "13.2 Kgfm", obs: "Fixação no chassi." },
+            bieleta_tras: { name: "Bieleta Traseira", nm: "50 Nm", kgfm: "5.1 Kgfm", obs: "Barra estabilizadora traseira." },
+            amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "110 Nm", kgfm: "11.2 Kgfm", obs: "Fixação na manga/manga de eixo." },
+            amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "65 Nm", kgfm: "6.6 Kgfm", obs: "Porcas superiores da torre." }
+        }
+    },
+    direcao: {
+        label: "Direção e Articulações",
+        components: {
+            terminal_direcao: { name: "Terminal de Direção", nm: "35 Nm", kgfm: "3.6 Kgfm", obs: "Porca da manga de eixo." },
+            axial_direcao: { name: "Articulação Axial", nm: "80 Nm", kgfm: "8.2 Kgfm", obs: "Rosca na caixa de direção." }
+        }
+    },
+    freios: {
+        label: "Sistema de Freios",
+        components: {
+            pinca_suporte: { name: "Suporte da Pinça (Cavalete)", nm: "85 Nm", kgfm: "8.7 Kgfm", obs: "Parafusos do cavalete dianteiro." },
+            pinca_deslizante: { name: "Pinos Deslizantes da Pinça", nm: "30 Nm", kgfm: "3.1 Kgfm", obs: "Pinos guia flutuantes." }
+        }
+    },
+    transmissao: {
+        label: "Transmissão e Rodas",
+        components: {
+            porca_homocinetica: { name: "Porca da junta homocinética", nm: "235 Nm", kgfm: "24.0 Kgfm", obs: "Porca de alto torque com cupilha/trava." },
+            parafuso_roda: { name: "Porcas de Roda", nm: "108 Nm", kgfm: "11.0 Kgfm", obs: "Rosca M12x1.5." }
+        }
+    }
+};
+
 // MAPA COMPLETO DE VEÍCULOS APONTANDO PARA AS PLATAFORMAS
 const vehiclesDatabase = {
     chevrolet: {
@@ -1285,12 +1435,12 @@ const vehiclesDatabase = {
     },
     toyota: {
         "Corolla (2015-2019)": toyota_platform,
-        "Corolla (2020+)": toyota_platform,
-        "Corolla Cross": toyota_platform,
+        "Corolla (2020+)": toyota_platform_multilink,
+        "Corolla Cross": toyota_platform_multilink,
         "Etios": toyota_platform,
         "Yaris": toyota_platform,
         "Hilux": hilux_platform,
-        "RAV4": rav4_platform
+        "RAV4": toyota_platform_multilink
     },
     honda: {
         "Fit": honda_compact_platform,
@@ -1304,8 +1454,8 @@ const vehiclesDatabase = {
         "March": nissan_compact_platform,
         "Versa": nissan_compact_platform,
         "Livina 1.6": nissan_compact_platform,
-        "Sentra (B16, B17, B18)": nissan_sentra_platform,
-        "Livina 1.8": nissan_sentra_platform
+        "Livina 1.8": nissan_sentra_platform,
+        "Sentra (B16, B17, B18)": nissan_sentra_platform        
     },
     renault: {
         "Clio": renault_compact_platform,
@@ -1328,17 +1478,16 @@ const vehiclesDatabase = {
         "Ka": ford_zetec_sigma_platform,
         "Fiesta": ford_zetec_sigma_platform,
         "Courier": ford_zetec_sigma_platform,
-        "Focus": ford_zetec_sigma_platform,
+        "Focus": ford_zetec_sigma_platform_multilink,
         "Ka G3": ford_dragon_tivct_platform,
         "New Fiesta": ford_dragon_tivct_platform
     },
     hyundai: {
         "HB20": hyundai_kappa_platform,
-        "Creta": hyundai_kappa_platform,
-        "i30": hyundai_kappa_platform,
         "HB20 1.6": hyundai_gamma_nu_platform,
+        "Creta": hyundai_kappa_platform,
         "Creta 1.6/2.0": hyundai_gamma_nu_platform,
-        "i30 (G1/G2)": hyundai_gamma_nu_platform
+        "i30 (G1/G2)": hyundai_i30_platform
     }
 };
 

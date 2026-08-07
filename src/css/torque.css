@@ -22,11 +22,16 @@ body {
 
 h1 {
     width: 100%;
-    color: #1a365d;
+    color: #ffffff;
     text-align: center;
     text-transform: uppercase;
     border-radius: 6px;
     margin: 30px auto;
+}
+
+h2 {
+    margin-top: 0;
+    color: #ffffff
 }
 
 .filter-container {
@@ -35,10 +40,10 @@ h1 {
     flex-direction: column;
     justify-content: center;
     gap: 15px;
-    background-color: #ffffff;
+    background-color: rgba(44, 102, 147, 0.8);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 10px #fff;
     margin: 25px auto;
 }
 
@@ -50,7 +55,7 @@ h1 {
 
 .filter-group label {
     font-weight: 600;
-    color: #1a365d;
+    color: #ffffff;
 }
 
 .filter-group select {
@@ -65,11 +70,12 @@ h1 {
 }
 
 .result-card {
+    display: none;
     max-width: 1300px;
-    background: #ffffff;
+    background: rgba(44, 102, 147, 0.8);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px #fff;
     display: none;
     margin: auto;
 }
@@ -95,17 +101,21 @@ h1 {
 
 .result-label {
     font-weight: 600;
-    color: #4a5568;
+    color: #ffffff;
 }
 
 .result-value {
-    color: #2b6cb0;
+    color: #ffffff;
     font-weight: 700;
 }
 
 .highlight {
     color: #c53030;
     font-weight: bold;
+}
+
+#resObs {
+    color: #ffffff;
 }
 
 footer {
