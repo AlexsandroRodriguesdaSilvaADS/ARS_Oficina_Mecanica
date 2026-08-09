@@ -75,8 +75,7 @@ h2 {
     background: rgba(44, 102, 147, 0.8);
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 10px #fff;
-    display: none;
+    box-shadow: 0 0 10px #ffffff;
     margin: auto;
 }
 
@@ -105,8 +104,13 @@ h2 {
 }
 
 .result-value {
-    color: #ffffff;
+    color: #f00404;
     font-weight: 700;
+    background-color: #ffffff;
+    padding: 0 5px;
+    border-radius: 4px;
+    
+
 }
 
 .highlight {
