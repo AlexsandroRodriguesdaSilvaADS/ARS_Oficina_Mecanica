@@ -99,18 +99,17 @@ h2 {
 }
 
 .result-label {
-    font-weight: 600;
+    font-weight: 700;
     color: #ffffff;
+    padding: 5px;
 }
 
 .result-value {
     color: #f00404;
     font-weight: 700;
     background-color: #ffffff;
-    padding: 0 5px;
+    padding: 5px;
     border-radius: 4px;
-    
-
 }
 
 .highlight {
