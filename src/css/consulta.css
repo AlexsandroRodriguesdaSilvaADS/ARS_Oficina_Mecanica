@@ -7,8 +7,10 @@ body {
 }
 
 .main {
+    max-width: 1300px;
+    display: flex;
     padding: 25px;
-    height: 90vh;
+    height: auto;
 }
 
 .header {
@@ -34,8 +36,13 @@ h2 {
     color: #ffffff
 }
 
+/* TORQUES */
+.torque,
+.sensores {
+    width: 50%;
+}
+
 .filter-container {
-    max-width: 1300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -44,7 +51,7 @@ h2 {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px #fff;
-    margin: 25px auto;
+    margin: auto 10px;
 }
 
 .filter-group {
@@ -71,12 +78,11 @@ h2 {
 
 .result-card {
     display: none;
-    max-width: 1300px;
     background: rgba(44, 102, 147, 0.8);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px #ffffff;
-    margin: auto;
+    margin: 10px;
 }
 
 .result-card.active {
@@ -90,8 +96,14 @@ h2 {
 
 .result-item {
     margin-bottom: 12px;
-    padding-bottom: 8px;
+    margin-top: 12px;
+    padding: 5px;
     border-bottom: 1px solid #edf2f7;
+}
+
+.result-item.display-column {
+    display: flex;
+    flex-direction: column;
 }
 
 .result-item:last-child {
@@ -104,12 +116,24 @@ h2 {
     padding: 5px;
 }
 
+.result-label-sensor {
+    font-weight: 700;
+    color: #ffffff;
+    border-bottom: 1px solid #edf2f7;
+}
+
 .result-value {
     color: #f00404;
     font-weight: 700;
     background-color: #ffffff;
     padding: 5px;
     border-radius: 4px;
+}
+
+.result-value-sensor {
+    color: #ffffff;
+    font-weight: 700;
+    padding: 5px;
 }
 
 .highlight {

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tabela de Torques Técnicos de Fábrica</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/estilos.css" />
+    <link rel="stylesheet" href="./css/consulta.css" />
+    <link rel="stylesheet" href="./css/responsivo_consulta.css" />
+</head>
+
+<body>
+    <main class="main">
+        <div class="torque">
+            <div class="filter-container">
+                <div class="header">
+                    <img class="logo" src="./imagens/logo.png" title="Soluções integradas para o seu veículo"
+                        alt="Logo de ARS Mecânico Automotivo" />
+                    <h1>Consulta de Torque</h1>
+                </div>
+                <div class="filter-group">
+                    <label for="brandSelect">1. Selecione a Montadora:</label>
+                    <select id="brandSelect" onchange="updateVehicles()">
+                        <option value="">-- Escolha a Montadora --</option>
+                        <option value="fiat">Fiat</option>
+                        <option value="jeep">Jeep</option>
+                        <option value="ford">Ford</option>
+                        <option value="honda">Honda</option>
+                        <option value="toyota">Toyota</option>
+                        <option value="nissan">Nissan</option>
+                        <option value="renault">Renault</option>
+                        <option value="peugeot">Peugeot</option>
+                        <option value="hyundai">Hyundai</option>
+                        <option value="chevrolet">Chevrolet</option>
+                        <option value="volkswagen">Volkswagen</option>
+
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="vehicleSelect">2. Selecione o Veículo:</label>
+                    <select id="vehicleSelect" onchange="updateSystems()" disabled>
+                        <option value="">-- Selecione a Montadora Primeiro --</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="systemSelect">3. Selecione o Conjunto/Sistema:</label>
+                    <select id="systemSelect" onchange="updateComponents()" disabled>
+                        <option value="">-- Selecione o Veículo Primeiro --</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="componentSelect">4. Selecione o Componente / Parafuso:</label>
+                    <select id="componentSelect" onchange="showTorqueDetails()" disabled>
+                        <option value="">-- Selecione o Conjunto Primeiro --</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="resultCard" class="result-card">
+                <h2 id="resTitle">-</h2>
+                <div class="result-item">
+                    <span class="result-label">Torque:</span>
+                    <span id="resNm" class="result-value">-</span>
+                    <span class="result-label">≃</span>
+                    <span id="resKgfm" class="result-value">-</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Observações:</span>
+                    <span id="resObs">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="sensores">
+            <div class="filter-container">
+                <div class="header">
+                    <h1>Consulta de Sensores</h1>
+                </div>
+                <div class="filter-group">
+                    <label for="sensorSelect">Selecione o Sensor:</label>
+                    <select id="sensorSelect" onchange="updateSensorInfo()">
+                        <option value="">-- Escolha o Sensor --</option>
+                        <option value="ckp">Rotação do Motor (CKP)</option>
+                        <option value="cmp">Fase (CMP)</option>
+                        <option value="ect">Temperatura da Água (ECT)</option>
+                        <option value="map">Pressão Absoluta / Coletor (MAP)</option>
+                        <option value="tps">Posição da Borboleta (TPS)</option>
+                        <option value="maf">Fluxo / Massa de Ar (MAF)</option>
+                        <option value="o2">Oxigênio / Sonda Lambda (O2)</option>
+                        <option value="ks">Detonação (KS)</option>
+                        <option value="iat">Temperatura do Ar (IAT)</option>
+                        <option value="vss">Velocidade do Veículo (VSS)</option>
+                        <option value="app">Posição do Pedal do Acelerador (APP)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="sensorInfo" class="result-card">
+                <h2 id="sensorTitle">-</h2>
+                <div class="result-item display-column">
+                    <strong class="result-label-sensor">Função:</strong>
+                    <span id="sensorFunction" class="result-value-sensor"></span>
+                    <strong class="result-label-sensor">Defeito:</strong>
+                    <span id="sensorDefect" class="result-value-sensor"></span>
+                    <strong class="result-label-sensor">Voltagem (Funcionamento):</strong>
+                    <span id="sensorVoltage" class="result-value-sensor"></span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="./js/torque.js"></script>
+    <script src="./js/sensor.js"></script>
+
+</body>
+
+</html>

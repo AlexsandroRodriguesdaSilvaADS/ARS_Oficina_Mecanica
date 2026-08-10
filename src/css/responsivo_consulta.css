@@ -1,13 +1,27 @@
+@media (max-width: 768px) {
+    .main {
+        height: auto;
+        min-height: 100vh;
+        padding: 25px 0;
+        flex-direction: column;
+        gap: 25px;
+        align-items: center;
+    }
+
+    .torque,
+    .sensores {
+        width: 100%;
+    }
+}
+
 @media (max-width: 425px) {
 
     body {
         margin: 10px;
     }
 
-    .main {
-        height: auto;
-        min-height: 100vh;
-        padding: 25px 0;
+    .torque {
+        max-width: 500px;
     }
 
     .logo {
