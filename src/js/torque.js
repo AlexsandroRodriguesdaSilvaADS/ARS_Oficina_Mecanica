@@ -336,6 +336,58 @@ const vw_pq_mqb = {
             amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "60 Nm", kgfm: "6.1 Kgfm", obs: "Haste superior." }
         }
     },
+    susp_tras: {
+        label: "Suspensão Traseira",
+        components: {
+            amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "40 Nm + 90°", kgfm: "4.1 Kgfm + ang.", obs: "Parafuso passante no eixo." },
+            amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "50 Nm + 45°", kgfm: "5.1 Kgfm + ang.", obs: "Coxim superior na caixa de roda." }
+        }
+    },
+    direcao: {
+        label: "Direção e Articulações",
+        components: {
+            terminal_direcao: { name: "Terminal de Direção", nm: "20 Nm + 90°", kgfm: "2.0 Kgfm + ang.", obs: "Padrão de aperto angular VW." },
+            axial_direcao: { name: "Articulação Axial", nm: "80 Nm", kgfm: "8.2 Kgfm", obs: "Braço interno na caixa." }
+        }
+    },
+    freios: {
+        label: "Sistema de Freios",
+        components: {
+            pinca_suporte: { name: "Suporte da Pinça (Cavalete)", nm: "120 Nm", kgfm: "12.2 Kgfm", obs: "Parafusos Allen ou XZN." },
+            pinca_deslizante: { name: "Pinos Deslizantes da Pinça", nm: "30 Nm", kgfm: "3.1 Kgfm", obs: "Guia deslizante." }
+        }
+    },
+    transmissao: {
+        label: "Transmissão e Rodas",
+        components: {
+            porca_homocinetica: { name: "Parafuso Central da junta homocinética", nm: "200 Nm + 180°", kgfm: "20.4 Kgfm + ang.", obs: "Parafuso estriado de uso único." },
+            parafuso_roda: { name: "Parafusos de Roda", nm: "120 Nm", kgfm: "12.2 Kgfm", obs: "Rosca M12x1.5 / M14x1.5." }
+        }
+    }
+};
+
+// VOLKSWAGEN - Plataforma Golf MK7/ Jetta GLI 
+const vw_pq_mqb_golf_jetta = {
+    embreagem: {
+        label: "Embreagem e Acoplamento",
+        components: {
+            plato: { name: "Platô no Volante", nm: "20 Nm", kgfm: "2.0 Kgfm", obs: "Aperto cruzado gradativo." },
+            volante_motor: { name: "Volante no Virabrequim", nm: "60 Nm + 90°", kgfm: "6.1 Kgfm + ang.", obs: "Substituir parafusos de expansão." },
+            atuador_hidraulico: { name: "Atuador/Cilindro Escravo", nm: "12 Nm", kgfm: "1.2 Kgfm", obs: "Parafusos do atuador concêntrico." },
+            cambio_motor: { name: "Caixa de Câmbio no Bloco", nm: "80 Nm", kgfm: "8.2 Kgfm", obs: "Parafusos M12." }
+        }
+    },
+    susp_diant: {
+        label: "Suspensão Dianteira",
+        components: {
+            pivo: { name: "Pivô na Manga de Eixo", nm: "50 Nm", kgfm: "5.1 Kgfm", obs: "Porca do pino cônico." },
+            pivo_base: { name: "Fixação do Pivô na Bandeja (3 Porcas)", nm: "40 Nm + 45°", kgfm: "4.1 Kgfm + ang.", obs: "Porcas de uso único." },
+            bandeja_bucha: { name: "Buchas da Bandeja no Subchassi", nm: "70 Nm + 90°", kgfm: "7.1 Kgfm + 90°", obs: "Parafusos elásticos M12 (substituição recomendada). Aplicar torque angular." },
+            bieleta: { name: "Bieleta da Barra Estabilizadora", nm: "40 Nm", kgfm: "4.1 Kgfm", obs: "Segurar encaixe allen/torx." },
+            amortecedor_inf: { name: "Amortecedor Inferior (Braçadeira)", nm: "60 Nm + 90°", kgfm: "6.1 Kgfm + ang.", obs: "Parafuso e porca de expansão." },
+            amortecedor_sup: { name: "Torre Superior do Amortecedor", nm: "60 Nm", kgfm: "6.1 Kgfm", obs: "Haste superior." }
+        }
+    },
     susp_tras_multilink: {
         label: "Suspensão Traseira Multi-link",
         components: {
@@ -346,13 +398,6 @@ const vw_pq_mqb = {
             bieleta_tras: { name: "Bieleta Traseira", nm: "45 Nm", kgfm: "4.6 Kgfm", obs: "Barra estabilizadora traseira." },
             amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "180 Nm", kgfm: "18.3 Kgfm", obs: "Fixação no braço transversal." },
             amort_tras_sup: { name: "Amortecedor Traseiro Superior (Coxim)", nm: "50 Nm + 45°", kgfm: "5.1 Kgfm + 45°", obs: "Suporte do coxim na caixa de roda." }
-        }
-    },
-    susp_tras: {
-        label: "Suspensão Traseira",
-        components: {
-            amort_tras_inf: { name: "Amortecedor Traseiro Inferior", nm: "40 Nm + 90°", kgfm: "4.1 Kgfm + ang.", obs: "Parafuso passante no eixo." },
-            amort_tras_sup: { name: "Amortecedor Traseiro Superior", nm: "50 Nm + 45°", kgfm: "5.1 Kgfm + ang.", obs: "Coxim superior na caixa de roda." }
         }
     },
     direcao: {
@@ -1427,6 +1472,7 @@ const vehiclesDatabase = {
         "Gol G5 / G6 / G7 / G8": vw_pq_mqb,
         "Nivus": vw_pq_mqb,
         "Polo (2018+)": vw_pq_mqb,
+        "Golf MK7 / Jetta GLI": vw_pq_mqb_golf_jetta,
         "Saveiro G5+": vw_pq_mqb,
         "T-Cross": vw_pq_mqb,
         "Up!": vw_pq_mqb,
