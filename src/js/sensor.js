@@ -3,19 +3,22 @@ const sensorData = {
         name: "Rotação do Motor (CKP)",
         funcao: "Informa à central (ECU) a rotação do motor (RPM) e a posição exata do ponto morto superior (PMS) para centelha e injeção.",
         defeito: "O motor simplesmente não pega (não há centelha nem comando de injeção), ou o veículo morre repentinamente em movimento e só volta a funcionar quando o motor esfria (comum em falhas térmicas do sensor indutivo). Pode gerar falha de funcionamento intermitente e corte de giro.",
-        voltagem: "Indutivo: CA (0,5V a 20V+). Hall: 0V a 5V (Onda Quadrada)."
+        voltagem: "Indutivo: CA (0,5V a 20V+). Hall: 0V a 5V (Onda Quadrada).",
+        resistencia: "Tipo Indutivo: Possui uma bobina interna. Funcionamento Normal: Geralmente apresenta entre 200 a 1.000 ohms (dependendo do modelo do fabricante). Durante a partida, gera tensão alternada (AC acima de 3V)."
     },
     "cmp": {
         name: "Fase (CMP)",
         funcao: "Identifica a posição do comando de válvulas, indicando qual cilindro está no tempo de compressão (usado em injeção sequencial).",
         defeito: "Dificuldade na partida (demora mais que o normal para pegar), funcionamento irregular do motor em marcha lenta e perda de potência. O sistema de injeção perde a referência sequencial e passa a injetar combustível de forma semi-sequencial ou coletiva.",
-        voltagem: "Onda digital de 0V a 5V."
+        voltagem: "Onda digital de 0V a 5V.",
+        resistencia: "Funcionamento Normal: A grande maioria atual é de Efeito Hall ou indutiva avançada. Nos modelos indutivos raros, a resistência fica na faixa de 500 a 1.500 ohms. Em modelos Hall, mede-se a queda de tensão de sinal (0V a 5V). Funcionamento Irregular: Curto interno gerando resistência nula ou interrupção total (circuito aberto)."
     },
     "ect": {
         name: "Temperatura da Água (ECT)",
         funcao: "Monitora a temperatura do líquido de arrefecimento do motor para ajuste de enriquecimento de combustível e acionamento da ventoinha.",
         defeito: "Consumo excessivo de combustível (a ECU acha que o carro está sempre frio e enriquece a mistura), falhas de marcha lenta, dificuldade na partida a frio (principalmente com álcool/flex) e risco grave de superaquecimento, pois a ventoinha do radiador pode deixar de ser acionada corretamente.",
-        voltagem: "Frio (20°C): 3,0V a 3,5V | Quente (90°C): 0,4V a 0,6V."
+        voltagem: "Frio (20°C): 3,0V a 3,5V | Quente (90°C): 0,4V a 0,6V.",
+        resistencia: "Funcionamento Normal: É um termistor tipo NTC (a resistência diminui conforme a temperatura do motor aumenta): Motor Frio (aprox. 20°C): 2.000 a 3.000 ohms. Motor Quente (aprox. 90°C): 200 a 300 ohms. Funcionamento Irregular: Resistência travada infinitamente alta (OL - sensor em aberto) ou travada próxima de 0 ohms (curto-circuito interno, indicando leitura fictícia de superaquecimento extremo)."
     },
     "map": {
         name: "Pressão Absoluta / Coletor (MAP)",
@@ -27,7 +30,8 @@ const sensorData = {
         name: "Posição da Borboleta (TPS)",
         funcao: "Informa o ângulo de abertura da borboleta de aceleração para a ECU gerenciar o torque e o avanço.",
         defeito: "Resposta lenta ou 'buracos' na aceleração (o motor hesita ao pisar fundo), marcha lenta acelerada ou oscilante, e em casos mais graves, o veículo entra em modo de segurança (limp mode), limitando drasticamente a rotação do motor.",
-        voltagem: "Borboleta fechada: 0,4V a 0,9V | Totalmente aberta: 4,0V a 4,8V."
+        voltagem: "Borboleta fechada: 0,4V a 0,9V | Totalmente aberta: 4,0V a 4,8V.",
+        resistencia: "Funcionamento Normal: É um potenciômetro resistivo. A resistência total entre os extremos (Alimentação e Terra) costuma ser fixa, variando entre 1.000 a 5.000 ohms. A resistência do pino de sinal varia suavemente de acordo com a abertura da borboleta (ex: de 1k ohms fechada até 3,5k ohms aberta).Funcionamento Irregular: Pistas de carvão desgastadas gerando saltos repentinos de resistência, resistência infinita (OL) em trechos específicos (falhas de aceleração / 'buracos') ou trilha em curto."
     },
     "maf": {
         name: "Fluxo / Massa de Ar (MAF)",
@@ -51,7 +55,8 @@ const sensorData = {
         name: "Temperatura do Ar (IAT)",
         funcao: "Mede a temperatura do ar que entra no coletor para refinar o cálculo da densidade do oxigênio.",
         defeito: "Leve aumento no consumo de combustível e falhas sutis na dirigibilidade, já que o módulo de injeção assume um valor de segurança (padrão) para a temperatura do ar caso o sensor falhe.",
-        voltagem: "Frio: 2,0V a 3,0V | Quente: 0,5V a 1,0V."
+        voltagem: "Frio: 2,0V a 3,0V | Quente: 0,5V a 1,0V.",
+        resistencia: "Funcionamento Normal: Assim como o ECT, é um termistor NTC:Ar Frio (aprox. 20°C): 2.000 a 3.000 ohms. Ar Quente (aprox. 80°C): 300 a 400 ohms. Funcionamento Irregular: Resistência infinita (OL - sensor aberto) ou valor estático inalterável mesmo com variação térmica externa."
     },
     "vss": {
         name: "Velocidade do Veículo (VSS)",
@@ -78,6 +83,7 @@ function updateSensorInfo() {
         document.getElementById("sensorFunction").innerText = data.funcao;
         document.getElementById("sensorDefect").innerText = data.defeito;
         document.getElementById("sensorVoltage").innerText = data.voltagem;
+        document.getElementById("sensorResistencia").innerText = data.resistencia;
         infoBox.style.display = "block";
     } else {
         infoBox.style.display = "none";
