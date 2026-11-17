@@ -183,9 +183,9 @@
         transition-duration: 0.5s;
     }
 
-    .cabecalho .menu-section.on .menu .botoes.none {
+    /*.cabecalho .menu-section.on .menu .botoes.none {
         display: none;
-    }
+    }*/
 }
 
 @media (max-width: 425px) {
