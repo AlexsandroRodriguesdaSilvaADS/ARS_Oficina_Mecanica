@@ -12,7 +12,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            font-size: 11pt;
+            /*font-size: 11pt;*/
         }
 
         body {
@@ -75,22 +75,6 @@
             position: relative;
         }
 
-        .marcas {
-            display: flex;
-            flex-direction: row;
-            gap: 50px;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .logo {
-            width: 130px;
-            height: 100px;
-            box-shadow: 0 0 10px #fff;
-            padding: 2px;
-            margin: 5px;
-        }
-
         .brand-tag {
             display: inline-block;
             background-color: #f97316;
@@ -110,7 +94,6 @@
             line-height: 1.05;
             letter-spacing: -0.5px;
             text-transform: uppercase;
-            text-align: center;
         }
 
         .header h1 span {
@@ -126,6 +109,7 @@
 
         /* 2. CORPO (Serviços e Diferenciais) */
         .content {
+            background: url(./src/imagens/logo-p.png) center / cover no-repeat;
             padding: 6mm 8mm;
             flex-grow: 1;
             display: flex;
@@ -334,16 +318,7 @@
         <!-- TOPO -->
         <header class="header">
             <div class="brand-tag">Mecânica Geral • Linha Leve</div>
-            <div class="marcas">
-                <div>
-                    <img class="logo" src="./src/imagens/logo.png" alt="Logo ARS">
-                    <h1>ARS <span>MECÂNICO AUTOMOTIVO</span></h1>
-                </div>
-                <div>
-                    <img class="logo" src="./src/imagens/top_garage.jpg" alt="Logo Top Garage">
-                    <h1>TOP <span>GARAGE</span></h1>
-                </div>
-            </div>
+            <h1>ARS <span>MECÂNICO AUTOMOTIVO</span></h1>
             <p class="subtitle">Seu carro em boas mãos. Manutenção preventiva e corretiva com diagnóstico preciso e
                 transparência.</p>
         </header>
