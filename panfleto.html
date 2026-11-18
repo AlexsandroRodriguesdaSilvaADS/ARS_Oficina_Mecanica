@@ -12,6 +12,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-size: 11pt;
         }
 
         body {
@@ -74,6 +75,22 @@
             position: relative;
         }
 
+        .marcas {
+            display: flex;
+            flex-direction: row;
+            gap: 50px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo {
+            width: 130px;
+            height: 100px;
+            box-shadow: 0 0 10px #fff;
+            padding: 2px;
+            margin: 5px;
+        }
+
         .brand-tag {
             display: inline-block;
             background-color: #f97316;
@@ -93,6 +110,7 @@
             line-height: 1.05;
             letter-spacing: -0.5px;
             text-transform: uppercase;
+            text-align: center;
         }
 
         .header h1 span {
@@ -316,7 +334,16 @@
         <!-- TOPO -->
         <header class="header">
             <div class="brand-tag">Mecânica Geral • Linha Leve</div>
-            <h1>ARS <span>OFICINA MECÂNICA</span></h1>
+            <div class="marcas">
+                <div>
+                    <img class="logo" src="./src/imagens/logo.png" alt="Logo ARS">
+                    <h1>ARS <span>MECÂNICO AUTOMOTIVO</span></h1>
+                </div>
+                <div>
+                    <img class="logo" src="./src/imagens/top_garage.jpg" alt="Logo Top Garage">
+                    <h1>TOP <span>GARAGE</span></h1>
+                </div>
+            </div>
             <p class="subtitle">Seu carro em boas mãos. Manutenção preventiva e corretiva com diagnóstico preciso e
                 transparência.</p>
         </header>
@@ -340,15 +367,15 @@
                     </div>
                     <div class="service-item">
                         <span class="service-icon">✔</span>
-                        <span>Injeção Eletrônica</span>
+                        <span>Tração e Rolamentos</span>
                     </div>
                     <div class="service-item">
                         <span class="service-icon">✔</span>
-                        <span>Embreagem e Câmbio</span>
+                        <span>Embreagem</span>
                     </div>
                     <div class="service-item">
                         <span class="service-icon">✔</span>
-                        <span>Correia Dentada e Arrefecimento</span>
+                        <span>Arrefecimento</span>
                     </div>
                 </div>
             </div>
@@ -357,7 +384,7 @@
             <div class="highlight-box">
                 <div class="highlight-row">
                     <span class="highlight-label">Mão de Obra Especializada</span>
-                    <span class="highlight-value">R$ 60,00 / hora</span>
+                    <!--<span class="highlight-value">R$ 60,00 / hora</span>-->
                 </div>
                 <p class="highlight-desc">
                     <strong>Atendimento Exclusivo aos Sábados e Feriados!</strong><br>
@@ -375,8 +402,8 @@
                 <p>Aponte a câmera para o QR Code ao lado para acessar nosso site, conferir serviços e marcar seu
                     horário.</p>
                 <div class="contact-details">
-                    📱 WhatsApp: (XX) 9XXXX-XXXX<br>
-                    📍 Edite aqui seu Bairro / Cidade
+                    📱 WhatsApp: (81) 99809-0037<br>
+                    📍 R. José Cardoso de Vasconcelos, 171 - São João da Escócia, Caruaru - PE, 55019-255
                 </div>
             </div>
 
